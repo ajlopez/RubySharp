@@ -92,5 +92,29 @@
 
             Assert.IsNull(lexer.NextToken());
         }
+
+        [TestMethod]
+        public void GetSimpleAdd()
+        {
+            Lexer lexer = new Lexer("1+2");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Integer, result.Type);
+            Assert.AreEqual("1", result.Value);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Operator, result.Type);
+            Assert.AreEqual("+", result.Value);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Integer, result.Type);
+            Assert.AreEqual("2", result.Value);
+        }
     }
 }

@@ -51,6 +51,8 @@
             for (int ich = this.NextChar(); ich >= 0 && char.IsDigit((char)ich); ich = this.NextChar())
                 value += (char)ich;
 
+            this.BackChar();
+
             return new Token(TokenType.Integer, value);
         }
 
@@ -68,6 +70,12 @@
                 return -1;
 
             return this.text[this.position++];
+        }
+
+        private void BackChar()
+        {
+            if (this.position < this.text.Length)
+                this.position--;
         }
     }
 }
