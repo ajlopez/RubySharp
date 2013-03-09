@@ -16,7 +16,7 @@
 
         public object Value { get { return this.value; } }
 
-        public object Evaluate()
+        public object Evaluate(Context context)
         {
             return this.value;
         }

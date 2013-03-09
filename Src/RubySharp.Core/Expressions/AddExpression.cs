@@ -1,0 +1,27 @@
+﻿namespace RubySharp.Core.Expressions
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public class AddExpression : IExpression
+    {
+        private IExpression left;
+        private IExpression right;
+
+        public AddExpression(IExpression left, IExpression right)
+        {
+            this.left = left;
+            this.right = right;
+        }
+
+        public object Evaluate(Context context)
+        {
+            int lvalue = (int)this.left.Evaluate(context);
+            int rvalue = (int)this.right.Evaluate(context);
+
+            return lvalue + rvalue;
+        }
+    }
+}

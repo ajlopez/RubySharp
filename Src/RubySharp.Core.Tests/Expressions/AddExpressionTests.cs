@@ -8,14 +8,14 @@
     using RubySharp.Core.Expressions;
 
     [TestClass]
-    public class ConstantExpressionTests
+    public class AddExpressionTests
     {
         [TestMethod]
-        public void EvaluateAsInteger()
+        public void AddTwoIntegers()
         {
-            ConstantExpression expr = new ConstantExpression(123);
+            AddExpression expr = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
 
-            Assert.AreEqual(123, expr.Evaluate(null));
+            Assert.AreEqual(3, expr.Evaluate(null));
         }
     }
 }

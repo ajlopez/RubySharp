@@ -7,5 +7,6 @@
 
     public interface IExpression
     {
+        object Evaluate(Context context);
     }
 }
