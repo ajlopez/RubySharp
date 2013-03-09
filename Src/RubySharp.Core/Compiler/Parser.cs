@@ -37,6 +37,19 @@
 
             Token token = this.lexer.NextToken();
 
+            if (token == null)
+            {
+                this.ParseEndOfCommand();
+                return new ExpressionCommand(expr);
+            }
+
+            if (token.Type != TokenType.Operator || token.Value != "=")
+            {
+                this.lexer.PushToken(token);
+                this.ParseEndOfCommand();
+                return new ExpressionCommand(expr);
+            }
+
             var cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
 
             this.ParseEndOfCommand();

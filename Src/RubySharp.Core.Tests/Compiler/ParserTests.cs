@@ -170,6 +170,15 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void RaiseIfItIsNotAnAssignment()
+        {
+            Parser parser = new Parser("a b\n");
+
+            parser.ParseCommand();
+        }
+
+        [TestMethod]
         public void ParseExpressionCommand()
         {
             Parser parser = new Parser("1+2");
@@ -183,6 +192,42 @@
 
             Assert.IsNotNull(cmd.Expression);
             Assert.IsInstanceOfType(cmd.Expression, typeof(AddExpression));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleNameAsExpressionCommand()
+        {
+            Parser parser = new Parser("a");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
+
+            var cmd = (ExpressionCommand)result;
+
+            Assert.IsNotNull(cmd.Expression);
+            Assert.IsInstanceOfType(cmd.Expression, typeof(NameExpression));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleNameAndNewLineAsExpressionCommand()
+        {
+            Parser parser = new Parser("a\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
+
+            var cmd = (ExpressionCommand)result;
+
+            Assert.IsNotNull(cmd.Expression);
+            Assert.IsInstanceOfType(cmd.Expression, typeof(NameExpression));
 
             Assert.IsNull(parser.ParseCommand());
         }
