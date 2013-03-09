@@ -102,6 +102,18 @@
         }
 
         [TestMethod]
+        public void GetEndOfLineWithNewLine()
+        {
+            Lexer lexer = new Lexer("\n");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.EndOfLine, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetFourArithmeticOperators()
         {
             Lexer lexer = new Lexer("+ - * /");

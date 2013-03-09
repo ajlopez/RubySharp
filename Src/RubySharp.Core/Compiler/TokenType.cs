@@ -4,6 +4,7 @@
     {
         Name = 1,
         Integer = 2,
-        Operator = 3
+        Operator = 3,
+        EndOfLine = 4
     }
 }

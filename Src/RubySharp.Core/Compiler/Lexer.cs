@@ -29,6 +29,9 @@
 
             char ch = (char)ich;
 
+            if (ch == '\n')
+                return new Token(TokenType.EndOfLine, "\n");
+
             if (Operators.Contains(ch))
                 return new Token(TokenType.Operator, ch.ToString());
 
@@ -69,7 +72,7 @@
 
         private int NextFirstChar()
         {
-            while (this.position < this.text.Length && char.IsWhiteSpace(this.text[this.position]))
+            while (this.position < this.text.Length && this.text[this.position] != '\n' && char.IsWhiteSpace(this.text[this.position]))
                 this.position++;
 
             return this.NextChar();
