@@ -16,5 +16,14 @@
 
             Assert.IsNull(context.GetValue("foo"));
         }
+
+        [TestMethod]
+        public void SetAndGetValue()
+        {
+            Context context = new Context();
+
+            context.SetValue("one", 1);
+            Assert.AreEqual(1, context.GetValue("one"));
+        }
     }
 }
