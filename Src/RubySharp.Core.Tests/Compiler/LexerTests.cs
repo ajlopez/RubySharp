@@ -61,5 +61,18 @@
 
             Assert.IsNull(lexer.NextToken());
         }
+
+        [TestMethod]
+        public void GetPlusAsOperator()
+        {
+            Lexer lexer = new Lexer("+");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("+", result.Value);
+            Assert.AreEqual(TokenType.Operator, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
     }
 }
