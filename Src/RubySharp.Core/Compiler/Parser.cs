@@ -22,7 +22,7 @@
             return this.ParseBinaryExpression();
         }
 
-        public AssignCommand ParseCommand()
+        public ICommand ParseCommand()
         {
             NameExpression expr = (NameExpression)this.ParseExpression();
 

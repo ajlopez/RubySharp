@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AssignCommandTests.cs" />
+    <Compile Include="Commands\IfCommandTests.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />

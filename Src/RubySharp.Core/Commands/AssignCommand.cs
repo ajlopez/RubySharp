@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class AssignCommand
+    public class AssignCommand : ICommand
     {
         private string name;
         private IExpression expression;
