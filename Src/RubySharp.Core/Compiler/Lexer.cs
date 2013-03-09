@@ -38,7 +38,7 @@
         {
             string value = ch.ToString();
 
-            for (int ich = this.NextChar(); ich >= 0 && char.IsLetter((char)ich); ich = this.NextChar())
+            for (int ich = this.NextChar(); ich >= 0 && char.IsLetterOrDigit((char)ich); ich = this.NextChar())
                 value += (char)ich;
 
             this.BackChar();

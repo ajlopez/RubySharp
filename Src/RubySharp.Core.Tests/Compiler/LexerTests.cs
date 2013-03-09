@@ -24,6 +24,19 @@
         }
 
         [TestMethod]
+        public void GetNameWithDigits()
+        {
+            Lexer lexer = new Lexer("name123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("name123", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetNameWithSpaces()
         {
             Lexer lexer = new Lexer("  name   ");
