@@ -42,5 +42,28 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseAddTwoIntegers()
+        {
+            Parser parser = new Parser("1+2");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AddExpression));
+
+            var expr = (AddExpression)result;
+            Assert.IsNotNull(expr.LeftExpression);
+            Assert.IsNotNull(expr.RightExpression);
+            Assert.IsInstanceOfType(expr.LeftExpression, typeof(ConstantExpression));
+            Assert.IsInstanceOfType(expr.RightExpression, typeof(ConstantExpression));
+
+            var lexpr = (ConstantExpression)expr.LeftExpression;
+            Assert.AreEqual(1, lexpr.Value);
+
+            var rexpr = (ConstantExpression)expr.RightExpression;
+            Assert.AreEqual(2, rexpr.Value);
+        }
     }
 }

@@ -17,6 +17,21 @@
 
         public IExpression ParseExpression()
         {
+            IExpression expr = this.ParseTerm();
+
+            if (expr == null)
+                return null;
+
+            Token token = this.lexer.NextToken();
+
+            if (token != null && token.Type == TokenType.Operator && token.Value == "+")
+                return new AddExpression(expr, this.ParseExpression());
+
+            return expr;
+        }
+
+        private IExpression ParseTerm()
+        {
             Token token = this.lexer.NextToken();
 
             if (token == null)

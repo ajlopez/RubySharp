@@ -16,6 +16,10 @@
             this.right = right;
         }
 
+        public IExpression LeftExpression { get { return this.left; } }
+
+        public IExpression RightExpression { get { return this.right; } }
+
         public object Evaluate(Context context)
         {
             int lvalue = (int)this.left.Evaluate(context);
