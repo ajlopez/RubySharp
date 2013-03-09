@@ -1,0 +1,11 @@
+bin
+obj
+*.suo
+*.user
+*.pidb
+*.userprefs
+*.gpState
+packages
+*.nupkg
+output
+TestResults
