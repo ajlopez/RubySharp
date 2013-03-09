@@ -137,5 +137,36 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseSimpleAssignCommandWithEndOfLine()
+        {
+            Parser parser = new Parser("a=2\n");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AssignCommand));
+
+            var cmd = (AssignCommand)result;
+
+            Assert.IsNotNull(cmd.Name);
+            Assert.IsNotNull(cmd.Expression);
+
+            Assert.AreEqual("a", cmd.Name);
+            Assert.IsInstanceOfType(cmd.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(2, ((ConstantExpression)cmd.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void RaiseIfEndOfCommandIsMissing()
+        {
+            Parser parser = new Parser("a=2 b=3\n");
+
+            parser.ParseCommand();
+        }
     }
 }

@@ -31,7 +31,24 @@
 
             Token token = this.lexer.NextToken();
 
-            return new AssignCommand(expr.Name, this.ParseExpression());
+            var cmd = new AssignCommand(expr.Name, this.ParseExpression());
+
+            this.ParseEndOfCommand();
+
+            return cmd;
+        }
+
+        private void ParseEndOfCommand()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null)
+                return;
+
+            if (token.Type == TokenType.EndOfLine)
+                return;
+
+            throw new ParserException("end of command expected");
         }
 
         private IExpression ParseBinaryExpression()
