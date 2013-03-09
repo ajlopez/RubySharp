@@ -7,6 +7,7 @@
 
     public class Lexer
     {
+        private const string Operators = "+-*/";
         private string text;
         private int position = 0;
 
@@ -24,8 +25,8 @@
 
             char ch = (char)ich;
 
-            if (ch == '+')
-                return new Token(TokenType.Operator, "+");
+            if (Operators.Contains(ch))
+                return new Token(TokenType.Operator, ch.ToString());
 
             if (char.IsDigit(ch))
                 return this.NextInteger(ch);
