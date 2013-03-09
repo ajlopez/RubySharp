@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubySharp.Core", "RubySharp.Core\RubySharp.Core.csproj", "{76151938-E38D-4690-A17E-8F59D6F0F037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubySharp.Core.Tests", "RubySharp.Core.Tests\RubySharp.Core.Tests.csproj", "{8DCFBD8E-E76C-4E32-8936-A51FE4032F9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A58DC6C-B486-47E2-96B2-8028849217BF}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		RubySharp.vsmdi = RubySharp.vsmdi
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = RubySharp.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76151938-E38D-4690-A17E-8F59D6F0F037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76151938-E38D-4690-A17E-8F59D6F0F037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76151938-E38D-4690-A17E-8F59D6F0F037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76151938-E38D-4690-A17E-8F59D6F0F037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DCFBD8E-E76C-4E32-8936-A51FE4032F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DCFBD8E-E76C-4E32-8936-A51FE4032F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DCFBD8E-E76C-4E32-8936-A51FE4032F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DCFBD8E-E76C-4E32-8936-A51FE4032F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
