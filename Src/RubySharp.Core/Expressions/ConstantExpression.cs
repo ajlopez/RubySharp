@@ -15,5 +15,10 @@
         }
 
         public object Value { get { return this.value; } }
+
+        public object Evaluate()
+        {
+            return this.value;
+        }
     }
 }
