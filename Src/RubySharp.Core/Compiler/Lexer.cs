@@ -22,12 +22,32 @@
             if (ich == -1)
                 return null;
 
-            string value = ((char)ich).ToString();
+            char ch = (char)ich;
 
-            for (ich = this.NextChar(); ich >= 0 && !char.IsWhiteSpace((char)ich); ich = this.NextChar())
+            if (char.IsDigit(ch))
+                return this.NextInteger(ch);
+
+            return this.NextName(ch);
+        }
+
+        private Token NextName(char ch)
+        {
+            string value = ch.ToString();
+
+            for (int ich = this.NextChar(); ich >= 0 && !char.IsWhiteSpace((char)ich); ich = this.NextChar())
                 value += (char)ich;
 
-            return new Token(value);
+            return new Token(TokenType.Name, value);
+        }
+
+        private Token NextInteger(char ch)
+        {
+            string value = ch.ToString();
+
+            for (int ich = this.NextChar(); ich >= 0 && char.IsDigit((char)ich); ich = this.NextChar())
+                value += (char)ich;
+
+            return new Token(TokenType.Integer, value);
         }
 
         private int NextFirstChar()
