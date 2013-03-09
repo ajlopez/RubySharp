@@ -6,6 +6,7 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Compiler;
+    using RubySharp.Core.Expressions;
 
     [TestClass]
     public class ParserTests
@@ -18,7 +19,10 @@
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(123, result.Value);
+            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
+
+            var expr = (ConstantExpression)result;
+            Assert.AreEqual(123, expr.Value);
 
             Assert.IsNull(parser.ParseExpression());
         }

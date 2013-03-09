@@ -15,14 +15,14 @@
             this.lexer = new Lexer(text);
         }
 
-        public Expression ParseExpression()
+        public IExpression ParseExpression()
         {
             Token token = this.lexer.NextToken();
 
             if (token == null)
                 return null;
 
-            return new Expression(int.Parse(token.Value));
+            return new ConstantExpression(int.Parse(token.Value));
         }
     }
 }
