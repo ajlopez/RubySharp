@@ -9,18 +9,6 @@
     <milliseconds>890</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1905645662">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
-  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/09/2013 17:13:03</timestamp>
-    <milliseconds>878</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="Token.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -48,15 +36,6 @@
     <milliseconds>170</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/09/2013 17:23:14</timestamp>
-    <milliseconds>202</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ConstantExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -64,15 +43,6 @@
     </settings>
     <timestamp>03/09/2013 17:57:29</timestamp>
     <milliseconds>701</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="AddExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/09/2013 17:56:41</timestamp>
-    <milliseconds>778</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -91,6 +61,63 @@
     </settings>
     <timestamp>03/09/2013 17:46:00</timestamp>
     <milliseconds>281</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1905645662">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="AssignCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/09/2013 18:51:54</timestamp>
+    <milliseconds>73</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/09/2013 18:44:23</timestamp>
+    <milliseconds>395</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AddExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/09/2013 18:25:53</timestamp>
+    <milliseconds>306</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/09/2013 18:07:55</timestamp>
+    <milliseconds>785</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="BinaryExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/09/2013 18:23:54</timestamp>
+    <milliseconds>383</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SubtractExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/09/2013 18:25:39</timestamp>
+    <milliseconds>630</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>
