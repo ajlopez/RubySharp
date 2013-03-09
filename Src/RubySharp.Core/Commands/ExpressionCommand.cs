@@ -15,6 +15,8 @@
             this.expression = expression;
         }
 
+        public IExpression Expression { get { return this.expression; } }
+
         public object Execute(Context context)
         {
             return this.expression.Evaluate(context);

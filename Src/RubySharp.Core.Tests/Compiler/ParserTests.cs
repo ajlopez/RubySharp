@@ -168,5 +168,23 @@
 
             parser.ParseCommand();
         }
+
+        [TestMethod]
+        public void ParseExpressionCommand()
+        {
+            Parser parser = new Parser("1+2");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
+
+            var cmd = (ExpressionCommand)result;
+
+            Assert.IsNotNull(cmd.Expression);
+            Assert.IsInstanceOfType(cmd.Expression, typeof(AddExpression));
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

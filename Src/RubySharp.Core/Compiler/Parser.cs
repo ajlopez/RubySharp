@@ -24,14 +24,20 @@
 
         public ICommand ParseCommand()
         {
-            NameExpression expr = (NameExpression)this.ParseExpression();
+            IExpression expr = this.ParseExpression();
 
             if (expr == null)
                 return null;
 
+            if (!(expr is NameExpression))
+            {
+                this.ParseEndOfCommand();
+                return new ExpressionCommand(expr);
+            }
+
             Token token = this.lexer.NextToken();
 
-            var cmd = new AssignCommand(expr.Name, this.ParseExpression());
+            var cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
 
             this.ParseEndOfCommand();
 
