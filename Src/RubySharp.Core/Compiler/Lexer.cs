@@ -38,8 +38,10 @@
         {
             string value = ch.ToString();
 
-            for (int ich = this.NextChar(); ich >= 0 && !char.IsWhiteSpace((char)ich); ich = this.NextChar())
+            for (int ich = this.NextChar(); ich >= 0 && char.IsLetter((char)ich); ich = this.NextChar())
                 value += (char)ich;
+
+            this.BackChar();
 
             return new Token(TokenType.Name, value);
         }

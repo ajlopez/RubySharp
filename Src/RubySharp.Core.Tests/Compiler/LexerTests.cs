@@ -116,5 +116,29 @@
             Assert.AreEqual(TokenType.Integer, result.Type);
             Assert.AreEqual("2", result.Value);
         }
+
+        [TestMethod]
+        public void GetSimpleAddNames()
+        {
+            Lexer lexer = new Lexer("one+two");
+
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Name, result.Type);
+            Assert.AreEqual("one", result.Value);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Operator, result.Type);
+            Assert.AreEqual("+", result.Value);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Name, result.Type);
+            Assert.AreEqual("two", result.Value);
+        }
     }
 }
