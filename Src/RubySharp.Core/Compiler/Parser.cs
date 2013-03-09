@@ -22,7 +22,10 @@
             if (token == null)
                 return null;
 
-            return new ConstantExpression(int.Parse(token.Value));
+            if (token.Type == TokenType.Integer)
+                return new ConstantExpression(int.Parse(token.Value));
+
+            return new NameExpression(token.Value);
         }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="Compiler\Token.cs" />
     <Compile Include="Compiler\TokenType.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />
+    <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
