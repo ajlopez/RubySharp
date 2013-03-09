@@ -17,6 +17,10 @@
             this.expression = expression;
         }
 
+        public string Name { get { return this.name; } }
+
+        public IExpression Expression { get { return this.expression; } }
+
         public void Execute(Context context)
         {
             context.SetValue(this.name, this.expression.Evaluate(context));

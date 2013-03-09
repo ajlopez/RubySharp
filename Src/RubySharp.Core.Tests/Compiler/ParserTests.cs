@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Expressions;
+    using RubySharp.Core.Commands;
 
     [TestClass]
     public class ParserTests
@@ -113,6 +114,28 @@
 
             var rexpr = (ConstantExpression)expr.RightExpression;
             Assert.AreEqual(3, rexpr.Value);
+        }
+
+        [TestMethod]
+        public void ParseSimpleAssignCommand()
+        {
+            Parser parser = new Parser("a=2");
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(AssignCommand));
+
+            var cmd = (AssignCommand)result;
+
+            Assert.IsNotNull(cmd.Name);
+            Assert.IsNotNull(cmd.Expression);
+
+            Assert.AreEqual("a", cmd.Name);
+            Assert.IsInstanceOfType(cmd.Expression, typeof(ConstantExpression));
+            Assert.AreEqual(2, ((ConstantExpression)cmd.Expression).Value);
+
+            Assert.IsNull(parser.ParseCommand());
         }
     }
 }

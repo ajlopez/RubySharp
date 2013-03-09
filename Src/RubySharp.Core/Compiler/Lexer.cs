@@ -7,9 +7,10 @@
 
     public class Lexer
     {
-        private const string Operators = "+-*/";
+        private const string Operators = "+-*/=";
         private string text;
         private int position = 0;
+        private Stack<Token> tokens = new Stack<Token>();
 
         public Lexer(string text)
         {
@@ -18,6 +19,9 @@
 
         public Token NextToken()
         {
+            if (this.tokens.Count > 0)
+                return this.tokens.Pop();
+
             int ich = this.NextFirstChar();
 
             if (ich == -1)
@@ -32,6 +36,11 @@
                 return this.NextInteger(ch);
 
             return this.NextName(ch);
+        }
+
+        public void PushToken(Token token)
+        {
+            this.tokens.Push(token);
         }
 
         private Token NextName(char ch)
