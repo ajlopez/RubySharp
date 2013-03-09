@@ -17,22 +17,22 @@
 
         public IExpression ParseExpression()
         {
+            return this.ParseBinaryExpression();
+        }
+
+        private IExpression ParseBinaryExpression()
+        {
             IExpression expr = this.ParseTerm();
 
             if (expr == null)
                 return null;
 
-            Token token = this.lexer.NextToken();
-
-            if (token == null)
-                return expr;
-
-            if (token.Type == TokenType.Operator)
+            for (Token token = this.lexer.NextToken(); token != null && token.Type == TokenType.Operator; token = this.lexer.NextToken())
             {
                 if (token.Value == "+")
-                    return new AddExpression(expr, this.ParseExpression());
+                    expr = new AddExpression(expr, this.ParseTerm());
                 if (token.Value == "-")
-                    return new SubtractExpression(expr, this.ParseExpression());
+                    expr = new SubtractExpression(expr, this.ParseTerm());
             }
 
             return expr;

@@ -88,5 +88,31 @@
             var rexpr = (ConstantExpression)expr.RightExpression;
             Assert.AreEqual(2, rexpr.Value);
         }
+
+        [TestMethod]
+        public void ParseSubtractThreeIntegers()
+        {
+            Parser parser = new Parser("1-2-3");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(SubtractExpression));
+
+            var expr = (SubtractExpression)result;
+            Assert.IsNotNull(expr.LeftExpression);
+            Assert.IsNotNull(expr.RightExpression);
+            Assert.IsInstanceOfType(expr.LeftExpression, typeof(SubtractExpression));
+            Assert.IsInstanceOfType(expr.RightExpression, typeof(ConstantExpression));
+
+            var lexpr = (SubtractExpression)expr.LeftExpression;
+            Assert.IsInstanceOfType(lexpr.LeftExpression, typeof(ConstantExpression));
+            Assert.IsInstanceOfType(lexpr.RightExpression, typeof(ConstantExpression));
+            Assert.AreEqual(1, ((ConstantExpression)lexpr.LeftExpression).Value);
+            Assert.AreEqual(2, ((ConstantExpression)lexpr.RightExpression).Value);
+
+            var rexpr = (ConstantExpression)expr.RightExpression;
+            Assert.AreEqual(3, rexpr.Value);
+        }
     }
 }
