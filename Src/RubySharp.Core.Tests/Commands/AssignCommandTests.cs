@@ -17,8 +17,9 @@
             AssignCommand cmd = new AssignCommand("one", new ConstantExpression(1));
             Context context = new Context();
 
-            cmd.Execute(context);
+            var result = cmd.Execute(context);
 
+            Assert.AreEqual(1, result);
             Assert.AreEqual(1, context.GetValue("one"));
         }
     }
