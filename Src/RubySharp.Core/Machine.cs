@@ -22,5 +22,10 @@
 
             return result;
         }
+
+        public object ExecuteFile(string filename)
+        {
+            return this.ExecuteText(System.IO.File.ReadAllText(filename));
+        }
     }
 }
