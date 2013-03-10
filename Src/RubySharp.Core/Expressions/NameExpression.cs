@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Functions;
 
     public class NameExpression : IExpression
     {
@@ -18,7 +19,12 @@
 
         public object Evaluate(Context context)
         {
-            return context.GetValue(this.name);
+            var result = context.GetValue(this.name);
+
+            if (result is IFunction)
+                return ((IFunction)result).Apply(null);
+
+            return result;
         }
 
         public override bool Equals(object obj)

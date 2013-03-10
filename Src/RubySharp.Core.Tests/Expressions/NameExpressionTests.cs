@@ -6,6 +6,8 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Expressions;
+    using RubySharp.Core.Functions;
+    using RubySharp.Core.Commands;
 
     [TestClass]
     public class NameExpressionTests
@@ -25,6 +27,16 @@
             NameExpression expr = new NameExpression("one");
             Context context = new Context();
             context.SetValue("one", 1);
+
+            Assert.AreEqual(1, expr.Evaluate(context));
+        }
+
+        [TestMethod]
+        public void EvaluateDefinedFunction()
+        {
+            NameExpression expr = new NameExpression("foo");
+            Context context = new Context();
+            context.SetValue("foo", new DefinedFunction(new ExpressionCommand(new ConstantExpression(1)), context));
 
             Assert.AreEqual(1, expr.Evaluate(context));
         }
