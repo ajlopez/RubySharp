@@ -174,6 +174,19 @@
         }
 
         [TestMethod]
+        public void ParseIfCommandWithCompositeThenCommand()
+        {
+            Parser parser = new Parser("if 1\n a=1\n b=2\nend");
+            var expected = new IfCommand(new ConstantExpression(1), new CompositeCommand(new ICommand[] { new AssignCommand("a", new ConstantExpression(1)), new AssignCommand("b", new ConstantExpression(2)) }));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void RaiseIfNoEndAtIf()
         {
