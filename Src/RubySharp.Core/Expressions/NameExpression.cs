@@ -30,7 +30,7 @@
             {
                 var expr = (NameExpression)obj;
 
-                return this.name.Equals(expr.name);
+                return this.Name.Equals(expr.Name);
             }
 
             return false;

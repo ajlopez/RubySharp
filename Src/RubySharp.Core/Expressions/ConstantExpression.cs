@@ -33,7 +33,7 @@
                 if (this.value == null)
                     return expr.value == null;
 
-                return this.value.Equals(expr.value);
+                return this.Value.Equals(expr.Value);
             }
 
             return false;
