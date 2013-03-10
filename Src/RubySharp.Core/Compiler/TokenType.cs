@@ -4,7 +4,8 @@
     {
         Name = 1,
         Integer = 2,
-        Operator = 3,
-        EndOfLine = 4
+        String = 3,
+        Operator = 4,
+        EndOfLine = 5
     }
 }

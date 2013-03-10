@@ -76,6 +76,19 @@
         }
 
         [TestMethod]
+        public void GetSingleQuoteString()
+        {
+            Lexer lexer = new Lexer("'foo'");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo", result.Value);
+            Assert.AreEqual(TokenType.String, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetAssignOperator()
         {
             Lexer lexer = new Lexer("=");

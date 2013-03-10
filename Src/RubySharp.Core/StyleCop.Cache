@@ -45,9 +45,6 @@
     <milliseconds>383</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1905645662">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="AssignCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -97,15 +94,6 @@
     </settings>
     <timestamp>03/10/2013 08:21:37</timestamp>
     <milliseconds>115</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/09/2013 19:58:28</timestamp>
-    <milliseconds>86</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ParserException.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -217,6 +205,18 @@
     </settings>
     <timestamp>03/10/2013 07:57:15</timestamp>
     <milliseconds>562</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1905645662">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/10/2013 10:16:36</timestamp>
+    <milliseconds>48</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

@@ -7,6 +7,7 @@
 
     public class Lexer
     {
+        private const char Quote = '\'';
         private const string Operators = "+-*/=";
         private string text;
         private int position = 0;
@@ -32,6 +33,9 @@
             if (ch == '\n')
                 return new Token(TokenType.EndOfLine, "\n");
 
+            if (ch == Quote)
+                return this.NextString();
+
             if (Operators.Contains(ch))
                 return new Token(TokenType.Operator, ch.ToString());
 
@@ -56,6 +60,16 @@
             this.BackChar();
 
             return new Token(TokenType.Name, value);
+        }
+
+        private Token NextString()
+        {
+            string value = string.Empty;
+
+            for (int ich = this.NextChar(); ich >= 0 && ((char)ich) != Quote; ich = this.NextChar())
+                value += (char)ich;
+
+            return new Token(TokenType.String, value);
         }
 
         private Token NextInteger(char ch)
