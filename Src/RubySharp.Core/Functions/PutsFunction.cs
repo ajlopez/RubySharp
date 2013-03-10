@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Text;
 
-    public class PutsFunction
+    public class PutsFunction : IFunction
     {
         private TextWriter writer;
 
@@ -15,10 +15,10 @@
             this.writer = writer;
         }
 
-        public object Apply(IList<object> arguments)
+        public object Apply(IList<object> values)
         {
-            foreach (var argument in arguments)
-                this.writer.WriteLine(argument);
+            foreach (var value in values)
+                this.writer.WriteLine(value);
 
             return null;
         }

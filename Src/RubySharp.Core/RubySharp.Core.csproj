@@ -58,10 +58,12 @@
     <Compile Include="Context.cs" />
     <Compile Include="Expressions\AddExpression.cs" />
     <Compile Include="Expressions\BinaryExpression.cs" />
+    <Compile Include="Expressions\CallExpression.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />
     <Compile Include="Expressions\SubtractExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

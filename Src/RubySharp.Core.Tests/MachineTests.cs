@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Functions;
 
     [TestClass]
     public class MachineTests
@@ -14,6 +15,16 @@
         {
             Machine machine = new Machine();
             Assert.IsNotNull(machine.RootContext);
+        }
+
+        [TestMethod]
+        public void PredefinedFunctions()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("puts");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IFunction));
         }
 
         [TestMethod]

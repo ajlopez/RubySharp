@@ -48,6 +48,7 @@
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />
     <Compile Include="Expressions\AddExpressionTests.cs" />
+    <Compile Include="Expressions\CallExpressionTests.cs" />
     <Compile Include="Expressions\ConstantExpressionTests.cs" />
     <Compile Include="Expressions\SubtractExpressionTests.cs" />
     <Compile Include="Expressions\NameExpressionTests.cs" />
