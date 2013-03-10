@@ -17,6 +17,10 @@
             this.thencommand = thencommand;
         }
 
+        public IExpression Condition { get { return this.condition; } }
+
+        public ICommand ThenCommand { get { return this.thencommand; } }
+
         public object Execute(Context context)
         {
             object value = this.condition.Evaluate(context);
