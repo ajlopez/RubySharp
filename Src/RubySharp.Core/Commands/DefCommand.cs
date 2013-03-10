@@ -23,5 +23,25 @@
             context.SetValue(this.name, result);
             return result;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is DefCommand)
+            {
+                var cmd = (DefCommand)obj;
+
+                return this.name == cmd.name && this.command.Equals(cmd.command);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.name.GetHashCode() + this.command.GetHashCode();
+        }
     }
 }
