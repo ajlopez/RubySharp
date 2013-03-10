@@ -25,6 +25,7 @@
             SubtractExpression expr1 = new SubtractExpression(new ConstantExpression(1), new ConstantExpression(2));
             SubtractExpression expr2 = new SubtractExpression(new ConstantExpression(1), new ConstantExpression(3));
             SubtractExpression expr3 = new SubtractExpression(new ConstantExpression(1), new ConstantExpression(2));
+            SubtractExpression expr4 = new SubtractExpression(new ConstantExpression(2), new ConstantExpression(2));
 
             Assert.IsTrue(expr1.Equals(expr3));
             Assert.IsTrue(expr3.Equals(expr1));
@@ -34,6 +35,8 @@
             Assert.IsFalse(expr1.Equals("foo"));
             Assert.IsFalse(expr1.Equals(expr2));
             Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr4));
+            Assert.IsFalse(expr4.Equals(expr1));
         }
     }
 }

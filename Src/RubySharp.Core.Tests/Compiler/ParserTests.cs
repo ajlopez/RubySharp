@@ -164,27 +164,13 @@
         public void ParseSimpleIfCommand()
         {
             Parser parser = new Parser("if 1\n a=1\nend");
-
+            var expected = new IfCommand(new ConstantExpression(1), new AssignCommand("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IfCommand));
+            Assert.AreEqual(expected, result);
 
-            var cmd = (IfCommand)result;
-
-            Assert.IsNotNull(cmd.Condition);
-            Assert.IsInstanceOfType(cmd.Condition, typeof(ConstantExpression));
-            Assert.AreEqual(1, ((ConstantExpression)cmd.Condition).Value);
-
-            Assert.IsNotNull(cmd.ThenCommand);
-            Assert.IsInstanceOfType(cmd.ThenCommand, typeof(AssignCommand));
-
-            var assign = (AssignCommand)cmd.ThenCommand;
-
-            Assert.AreEqual("a", assign.Name);
-            Assert.IsNotNull(assign.Expression);
-            Assert.IsInstanceOfType(assign.Expression, typeof(ConstantExpression));
-            Assert.AreEqual(1, ((ConstantExpression)assign.Expression).Value);
+            Assert.IsNull(parser.ParseCommand());
         }
 
         [TestMethod]

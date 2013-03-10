@@ -24,6 +24,7 @@
             AddExpression expr1 = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
             AddExpression expr2 = new AddExpression(new ConstantExpression(1), new ConstantExpression(3));
             AddExpression expr3 = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
+            AddExpression expr4 = new AddExpression(new ConstantExpression(2), new ConstantExpression(2));
 
             Assert.IsTrue(expr1.Equals(expr3));
             Assert.IsTrue(expr3.Equals(expr1));
@@ -33,6 +34,8 @@
             Assert.IsFalse(expr1.Equals("foo"));
             Assert.IsFalse(expr1.Equals(expr2));
             Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr4));
+            Assert.IsFalse(expr4.Equals(expr1));
         }
     }
 }
