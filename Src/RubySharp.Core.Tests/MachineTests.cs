@@ -66,5 +66,16 @@
             Assert.AreEqual(null, machine.ExecuteFile("MachineFiles\\SimplePuts.rb"));
             Assert.AreEqual("hello\r\n", writer.ToString());
         }
+
+        [TestMethod]
+        [DeploymentItem("MachineFiles", "MachineFiles")]
+        public void ExecuteSimpleDefFile()
+        {
+            Machine machine = new Machine();
+            StringWriter writer = new StringWriter();
+            machine.RootContext.SetValue("puts", new PutsFunction(writer));
+            Assert.AreEqual(null, machine.ExecuteFile("MachineFiles\\SimpleDef.rb"));
+            Assert.AreEqual("1\r\n", writer.ToString());
+        }
     }
 }
