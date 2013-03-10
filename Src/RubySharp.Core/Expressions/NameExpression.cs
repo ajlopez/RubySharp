@@ -20,5 +20,25 @@
         {
             return context.GetValue(this.name);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is NameExpression) 
+            {
+                var expr = (NameExpression)obj;
+
+                return this.name.Equals(expr.name);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.name.GetHashCode() + 11;
+        }
     }
 }
