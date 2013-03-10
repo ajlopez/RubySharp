@@ -245,5 +245,26 @@
 
             parser.ParseCommand();
         }
+
+        [TestMethod]
+        public void ParseSimpleDefCommand()
+        {
+            Parser parser = new Parser("def foo\na=1\nend");
+            var expected = new DefCommand("foo", new AssignCommand("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void RaiseIfDefWithoutName()
+        {
+            Parser parser = new Parser("def\na=1\nend");
+            parser.ParseCommand();
+        }
     }
 }

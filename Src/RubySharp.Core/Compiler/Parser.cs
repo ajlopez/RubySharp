@@ -48,6 +48,9 @@
             {
                 if (token.Value == "if")
                     return this.ParseIfCommand();
+
+                if (token.Value == "def")
+                    return this.ParseDefCommand();
             }
 
             this.lexer.PushToken(token);
@@ -92,6 +95,15 @@
             ICommand thencommand = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new IfCommand(condition, thencommand);
+        }
+
+        private DefCommand ParseDefCommand()
+        {
+            string name = this.ParseName();
+            this.ParseEndOfCommand();
+            ICommand body = this.ParseCommandList();
+            this.ParseEndOfCommand();
+            return new DefCommand(name, body);
         }
 
         private ICommand ParseCommandList()
@@ -192,6 +204,16 @@
 
             if (token == null || token.Type != TokenType.Name || token.Value != name)
                 throw new ParserException(string.Format("expected '{0}'", name));
+        }
+
+        private string ParseName()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null || token.Type != TokenType.Name)
+                throw new ParserException("name expected");
+
+            return token.Value;
         }
 
         private bool IsBinaryOperator(Token token)
