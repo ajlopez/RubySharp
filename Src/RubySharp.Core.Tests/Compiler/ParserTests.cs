@@ -138,6 +138,19 @@
         }
 
         [TestMethod]
+        public void ParseSimpleAssignCommandPrecededByAnEndOfLine()
+        {
+            Parser parser = new Parser("\na=2");
+            var expected = new AssignCommand("a", new ConstantExpression(2));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void RaiseIfEndOfCommandIsMissing()
         {

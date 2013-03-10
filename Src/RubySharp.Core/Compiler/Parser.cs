@@ -38,6 +38,9 @@
         {
             Token token = this.lexer.NextToken();
 
+            while (token != null && token.Type == TokenType.EndOfLine)
+                token = this.lexer.NextToken();
+
             if (token == null)
                 return null;
 
