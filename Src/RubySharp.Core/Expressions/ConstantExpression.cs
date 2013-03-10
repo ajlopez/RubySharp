@@ -20,5 +20,31 @@
         {
             return this.value;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is ConstantExpression)
+            {
+                var expr = (ConstantExpression)obj;
+
+                if (this.value == null)
+                    return expr.value == null;
+
+                return this.value.Equals(expr.value);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            if (this.value == null)
+                return 0;
+
+            return this.value.GetHashCode();
+        }
     }
 }
