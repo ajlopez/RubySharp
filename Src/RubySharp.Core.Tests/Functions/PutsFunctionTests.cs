@@ -21,5 +21,16 @@
 
             Assert.AreEqual("123\r\n", writer.ToString());
         }
+
+        [TestMethod]
+        public void PutsTwoIntegers()
+        {
+            StringWriter writer = new StringWriter();
+            PutsFunction function = new PutsFunction(writer);
+
+            Assert.IsNull(function.Apply(new object[] { 123, 456 }));
+
+            Assert.AreEqual("123\r\n456\r\n", writer.ToString());
+        }
     }
 }
