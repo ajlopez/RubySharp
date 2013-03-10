@@ -23,7 +23,7 @@
 
             IList<object> values = new List<object>();
 
-            foreach (var argument in arguments)
+            foreach (var argument in this.arguments)
                 values.Add(argument.Evaluate(context));
 
             return function.Apply(values);

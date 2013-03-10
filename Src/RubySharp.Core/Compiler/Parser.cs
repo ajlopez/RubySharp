@@ -32,7 +32,7 @@
             if (token.Type == TokenType.Name)
             {
                 if (token.Value == "if")
-                    return ParseIfCommand();
+                    return this.ParseIfCommand();
             }
 
             this.lexer.PushToken(token);

@@ -18,7 +18,7 @@
         {
             object result = null;
 
-            foreach (var command in commands)
+            foreach (var command in this.commands)
                 result = command.Execute(context);
 
             return result;
