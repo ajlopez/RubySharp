@@ -104,6 +104,14 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void RaiseIfNotAnExpression()
+        {
+            Parser parser = new Parser("+");
+            parser.ParseExpression();
+        }
+
+        [TestMethod]
         public void ParseSimpleAssignCommand()
         {
             Parser parser = new Parser("a=2");

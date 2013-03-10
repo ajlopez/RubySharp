@@ -177,7 +177,10 @@
             if (token.Type == TokenType.String)
                 return new ConstantExpression(token.Value);
 
-            return new NameExpression(token.Value);
+            if (token.Type == TokenType.Name)    
+                return new NameExpression(token.Value);
+
+            throw new ParserException(string.Format("unexpected '{0}'", token.Value));
         }
 
         private void ParseName(string name)
