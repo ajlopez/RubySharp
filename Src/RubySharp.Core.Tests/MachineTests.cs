@@ -33,5 +33,15 @@
             Assert.AreEqual(1, machine.ExecuteFile("MachineFiles\\SimpleAssign.rb"));
             Assert.AreEqual(1, machine.RootContext.GetValue("a"));
         }
+
+        [TestMethod]
+        [DeploymentItem("MachineFiles", "MachineFiles")]
+        public void ExecuteSimpleAssignsFile()
+        {
+            Machine machine = new Machine();
+            Assert.AreEqual(2, machine.ExecuteFile("MachineFiles\\SimpleAssigns.rb"));
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
     }
 }
