@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -53,6 +54,17 @@
             Assert.AreEqual(2, machine.ExecuteFile("MachineFiles\\SimpleAssigns.rb"));
             Assert.AreEqual(1, machine.RootContext.GetValue("a"));
             Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
+
+        [TestMethod]
+        [DeploymentItem("MachineFiles", "MachineFiles")]
+        public void ExecuteSimplePutsFile()
+        {
+            Machine machine = new Machine();
+            StringWriter writer = new StringWriter();
+            machine.RootContext.SetValue("puts", new PutsFunction(writer));
+            Assert.AreEqual(null, machine.ExecuteFile("MachineFiles\\SimplePuts.rb"));
+            Assert.AreEqual("hello\r\n", writer.ToString());
         }
     }
 }

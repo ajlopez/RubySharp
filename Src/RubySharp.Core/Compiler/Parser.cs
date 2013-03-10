@@ -174,6 +174,9 @@
             if (token.Type == TokenType.Integer)
                 return new ConstantExpression(int.Parse(token.Value));
 
+            if (token.Type == TokenType.String)
+                return new ConstantExpression(token.Value);
+
             return new NameExpression(token.Value);
         }
 

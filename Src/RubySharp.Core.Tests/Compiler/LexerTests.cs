@@ -89,6 +89,14 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ParserException))]
+        public void RaiseIfSingleQuoteStringIsNotClosed()
+        {
+            Lexer lexer = new Lexer("'foo");
+            lexer.NextToken();
+        }
+
+        [TestMethod]
         public void GetAssignOperator()
         {
             Lexer lexer = new Lexer("=");

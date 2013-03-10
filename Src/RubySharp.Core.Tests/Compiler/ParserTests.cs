@@ -39,6 +39,19 @@
         }
 
         [TestMethod]
+        public void ParseSingleQuoteString()
+        {
+            Parser parser = new Parser("'foo'");
+            var expected = new ConstantExpression("foo");
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseAddTwoIntegers()
         {
             Parser parser = new Parser("1+2");

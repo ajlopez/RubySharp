@@ -65,9 +65,13 @@
         private Token NextString()
         {
             string value = string.Empty;
+            int ich;
 
-            for (int ich = this.NextChar(); ich >= 0 && ((char)ich) != Quote; ich = this.NextChar())
+            for (ich = this.NextChar(); ich >= 0 && ((char)ich) != Quote; ich = this.NextChar())
                 value += (char)ich;
+
+            if (ich < 0)
+                throw new ParserException("single quote expected");
 
             return new Token(TokenType.String, value);
         }
