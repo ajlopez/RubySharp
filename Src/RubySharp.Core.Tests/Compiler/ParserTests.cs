@@ -16,14 +16,11 @@
         public void ParseInteger()
         {
             Parser parser = new Parser("123");
-
+            var expected = new ConstantExpression(123);
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ConstantExpression));
-
-            var expr = (ConstantExpression)result;
-            Assert.AreEqual(123, expr.Value);
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseExpression());
         }
@@ -32,14 +29,11 @@
         public void ParseName()
         {
             Parser parser = new Parser("foo");
-
+            var expected = new NameExpression("foo");
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(NameExpression));
-
-            var expr = (NameExpression)result;
-            Assert.AreEqual("foo", expr.Name);
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseExpression());
         }
@@ -48,72 +42,39 @@
         public void ParseAddTwoIntegers()
         {
             Parser parser = new Parser("1+2");
-
+            var expected = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(AddExpression));
+            Assert.AreEqual(expected, result);
 
-            var expr = (AddExpression)result;
-            Assert.IsNotNull(expr.LeftExpression);
-            Assert.IsNotNull(expr.RightExpression);
-            Assert.IsInstanceOfType(expr.LeftExpression, typeof(ConstantExpression));
-            Assert.IsInstanceOfType(expr.RightExpression, typeof(ConstantExpression));
-
-            var lexpr = (ConstantExpression)expr.LeftExpression;
-            Assert.AreEqual(1, lexpr.Value);
-
-            var rexpr = (ConstantExpression)expr.RightExpression;
-            Assert.AreEqual(2, rexpr.Value);
+            Assert.IsNull(parser.ParseExpression());
         }
 
         [TestMethod]
         public void ParseSubtractTwoIntegers()
         {
             Parser parser = new Parser("1-2");
-
+            var expected = new SubtractExpression(new ConstantExpression(1), new ConstantExpression(2));
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SubtractExpression));
+            Assert.AreEqual(expected, result);
 
-            var expr = (SubtractExpression)result;
-            Assert.IsNotNull(expr.LeftExpression);
-            Assert.IsNotNull(expr.RightExpression);
-            Assert.IsInstanceOfType(expr.LeftExpression, typeof(ConstantExpression));
-            Assert.IsInstanceOfType(expr.RightExpression, typeof(ConstantExpression));
-
-            var lexpr = (ConstantExpression)expr.LeftExpression;
-            Assert.AreEqual(1, lexpr.Value);
-
-            var rexpr = (ConstantExpression)expr.RightExpression;
-            Assert.AreEqual(2, rexpr.Value);
+            Assert.IsNull(parser.ParseExpression());
         }
 
         [TestMethod]
         public void ParseSubtractThreeIntegers()
         {
             Parser parser = new Parser("1-2-3");
-
+            var expected = new SubtractExpression(new SubtractExpression(new ConstantExpression(1), new ConstantExpression(2)), new ConstantExpression(3));
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(SubtractExpression));
+            Assert.AreEqual(expected, result);
 
-            var expr = (SubtractExpression)result;
-            Assert.IsNotNull(expr.LeftExpression);
-            Assert.IsNotNull(expr.RightExpression);
-            Assert.IsInstanceOfType(expr.LeftExpression, typeof(SubtractExpression));
-            Assert.IsInstanceOfType(expr.RightExpression, typeof(ConstantExpression));
-
-            var lexpr = (SubtractExpression)expr.LeftExpression;
-            Assert.IsInstanceOfType(lexpr.LeftExpression, typeof(ConstantExpression));
-            Assert.IsInstanceOfType(lexpr.RightExpression, typeof(ConstantExpression));
-            Assert.AreEqual(1, ((ConstantExpression)lexpr.LeftExpression).Value);
-            Assert.AreEqual(2, ((ConstantExpression)lexpr.RightExpression).Value);
-
-            var rexpr = (ConstantExpression)expr.RightExpression;
-            Assert.AreEqual(3, rexpr.Value);
+            Assert.IsNull(parser.ParseExpression());
         }
 
         [TestMethod]
