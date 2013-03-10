@@ -30,5 +30,25 @@
 
             return this.thencommand.Execute(context);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is IfCommand)
+            {
+                var cmd = (IfCommand)obj;
+
+                return this.Condition.Equals(cmd.Condition) && this.ThenCommand.Equals(cmd.ThenCommand);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Condition.GetHashCode() + this.ThenCommand.GetHashCode();
+        }
     }
 }
