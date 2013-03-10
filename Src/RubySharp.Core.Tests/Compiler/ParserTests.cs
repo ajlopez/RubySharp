@@ -81,20 +81,11 @@
         public void ParseSimpleAssignCommand()
         {
             Parser parser = new Parser("a=2");
-
+            var expected = new AssignCommand("a", new ConstantExpression(2));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(AssignCommand));
-
-            var cmd = (AssignCommand)result;
-
-            Assert.IsNotNull(cmd.Name);
-            Assert.IsNotNull(cmd.Expression);
-
-            Assert.AreEqual("a", cmd.Name);
-            Assert.IsInstanceOfType(cmd.Expression, typeof(ConstantExpression));
-            Assert.AreEqual(2, ((ConstantExpression)cmd.Expression).Value);
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseCommand());
         }
@@ -103,20 +94,11 @@
         public void ParseSimpleAssignCommandWithEndOfLine()
         {
             Parser parser = new Parser("a=2\n");
-
+            var expected = new AssignCommand("a", new ConstantExpression(2));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(AssignCommand));
-
-            var cmd = (AssignCommand)result;
-
-            Assert.IsNotNull(cmd.Name);
-            Assert.IsNotNull(cmd.Expression);
-
-            Assert.AreEqual("a", cmd.Name);
-            Assert.IsInstanceOfType(cmd.Expression, typeof(ConstantExpression));
-            Assert.AreEqual(2, ((ConstantExpression)cmd.Expression).Value);
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseCommand());
         }
@@ -143,16 +125,11 @@
         public void ParseExpressionCommand()
         {
             Parser parser = new Parser("1+2");
-
+            var expected = new ExpressionCommand(new AddExpression(new ConstantExpression(1), new ConstantExpression(2)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
-
-            var cmd = (ExpressionCommand)result;
-
-            Assert.IsNotNull(cmd.Expression);
-            Assert.IsInstanceOfType(cmd.Expression, typeof(AddExpression));
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseCommand());
         }
@@ -161,16 +138,11 @@
         public void ParseSimpleNameAsExpressionCommand()
         {
             Parser parser = new Parser("a");
-
+            var expected = new ExpressionCommand(new NameExpression("a"));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
-
-            var cmd = (ExpressionCommand)result;
-
-            Assert.IsNotNull(cmd.Expression);
-            Assert.IsInstanceOfType(cmd.Expression, typeof(NameExpression));
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseCommand());
         }
@@ -179,16 +151,11 @@
         public void ParseSimpleNameAndNewLineAsExpressionCommand()
         {
             Parser parser = new Parser("a\n");
-
+            var expected = new ExpressionCommand(new NameExpression("a"));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ExpressionCommand));
-
-            var cmd = (ExpressionCommand)result;
-
-            Assert.IsNotNull(cmd.Expression);
-            Assert.IsInstanceOfType(cmd.Expression, typeof(NameExpression));
+            Assert.AreEqual(expected, result);
 
             Assert.IsNull(parser.ParseCommand());
         }
