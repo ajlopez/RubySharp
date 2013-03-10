@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Commands\AssignCommandTests.cs" />
     <Compile Include="Commands\CompositeCommandTests.cs" />
+    <Compile Include="Commands\DefCommandTests.cs" />
     <Compile Include="Commands\ExpressionCommandTests.cs" />
     <Compile Include="Commands\IfCommandTests.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Expressions\ConstantExpressionTests.cs" />
     <Compile Include="Expressions\SubtractExpressionTests.cs" />
     <Compile Include="Expressions\NameExpressionTests.cs" />
+    <Compile Include="Functions\DefinedFunctionTests.cs" />
     <Compile Include="Functions\PutsFunctionTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Commands\AssignCommand.cs" />
     <Compile Include="Commands\CompositeCommand.cs" />
+    <Compile Include="Commands\DefCommand.cs" />
     <Compile Include="Commands\ExpressionCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\IfCommand.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Expressions\SubtractExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Functions\DefinedFunction.cs" />
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Machine.cs" />
