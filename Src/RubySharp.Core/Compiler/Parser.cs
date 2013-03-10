@@ -19,7 +19,19 @@
 
         public IExpression ParseExpression()
         {
-            return this.ParseBinaryExpression();
+            var result = this.ParseBinaryExpression();
+
+            if (!(result is NameExpression))
+                return result;
+
+            if (this.NextTokenIsEndOfCommand())
+                return result;
+            if (this.NextTokenIsOperator())
+                return result;
+
+            var expr = this.ParseExpression();
+
+            return new CallExpression(((NameExpression)result).Name, new IExpression[] { expr });
         }
 
         public ICommand ParseCommand()
@@ -103,13 +115,30 @@
         {
             Token token = this.lexer.NextToken();
 
+            if (!IsEndOfCommand(token))
+                throw new ParserException("end of command expected");
+        }
+
+        private bool NextTokenIsEndOfCommand()
+        {
+            Token token = this.lexer.NextToken();
+            this.lexer.PushToken(token);
+            return this.IsEndOfCommand(token);
+        }
+
+        private bool NextTokenIsOperator()
+        {
+            Token token = this.lexer.NextToken();
+            this.lexer.PushToken(token);
+            return token.Type == TokenType.Operator;
+        }
+
+        private bool IsEndOfCommand(Token token)
+        {
             if (token == null)
-                return;
+                return true;
 
-            if (token.Type == TokenType.EndOfLine)
-                return;
-
-            throw new ParserException("end of command expected");
+            return token.Type == TokenType.EndOfLine;
         }
 
         private IExpression ParseBinaryExpression()

@@ -78,6 +78,19 @@
         }
 
         [TestMethod]
+        public void ParseCallExpressionSimplePuts()
+        {
+            Parser parser = new Parser("puts 123");
+            var expected = new CallExpression("puts", new IExpression[] { new ConstantExpression(123) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseSimpleAssignCommand()
         {
             Parser parser = new Parser("a=2");
@@ -113,12 +126,16 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParserException))]
-        public void RaiseIfItIsNotAnAssignment()
+        public void ParseTwoNameAsCall()
         {
             Parser parser = new Parser("a b\n");
+            var expected = new CallExpression("a", new IExpression[] { new NameExpression("b") });
+            var result = parser.ParseExpression();
 
-            parser.ParseCommand();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
         }
 
         [TestMethod]
