@@ -9,6 +9,7 @@
     {
         private const char Quote = '\'';
         private const string Operators = "+-*/=";
+        private const string Separators = ";";
         private string text;
         private int position = 0;
         private Stack<Token> tokens = new Stack<Token>();
@@ -38,6 +39,9 @@
 
             if (Operators.Contains(ch))
                 return new Token(TokenType.Operator, ch.ToString());
+
+            if (Separators.Contains(ch))
+                return new Token(TokenType.Separator, ch.ToString());
 
             if (char.IsDigit(ch))
                 return this.NextInteger(ch);

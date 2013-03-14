@@ -251,6 +251,19 @@
         }
 
         [TestMethod]
+        public void ParseSimpleIfCommandWithSemicolonOneLine()
+        {
+            Parser parser = new Parser("if 1; a=1 end");
+            var expected = new IfCommand(new ConstantExpression(1), new AssignCommand("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSimpleIfCommandWithThenOneLineAndOtherLine()
         {
             Parser parser = new Parser("if 1 then a=1\nb=2 end");

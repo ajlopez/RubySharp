@@ -162,7 +162,13 @@
             if (token == null)
                 return true;
 
-            return token.Type == TokenType.EndOfLine;
+            if (token.Type == TokenType.EndOfLine)
+                return true;
+
+            if (token.Type == TokenType.Separator && token.Value == ";")
+                return true;
+
+            return false;
         }
 
         private IExpression ParseBinaryExpression()

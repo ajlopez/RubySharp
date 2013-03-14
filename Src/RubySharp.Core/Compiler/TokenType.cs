@@ -6,6 +6,7 @@
         Integer = 2,
         String = 3,
         Operator = 4,
-        EndOfLine = 5
+        Separator = 5,
+        EndOfLine = 6
     }
 }
