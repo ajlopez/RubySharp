@@ -58,11 +58,10 @@
         {
             int result = this.name.GetHashCode();
 
-            foreach (var argument in arguments)
+            foreach (var argument in this.arguments)
                 result += argument.GetHashCode();
 
             return result;
         }
-
     }
 }

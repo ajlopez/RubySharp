@@ -54,21 +54,6 @@
     <milliseconds>406</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="CompositeCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/10/2013 08:32:17</timestamp>
-    <milliseconds>722</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to commands must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>21</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
   <sourcecode name="ICommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -105,30 +90,6 @@
     <milliseconds>884</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/10/2013 08:39:29</timestamp>
-    <milliseconds>803</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to ParseIfCommand must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>35</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
-  <sourcecode name="TokenType.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/09/2013 19:56:24</timestamp>
-    <milliseconds>72</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="AddExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -138,21 +99,6 @@
     <milliseconds>249</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="CallExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/10/2013 09:23:25</timestamp>
-    <milliseconds>215</milliseconds>
-    <violations>
-      <violation namespace="Microsoft.StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to arguments must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>26</line>
-        <warning>False</warning>
-      </violation>
-    </violations>
-  </sourcecode>
   <sourcecode name="ConstantExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -160,15 +106,6 @@
     </settings>
     <timestamp>03/10/2013 08:08:35</timestamp>
     <milliseconds>420</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="NameExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/10/2013 08:08:28</timestamp>
-    <milliseconds>13</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IFunction.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -207,16 +144,79 @@
     <milliseconds>562</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1905645662">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
+  <sourcecode name="DefCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/10/2013 11:16:07</timestamp>
+    <milliseconds>762</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="CompositeCommand.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/10/2013 09:30:57</timestamp>
+    <milliseconds>165</milliseconds>
+    <violations />
+  </sourcecode>
   <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
       <milliseconds>191</milliseconds>
     </settings>
-    <timestamp>03/10/2013 10:16:36</timestamp>
-    <milliseconds>48</milliseconds>
+    <timestamp>03/14/2013 06:10:21</timestamp>
+    <milliseconds>858</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TokenType.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/14/2013 06:09:49</timestamp>
+    <milliseconds>985</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DefinedFunction.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/10/2013 10:58:58</timestamp>
+    <milliseconds>259</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NameExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/10/2013 11:33:54</timestamp>
+    <milliseconds>129</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1905645662">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="CallExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/14/2013 06:14:25</timestamp>
+    <milliseconds>84</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/14/2013 06:14:16</timestamp>
+    <milliseconds>468</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

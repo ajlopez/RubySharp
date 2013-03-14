@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
-    using RubySharp.Core.Commands;
 
     [TestClass]
     public class NameExpressionTests

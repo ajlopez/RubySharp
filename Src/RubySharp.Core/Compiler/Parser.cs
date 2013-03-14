@@ -139,7 +139,7 @@
                 return;
             }
 
-            if (!IsEndOfCommand(token))
+            if (!this.IsEndOfCommand(token))
                 throw new ParserException("end of command expected");
         }
 
