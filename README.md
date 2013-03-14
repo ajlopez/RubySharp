@@ -11,3 +11,4 @@ It's a new implementation of previous work https://github.com/ajlopez/AjRuby
 ## References
 
 - [True, False And Nil Objects In Ruby](http://www.skorks.com/2009/09/true-false-and-nil-objects-in-ruby/)
+- [Why should you avoid the then keyword in Ruby?](http://stackoverflow.com/questions/5659360/why-should-you-avoid-the-then-keyword-in-ruby)

@@ -91,7 +91,10 @@
         private IfCommand ParseIfCommand()
         {
             IExpression condition = this.ParseExpression();
-            this.ParseEndOfCommand();
+            if (this.TryParseName("then"))
+                this.TryParseEndOfLine();
+            else
+                this.ParseEndOfCommand();
             ICommand thencommand = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new IfCommand(condition, thencommand);
@@ -129,6 +132,12 @@
         private void ParseEndOfCommand()
         {
             Token token = this.lexer.NextToken();
+
+            if (token != null && token.Type == TokenType.Name && token.Value == "end")
+            {
+                this.lexer.PushToken(token);
+                return;
+            }
 
             if (!IsEndOfCommand(token))
                 throw new ParserException("end of command expected");
@@ -214,6 +223,30 @@
                 throw new ParserException("name expected");
 
             return token.Value;
+        }
+
+        private bool TryParseName(string name)
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token != null && token.Type == TokenType.Name && token.Value == name)
+                return true;
+
+            this.lexer.PushToken(token);
+
+            return false;
+        }
+
+        private bool TryParseEndOfLine()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token != null && token.Type == TokenType.EndOfLine && token.Value == "\n")
+                return true;
+
+            this.lexer.PushToken(token);
+
+            return false;
         }
 
         private bool IsBinaryOperator(Token token)

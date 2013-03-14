@@ -225,6 +225,32 @@
         }
 
         [TestMethod]
+        public void ParseSimpleIfCommandWithThen()
+        {
+            Parser parser = new Parser("if 1 then\n a=1\nend");
+            var expected = new IfCommand(new ConstantExpression(1), new AssignCommand("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleIfCommandWithThenOneLine()
+        {
+            Parser parser = new Parser("if 1 then a=1 end");
+            var expected = new IfCommand(new ConstantExpression(1), new AssignCommand("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseIfCommandWithCompositeThenCommand()
         {
             Parser parser = new Parser("if 1\n a=1\n b=2\nend");
