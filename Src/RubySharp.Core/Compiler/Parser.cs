@@ -210,6 +210,13 @@
             if (token.Type == TokenType.Name)    
                 return new NameExpression(token.Value);
 
+            if (token.Type == TokenType.Separator && token.Value == "(")
+            {
+                IExpression expr = this.ParseExpression();
+                this.ParseToken(TokenType.Separator, ")");
+                return expr;
+            }
+
             throw new ParserException(string.Format("unexpected '{0}'", token.Value));
         }
 
@@ -219,6 +226,14 @@
 
             if (token == null || token.Type != TokenType.Name || token.Value != name)
                 throw new ParserException(string.Format("expected '{0}'", name));
+        }
+
+        private void ParseToken(TokenType type, string value)
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token == null || token.Type != type || token.Value != value)
+                throw new ParserException(string.Format("expected '{0}'", value));
         }
 
         private string ParseName()

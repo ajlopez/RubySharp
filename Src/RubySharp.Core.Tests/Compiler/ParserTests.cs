@@ -65,6 +65,19 @@
         }
 
         [TestMethod]
+        public void ParseAddTwoIntegersInParentheses()
+        {
+            Parser parser = new Parser("(1+2)");
+            var expected = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseSubtractTwoIntegers()
         {
             Parser parser = new Parser("1-2");
@@ -163,13 +176,13 @@
         public void ParseTwoNameAsCall()
         {
             Parser parser = new Parser("a b\n");
-            var expected = new CallExpression("a", new IExpression[] { new NameExpression("b") });
-            var result = parser.ParseExpression();
+            var expected = new ExpressionCommand(new CallExpression("a", new IExpression[] { new NameExpression("b") }));
+            var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
             Assert.AreEqual(expected, result);
 
-            Assert.IsNull(parser.ParseExpression());
+            Assert.IsNull(parser.ParseCommand());
         }
 
         [TestMethod]

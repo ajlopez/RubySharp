@@ -9,7 +9,7 @@
     {
         private const char Quote = '\'';
         private const string Operators = "+-*/=";
-        private const string Separators = ";";
+        private const string Separators = ";()";
         private string text;
         private int position = 0;
         private Stack<Token> tokens = new Stack<Token>();
@@ -57,11 +57,13 @@
         private Token NextName(char ch)
         {
             string value = ch.ToString();
+            int ich;
 
-            for (int ich = this.NextChar(); ich >= 0 && char.IsLetterOrDigit((char)ich); ich = this.NextChar())
+            for (ich = this.NextChar(); ich >= 0 && char.IsLetterOrDigit((char)ich); ich = this.NextChar())
                 value += (char)ich;
 
-            this.BackChar();
+            if (ich >= 0)
+                this.BackChar();
 
             return new Token(TokenType.Name, value);
         }
@@ -83,11 +85,13 @@
         private Token NextInteger(char ch)
         {
             string value = ch.ToString();
+            int ich;
 
-            for (int ich = this.NextChar(); ich >= 0 && char.IsDigit((char)ich); ich = this.NextChar())
+            for (ich = this.NextChar(); ich >= 0 && char.IsDigit((char)ich); ich = this.NextChar())
                 value += (char)ich;
 
-            this.BackChar();
+            if (ich >= 0)
+                this.BackChar();
 
             return new Token(TokenType.Integer, value);
         }
@@ -110,7 +114,7 @@
 
         private void BackChar()
         {
-            if (this.position < this.text.Length)
+            if (this.position <= this.text.Length)
                 this.position--;
         }
     }
