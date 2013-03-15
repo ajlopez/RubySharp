@@ -78,6 +78,22 @@
         }
 
         [TestMethod]
+        public void RaiseIsMissingParenthesis()
+        {
+            Parser parser = new Parser("(1+2");
+
+            try
+            {
+                parser.ParseExpression();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("expected ')'", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void ParseSubtractTwoIntegers()
         {
             Parser parser = new Parser("1-2");

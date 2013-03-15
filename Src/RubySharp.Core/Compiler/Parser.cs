@@ -57,9 +57,6 @@
 
             IExpression expr = this.ParseExpression();
 
-            if (expr == null)
-                return null;
-
             if (!(expr is NameExpression))
             {
                 this.ParseEndOfCommand();
@@ -222,10 +219,7 @@
 
         private void ParseName(string name)
         {
-            Token token = this.lexer.NextToken();
-
-            if (token == null || token.Type != TokenType.Name || token.Value != name)
-                throw new ParserException(string.Format("expected '{0}'", name));
+            this.ParseToken(TokenType.Name, name);
         }
 
         private void ParseToken(TokenType type, string value)
