@@ -8,6 +8,7 @@
     using RubySharp.Core.Commands;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Expressions;
+    using RubySharp.Core.Language;
 
     [TestClass]
     public class ParserTests
@@ -472,6 +473,19 @@
                 Assert.IsInstanceOfType(ex, typeof(ParserException));
                 Assert.AreEqual("name expected", ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void ParseSymbol()
+        {
+            Parser parser = new Parser(":foo");
+            var expected = new ConstantExpression(new Symbol("foo"));
+            var expression = parser.ParseExpression();
+
+            Assert.IsNotNull(expression);
+            Assert.AreEqual(expected, expression);
+
+            Assert.IsNull(parser.ParseExpression());
         }
     }
 }

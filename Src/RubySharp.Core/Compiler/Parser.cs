@@ -6,6 +6,7 @@
     using System.Text;
     using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
+    using RubySharp.Core.Language;
 
     public class Parser
     {
@@ -250,6 +251,9 @@
 
             if (token.Type == TokenType.Name)    
                 return new NameExpression(token.Value);
+
+            if (token.Type == TokenType.Symbol)
+                return new ConstantExpression(new Symbol(token.Value));
 
             if (token.Type == TokenType.Separator && token.Value == "(")
             {
