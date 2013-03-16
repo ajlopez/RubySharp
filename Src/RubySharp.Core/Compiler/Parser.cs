@@ -111,12 +111,17 @@
         {
             IList<string> parameters = new List<string>();
 
+            bool inparentheses = this.TryParseToken(TokenType.Separator, "(");
+
             for (string name = this.TryParseName(); name != null; name = this.ParseName())
             {
                 parameters.Add(name);
                 if (!this.TryParseToken(TokenType.Separator, ","))
                     break;
             }
+
+            if (inparentheses)
+                this.ParseToken(TokenType.Separator, ")");
 
             return parameters;
         }

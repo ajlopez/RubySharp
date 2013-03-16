@@ -354,6 +354,19 @@
         }
 
         [TestMethod]
+        public void ParseDefCommandWithParametersInParentheses()
+        {
+            Parser parser = new Parser("def foo(a, b)\na+b\nend");
+            var expected = new DefCommand("foo", new string[] { "a", "b" }, new ExpressionCommand(new AddExpression(new NameExpression("a"), new NameExpression("b"))));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void RaiseIfDefHasNoName()
         {
             Parser parser = new Parser("def \na=1\nend");
