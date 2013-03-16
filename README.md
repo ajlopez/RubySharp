@@ -16,3 +16,8 @@ It's a new implementation of previous work https://github.com/ajlopez/AjRuby
 - [Ruby Syntax](http://web.njit.edu/all_topics/Prog_Lang_Docs/html/ruby/syntax.html)
 - [Ruby Documentation](http://www.ruby-lang.org/en/documentation/)
 - [The Ruby Language](http://www.rubycentral.com/pickaxe/language.html)
+- [Define method for instance of class](http://stackoverflow.com/questions/3026943/define-method-for-instance-of-class)
+- [Ruby: Dynamically Define Method](http://blog.jayfields.com/2008/02/ruby-dynamically-define-method.html)
+- [Class and Instance Methods in Ruby](http://www.railstips.org/blog/archives/2009/05/11/class-and-instance-methods-in-ruby/)
+- [Test for instance method existence?](http://www.ruby-forum.com/topic/142523)
+- [Ruby Metaprogramming: Declaratively Adding Methods to a Class](http://www.vitarara.org/cms/ruby_metaprogamming_declaratively_adding_methods_to_a_class)
