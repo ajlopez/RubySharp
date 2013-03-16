@@ -57,6 +57,7 @@
     <Compile Include="Expressions\NameExpressionTests.cs" />
     <Compile Include="Functions\DefinedFunctionTests.cs" />
     <Compile Include="Functions\PutsFunctionTests.cs" />
+    <Compile Include="Language\DefinedClassTests.cs" />
     <Compile Include="Language\SymbolTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
