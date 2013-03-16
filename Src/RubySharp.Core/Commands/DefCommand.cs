@@ -35,6 +35,13 @@
             {
                 var cmd = (DefCommand)obj;
 
+                if (this.parameters.Count != cmd.parameters.Count)
+                    return false;
+
+                for (int k = 0; k < this.parameters.Count; k++)
+                    if (this.parameters[k] != cmd.parameters[k])
+                        return false;
+
                 return this.name == cmd.name && this.command.Equals(cmd.command);
             }
 
@@ -43,7 +50,12 @@
 
         public override int GetHashCode()
         {
-            return this.name.GetHashCode() + this.command.GetHashCode();
+            int result = this.name.GetHashCode() + this.command.GetHashCode();
+
+            foreach (var parameter in this.parameters)
+                result += parameter.GetHashCode();
+
+            return result;
         }
     }
 }
