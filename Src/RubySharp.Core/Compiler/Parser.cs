@@ -9,7 +9,7 @@
 
     public class Parser
     {
-        private static string[] binaryoperators = new string[] { "+", "-" };
+        private static string[] binaryoperators = new string[] { "+", "-", "*" };
         private Lexer lexer;
 
         public Parser(string text)
@@ -220,6 +220,8 @@
                     expr = new AddExpression(expr, this.ParseTerm());
                 if (token.Value == "-")
                     expr = new SubtractExpression(expr, this.ParseTerm());
+                if (token.Value == "*")
+                    expr = new MultiplyExpression(expr, this.ParseTerm());
             }
 
             if (token != null)

@@ -120,6 +120,19 @@
         }
 
         [TestMethod]
+        public void ParseMultiplyTwoIntegers()
+        {
+            Parser parser = new Parser("3*2");
+            var expected = new MultiplyExpression(new ConstantExpression(3), new ConstantExpression(2));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseCallExpressionSimplePuts()
         {
             Parser parser = new Parser("puts 123");
