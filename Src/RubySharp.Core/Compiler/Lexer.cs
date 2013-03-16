@@ -50,7 +50,10 @@
             if (char.IsDigit(ch))
                 return this.NextInteger(ch);
 
-            return this.NextName(ch);
+            if (char.IsLetter(ch) || ch == '_')
+                return this.NextName(ch);
+
+            throw new ParserException(string.Format("unexpected '{0}'", ch));
         }
 
         public void PushToken(Token token)

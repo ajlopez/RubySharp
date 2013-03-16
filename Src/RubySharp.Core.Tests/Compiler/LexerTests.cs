@@ -50,6 +50,36 @@
         }
 
         [TestMethod]
+        public void GetNameWithInitialUnderscore()
+        {
+            Lexer lexer = new Lexer("_foo");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_foo", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void RaiseIfUnexpectedCharacter()
+        {
+            Lexer lexer = new Lexer("\\");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("unexpected '\\'", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void GetNameWithSpaces()
         {
             Lexer lexer = new Lexer("  name   ");
