@@ -106,6 +106,45 @@
         }
 
         [TestMethod]
+        public void GetSymbolWithDigits()
+        {
+            Lexer lexer = new Lexer(":foo123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo123", result.Value);
+            Assert.AreEqual(TokenType.Symbol, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetSymbolWithUnderscore()
+        {
+            Lexer lexer = new Lexer(":foo_123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo_123", result.Value);
+            Assert.AreEqual(TokenType.Symbol, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetSymbolWithInitialUnderscore()
+        {
+            Lexer lexer = new Lexer(":_123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_123", result.Value);
+            Assert.AreEqual(TokenType.Symbol, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetInteger()
         {
             Lexer lexer = new Lexer("123");
