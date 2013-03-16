@@ -26,5 +26,18 @@
             Assert.IsNull(function.Apply(null));
             Assert.AreEqual("123\r\n", writer.ToString());
         }
+
+        [TestMethod]
+        public void DefineAndExecuteFunctionWithParameters()
+        {
+            Context context = new Context();
+
+            DefinedFunction function = new DefinedFunction(new ExpressionCommand(new AddExpression(new NameExpression("a"), new NameExpression("b"))), new string[] { "a", "b" }, context);
+
+            var result = function.Apply(new object[] { 1, 2 });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
     }
 }

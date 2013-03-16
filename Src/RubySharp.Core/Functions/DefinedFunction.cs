@@ -21,7 +21,21 @@
 
         public object Apply(IList<object> values)
         {
-            return this.body.Execute(this.context);
+            if (parameters.Count == 0)
+                return this.body.Execute(this.context);
+
+            Context newcontext = new Context(this.context);
+
+            int k = 0;
+            int cv = values.Count;
+
+            foreach (var parameter in this.parameters) 
+            {
+                newcontext.SetValue(parameter, values[k]);
+                k++;
+            }
+
+            return this.body.Execute(newcontext);
         }
     }
 }
