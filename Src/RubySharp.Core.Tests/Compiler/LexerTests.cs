@@ -168,6 +168,23 @@
         }
 
         [TestMethod]
+        public void RaiseIfSymbolStartsWithADigit()
+        {
+            Lexer lexer = new Lexer(":123");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxException));
+                Assert.AreEqual("unexpected integer", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void GetInteger()
         {
             Lexer lexer = new Lexer("123");

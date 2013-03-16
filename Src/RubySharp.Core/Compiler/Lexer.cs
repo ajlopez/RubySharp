@@ -85,7 +85,12 @@
             int ich;
 
             for (ich = this.NextChar(); ich >= 0 && ((char)ich == '_' || char.IsLetterOrDigit((char)ich)); ich = this.NextChar())
+            {
+                if (char.IsDigit((char)ich) && string.IsNullOrEmpty(value))
+                    throw new SyntaxException("unexpected integer");
+
                 value += (char)ich;
+            }
 
             if (ich >= 0)
                 this.BackChar();
