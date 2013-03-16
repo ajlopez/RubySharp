@@ -9,6 +9,9 @@
     {
         private const char Quote = '\'';
         private const char Colon = ':';
+        private const char StartComment = '#';
+        private const char EndOfLine = '\n';
+
         private const string Operators = "+-*/=";
         private const string Separators = ";(),";
         private string text;
@@ -32,7 +35,7 @@
 
             char ch = (char)ich;
 
-            if (ch == '\n')
+            if (ch == EndOfLine)
                 return new Token(TokenType.EndOfLine, "\n");
 
             if (ch == Quote)
@@ -130,7 +133,22 @@
             if (this.position >= this.text.Length)
                 return -1;
 
-            return this.text[this.position++];
+            char ch = this.text[this.position++];
+
+            if (ch == StartComment)
+            {
+                this.position++;
+
+                while (this.position < this.text.Length && this.text[this.position] != '\n')
+                    this.position++;
+
+                if (this.position >= this.text.Length)
+                    return -1;
+
+                ch = this.text[this.position++];
+            }
+
+            return ch;
         }
 
         private void BackChar()

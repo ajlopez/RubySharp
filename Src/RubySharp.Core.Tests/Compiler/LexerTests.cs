@@ -93,6 +93,28 @@
         }
 
         [TestMethod]
+        public void SkipComment()
+        {
+            Lexer lexer = new Lexer("# this is a comment");
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void SkipCommentUpToEndOfLine()
+        {
+            Lexer lexer = new Lexer("# this is a comment\n");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\n", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetSymbol()
         {
             Lexer lexer = new Lexer(":foo");
