@@ -100,11 +100,25 @@
         private DefCommand ParseDefCommand()
         {
             string name = this.ParseName();
+            IList<string> parameters = this.ParseParameterList();
             this.ParseEndOfCommand();
-            IList<string> parameters = new List<string>();
             ICommand body = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new DefCommand(name, parameters, body);
+        }
+
+        private IList<string> ParseParameterList()
+        {
+            IList<string> parameters = new List<string>();
+
+            for (string name = this.TryParseName(); name != null; name = this.ParseName())
+            {
+                parameters.Add(name);
+                if (!this.TryParseToken(TokenType.Separator, ","))
+                    break;
+            }
+
+            return parameters;
         }
 
         private ICommand ParseCommandList()
@@ -243,14 +257,31 @@
 
         private bool TryParseName(string name)
         {
+            return this.TryParseToken(TokenType.Name, name);
+        }
+
+        private bool TryParseToken(TokenType type, string value)
+        {
             Token token = this.lexer.NextToken();
 
-            if (token != null && token.Type == TokenType.Name && token.Value == name)
+            if (token != null && token.Type == type && token.Value == value)
                 return true;
 
             this.lexer.PushToken(token);
 
             return false;
+        }
+
+        private string TryParseName()
+        {
+            Token token = this.lexer.NextToken();
+
+            if (token != null && token.Type == TokenType.Name)
+                return token.Value;
+
+            this.lexer.PushToken(token);
+
+            return null;
         }
 
         private bool TryParseEndOfLine()
