@@ -69,6 +69,7 @@
     <Compile Include="Functions\DefinedFunction.cs" />
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
+    <Compile Include="Language\ConstantName.cs" />
     <Compile Include="Language\Symbol.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
