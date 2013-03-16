@@ -51,6 +51,9 @@
 
                 if (token.Value == "def")
                     return this.ParseDefCommand();
+
+                if (token.Value == "class")
+                    return this.ParseClassCommand();
             }
 
             this.lexer.PushToken(token);
@@ -105,6 +108,15 @@
             ICommand body = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new DefCommand(name, parameters, body);
+        }
+
+        private ClassCommand ParseClassCommand()
+        {
+            string name = this.ParseName();
+            this.ParseEndOfCommand();
+            ICommand body = this.ParseCommandList();
+            this.ParseEndOfCommand();
+            return new ClassCommand(name, body);
         }
 
         private IList<string> ParseParameterList()

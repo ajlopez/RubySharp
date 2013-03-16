@@ -488,5 +488,18 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseSimpleClassCommand()
+        {
+            Parser parser = new Parser("class Dog\na=1\nend");
+            var expected = new ClassCommand("Dog", new AssignCommand("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }
