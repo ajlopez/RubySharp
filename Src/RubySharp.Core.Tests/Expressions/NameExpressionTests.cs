@@ -36,7 +36,7 @@
         {
             NameExpression expr = new NameExpression("foo");
             Context context = new Context();
-            context.SetValue("foo", new DefinedFunction(new ExpressionCommand(new ConstantExpression(1)), context));
+            context.SetValue("foo", new DefinedFunction(new ExpressionCommand(new ConstantExpression(1)), new string[0], context));
 
             Assert.AreEqual(1, expr.Evaluate(context));
         }

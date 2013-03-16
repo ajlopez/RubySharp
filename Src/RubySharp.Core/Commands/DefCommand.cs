@@ -9,17 +9,19 @@
     public class DefCommand : ICommand
     {
         private string name;
+        private IList<string> parameters;
         private ICommand command;
 
-        public DefCommand(string name, ICommand command)
+        public DefCommand(string name, IList<string> parameters, ICommand command)
         {
             this.name = name;
+            this.parameters = parameters;
             this.command = command;
         }
 
         public object Execute(Context context)
         {
-            var result = new DefinedFunction(this.command, context);
+            var result = new DefinedFunction(this.command, this.parameters, context);
             context.SetValue(this.name, result);
             return result;
         }

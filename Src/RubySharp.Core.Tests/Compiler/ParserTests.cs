@@ -331,7 +331,7 @@
         public void ParseSimpleDefCommand()
         {
             Parser parser = new Parser("def foo\na=1\nend");
-            var expected = new DefCommand("foo", new AssignCommand("a", new ConstantExpression(1)));
+            var expected = new DefCommand("foo", new string[] { }, new AssignCommand("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);

@@ -21,7 +21,7 @@
             PutsFunction puts = new PutsFunction(writer);
             machine.RootContext.SetValue("puts", puts);
 
-            DefinedFunction function = new DefinedFunction(new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })), machine.RootContext);
+            DefinedFunction function = new DefinedFunction(new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })), new string[] { }, machine.RootContext);
 
             Assert.IsNull(function.Apply(null));
             Assert.AreEqual("123\r\n", writer.ToString());

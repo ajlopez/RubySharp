@@ -101,9 +101,10 @@
         {
             string name = this.ParseName();
             this.ParseEndOfCommand();
+            IList<string> parameters = new List<string>();
             ICommand body = this.ParseCommandList();
             this.ParseEndOfCommand();
-            return new DefCommand(name, body);
+            return new DefCommand(name, parameters, body);
         }
 
         private ICommand ParseCommandList()
