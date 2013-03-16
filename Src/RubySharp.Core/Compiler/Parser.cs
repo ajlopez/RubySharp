@@ -250,8 +250,11 @@
             if (token.Type == TokenType.String)
                 return new ConstantExpression(token.Value);
 
-            if (token.Type == TokenType.Name)    
-                return new NameExpression(token.Value);
+            if (token.Type == TokenType.Name)
+                if (char.IsUpper(token.Value[0]))
+                    return new ConstantExpression(new ConstantName(token.Value));
+                else
+                    return new NameExpression(token.Value);
 
             if (token.Type == TokenType.Symbol)
                 return new ConstantExpression(new Symbol(token.Value));
