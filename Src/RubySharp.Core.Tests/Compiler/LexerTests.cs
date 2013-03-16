@@ -6,6 +6,7 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Compiler;
+    using RubySharp.Core.Exceptions;
 
     [TestClass]
     public class LexerTests
@@ -74,7 +75,7 @@
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.IsInstanceOfType(ex, typeof(SyntaxException));
                 Assert.AreEqual("unexpected '\\'", ex.Message);
             }
         }
@@ -206,7 +207,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ParserException))]
+        [ExpectedException(typeof(SyntaxException))]
         public void RaiseIfSingleQuoteStringIsNotClosed()
         {
             Lexer lexer = new Lexer("'foo");

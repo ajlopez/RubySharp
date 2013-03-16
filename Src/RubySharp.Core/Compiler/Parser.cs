@@ -7,6 +7,7 @@
     using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Exceptions;
 
     public class Parser
     {
@@ -175,7 +176,7 @@
             }
 
             if (!this.IsEndOfCommand(token))
-                throw new ParserException("end of command expected");
+                throw new SyntaxException("end of command expected");
         }
 
         private bool NextTokenIsEndOfCommand()
@@ -262,7 +263,7 @@
                 return expr;
             }
 
-            throw new ParserException(string.Format("unexpected '{0}'", token.Value));
+            throw new SyntaxException(string.Format("unexpected '{0}'", token.Value));
         }
 
         private void ParseName(string name)
@@ -275,7 +276,7 @@
             Token token = this.lexer.NextToken();
 
             if (token == null || token.Type != type || token.Value != value)
-                throw new ParserException(string.Format("expected '{0}'", value));
+                throw new SyntaxException(string.Format("expected '{0}'", value));
         }
 
         private string ParseName()
@@ -283,7 +284,7 @@
             Token token = this.lexer.NextToken();
 
             if (token == null || token.Type != TokenType.Name)
-                throw new ParserException("name expected");
+                throw new SyntaxException("name expected");
 
             return token.Value;
         }

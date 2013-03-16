@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Exceptions;
 
     public class Lexer
     {
@@ -56,7 +57,7 @@
             if (char.IsLetter(ch) || ch == '_')
                 return this.NextName(ch);
 
-            throw new ParserException(string.Format("unexpected '{0}'", ch));
+            throw new SyntaxException(string.Format("unexpected '{0}'", ch));
         }
 
         public void PushToken(Token token)
@@ -101,7 +102,7 @@
                 value += (char)ich;
 
             if (ich < 0)
-                throw new ParserException("single quote expected");
+                throw new SyntaxException("single quote expected");
 
             return new Token(TokenType.String, value);
         }
