@@ -133,6 +133,45 @@
         }
 
         [TestMethod]
+        public void ParseAddAndMultiplyIntegers()
+        {
+            Parser parser = new Parser("1+3*2");
+            var expected = new AddExpression(new ConstantExpression(1), new MultiplyExpression(new ConstantExpression(3), new ConstantExpression(2)));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseDivideTwoIntegers()
+        {
+            Parser parser = new Parser("3/2");
+            var expected = new DivideExpression(new ConstantExpression(3), new ConstantExpression(2));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseSubtractAndDivideIntegers()
+        {
+            Parser parser = new Parser("1-3/2");
+            var expected = new SubtractExpression(new ConstantExpression(1), new DivideExpression(new ConstantExpression(3), new ConstantExpression(2)));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseCallExpressionSimplePuts()
         {
             Parser parser = new Parser("puts 123");
