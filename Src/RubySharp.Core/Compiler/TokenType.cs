@@ -7,6 +7,7 @@
         String = 3,
         Operator = 4,
         Separator = 5,
-        EndOfLine = 6
+        Symbol = 6,
+        EndOfLine = 7
     }
 }

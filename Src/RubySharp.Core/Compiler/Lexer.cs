@@ -8,6 +8,7 @@
     public class Lexer
     {
         private const char Quote = '\'';
+        private const char Colon = ':';
         private const string Operators = "+-*/=";
         private const string Separators = ";(),";
         private string text;
@@ -36,6 +37,9 @@
 
             if (ch == Quote)
                 return this.NextString();
+
+            if (ch == Colon)
+                return this.NextSymbol();
 
             if (Operators.Contains(ch))
                 return new Token(TokenType.Operator, ch.ToString());
@@ -66,6 +70,20 @@
                 this.BackChar();
 
             return new Token(TokenType.Name, value);
+        }
+
+        private Token NextSymbol()
+        {
+            string value = string.Empty;
+            int ich;
+
+            for (ich = this.NextChar(); ich >= 0 && char.IsLetterOrDigit((char)ich); ich = this.NextChar())
+                value += (char)ich;
+
+            if (ich >= 0)
+                this.BackChar();
+
+            return new Token(TokenType.Symbol, value);
         }
 
         private Token NextString()
