@@ -23,7 +23,7 @@
         {
             var result = new DefinedFunction(this.command, this.parameters, context);
             context.SetValue(this.name, result);
-            return result;
+            return null;
         }
 
         public override bool Equals(object obj)

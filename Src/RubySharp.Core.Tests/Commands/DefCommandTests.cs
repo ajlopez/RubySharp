@@ -20,9 +20,10 @@
 
             var result = cmd.Execute(context);
 
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(DefinedFunction));
-            Assert.AreEqual(result, context.GetValue("foo"));
+            Assert.IsNull(result);
+
+            var value = context.GetValue("foo");
+            Assert.IsInstanceOfType(value, typeof(DefinedFunction));
         }
 
         [TestMethod]
