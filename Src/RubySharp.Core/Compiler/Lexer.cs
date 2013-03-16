@@ -63,7 +63,7 @@
             string value = ch.ToString();
             int ich;
 
-            for (ich = this.NextChar(); ich >= 0 && char.IsLetterOrDigit((char)ich); ich = this.NextChar())
+            for (ich = this.NextChar(); ich >= 0 && ((char)ich == '_' || char.IsLetterOrDigit((char)ich)); ich = this.NextChar())
                 value += (char)ich;
 
             if (ich >= 0)
