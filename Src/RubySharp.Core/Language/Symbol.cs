@@ -7,6 +7,7 @@
 
     public class Symbol
     {
+        private static int hashcode = typeof(Symbol).GetHashCode();
         private string name;
 
         public Symbol(string name)
@@ -36,7 +37,7 @@
 
         public override int GetHashCode()
         {
-            return this.name.GetHashCode() + 17;
+            return this.name.GetHashCode() + hashcode;
         }
     }
 }
