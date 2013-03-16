@@ -133,6 +133,45 @@
         }
 
         [TestMethod]
+        public void ParseCallExpressionPutsWithTwoArguments()
+        {
+            Parser parser = new Parser("puts 1,2");
+            var expected = new CallExpression("puts", new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseCallExpressionPutsWithParentheses()
+        {
+            Parser parser = new Parser("puts(123)");
+            var expected = new CallExpression("puts", new IExpression[] { new ConstantExpression(123) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseCallExpressionPutsWithTwoArgumentsAndParentheses()
+        {
+            Parser parser = new Parser("puts(1,2)");
+            var expected = new CallExpression("puts", new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void RaiseIfNotAnExpression()
         {
@@ -381,14 +420,6 @@
                 Assert.IsInstanceOfType(ex, typeof(ParserException));
                 Assert.AreEqual("name expected", ex.Message);
             }
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ParserException))]
-        public void RaiseIfDefWithoutName()
-        {
-            Parser parser = new Parser("def\na=1\nend");
-            parser.ParseCommand();
         }
     }
 }

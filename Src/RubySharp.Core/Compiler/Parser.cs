@@ -29,9 +29,7 @@
             if (this.NextTokenIsOperator())
                 return result;
 
-            var expr = this.ParseExpression();
-
-            return new CallExpression(((NameExpression)result).Name, new IExpression[] { expr });
+            return new CallExpression(((NameExpression)result).Name, this.ParseExpressionList());
         }
 
         public ICommand ParseCommand()
@@ -124,6 +122,25 @@
                 this.ParseToken(TokenType.Separator, ")");
 
             return parameters;
+        }
+
+        private IList<IExpression> ParseExpressionList()
+        {
+            IList<IExpression> expressions = new List<IExpression>();
+
+            bool inparentheses = this.TryParseToken(TokenType.Separator, "(");
+
+            for (IExpression expression = this.ParseExpression(); expression != null; expression = this.ParseExpression())
+            {
+                expressions.Add(expression);
+                if (!this.TryParseToken(TokenType.Separator, ","))
+                    break;
+            }
+
+            if (inparentheses)
+                this.ParseToken(TokenType.Separator, ")");
+
+            return expressions;
         }
 
         private ICommand ParseCommandList()
