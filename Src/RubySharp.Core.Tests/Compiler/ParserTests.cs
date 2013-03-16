@@ -488,18 +488,5 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
-
-        [TestMethod]
-        public void ParseConstantName()
-        {
-            Parser parser = new Parser("Foo");
-            var expected = new ConstantExpression(new ConstantName("Foo"));
-            var expression = parser.ParseExpression();
-
-            Assert.IsNotNull(expression);
-            Assert.AreEqual(expected, expression);
-
-            Assert.IsNull(parser.ParseExpression());
-        }
     }
 }
