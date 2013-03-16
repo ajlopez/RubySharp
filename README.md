@@ -15,3 +15,4 @@ It's a new implementation of previous work https://github.com/ajlopez/AjRuby
 - [Ruby Language Reference Manual](http://web.njit.edu/all_topics/Prog_Lang_Docs/html/ruby/index.html)
 - [Ruby Syntax](http://web.njit.edu/all_topics/Prog_Lang_Docs/html/ruby/syntax.html)
 - [Ruby Documentation](http://www.ruby-lang.org/en/documentation/)
+- [The Ruby Language](http://www.rubycentral.com/pickaxe/language.html)
