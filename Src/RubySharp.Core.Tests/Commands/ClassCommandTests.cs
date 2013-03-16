@@ -29,6 +29,26 @@
         }
 
         [TestMethod]
+        public void RedefineSimpleClass()
+        {
+            Context context = new Context();
+            ClassCommand cmd = new ClassCommand("Dog", new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })));
+
+            cmd.Execute(context);
+
+            var initial = context.GetValue("Dog");
+
+            var result = cmd.Execute(context);
+
+            Assert.IsNull(result);
+
+            var value = context.GetValue("Dog");
+            Assert.IsInstanceOfType(value, typeof(DefinedClass));
+            Assert.AreEqual(value, context.GetValue("Dog"));
+            Assert.AreSame(initial, value);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             ClassCommand cmd1 = new ClassCommand("foo", new ExpressionCommand(new ConstantExpression(1)));

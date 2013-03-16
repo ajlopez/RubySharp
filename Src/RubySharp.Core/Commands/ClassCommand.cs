@@ -21,8 +21,14 @@
 
         public object Execute(Context context)
         {
-            var result = new DefinedClass(this.name);
-            context.SetValue(this.name, result);
+            var value = context.GetValue(this.name);
+
+            if (value == null || !(value is DefinedClass))
+            {
+                var newclass = new DefinedClass(this.name);
+                context.SetValue(this.name, newclass);
+            }
+
             return null;
         }
 
