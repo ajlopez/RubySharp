@@ -341,6 +341,23 @@
         }
 
         [TestMethod]
+        public void RaiseIfDefHasNoName()
+        {
+            Parser parser = new Parser("def \na=1\nend");
+
+            try
+            {
+                parser.ParseCommand();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(ParserException));
+                Assert.AreEqual("name expected", ex.Message);
+            }
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ParserException))]
         public void RaiseIfDefWithoutName()
         {
