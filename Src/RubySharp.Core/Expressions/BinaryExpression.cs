@@ -28,6 +28,26 @@
             return this.Apply(lvalue, rvalue);
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj.GetType() == this.GetType())
+            {
+                var expr = (BinaryExpression)obj;
+
+                return this.left.Equals(expr.left) && this.right.Equals(expr.right);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.LeftExpression.GetHashCode() + this.RightExpression.GetHashCode() + this.GetType().GetHashCode();
+        }
+
         public abstract object Apply(object leftvalue, object rightvalue);
     }
 }
