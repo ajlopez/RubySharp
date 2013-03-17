@@ -48,6 +48,7 @@
     <Compile Include="Commands\AssignCommand.cs" />
     <Compile Include="Commands\CompositeCommand.cs" />
     <Compile Include="Commands\ClassCommand.cs" />
+    <Compile Include="Commands\AssignInstanceVarCommand.cs" />
     <Compile Include="Commands\DefCommand.cs" />
     <Compile Include="Commands\ExpressionCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
