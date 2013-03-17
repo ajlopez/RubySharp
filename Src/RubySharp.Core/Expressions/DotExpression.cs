@@ -11,11 +11,13 @@
         private static int hashcode = typeof(DotExpression).GetHashCode();
         private IExpression expression;
         private string name;
+        private IList<IExpression> arguments;
 
-        public DotExpression(IExpression expression, string name)
+        public DotExpression(IExpression expression, string name, IList<IExpression> arguments)
         {
             this.expression = expression;
             this.name = name;
+            this.arguments = arguments;
         }
 
         public object Evaluate(Context context)
@@ -33,6 +35,13 @@
             {
                 var expr = (DotExpression)obj;
 
+                if (this.arguments.Count != expr.arguments.Count)
+                    return false;
+
+                for (var k = 0; k < this.arguments.Count; k++)
+                    if (!this.arguments[k].Equals(expr.arguments[k]))
+                        return false;
+
                 return this.name.Equals(expr.name) && this.expression.Equals(expr.expression);
             }
 
@@ -41,7 +50,12 @@
 
         public override int GetHashCode()
         {
-            return this.name.GetHashCode() + this.expression.GetHashCode() + hashcode;
+            int result = this.name.GetHashCode() + this.expression.GetHashCode() + hashcode;
+
+            foreach (var argument in this.arguments)
+                result += argument.GetHashCode();
+
+            return result;
         }
     }
 }

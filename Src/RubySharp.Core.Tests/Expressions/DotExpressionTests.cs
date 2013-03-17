@@ -21,7 +21,7 @@
 
             var myobj = dclass.CreateInstance();
 
-            DotExpression expression = new DotExpression(new ConstantExpression(myobj), "foo");
+            DotExpression expression = new DotExpression(new ConstantExpression(myobj), "foo", new IExpression[0]);
 
             var result = expression.Evaluate(null);
 
@@ -32,10 +32,30 @@
         [TestMethod]
         public void Equals()
         {
-            DotExpression expr1 = new DotExpression(new ConstantExpression(1), "foo");
-            DotExpression expr2 = new DotExpression(new ConstantExpression(2), "foo");
-            DotExpression expr3 = new DotExpression(new ConstantExpression(1), "bar");
-            DotExpression expr4 = new DotExpression(new ConstantExpression(1), "foo");
+            DotExpression expr1 = new DotExpression(new ConstantExpression(1), "foo", new IExpression[0]);
+            DotExpression expr2 = new DotExpression(new ConstantExpression(2), "foo", new IExpression[0]);
+            DotExpression expr3 = new DotExpression(new ConstantExpression(1), "bar", new IExpression[0]);
+            DotExpression expr4 = new DotExpression(new ConstantExpression(1), "foo", new IExpression[0]);
+
+            Assert.IsTrue(expr1.Equals(expr4));
+            Assert.IsTrue(expr4.Equals(expr1));
+            Assert.AreEqual(expr1.GetHashCode(), expr4.GetHashCode());
+
+            Assert.IsFalse(expr1.Equals(expr2));
+            Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr3));
+            Assert.IsFalse(expr3.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(null));
+            Assert.IsFalse(expr1.Equals("foo"));
+        }
+
+        [TestMethod]
+        public void EqualsWithArguments()
+        {
+            DotExpression expr1 = new DotExpression(new ConstantExpression(1), "foo", new IExpression[] { new ConstantExpression(2) });
+            DotExpression expr2 = new DotExpression(new ConstantExpression(2), "foo", new IExpression[] { new ConstantExpression(1) });
+            DotExpression expr3 = new DotExpression(new ConstantExpression(1), "bar", new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            DotExpression expr4 = new DotExpression(new ConstantExpression(1), "foo", new IExpression[] { new ConstantExpression(2) });
 
             Assert.IsTrue(expr1.Equals(expr4));
             Assert.IsTrue(expr4.Equals(expr1));

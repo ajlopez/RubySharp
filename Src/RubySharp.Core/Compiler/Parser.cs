@@ -258,7 +258,10 @@
 
             while (this.TryParseToken(TokenType.Separator, "."))
             {
-                expression = new DotExpression(expression, this.ParseName());
+                string name = this.ParseName();
+                IList<IExpression> arguments = new List<IExpression>();
+
+                expression = new DotExpression(expression, name, arguments);
             }
 
             return expression;

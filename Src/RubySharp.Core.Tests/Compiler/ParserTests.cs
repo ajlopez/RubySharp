@@ -506,7 +506,7 @@
         public void ParseDotExpression()
         {
             Parser parser = new Parser("dog.foo");
-            var expected = new DotExpression(new NameExpression("dog"), "foo");
+            var expected = new DotExpression(new NameExpression("dog"), "foo", new IExpression[0]);
 
             var result = parser.ParseExpression();
 
