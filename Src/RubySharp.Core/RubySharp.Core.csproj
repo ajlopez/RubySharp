@@ -68,6 +68,7 @@
     <Compile Include="Expressions\SubtractExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Functions\NewFunction.cs" />
     <Compile Include="Functions\DefinedFunction.cs" />
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />

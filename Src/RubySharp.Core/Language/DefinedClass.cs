@@ -8,6 +8,8 @@
 
     public class DefinedClass : BaseObject
     {
+        private static IFunction newfunction = new NewFunction();
+
         private string name;
         private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
 
@@ -35,6 +37,14 @@
         public BaseObject CreateInstance()
         {
             return new BaseObject(this);
+        }
+
+        public override IFunction GetMethod(string name)
+        {
+            if (name == "new")
+                return newfunction;
+
+            return base.GetMethod(name);
         }
     }
 }

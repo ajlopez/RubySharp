@@ -40,5 +40,30 @@
             Assert.AreSame(dclass, result.Class);
             Assert.AreSame(foo, result.GetMethod("foo"));
         }
+
+        [TestMethod]
+        public void ClassHasNewMethod()
+        {
+            DefinedClass @class = new DefinedClass("Dog");
+
+            var result = @class.GetMethod("new");
+
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void ApplyNewMethod()
+        {
+            DefinedClass @class = new DefinedClass("Dog");
+
+            var result = @class.GetMethod("new").Apply(@class, null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseObject));
+
+            var obj = (BaseObject)result;
+
+            Assert.AreSame(@class, obj.Class);
+        }
     }
 }
