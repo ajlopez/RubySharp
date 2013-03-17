@@ -117,15 +117,6 @@
     <milliseconds>165</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="NameExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/10/2013 11:33:54</timestamp>
-    <milliseconds>129</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="CallExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -151,15 +142,6 @@
     </settings>
     <timestamp>03/16/2013 19:41:33</timestamp>
     <milliseconds>808</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/16/2013 19:22:49</timestamp>
-    <milliseconds>383</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="TokenType.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
@@ -243,15 +225,6 @@
     <milliseconds>796</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="DefinedClass.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/17/2013 08:27:18</timestamp>
-    <milliseconds>304</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="Symbol.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -261,18 +234,6 @@
     <milliseconds>614</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>03/09/2013 16:37:16</timestamp>
-      <milliseconds>191</milliseconds>
-    </settings>
-    <timestamp>03/17/2013 08:41:27</timestamp>
-    <milliseconds>133</milliseconds>
-    <violations />
-  </sourcecode>
-  <project key="1905645662">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="DefinedFunction.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -280,6 +241,54 @@
     </settings>
     <timestamp>03/17/2013 08:40:51</timestamp>
     <milliseconds>341</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="1905645662">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Parser.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/17/2013 15:58:46</timestamp>
+    <milliseconds>890</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Lexer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/17/2013 13:57:08</timestamp>
+    <milliseconds>476</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NameExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/17/2013 08:42:27</timestamp>
+    <milliseconds>842</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DotExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/17/2013 16:08:59</timestamp>
+    <milliseconds>625</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DefinedClass.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>03/09/2013 16:37:16</timestamp>
+      <milliseconds>191</milliseconds>
+    </settings>
+    <timestamp>03/17/2013 16:29:35</timestamp>
+    <milliseconds>817</milliseconds>
     <violations />
   </sourcecode>
 </stylecopresultscache>

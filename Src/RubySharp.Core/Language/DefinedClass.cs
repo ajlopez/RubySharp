@@ -4,14 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-using RubySharp.Core.Functions;
+    using RubySharp.Core.Functions;
 
-    public class DefinedClass
+    public class DefinedClass : BaseObject
     {
         private string name;
         private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
 
         public DefinedClass(string name)
+            : base(null)
         {
             this.name = name;
         }

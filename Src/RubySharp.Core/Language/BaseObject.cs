@@ -31,7 +31,7 @@
             return null;
         }
 
-        public IFunction GetMethod(string name)
+        public virtual IFunction GetMethod(string name)
         {
             return this.@class.GetInstanceMethod(name);
         }

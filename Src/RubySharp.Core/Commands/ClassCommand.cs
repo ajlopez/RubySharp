@@ -32,17 +32,9 @@
 
             var dclass = (DefinedClass)value;
 
-            Context classcontext = new Context(context);
+            Context classcontext = new Context(dclass, null, context);
 
             this.command.Execute(classcontext);
-
-            foreach (var name in classcontext.GetLocalNames())
-            {
-                var newvalue = classcontext.GetValue(name);
-
-                if (newvalue is IFunction)
-                    dclass.SetInstanceMethod(name, (IFunction)newvalue);
-            }
 
             return null;
         }
