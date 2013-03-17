@@ -5,13 +5,13 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Commands;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
-    using RubySharp.Core.Exceptions;
 
     public class Parser
     {
-        private static string[][] binaryoperators = new string[][] { new string[] { "+", "-"} , new string[] { "*", "/" } };
+        private static string[][] binaryoperators = new string[][] { new string[] { "+", "-" }, new string[] { "*", "/" } };
         private Lexer lexer;
 
         public Parser(string text)

@@ -21,7 +21,7 @@
 
         public object Apply(IList<object> values)
         {
-            if (parameters.Count == 0)
+            if (this.parameters.Count == 0)
                 return this.body.Execute(this.context);
 
             Context newcontext = new Context(this.context);
