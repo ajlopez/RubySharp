@@ -107,5 +107,20 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);
         }
+
+        [TestMethod]
+        public void CreateInstanceWithArgumentsUsingInitialize()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.ExecuteText("class Dog;def initialize(age);@age = age;end;end; nero = Dog.new(10)");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseObject));
+
+            var obj = (BaseObject)result;
+
+            Assert.AreEqual(10, obj.GetValue("age"));
+        }
     }
 }
