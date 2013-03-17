@@ -60,6 +60,22 @@
         }
 
         [TestMethod]
+        public void NewInstance()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.ExecuteText("class MyClass;end;MyClass.new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseObject));
+
+            var obj = (BaseObject)result;
+
+            Assert.IsNotNull(obj.Class);
+            Assert.AreEqual("MyClass", obj.Class.Name);
+        }
+
+        [TestMethod]
         public void CallInstanceMethod()
         {
             Machine machine = new Machine();
