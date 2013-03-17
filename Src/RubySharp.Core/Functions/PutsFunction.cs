@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Language;
 
     public class PutsFunction : IFunction
     {
@@ -15,7 +16,7 @@
             this.writer = writer;
         }
 
-        public object Apply(IList<object> values)
+        public object Apply(BaseObject self, IList<object> values)
         {
             foreach (var value in values)
                 this.writer.WriteLine(value);

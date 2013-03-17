@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Commands;
+    using RubySharp.Core.Language;
 
     public class DefinedFunction : IFunction
     {
@@ -19,7 +20,7 @@
             this.parameters = parameters;
         }
 
-        public object Apply(IList<object> values)
+        public object Apply(BaseObject self, IList<object> values)
         {
             if (this.parameters.Count == 0)
                 return this.body.Execute(this.context);

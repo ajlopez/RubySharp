@@ -23,7 +23,7 @@
 
             DefinedFunction function = new DefinedFunction(new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })), new string[] { }, machine.RootContext);
 
-            Assert.IsNull(function.Apply(null));
+            Assert.IsNull(function.Apply(null, null));
             Assert.AreEqual("123\r\n", writer.ToString());
         }
 
@@ -34,7 +34,7 @@
 
             DefinedFunction function = new DefinedFunction(new ExpressionCommand(new AddExpression(new NameExpression("a"), new NameExpression("b"))), new string[] { "a", "b" }, context);
 
-            var result = function.Apply(new object[] { 1, 2 });
+            var result = function.Apply(null, new object[] { 1, 2 });
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);

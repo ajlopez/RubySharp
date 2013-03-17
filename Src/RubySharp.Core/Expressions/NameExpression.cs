@@ -23,7 +23,7 @@
             var result = context.GetValue(this.name);
 
             if (result is IFunction)
-                return ((IFunction)result).Apply(null);
+                return ((IFunction)result).Apply(null, null);
 
             return result;
         }

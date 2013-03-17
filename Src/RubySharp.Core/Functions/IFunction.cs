@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Language;
 
     public interface IFunction
     {
-        object Apply(IList<object> values);
+        object Apply(BaseObject self, IList<object> values);
     }
 }

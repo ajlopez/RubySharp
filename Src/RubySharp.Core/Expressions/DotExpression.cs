@@ -29,7 +29,7 @@
             foreach (var argument in this.arguments)
                 values.Add(argument.Evaluate(context));
 
-            return obj.GetMethod(this.name).Apply(values);
+            return obj.GetMethod(this.name).Apply(obj, values);
         }
 
         public override bool Equals(object obj)
