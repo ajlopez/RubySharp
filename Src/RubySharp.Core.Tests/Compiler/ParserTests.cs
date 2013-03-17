@@ -282,6 +282,19 @@
         }
 
         [TestMethod]
+        public void ParseAssignInstanceVarCommand()
+        {
+            Parser parser = new Parser("@a=2");
+            var expected = new AssignInstanceVarCommand("a", new ConstantExpression(2));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseTwoNameAsCall()
         {
             Parser parser = new Parser("a b\n");

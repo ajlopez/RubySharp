@@ -60,7 +60,7 @@
 
             IExpression expr = this.ParseExpression();
 
-            if (!(expr is NameExpression))
+            if (!(expr is NameExpression) && !(expr is InstanceVarExpression))
             {
                 this.ParseEndOfCommand();
                 return new ExpressionCommand(expr);
@@ -81,7 +81,12 @@
                 return new ExpressionCommand(expr);
             }
 
-            var cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
+            ICommand cmd;
+
+            if (expr is NameExpression)
+                cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
+            else
+                cmd = new AssignInstanceVarCommand(((InstanceVarExpression)expr).Name, this.ParseExpression());
 
             this.ParseEndOfCommand();
 
