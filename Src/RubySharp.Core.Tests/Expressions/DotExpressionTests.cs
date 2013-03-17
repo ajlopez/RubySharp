@@ -28,5 +28,25 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);
         }
+
+        [TestMethod]
+        public void Equals()
+        {
+            DotExpression expr1 = new DotExpression(new ConstantExpression(1), "foo");
+            DotExpression expr2 = new DotExpression(new ConstantExpression(2), "foo");
+            DotExpression expr3 = new DotExpression(new ConstantExpression(1), "bar");
+            DotExpression expr4 = new DotExpression(new ConstantExpression(1), "foo");
+
+            Assert.IsTrue(expr1.Equals(expr4));
+            Assert.IsTrue(expr4.Equals(expr1));
+            Assert.AreEqual(expr1.GetHashCode(), expr4.GetHashCode());
+
+            Assert.IsFalse(expr1.Equals(expr2));
+            Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr3));
+            Assert.IsFalse(expr3.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(null));
+            Assert.IsFalse(expr1.Equals("foo"));
+        }
     }
 }
