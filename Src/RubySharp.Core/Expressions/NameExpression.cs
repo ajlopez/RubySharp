@@ -8,6 +8,7 @@
 
     public class NameExpression : IExpression
     {
+        private static int hashcode = typeof(NameExpression).GetHashCode();
         private string name;
 
         public NameExpression(string name)
@@ -44,7 +45,7 @@
 
         public override int GetHashCode()
         {
-            return this.name.GetHashCode() + 11;
+            return this.name.GetHashCode() + hashcode;
         }
     }
 }
