@@ -44,6 +44,7 @@
     <Compile Include="Commands\CompositeCommandTests.cs" />
     <Compile Include="Commands\ClassCommandTests.cs" />
     <Compile Include="Commands\AssignInstanceVarCommandTests.cs" />
+    <Compile Include="Commands\WhileCommandTests.cs" />
     <Compile Include="Commands\DefCommandTests.cs" />
     <Compile Include="Commands\ExpressionCommandTests.cs" />
     <Compile Include="Commands\IfCommandTests.cs" />

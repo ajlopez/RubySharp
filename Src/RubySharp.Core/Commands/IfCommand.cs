@@ -19,10 +19,6 @@
             this.thencommand = thencommand;
         }
 
-        public IExpression Condition { get { return this.condition; } }
-
-        public ICommand ThenCommand { get { return this.thencommand; } }
-
         public object Execute(Context context)
         {
             object value = this.condition.Evaluate(context);
@@ -42,7 +38,7 @@
             {
                 var cmd = (IfCommand)obj;
 
-                return this.Condition.Equals(cmd.Condition) && this.ThenCommand.Equals(cmd.ThenCommand);
+                return this.condition.Equals(cmd.condition) && this.thencommand.Equals(cmd.thencommand);
             }
 
             return false;
@@ -50,7 +46,7 @@
 
         public override int GetHashCode()
         {
-            return this.Condition.GetHashCode() + this.ThenCommand.GetHashCode() + hashcode;
+            return this.condition.GetHashCode() + this.thencommand.GetHashCode() + hashcode;
         }
     }
 }
