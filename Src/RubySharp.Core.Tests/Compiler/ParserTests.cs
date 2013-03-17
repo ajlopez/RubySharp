@@ -515,5 +515,47 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseDotExpressionWithIntegerArgument()
+        {
+            Parser parser = new Parser("dog.foo 1");
+            var expected = new DotExpression(new NameExpression("dog"), "foo", new IExpression[] { new ConstantExpression(1) });
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseDotExpressionWithIntegerArgumentInParentheses()
+        {
+            Parser parser = new Parser("dog.foo(1)");
+            var expected = new DotExpression(new NameExpression("dog"), "foo", new IExpression[] { new ConstantExpression(1) });
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseDotExpressionWithTwoArgumentsInParentheses()
+        {
+            Parser parser = new Parser("dog.foo('foo', 'bar')");
+            var expected = new DotExpression(new NameExpression("dog"), "foo", new IExpression[] { new ConstantExpression("foo"), new ConstantExpression("bar") });
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }

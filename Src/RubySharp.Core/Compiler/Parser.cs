@@ -205,6 +205,26 @@
             return token.Type == TokenType.Operator;
         }
 
+        private bool NextTokenStartsExpressionList()
+        {
+            Token token = this.lexer.NextToken();
+            this.lexer.PushToken(token);
+
+            if (token == null)
+                return false;
+
+            if (this.IsEndOfCommand(token))
+                return false;
+
+            if (token.Type == TokenType.Operator)
+                return false;
+
+            if (token.Type == TokenType.Separator)
+                return token.Value == "(";
+
+            return true;
+        }
+
         private bool IsEndOfCommand(Token token)
         {
             if (token == null)
@@ -259,9 +279,12 @@
             while (this.TryParseToken(TokenType.Separator, "."))
             {
                 string name = this.ParseName();
-                IList<IExpression> arguments = new List<IExpression>();
 
-                expression = new DotExpression(expression, name, arguments);
+                while (this.NextTokenStartsExpressionList())
+                    expression = new DotExpression(expression, name, this.ParseExpressionList());
+
+                if (!(expression is DotExpression))
+                    expression = new DotExpression(expression, name, new IExpression[0]);
             }
 
             return expression;
