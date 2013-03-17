@@ -31,5 +31,18 @@
         {
             return functions[this.@operator](leftvalue, rightvalue);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!base.Equals(obj))
+                return false;
+
+            return this.@operator == ((CompareExpression)obj).@operator;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() + (int)this.@operator;
+        }
     }
 }
