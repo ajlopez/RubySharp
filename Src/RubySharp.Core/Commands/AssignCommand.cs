@@ -8,6 +8,8 @@
 
     public class AssignCommand : ICommand
     {
+        private static int hashtag = typeof(AssignCommand).GetHashCode();
+
         private string name;
         private IExpression expression;
 
@@ -45,7 +47,7 @@
 
         public override int GetHashCode()
         {
-            return this.Name.GetHashCode() + this.Expression.GetHashCode();
+            return this.Name.GetHashCode() + this.Expression.GetHashCode() + hashtag;
         }
     }
 }
