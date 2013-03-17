@@ -14,7 +14,7 @@
         private const char EndOfLine = '\n';
 
         private const string Operators = "+-*/=";
-        private const string Separators = ";(),";
+        private const string Separators = ";(),.";
         private string text;
         private int position = 0;
         private Stack<Token> tokens = new Stack<Token>();

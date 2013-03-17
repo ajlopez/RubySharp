@@ -251,6 +251,21 @@
 
         private IExpression ParseTerm()
         {
+            IExpression expression = this.ParseSimpleTerm();
+
+            if (expression == null)
+                return null;
+
+            while (this.TryParseToken(TokenType.Separator, "."))
+            {
+                expression = new DotExpression(expression, this.ParseName());
+            }
+
+            return expression;
+        }
+
+        private IExpression ParseSimpleTerm()
+        {
             Token token = this.lexer.NextToken();
 
             if (token == null)

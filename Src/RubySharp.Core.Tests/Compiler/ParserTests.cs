@@ -501,5 +501,19 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseDotExpression()
+        {
+            Parser parser = new Parser("dog.foo");
+            var expected = new DotExpression(new NameExpression("dog"), "foo");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }
