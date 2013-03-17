@@ -6,6 +6,7 @@
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Functions;
 
     [TestClass]
     public class DefinedClassTests
@@ -24,6 +25,20 @@
             DefinedClass dclass = new DefinedClass("Dog");
 
             Assert.IsNull(dclass.GetInstanceMethod("foo"));
+        }
+
+        [TestMethod]
+        public void CreateInstance()
+        {
+            DefinedClass dclass = new DefinedClass("Dog");
+            IFunction foo = new DefinedFunction(null, null, null);
+            dclass.SetInstanceMethod("foo", foo);
+
+            var result = dclass.CreateInstance();
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(dclass, result.Class);
+            Assert.AreSame(foo, result.GetMethod("foo"));
         }
     }
 }

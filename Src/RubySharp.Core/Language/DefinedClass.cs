@@ -30,5 +30,10 @@ using RubySharp.Core.Functions;
 
             return null;
         }
+
+        public BaseObject CreateInstance()
+        {
+            return new BaseObject(this);
+        }
     }
 }
