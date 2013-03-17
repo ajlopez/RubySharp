@@ -79,13 +79,8 @@
         public void CallInstanceMethod()
         {
             Machine machine = new Machine();
-            machine.ExecuteText("class MyClass;def foo;3;end;end");
 
-            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
-            var myobj = dclass.CreateInstance();
-            machine.RootContext.SetValue("myobj", myobj);
-
-            var result = machine.ExecuteText("myobj.foo");
+            var result = machine.ExecuteText("class MyClass;def foo;3;end;end;myobj = MyClass.new;myobj.foo");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);
@@ -95,13 +90,8 @@
         public void CallInstanceMethodWithArguments()
         {
             Machine machine = new Machine();
-            machine.ExecuteText("class MyClass;def foo a,b;a+b;end;end");
 
-            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
-            var myobj = dclass.CreateInstance();
-            machine.RootContext.SetValue("myobj", myobj);
-
-            var result = machine.ExecuteText("myobj.foo 1, 2");
+            var result = machine.ExecuteText("class MyClass;def foo a,b;a+b;end;end; myobj = MyClass.new; myobj.foo 1,2");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);
@@ -111,13 +101,8 @@
         public void CallInstanceMethodWithArgumentsInParentheses()
         {
             Machine machine = new Machine();
-            machine.ExecuteText("class MyClass;def foo(a,b);a+b;end;end");
 
-            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
-            var myobj = dclass.CreateInstance();
-            machine.RootContext.SetValue("myobj", myobj);
-
-            var result = machine.ExecuteText("myobj.foo(1, 2)");
+            var result = machine.ExecuteText("class MyClass;def foo(a,b);a+b;end;end; myobj = MyClass.new; myobj.foo(1,2)");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);

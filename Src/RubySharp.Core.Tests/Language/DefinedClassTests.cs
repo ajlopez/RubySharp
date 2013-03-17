@@ -20,7 +20,7 @@
         }
 
         [TestMethod]
-        public void UndefinedMethodIsNull()
+        public void UndefinedInstanceMethodIsNull()
         {
             DefinedClass dclass = new DefinedClass("Dog");
 
@@ -49,6 +49,14 @@
             var result = @class.GetMethod("new");
 
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void UndefinedMethodIsNull()
+        {
+            DefinedClass @class = new DefinedClass("Dog");
+
+            Assert.IsNull(@class.GetMethod("foo"));
         }
 
         [TestMethod]

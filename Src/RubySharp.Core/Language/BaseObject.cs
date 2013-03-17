@@ -33,6 +33,9 @@
 
         public virtual IFunction GetMethod(string name)
         {
+            if (this.@class == null)
+                return null;
+
             return this.@class.GetInstanceMethod(name);
         }
     }
