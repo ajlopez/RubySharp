@@ -8,6 +8,8 @@
 
     public class IfCommand : ICommand
     {
+        private static int hashcode = typeof(IfCommand).GetHashCode();
+
         private IExpression condition;
         private ICommand thencommand;
 
@@ -48,7 +50,7 @@
 
         public override int GetHashCode()
         {
-            return this.Condition.GetHashCode() + this.ThenCommand.GetHashCode();
+            return this.Condition.GetHashCode() + this.ThenCommand.GetHashCode() + hashcode;
         }
     }
 }

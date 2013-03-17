@@ -11,7 +11,7 @@
 
     public class Parser
     {
-        private static string[][] binaryoperators = new string[][] { new string[] { "+", "-" }, new string[] { "*", "/" } };
+        private static string[][] binaryoperators = new string[][] { new string[] { "==", "!=", "<", ">", "<=", ">=" }, new string[] { "+", "-" }, new string[] { "*", "/" } };
         private Lexer lexer;
 
         public Parser(string text)
@@ -266,6 +266,18 @@
                     expr = new MultiplyExpression(expr, this.ParseBinaryExpression(level + 1));
                 if (token.Value == "/")
                     expr = new DivideExpression(expr, this.ParseBinaryExpression(level + 1));
+                if (token.Value == "==")
+                    expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.Equal);
+                if (token.Value == "!=")
+                    expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.NotEqual);
+                if (token.Value == "<")
+                    expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.Less);
+                if (token.Value == ">")
+                    expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.Greater);
+                if (token.Value == "<=")
+                    expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.LessOrEqual);
+                if (token.Value == ">=")
+                    expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.GreaterOrEqual);
             }
 
             if (token != null)

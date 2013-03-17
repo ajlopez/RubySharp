@@ -584,5 +584,25 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseCompareExpressions()
+        {
+            Parser parser = new Parser("1==2 1!=2 1<2 1>2 1<=2 1>=2");
+            var expected = new IExpression[] 
+            {
+                new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.Equal),
+                new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.NotEqual),
+                new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.Less),
+                new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.Greater),
+                new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.LessOrEqual),
+                new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.GreaterOrEqual)
+            };
+
+            foreach (var exp in expected)
+                Assert.AreEqual(exp, parser.ParseExpression());
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }
