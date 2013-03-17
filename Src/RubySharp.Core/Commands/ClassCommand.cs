@@ -29,6 +29,8 @@
                 context.SetValue(this.name, newclass);
             }
 
+            this.command.Execute(context);
+
             return null;
         }
 

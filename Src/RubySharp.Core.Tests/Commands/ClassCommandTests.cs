@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,6 +18,8 @@
         public void DefineSimpleClass()
         {
             Context context = new Context();
+            StringWriter writer = new StringWriter();
+            context.SetValue("puts", new PutsFunction(writer));
             ClassCommand cmd = new ClassCommand("Dog", new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })));
 
             var result = cmd.Execute(context);
@@ -26,12 +29,15 @@
             var value = context.GetValue("Dog");
             Assert.IsInstanceOfType(value, typeof(DefinedClass));
             Assert.AreEqual(value, context.GetValue("Dog"));
+            Assert.AreEqual("123\r\n", writer.ToString());
         }
 
         [TestMethod]
         public void RedefineSimpleClass()
         {
             Context context = new Context();
+            StringWriter writer = new StringWriter();
+            context.SetValue("puts", new PutsFunction(writer));
             ClassCommand cmd = new ClassCommand("Dog", new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })));
 
             cmd.Execute(context);
@@ -46,6 +52,7 @@
             Assert.IsInstanceOfType(value, typeof(DefinedClass));
             Assert.AreEqual(value, context.GetValue("Dog"));
             Assert.AreSame(initial, value);
+            Assert.AreEqual("123\r\n123\r\n", writer.ToString());
         }
 
         [TestMethod]

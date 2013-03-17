@@ -7,6 +7,7 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     [TestClass]
     public class MachineTests
@@ -76,6 +77,26 @@
             machine.RootContext.SetValue("puts", new PutsFunction(writer));
             Assert.AreEqual(null, machine.ExecuteFile("MachineFiles\\SimpleDef.rb"));
             Assert.AreEqual("1\r\n", writer.ToString());
+        }
+
+        [TestMethod]
+        [DeploymentItem("MachineFiles", "MachineFiles")]
+        public void ExecuteSimpleClassFile()
+        {
+            Machine machine = new Machine();
+            StringWriter writer = new StringWriter();
+            machine.RootContext.SetValue("puts", new PutsFunction(writer));
+            Assert.AreEqual(null, machine.ExecuteFile("MachineFiles\\SimpleClass.rb"));
+            Assert.AreEqual("Hello\r\n", writer.ToString());
+
+            var result = machine.RootContext.GetValue("Dog");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DefinedClass));
+
+            var dclass = (DefinedClass)result;
+
+            Assert.AreEqual("Dog", dclass.Name);
         }
     }
 }
