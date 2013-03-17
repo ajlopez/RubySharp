@@ -9,6 +9,7 @@
     public class NameExpression : IExpression
     {
         private static int hashcode = typeof(NameExpression).GetHashCode();
+        private static IList<object> emptyvalues = new object[] { };
         private string name;
 
         public NameExpression(string name)
@@ -23,7 +24,7 @@
             var result = context.GetValue(this.name);
 
             if (result is IFunction)
-                return ((IFunction)result).Apply(null, null);
+                return ((IFunction)result).Apply(null, emptyvalues);
 
             return result;
         }

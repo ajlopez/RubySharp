@@ -22,10 +22,7 @@
 
         public object Apply(BaseObject self, IList<object> values)
         {
-            if (this.parameters.Count == 0)
-                return this.body.Execute(this.context);
-
-            Context newcontext = new Context(this.context);
+            Context newcontext = new Context(null, self, this.context);
 
             int k = 0;
             int cv = values.Count;

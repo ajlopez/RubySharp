@@ -23,7 +23,7 @@
 
             DefinedFunction function = new DefinedFunction(new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })), new string[] { }, machine.RootContext);
 
-            Assert.IsNull(function.Apply(null, null));
+            Assert.IsNull(function.Apply(null, new object[] { }));
             Assert.AreEqual("123\r\n", writer.ToString());
         }
 

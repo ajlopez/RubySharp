@@ -11,7 +11,14 @@
     {
         public object Apply(BaseObject self, IList<object> values)
         {
-            return ((DefinedClass)self).CreateInstance();
+            var obj = ((DefinedClass)self).CreateInstance();
+
+            var initialize = obj.GetMethod("initialize");
+
+            if (initialize != null)
+                initialize.Apply(obj, values);
+
+            return obj;
         }
     }
 }

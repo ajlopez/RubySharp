@@ -1,12 +1,14 @@
 ﻿namespace RubySharp.Core.Tests.Language
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Language;
+    using RubySharp.Core.Commands;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
+    using RubySharp.Core.Expressions;
 
     [TestClass]
     public class DefinedClassTests
@@ -72,6 +74,24 @@
             var obj = (BaseObject)result;
 
             Assert.AreSame(@class, obj.Class);
+        }
+
+        [TestMethod]
+        public void ApplyNewMethodCallingInitialize()
+        {
+            DefinedClass @class = new DefinedClass("Dog");
+            IFunction initialize = new DefinedFunction(new AssignInstanceVarCommand("age", new ConstantExpression(10)), new string[0], null);
+            @class.SetInstanceMethod("initialize", initialize);
+
+            var result = @class.GetMethod("new").Apply(@class, new object[] { });
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseObject));
+
+            var obj = (BaseObject)result;
+
+            Assert.AreSame(@class, obj.Class);
+            Assert.AreEqual(10, obj.GetValue("age"));
         }
     }
 }
