@@ -11,6 +11,7 @@
         private Context parent;
         private IDictionary<string, object> values = new Dictionary<string, object>();
         private DefinedClass @class;
+        private BaseObject self;
 
         public Context()
             : this(null)
@@ -22,13 +23,16 @@
             this.parent = parent;
         }
 
-        public Context(DefinedClass @class, Context parent)
+        public Context(DefinedClass @class, BaseObject self, Context parent)
         {
             this.@class = @class;
             this.parent = parent;
+            this.self = self;
         }
 
         public DefinedClass Class { get { return this.@class; } }
+
+        public BaseObject Self { get { return this.self; } }
 
         public void SetValue(string name, object value)
         {

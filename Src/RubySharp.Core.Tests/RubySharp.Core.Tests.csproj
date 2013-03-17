@@ -49,6 +49,7 @@
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />
+    <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="MachineFileTests.cs" />
