@@ -604,5 +604,43 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseWhileCommand()
+        {
+            Parser cmdparser = new Parser("a = a + 1");
+            ICommand body = cmdparser.ParseCommand();
+            Parser exprparser = new Parser("a < 6");
+            IExpression expr = exprparser.ParseExpression();
+
+            Parser parser = new Parser("while a<6; a=a+1; end");
+            ICommand expected = new WhileCommand(expr, body);
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseWhileCommandWithDo()
+        {
+            Parser cmdparser = new Parser("a = a + 1");
+            ICommand body = cmdparser.ParseCommand();
+            Parser exprparser = new Parser("a < 6");
+            IExpression expr = exprparser.ParseExpression();
+
+            Parser parser = new Parser("while a<6 do a=a+1; end");
+            ICommand expected = new WhileCommand(expr, body);
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }
