@@ -23,7 +23,13 @@
         public object Evaluate(Context context)
         {
             var obj = (BaseObject)this.expression.Evaluate(context);
-            return obj.GetMethod(this.name).Apply(null);
+
+            IList<object> values = new List<object>();
+
+            foreach (var argument in this.arguments)
+                values.Add(argument.Evaluate(context));
+
+            return obj.GetMethod(this.name).Apply(values);
         }
 
         public override bool Equals(object obj)

@@ -58,5 +58,53 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DefinedFunction));
         }
+
+        [TestMethod]
+        public void CallInstanceMethod()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("class MyClass;def foo;3;end;end");
+
+            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
+            var myobj = dclass.CreateInstance();
+            machine.RootContext.SetValue("myobj", myobj);
+
+            var result = machine.ExecuteText("myobj.foo");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void CallInstanceMethodWithArguments()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("class MyClass;def foo a,b;a+b;end;end");
+
+            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
+            var myobj = dclass.CreateInstance();
+            machine.RootContext.SetValue("myobj", myobj);
+
+            var result = machine.ExecuteText("myobj.foo 1, 2");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void CallInstanceMethodWithArgumentsInParentheses()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("class MyClass;def foo(a,b);a+b;end;end");
+
+            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
+            var myobj = dclass.CreateInstance();
+            machine.RootContext.SetValue("myobj", myobj);
+
+            var result = machine.ExecuteText("myobj.foo(1, 2)");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
     }
 }
