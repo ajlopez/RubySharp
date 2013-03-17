@@ -557,5 +557,19 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseInstanceVariableExpression()
+        {
+            Parser parser = new Parser("@a");
+            var expected = new InstanceVarExpression("a");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }

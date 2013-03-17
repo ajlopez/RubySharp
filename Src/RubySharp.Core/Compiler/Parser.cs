@@ -306,6 +306,9 @@
             if (token.Type == TokenType.Name)
                 return new NameExpression(token.Value);
 
+            if (token.Type == TokenType.InstanceVarName)
+                return new InstanceVarExpression(token.Value);
+
             if (token.Type == TokenType.Symbol)
                 return new ConstantExpression(new Symbol(token.Value));
 
