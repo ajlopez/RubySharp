@@ -75,7 +75,7 @@
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(SyntaxException));
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
                 Assert.AreEqual("unexpected '\\'", ex.Message);
             }
         }
@@ -179,8 +179,94 @@
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(SyntaxException));
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
                 Assert.AreEqual("unexpected integer", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void GetInstanceVarName()
+        {
+            Lexer lexer = new Lexer("@a");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("a", result.Value);
+            Assert.AreEqual(TokenType.InstanceVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetInstanceVarNameWithDigits()
+        {
+            Lexer lexer = new Lexer("@a123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("a123", result.Value);
+            Assert.AreEqual(TokenType.InstanceVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetInstanceVarNameWithDigitsAndUnderscore()
+        {
+            Lexer lexer = new Lexer("@a_123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("a_123", result.Value);
+            Assert.AreEqual(TokenType.InstanceVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetInstanceVarNameWithInitialUnderscore()
+        {
+            Lexer lexer = new Lexer("@_123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_123", result.Value);
+            Assert.AreEqual(TokenType.InstanceVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void RaiseWhenInvalidInstanceVarName()
+        {
+            Lexer lexer = new Lexer("@");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
+                Assert.AreEqual("invalid instance variable name", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void RaiseWhenInstanceVarNameStartsWithADigit()
+        {
+            Lexer lexer = new Lexer("@123");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
+                Assert.AreEqual("invalid instance variable name", ex.Message);
             }
         }
 
@@ -224,7 +310,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SyntaxException))]
+        [ExpectedException(typeof(SyntaxError))]
         public void RaiseIfSingleQuoteStringIsNotClosed()
         {
             Lexer lexer = new Lexer("'foo");

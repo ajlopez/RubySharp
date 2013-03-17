@@ -12,6 +12,7 @@
         private const char Colon = ':';
         private const char StartComment = '#';
         private const char EndOfLine = '\n';
+        private const char Variable = '@';
 
         private const string Operators = "+-*/=";
         private const string Separators = ";(),.";
@@ -45,6 +46,9 @@
             if (ch == Colon)
                 return this.NextSymbol();
 
+            if (ch == Variable)
+                return this.NextInstanceVariableName();
+
             if (Operators.Contains(ch))
                 return new Token(TokenType.Operator, ch.ToString());
 
@@ -57,7 +61,7 @@
             if (char.IsLetter(ch) || ch == '_')
                 return this.NextName(ch);
 
-            throw new SyntaxException(string.Format("unexpected '{0}'", ch));
+            throw new SyntaxError(string.Format("unexpected '{0}'", ch));
         }
 
         public void PushToken(Token token)
@@ -79,6 +83,23 @@
             return new Token(TokenType.Name, value);
         }
 
+        private Token NextInstanceVariableName()
+        {
+            string value = string.Empty;
+            int ich;
+
+            for (ich = this.NextChar(); ich >= 0 && ((char)ich == '_' || char.IsLetterOrDigit((char)ich)); ich = this.NextChar())
+                value += (char)ich;
+
+            if (ich >= 0)
+                this.BackChar();
+
+            if (string.IsNullOrEmpty(value) || char.IsDigit(value[0]))
+                throw new SyntaxError("invalid instance variable name");
+
+            return new Token(TokenType.InstanceVarName, value);
+        }
+
         private Token NextSymbol()
         {
             string value = string.Empty;
@@ -87,7 +108,7 @@
             for (ich = this.NextChar(); ich >= 0 && ((char)ich == '_' || char.IsLetterOrDigit((char)ich)); ich = this.NextChar())
             {
                 if (char.IsDigit((char)ich) && string.IsNullOrEmpty(value))
-                    throw new SyntaxException("unexpected integer");
+                    throw new SyntaxError("unexpected integer");
 
                 value += (char)ich;
             }
@@ -107,7 +128,7 @@
                 value += (char)ich;
 
             if (ich < 0)
-                throw new SyntaxException("single quote expected");
+                throw new SyntaxError("single quote expected");
 
             return new Token(TokenType.String, value);
         }

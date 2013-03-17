@@ -188,7 +188,7 @@
             }
 
             if (!this.IsEndOfCommand(token))
-                throw new SyntaxException("end of command expected");
+                throw new SyntaxError("end of command expected");
         }
 
         private bool NextTokenIsEndOfCommand()
@@ -316,7 +316,7 @@
                 return expr;
             }
 
-            throw new SyntaxException(string.Format("unexpected '{0}'", token.Value));
+            throw new SyntaxError(string.Format("unexpected '{0}'", token.Value));
         }
 
         private void ParseName(string name)
@@ -329,7 +329,7 @@
             Token token = this.lexer.NextToken();
 
             if (token == null || token.Type != type || token.Value != value)
-                throw new SyntaxException(string.Format("expected '{0}'", value));
+                throw new SyntaxError(string.Format("expected '{0}'", value));
         }
 
         private string ParseName()
@@ -337,7 +337,7 @@
             Token token = this.lexer.NextToken();
 
             if (token == null || token.Type != TokenType.Name)
-                throw new SyntaxException("name expected");
+                throw new SyntaxError("name expected");
 
             return token.Value;
         }

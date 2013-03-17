@@ -90,7 +90,7 @@
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(SyntaxException));
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
                 Assert.AreEqual("expected ')'", ex.Message);
             }
         }
@@ -226,7 +226,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SyntaxException))]
+        [ExpectedException(typeof(SyntaxError))]
         public void RaiseIfNotAnExpression()
         {
             Parser parser = new Parser("+");
@@ -273,7 +273,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SyntaxException))]
+        [ExpectedException(typeof(SyntaxError))]
         public void RaiseIfEndOfCommandIsMissing()
         {
             Parser parser = new Parser("a=2 b=3\n");
@@ -412,7 +412,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SyntaxException))]
+        [ExpectedException(typeof(SyntaxError))]
         public void RaiseIfNoEndAtIf()
         {
             Parser parser = new Parser("if 1\n a=1\n");
@@ -471,7 +471,7 @@
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(SyntaxException));
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
                 Assert.AreEqual("name expected", ex.Message);
             }
         }

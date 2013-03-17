@@ -8,6 +8,7 @@
         Operator = 4,
         Separator = 5,
         Symbol = 6,
-        EndOfLine = 7
+        InstanceVarName = 7,
+        EndOfLine = 8
     }
 }
