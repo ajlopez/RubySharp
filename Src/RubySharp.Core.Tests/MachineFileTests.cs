@@ -71,5 +71,20 @@
 
             Assert.AreEqual("Dog", dclass.Name);
         }
+
+        [TestMethod]
+        public void ExecuteNewInstanceFile()
+        {
+            var result = this.machine.ExecuteFile("MachineFiles\\NewInstance.rb");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(BaseObject));
+
+            var obj = (BaseObject)result;
+
+            Assert.AreEqual("Nero", obj.GetValue("name"));
+            Assert.AreEqual(6, obj.GetValue("age"));
+            Assert.AreEqual("Dog", obj.Class.Name);
+        }
     }
 }
