@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Functions;
 
     public class BaseObject
     {
@@ -28,6 +29,11 @@
                 return this.values[name];
 
             return null;
+        }
+
+        public IFunction GetMethod(string name)
+        {
+            return this.@class.GetInstanceMethod(name);
         }
     }
 }

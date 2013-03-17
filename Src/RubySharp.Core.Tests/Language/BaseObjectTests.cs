@@ -6,16 +6,20 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Functions;
 
     [TestClass]
     public class BaseObjectTests
     {
         private DefinedClass @class;
+        private IFunction foo;
 
         [TestInitialize]
         public void Setup()
         {
             this.@class = new DefinedClass("Dog");
+            this.foo = new DefinedFunction(null, null, null);
+            this.@class.SetInstanceMethod("foo", foo);
         }
 
         [TestMethod]
@@ -42,6 +46,13 @@
             obj.SetValue("name", "Nero");
 
             Assert.AreEqual("Nero", obj.GetValue("name"));
+        }
+
+        [TestMethod]
+        public void GetMethodFromClass()
+        {
+            BaseObject obj = new BaseObject(this.@class);
+            Assert.AreSame(this.foo, obj.GetMethod("foo"));
         }
     }
 }
