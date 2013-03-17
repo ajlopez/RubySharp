@@ -13,9 +13,10 @@
         [TestMethod]
         public void CreateDefinedClass()
         {
-            DefinedClass dclass = new DefinedClass("Dog");
+            DefinedClass dclass = new DefinedClass("Dog", null);
 
             Assert.AreEqual("Dog", dclass.Name);
+            Assert.IsNotNull(dclass.Context);
         }
     }
 }

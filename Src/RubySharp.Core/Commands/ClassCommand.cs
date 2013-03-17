@@ -25,11 +25,14 @@
 
             if (value == null || !(value is DefinedClass))
             {
-                var newclass = new DefinedClass(this.name);
+                var newclass = new DefinedClass(this.name, context);
                 context.SetValue(this.name, newclass);
+                value = newclass;
             }
 
-            this.command.Execute(context);
+            var dclass = (DefinedClass)value;
+
+            this.command.Execute(dclass.Context);
 
             return null;
         }
