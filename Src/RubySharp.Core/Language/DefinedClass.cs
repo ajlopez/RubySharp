@@ -4,22 +4,31 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+using RubySharp.Core.Functions;
 
     public class DefinedClass
     {
         private string name;
-        private Context parent;
-        private Context context;
+        private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
 
-        public DefinedClass(string name, Context parent)
+        public DefinedClass(string name)
         {
             this.name = name;
-            this.parent = parent;
-            this.context = new Context(parent);
         }
 
         public string Name { get { return this.name; } }
 
-        public Context Context { get { return this.context; } }
+        public void SetInstanceMethod(string name, IFunction method)
+        {
+            this.methods[name] = method;
+        }
+
+        public IFunction GetInstanceMethod(string name)
+        {
+            if (this.methods.ContainsKey(name))
+                return this.methods[name];
+
+            return null;
+        }
     }
 }

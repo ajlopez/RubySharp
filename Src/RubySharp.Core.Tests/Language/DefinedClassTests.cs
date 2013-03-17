@@ -13,10 +13,17 @@
         [TestMethod]
         public void CreateDefinedClass()
         {
-            DefinedClass dclass = new DefinedClass("Dog", null);
+            DefinedClass dclass = new DefinedClass("Dog");
 
             Assert.AreEqual("Dog", dclass.Name);
-            Assert.IsNotNull(dclass.Context);
+        }
+
+        [TestMethod]
+        public void UndefinedMethodIsNull()
+        {
+            DefinedClass dclass = new DefinedClass("Dog");
+
+            Assert.IsNull(dclass.GetInstanceMethod("foo"));
         }
     }
 }

@@ -35,5 +35,10 @@
 
             return null;
         }
+
+        public IList<string> GetLocalNames()
+        {
+            return this.values.Keys.ToList();
+        }
     }
 }

@@ -15,7 +15,7 @@
         [TestInitialize]
         public void Setup()
         {
-            this.@class = new DefinedClass("Dog", null);
+            this.@class = new DefinedClass("Dog");
         }
 
         [TestMethod]

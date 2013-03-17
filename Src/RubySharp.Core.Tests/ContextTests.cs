@@ -35,5 +35,23 @@
             parent.SetValue("one", 1);
             Assert.AreEqual(1, context.GetValue("one"));
         }
+
+        [TestMethod]
+        public void GetLocalNames()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+
+            parent.SetValue("one", 1);
+            context.SetValue("two", 2);
+            context.SetValue("three", 3);
+
+            var result = context.GetLocalNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains("two"));
+            Assert.IsTrue(result.Contains("three"));
+        }
     }
 }

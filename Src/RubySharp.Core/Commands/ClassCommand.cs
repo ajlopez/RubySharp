@@ -25,14 +25,24 @@
 
             if (value == null || !(value is DefinedClass))
             {
-                var newclass = new DefinedClass(this.name, context);
+                var newclass = new DefinedClass(this.name);
                 context.SetValue(this.name, newclass);
                 value = newclass;
             }
 
             var dclass = (DefinedClass)value;
 
-            this.command.Execute(dclass.Context);
+            Context classcontext = new Context(context);
+
+            this.command.Execute(classcontext);
+
+            foreach (var name in classcontext.GetLocalNames())
+            {
+                var newvalue = classcontext.GetValue(name);
+
+                if (newvalue is IFunction)
+                    dclass.SetInstanceMethod(name, (IFunction)newvalue);
+            }
 
             return null;
         }

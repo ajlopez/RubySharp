@@ -52,9 +52,8 @@
             var dclass = (DefinedClass)result;
 
             Assert.AreEqual("MyClass", dclass.Name);
-            Assert.IsNotNull(dclass.Context);
 
-            result = dclass.Context.GetValue("foo");
+            result = dclass.GetInstanceMethod("foo");
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DefinedFunction));
