@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -62,7 +63,9 @@
     <Compile Include="Expressions\AddExpression.cs" />
     <Compile Include="Expressions\BinaryExpression.cs" />
     <Compile Include="Expressions\CallExpression.cs" />
+    <Compile Include="Expressions\CompareOperator.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />
+    <Compile Include="Expressions\CompareExpression.cs" />
     <Compile Include="Expressions\InstanceVarExpression.cs" />
     <Compile Include="Expressions\DivideExpression.cs" />
     <Compile Include="Expressions\DotExpression.cs" />

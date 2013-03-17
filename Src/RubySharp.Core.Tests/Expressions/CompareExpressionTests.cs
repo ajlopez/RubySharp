@@ -1,0 +1,55 @@
+﻿namespace RubySharp.Core.Tests.Expressions
+{
+    using System;
+    using System.Text;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Expressions;
+
+    [TestClass]
+    public class CompareExpressionTests
+    {
+        [TestMethod]
+        public void CompareEqualIntegers()
+        {
+            CompareExpression expr = new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.Equal);
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void CompareNotEqualIntegers()
+        {
+            CompareExpression expr = new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.NotEqual);
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void CompareLessIntegers()
+        {
+            CompareExpression expr = new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.Less);
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void CompareGreaterIntegers()
+        {
+            CompareExpression expr = new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.Greater);
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void CompareGreaterOrEqualIntegers()
+        {
+            CompareExpression expr = new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.GreaterOrEqual);
+            Assert.AreEqual(false, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void CompareLessOrEqualIntegers()
+        {
+            CompareExpression expr = new CompareExpression(new ConstantExpression(1), new ConstantExpression(2), CompareOperator.LessOrEqual);
+            Assert.AreEqual(true, expr.Evaluate(null));
+        }
+    }
+}
