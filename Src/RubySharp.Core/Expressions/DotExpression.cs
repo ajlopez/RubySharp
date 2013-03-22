@@ -20,6 +20,10 @@
             this.arguments = arguments;
         }
 
+        public IExpression Expression { get { return this.expression; } }
+
+        public string Name { get { return this.name; } }
+
         public object Evaluate(Context context)
         {
             var obj = (BaseObject)this.expression.Evaluate(context);
