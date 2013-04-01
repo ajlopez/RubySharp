@@ -23,3 +23,4 @@ It's a new implementation of previous work https://github.com/ajlopez/AjRuby
 - [Ruby Metaprogramming: Declaratively Adding Methods to a Class](http://www.vitarara.org/cms/ruby_metaprogamming_declaratively_adding_methods_to_a_class)
 - [How do I build DSLs with yield and instance_eval?](http://rubylearning.com/blog/2010/11/30/how-do-i-build-dsls-with-yield-and-instance_eval/)
 - [DSL in Ruby](http://4loc.wordpress.com/2009/05/29/dsl-in-ruby/)
+- [Python's method decorators for Ruby](https://github.com/michaelfairley/method_decorators)
