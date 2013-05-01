@@ -58,6 +58,7 @@
     <Compile Include="Commands\IfCommand.cs" />
     <Compile Include="Compiler\Lexer.cs" />
     <Compile Include="Compiler\Parser.cs" />
+    <Compile Include="Exceptions\NoMethodError.cs" />
     <Compile Include="Exceptions\SyntaxError.cs" />
     <Compile Include="Compiler\Token.cs" />
     <Compile Include="Compiler\TokenType.cs" />

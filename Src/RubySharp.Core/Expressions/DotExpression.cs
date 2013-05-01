@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Exceptions;
 
     public class DotExpression : IExpression
     {
@@ -33,7 +34,12 @@
             foreach (var argument in this.arguments)
                 values.Add(argument.Evaluate(context));
 
-            return obj.GetMethod(this.name).Apply(obj, values);
+            var method = obj.GetMethod(this.name);
+
+            if (method == null)
+                throw new NoMethodError(this.name);
+
+            return method.Apply(obj, values);
         }
 
         public override bool Equals(object obj)

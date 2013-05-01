@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
 
@@ -12,7 +13,7 @@
     public class DotExpressionTests
     {
         [TestMethod]
-        public void EvaluateObjectMethod()
+        public void EvaluateInstanceMethod()
         {
             Machine machine = new Machine();
             machine.ExecuteText("class MyClass;def foo;3;end;end");
@@ -27,6 +28,30 @@
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void EvaluateUndefinedInstanceMethod()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("class MyClass;end");
+
+            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
+
+            var myobj = dclass.CreateInstance();
+
+            DotExpression expression = new DotExpression(new ConstantExpression(myobj), "foo", new IExpression[0]);
+
+            try
+            {
+                expression.Evaluate(null);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(NoMethodError));
+                Assert.AreEqual("undefined method 'foo'", ex.Message);
+            }
         }
 
         [TestMethod]
