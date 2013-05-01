@@ -8,8 +8,6 @@
 
     public class Lexer
     {
-        private static string[] Operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=" };
-
         private const char Quote = '\'';
         private const char Colon = ':';
         private const char StartComment = '#';
@@ -17,6 +15,9 @@
         private const char Variable = '@';
 
         private const string Separators = ";(),.";
+
+        private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=" };
+
         private string text;
         private int position = 0;
         private Stack<Token> tokens = new Stack<Token>();
@@ -50,7 +51,7 @@
             if (ch == Variable)
                 return this.NextInstanceVariableName();
 
-            if (Operators.Contains(ch.ToString()))
+            if (operators.Contains(ch.ToString()))
             {
                 string value = ch.ToString();
                 ich = this.NextChar();
@@ -58,7 +59,7 @@
                 if (ich >= 0)
                 {
                     value += (char)ich;
-                    if (Operators.Contains(value))
+                    if (operators.Contains(value))
                         return new Token(TokenType.Operator, value);
 
                     this.BackChar();

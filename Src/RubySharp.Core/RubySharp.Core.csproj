@@ -72,6 +72,7 @@
     <Compile Include="Expressions\InstanceVarExpression.cs" />
     <Compile Include="Expressions\DivideExpression.cs" />
     <Compile Include="Expressions\DotExpression.cs" />
+    <Compile Include="Expressions\ListExpression.cs" />
     <Compile Include="Expressions\MultiplyExpression.cs" />
     <Compile Include="Expressions\SubtractExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />

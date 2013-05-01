@@ -6,8 +6,8 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Commands;
-    using RubySharp.Core.Expressions;
     using RubySharp.Core.Compiler;
+    using RubySharp.Core.Expressions;
 
     [TestClass]
     public class WhileCommandTests

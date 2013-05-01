@@ -5,8 +5,8 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Language;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     [TestClass]
     public class BaseObjectTests
@@ -19,7 +19,7 @@
         {
             this.@class = new DefinedClass("Dog");
             this.foo = new DefinedFunction(null, null, null);
-            this.@class.SetInstanceMethod("foo", foo);
+            this.@class.SetInstanceMethod("foo", this.foo);
         }
 
         [TestMethod]

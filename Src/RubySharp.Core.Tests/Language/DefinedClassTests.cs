@@ -6,9 +6,9 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Commands;
+    using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
-    using RubySharp.Core.Expressions;
 
     [TestClass]
     public class DefinedClassTests

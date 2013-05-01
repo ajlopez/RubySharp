@@ -1,11 +1,8 @@
 ﻿namespace RubySharp.Core.Expressions
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using RubySharp.Core.Language;
     using RubySharp.Core.Exceptions;
+    using RubySharp.Core.Language;
 
     public class DotExpression : IExpression
     {

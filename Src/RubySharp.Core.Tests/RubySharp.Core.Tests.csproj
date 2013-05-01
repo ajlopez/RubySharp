@@ -55,6 +55,7 @@
     <Compile Include="Expressions\CompareExpressionTests.cs" />
     <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
+    <Compile Include="Expressions\ListExpressionTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="MachineFileTests.cs" />
     <Compile Include="Expressions\AddExpressionTests.cs" />

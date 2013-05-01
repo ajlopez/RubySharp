@@ -7,9 +7,9 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Commands;
     using RubySharp.Core.Compiler;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
-    using RubySharp.Core.Exceptions;
 
     [TestClass]
     public class ParserTests
