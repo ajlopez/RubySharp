@@ -26,5 +26,28 @@
             Assert.AreEqual(1, list[0]);
             Assert.AreEqual(2, list[1]);
         }
+
+        [TestMethod]
+        public void Equals()
+        {
+            ListExpression expr1 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            ListExpression expr2 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) });
+            ListExpression expr3 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(3) });
+            ListExpression expr4 = new ListExpression(new IExpression[] { });
+            ListExpression expr5 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+
+            Assert.IsTrue(expr1.Equals(expr5));
+            Assert.IsTrue(expr5.Equals(expr1));
+            Assert.AreEqual(expr1.GetHashCode(), expr5.GetHashCode());
+
+            Assert.IsFalse(expr1.Equals(null));
+            Assert.IsFalse(expr1.Equals(123));
+            Assert.IsFalse(expr1.Equals(expr2));
+            Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr3));
+            Assert.IsFalse(expr3.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr4));
+            Assert.IsFalse(expr4.Equals(expr1));
+        }
     }
 }

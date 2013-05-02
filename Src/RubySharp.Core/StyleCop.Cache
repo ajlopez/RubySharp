@@ -369,9 +369,6 @@
     <milliseconds>873</milliseconds>
     <violations />
   </sourcecode>
-  <project key="1905645662">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="ListExpression.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>03/09/2013 16:37:16</timestamp>
@@ -381,4 +378,7 @@
     <milliseconds>859</milliseconds>
     <violations />
   </sourcecode>
+  <project key="1905645662">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
 </stylecopresultscache>
