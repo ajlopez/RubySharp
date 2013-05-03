@@ -177,6 +177,22 @@
             return expressions;
         }
 
+        private IList<IExpression> ParseExpressionList(string separator)
+        {
+            IList<IExpression> expressions = new List<IExpression>();
+
+            for (IExpression expression = this.ParseExpression(); expression != null; expression = this.ParseExpression())
+            {
+                expressions.Add(expression);
+                if (!this.TryParseToken(TokenType.Separator, ","))
+                    break;
+            }
+
+            this.ParseToken(TokenType.Separator, separator);
+
+            return expressions;
+        }
+
         private ICommand ParseCommandList()
         {
             Token token;
@@ -349,6 +365,12 @@
                 IExpression expr = this.ParseExpression();
                 this.ParseToken(TokenType.Separator, ")");
                 return expr;
+            }
+
+            if (token.Type == TokenType.Separator && token.Value == "[")
+            {
+                IList<IExpression> expressions = this.ParseExpressionList("]");
+                return new ListExpression(expressions);
             }
 
             throw new SyntaxError(string.Format("unexpected '{0}'", token.Value));

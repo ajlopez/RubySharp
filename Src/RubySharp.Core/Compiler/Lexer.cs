@@ -14,7 +14,7 @@
         private const char EndOfLine = '\n';
         private const char Variable = '@';
 
-        private const string Separators = ";(),.";
+        private const string Separators = ";()[],.";
 
         private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=" };
 

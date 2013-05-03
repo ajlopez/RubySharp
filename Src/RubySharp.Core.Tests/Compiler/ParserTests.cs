@@ -642,5 +642,33 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseSimpleList()
+        {
+            Parser parser = new Parser("[1,2,3]");
+            IExpression expected = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) });
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseSimpleListWithExpression()
+        {
+            Parser parser = new Parser("[1,1+1,3]");
+            IExpression expected = new ListExpression(new IExpression[] { new ConstantExpression(1), new AddExpression(new ConstantExpression(1), new ConstantExpression(1)), new ConstantExpression(3) });
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
     }
 }
