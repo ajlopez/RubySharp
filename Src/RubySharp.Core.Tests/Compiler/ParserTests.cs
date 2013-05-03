@@ -217,6 +217,21 @@
         {
             Parser parser = new Parser("puts(1,2)");
             var expected = new CallExpression("puts", new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseAddTwoNameExpressions()
+        {
+            Parser parser = new Parser("foo+bar");
+            var expected = new AddExpression(new NameExpression("foo"), new NameExpression("bar"));
+            
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);

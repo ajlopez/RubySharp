@@ -26,9 +26,7 @@
             if (!(result is NameExpression))
                 return result;
 
-            if (this.NextTokenIsEndOfCommand())
-                return result;
-            if (this.NextTokenIsOperator())
+            if (!this.NextTokenStartsExpressionList())
                 return result;
 
             return new CallExpression(((NameExpression)result).Name, this.ParseExpressionList());
@@ -225,20 +223,6 @@
 
             if (!this.IsEndOfCommand(token))
                 throw new SyntaxError("end of command expected");
-        }
-
-        private bool NextTokenIsEndOfCommand()
-        {
-            Token token = this.lexer.NextToken();
-            this.lexer.PushToken(token);
-            return this.IsEndOfCommand(token);
-        }
-
-        private bool NextTokenIsOperator()
-        {
-            Token token = this.lexer.NextToken();
-            this.lexer.PushToken(token);
-            return token.Type == TokenType.Operator;
         }
 
         private bool NextTokenStartsExpressionList()

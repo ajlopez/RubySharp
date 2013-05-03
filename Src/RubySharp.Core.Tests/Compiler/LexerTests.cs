@@ -168,6 +168,19 @@
         }
 
         [TestMethod]
+        public void GetSymbolWithSpaces()
+        {
+            Lexer lexer = new Lexer(" :_123 ");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_123", result.Value);
+            Assert.AreEqual(TokenType.Symbol, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void RaiseIfSymbolStartsWithADigit()
         {
             Lexer lexer = new Lexer(":123");
