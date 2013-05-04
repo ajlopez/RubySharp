@@ -122,5 +122,41 @@
 
             Assert.AreEqual(10, obj.GetValue("age"));
         }
+
+        [TestMethod]
+        public void EvaluateSimpleList()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.ExecuteText("[1,2,3]");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IList<object>));
+
+            var list = (IList<object>)result;
+
+            Assert.AreEqual(3, list.Count);
+            Assert.AreEqual(1, list[0]);
+            Assert.AreEqual(2, list[1]);
+            Assert.AreEqual(3, list[2]);
+        }
+
+        [TestMethod]
+        public void EvaluateListWithExpression()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.ExecuteText("[1,1+1,3]");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IList<object>));
+
+            var list = (IList<object>)result;
+
+            Assert.AreEqual(3, list.Count);
+            Assert.AreEqual(1, list[0]);
+            Assert.AreEqual(2, list[1]);
+            Assert.AreEqual(3, list[2]);
+        }
     }
 }
