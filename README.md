@@ -26,4 +26,4 @@ It's a new implementation of previous work https://github.com/ajlopez/AjRuby
 - [Python's method decorators for Ruby](https://github.com/michaelfairley/method_decorators)
 - [Ruby: Class Methods](http://blog.jayfields.com/2007/04/ruby-class-methods.html)
 - [Class and Instance Methods in Ruby](http://www.railstips.org/blog/archives/2009/05/11/class-and-instance-methods-in-ruby/)
-
+- [Creating your own attr_accessor in Ruby](http://mikeyhogarth.wordpress.com/2011/12/01/creating-your-own-attr_accessor-in-ruby/)
