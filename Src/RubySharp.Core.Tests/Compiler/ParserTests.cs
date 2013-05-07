@@ -685,5 +685,57 @@
 
             Assert.IsNull(parser.ParseExpression());
         }
+
+        [TestMethod]
+        public void ParseSimpleForInCommand()
+        {
+            Parser parser = new Parser("for k in [1,2,3]\n puts k\nend");
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleForInCommandWithDo()
+        {
+            Parser parser = new Parser("for k in [1,2,3] do\n puts k\nend");
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleForInCommandWithDoSingleLine()
+        {
+            Parser parser = new Parser("for k in [1,2,3] do puts(k) end");
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleForInCommandSingleLine()
+        {
+            Parser parser = new Parser("for k in [1,2,3]; puts k; end");
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

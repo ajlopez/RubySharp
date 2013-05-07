@@ -50,6 +50,9 @@
                 if (token.Value == "while")
                     return this.ParseWhileCommand();
 
+                if (token.Value == "for")
+                    return this.ParseForInCommand();
+
                 if (token.Value == "def")
                     return this.ParseDefCommand();
 
@@ -104,6 +107,20 @@
             ICommand thencommand = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new IfCommand(condition, thencommand);
+        }
+
+        private ForInCommand ParseForInCommand()
+        {
+            string name = this.ParseName();
+            this.ParseName("in");
+            IExpression expression = this.ParseExpression();
+            if (this.TryParseName("do"))
+                this.TryParseEndOfLine();
+            else
+                this.ParseEndOfCommand();
+            ICommand command = this.ParseCommandList();
+            this.ParseEndOfCommand();
+            return new ForInCommand(name, expression, command);
         }
 
         private WhileCommand ParseWhileCommand()
