@@ -353,7 +353,18 @@
                 return new ConstantExpression(token.Value);
 
             if (token.Type == TokenType.Name)
+            {
+                if (token.Value == "false")
+                    return new ConstantExpression(false);
+
+                if (token.Value == "true")
+                    return new ConstantExpression(true);
+
+                if (token.Value == "nil")
+                    return new ConstantExpression(null);
+
                 return new NameExpression(token.Value);
+            }
 
             if (token.Type == TokenType.InstanceVarName)
                 return new InstanceVarExpression(token.Value);

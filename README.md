@@ -8,6 +8,8 @@ Work in Progress
 
 It's a new implementation of previous work https://github.com/ajlopez/AjRuby
 
+It's an interpreter, not a compiler. It keeps a tree of commands and expressions that are executed and evaluated.
+
 ## References
 
 - [True, False And Nil Objects In Ruby](http://www.skorks.com/2009/09/true-false-and-nil-objects-in-ruby/)

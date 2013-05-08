@@ -158,5 +158,34 @@
             Assert.AreEqual(2, list[1]);
             Assert.AreEqual(3, list[2]);
         }
+
+        [TestMethod]
+        public void EvaluateFalse()
+        {
+            Machine machine = new Machine();
+            var result = machine.ExecuteText("false");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void EvaluateTrue()
+        {
+            Machine machine = new Machine();
+            var result = machine.ExecuteText("true");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void EvaluateNil()
+        {
+            Machine machine = new Machine();
+            var result = machine.ExecuteText("nil");
+
+            Assert.IsNull(result);
+        }
     }
 }
