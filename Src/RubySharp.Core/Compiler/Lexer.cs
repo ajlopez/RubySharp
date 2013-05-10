@@ -157,10 +157,27 @@
             for (ich = this.NextChar(); ich >= 0 && char.IsDigit((char)ich); ich = this.NextChar())
                 value += (char)ich;
 
+            if (ich >= 0 && (char)ich == '.')
+                return NextReal(value);
+
             if (ich >= 0)
                 this.BackChar();
 
             return new Token(TokenType.Integer, value);
+        }
+
+        private Token NextReal(string ivalue)
+        {
+            string value = ivalue + ".";
+            int ich;
+
+            for (ich = this.NextChar(); ich >= 0 && char.IsDigit((char)ich); ich = this.NextChar())
+                value += (char)ich;
+
+            if (ich >= 0)
+                this.BackChar();
+
+            return new Token(TokenType.Real, value);
         }
 
         private int NextFirstChar()

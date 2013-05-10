@@ -4,11 +4,12 @@
     {
         Name = 1,
         Integer = 2,
-        String = 3,
-        Operator = 4,
-        Separator = 5,
-        Symbol = 6,
-        InstanceVarName = 7,
-        EndOfLine = 8
+        Real = 3,
+        String = 4,
+        Operator = 5,
+        Separator = 6,
+        Symbol = 7,
+        InstanceVarName = 8,
+        EndOfLine = 9
     }
 }
