@@ -1,11 +1,11 @@
 ﻿namespace RubySharp.Core.Commands
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Expressions;
-    using System.Collections;
 
     public class ForInCommand : ICommand
     {
@@ -15,7 +15,7 @@
         private IExpression expression;
         private ICommand command;
 
-        public ForInCommand(string name,IExpression expression, ICommand command)
+        public ForInCommand(string name, IExpression expression, ICommand command)
         {
             this.name = name;
             this.expression = expression;
