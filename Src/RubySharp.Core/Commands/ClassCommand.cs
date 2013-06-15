@@ -4,22 +4,23 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
 
-    public class ClassCommand : ICommand
+    public class ClassCommand : IExpression
     {
         private static int hashcode = typeof(ClassCommand).GetHashCode();
         private string name;
-        private ICommand command;
+        private IExpression command;
 
-        public ClassCommand(string name, ICommand command)
+        public ClassCommand(string name, IExpression command)
         {
             this.name = name;
             this.command = command;
         }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             var value = context.GetValue(this.name);
 
@@ -34,7 +35,7 @@
 
             Context classcontext = new Context(dclass, null, context);
 
-            this.command.Execute(classcontext);
+            this.command.Evaluate(classcontext);
 
             return null;
         }

@@ -313,7 +313,7 @@
         public void ParseTwoNameAsCall()
         {
             Parser parser = new Parser("a b\n");
-            var expected = new ExpressionCommand(new CallExpression("a", new IExpression[] { new NameExpression("b") }));
+            var expected = new CallExpression("a", new IExpression[] { new NameExpression("b") });
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -326,7 +326,7 @@
         public void ParseExpressionCommand()
         {
             Parser parser = new Parser("1+2");
-            var expected = new ExpressionCommand(new AddExpression(new ConstantExpression(1), new ConstantExpression(2)));
+            var expected = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -339,7 +339,7 @@
         public void ParseSimpleNameAsExpressionCommand()
         {
             Parser parser = new Parser("a");
-            var expected = new ExpressionCommand(new NameExpression("a"));
+            var expected = new NameExpression("a");
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -352,7 +352,7 @@
         public void ParseSimpleNameAndNewLineAsExpressionCommand()
         {
             Parser parser = new Parser("a\n");
-            var expected = new ExpressionCommand(new NameExpression("a"));
+            var expected = new NameExpression("a");
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -417,7 +417,7 @@
         public void ParseSimpleIfCommandWithThenOneLineAndOtherLine()
         {
             Parser parser = new Parser("if 1 then a=1\nb=2 end");
-            var expected = new IfCommand(new ConstantExpression(1), new CompositeCommand(new ICommand[] { new AssignCommand("a", new ConstantExpression(1)), new AssignCommand("b", new ConstantExpression(2)) }));
+            var expected = new IfCommand(new ConstantExpression(1), new CompositeCommand(new IExpression[] { new AssignCommand("a", new ConstantExpression(1)), new AssignCommand("b", new ConstantExpression(2)) }));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -430,7 +430,7 @@
         public void ParseIfCommandWithCompositeThenCommand()
         {
             Parser parser = new Parser("if 1\n a=1\n b=2\nend");
-            var expected = new IfCommand(new ConstantExpression(1), new CompositeCommand(new ICommand[] { new AssignCommand("a", new ConstantExpression(1)), new AssignCommand("b", new ConstantExpression(2)) }));
+            var expected = new IfCommand(new ConstantExpression(1), new CompositeCommand(new IExpression[] { new AssignCommand("a", new ConstantExpression(1)), new AssignCommand("b", new ConstantExpression(2)) }));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -465,7 +465,7 @@
         public void ParseDefCommandWithParameters()
         {
             Parser parser = new Parser("def foo a, b\na+b\nend");
-            var expected = new DefCommand("foo", new string[] { "a", "b" }, new ExpressionCommand(new AddExpression(new NameExpression("a"), new NameExpression("b"))));
+            var expected = new DefCommand("foo", new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -478,7 +478,7 @@
         public void ParseDefCommandWithParametersInParentheses()
         {
             Parser parser = new Parser("def foo(a, b)\na+b\nend");
-            var expected = new DefCommand("foo", new string[] { "a", "b" }, new ExpressionCommand(new AddExpression(new NameExpression("a"), new NameExpression("b"))));
+            var expected = new DefCommand("foo", new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -624,12 +624,12 @@
         public void ParseWhileCommand()
         {
             Parser cmdparser = new Parser("a = a + 1");
-            ICommand body = cmdparser.ParseCommand();
+            IExpression body = cmdparser.ParseCommand();
             Parser exprparser = new Parser("a < 6");
             IExpression expr = exprparser.ParseExpression();
 
             Parser parser = new Parser("while a<6; a=a+1; end");
-            ICommand expected = new WhileCommand(expr, body);
+            IExpression expected = new WhileCommand(expr, body);
 
             var result = parser.ParseCommand();
 
@@ -643,12 +643,12 @@
         public void ParseWhileCommandWithDo()
         {
             Parser cmdparser = new Parser("a = a + 1");
-            ICommand body = cmdparser.ParseCommand();
+            IExpression body = cmdparser.ParseCommand();
             Parser exprparser = new Parser("a < 6");
             IExpression expr = exprparser.ParseExpression();
 
             Parser parser = new Parser("while a<6 do a=a+1; end");
-            ICommand expected = new WhileCommand(expr, body);
+            IExpression expected = new WhileCommand(expr, body);
 
             var result = parser.ParseCommand();
 
@@ -690,7 +690,7 @@
         public void ParseSimpleForInCommand()
         {
             Parser parser = new Parser("for k in [1,2,3]\n puts k\nend");
-            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new CallExpression("puts", new IExpression[] { new NameExpression("k") }));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -703,7 +703,7 @@
         public void ParseSimpleForInCommandWithDo()
         {
             Parser parser = new Parser("for k in [1,2,3] do\n puts k\nend");
-            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new CallExpression("puts", new IExpression[] { new NameExpression("k") }));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -716,7 +716,7 @@
         public void ParseSimpleForInCommandWithDoSingleLine()
         {
             Parser parser = new Parser("for k in [1,2,3] do puts(k) end");
-            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new CallExpression("puts", new IExpression[] { new NameExpression("k") }));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -729,7 +729,7 @@
         public void ParseSimpleForInCommandSingleLine()
         {
             Parser parser = new Parser("for k in [1,2,3]; puts k; end");
-            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new ExpressionCommand(new CallExpression("puts", new IExpression[] { new NameExpression("k") })));
+            var expected = new ForInCommand("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new CallExpression("puts", new IExpression[] { new NameExpression("k") }));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);

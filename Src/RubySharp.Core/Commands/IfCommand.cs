@@ -6,27 +6,27 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class IfCommand : ICommand
+    public class IfCommand : IExpression
     {
         private static int hashcode = typeof(IfCommand).GetHashCode();
 
         private IExpression condition;
-        private ICommand thencommand;
+        private IExpression thencommand;
 
-        public IfCommand(IExpression condition, ICommand thencommand)
+        public IfCommand(IExpression condition, IExpression thencommand)
         {
             this.condition = condition;
             this.thencommand = thencommand;
         }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             object value = this.condition.Evaluate(context);
 
             if (value == null || false.Equals(value))
                 return null;
 
-            return this.thencommand.Execute(context);
+            return this.thencommand.Evaluate(context);
         }
 
         public override bool Equals(object obj)

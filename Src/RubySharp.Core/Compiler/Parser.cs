@@ -32,7 +32,7 @@
             return new CallExpression(((NameExpression)result).Name, this.ParseExpressionList());
         }
 
-        public ICommand ParseCommand()
+        public IExpression ParseCommand()
         {
             Token token = this.lexer.NextToken();
 
@@ -67,7 +67,7 @@
             if (!(expr is NameExpression) && !(expr is InstanceVarExpression))
             {
                 this.ParseEndOfCommand();
-                return new ExpressionCommand(expr);
+                return expr;
             }
 
             token = this.lexer.NextToken();
@@ -75,17 +75,17 @@
             if (token == null)
             {
                 this.ParseEndOfCommand();
-                return new ExpressionCommand(expr);
+                return expr;
             }
 
             if (token.Type != TokenType.Operator || token.Value != "=")
             {
                 this.lexer.PushToken(token);
                 this.ParseEndOfCommand();
-                return new ExpressionCommand(expr);
+                return expr;
             }
 
-            ICommand cmd;
+            IExpression cmd;
 
             if (expr is NameExpression)
                 cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
@@ -104,7 +104,7 @@
                 this.TryParseEndOfLine();
             else
                 this.ParseEndOfCommand();
-            ICommand thencommand = this.ParseCommandList();
+            IExpression thencommand = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new IfCommand(condition, thencommand);
         }
@@ -118,7 +118,7 @@
                 this.TryParseEndOfLine();
             else
                 this.ParseEndOfCommand();
-            ICommand command = this.ParseCommandList();
+            IExpression command = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new ForInCommand(name, expression, command);
         }
@@ -130,7 +130,7 @@
                 this.TryParseEndOfLine();
             else
                 this.ParseEndOfCommand();
-            ICommand command = this.ParseCommandList();
+            IExpression command = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new WhileCommand(condition, command);
         }
@@ -140,7 +140,7 @@
             string name = this.ParseName();
             IList<string> parameters = this.ParseParameterList();
             this.ParseEndOfCommand();
-            ICommand body = this.ParseCommandList();
+            IExpression body = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new DefCommand(name, parameters, body);
         }
@@ -149,7 +149,7 @@
         {
             string name = this.ParseName();
             this.ParseEndOfCommand();
-            ICommand body = this.ParseCommandList();
+            IExpression body = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new ClassCommand(name, body);
         }
@@ -208,10 +208,10 @@
             return expressions;
         }
 
-        private ICommand ParseCommandList()
+        private IExpression ParseCommandList()
         {
             Token token;
-            IList<ICommand> commands = new List<ICommand>();
+            IList<IExpression> commands = new List<IExpression>();
 
             for (token = this.lexer.NextToken(); token != null && (token.Type != TokenType.Name || token.Value != "end"); token = this.lexer.NextToken())
             {

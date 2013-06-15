@@ -48,7 +48,6 @@
     <Compile Include="Commands\ForInCommandTests.cs" />
     <Compile Include="Commands\WhileCommandTests.cs" />
     <Compile Include="Commands\DefCommandTests.cs" />
-    <Compile Include="Commands\ExpressionCommandTests.cs" />
     <Compile Include="Commands\IfCommandTests.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />

@@ -16,7 +16,7 @@
         {
             IfCommand cmd = new IfCommand(new ConstantExpression(true), new AssignCommand("one", new ConstantExpression(1)));
             Context context = new Context();
-            Assert.AreEqual(1, cmd.Execute(context));
+            Assert.AreEqual(1, cmd.Evaluate(context));
             Assert.AreEqual(1, context.GetValue("one"));
         }
 
@@ -25,7 +25,7 @@
         {
             IfCommand cmd = new IfCommand(new ConstantExpression(false), new AssignCommand("one", new ConstantExpression(1)));
             Context context = new Context();
-            Assert.IsNull(cmd.Execute(context));
+            Assert.IsNull(cmd.Evaluate(context));
             Assert.IsNull(context.GetValue("one"));
         }
 
@@ -34,7 +34,7 @@
         {
             IfCommand cmd = new IfCommand(new ConstantExpression(null), new AssignCommand("one", new ConstantExpression(1)));
             Context context = new Context();
-            Assert.IsNull(cmd.Execute(context));
+            Assert.IsNull(cmd.Evaluate(context));
             Assert.IsNull(context.GetValue("one"));
         }
 
@@ -43,7 +43,7 @@
         {
             IfCommand cmd = new IfCommand(new ConstantExpression(0), new AssignCommand("one", new ConstantExpression(1)));
             Context context = new Context();
-            Assert.AreEqual(1, cmd.Execute(context));
+            Assert.AreEqual(1, cmd.Evaluate(context));
             Assert.AreEqual(1, context.GetValue("one"));
         }
 

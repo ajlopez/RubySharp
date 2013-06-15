@@ -24,7 +24,7 @@
             object result = null;
 
             for (var command = parser.ParseCommand(); command != null; command = parser.ParseCommand())
-                result = command.Execute(this.rootcontext);
+                result = command.Evaluate(this.rootcontext);
 
             return result;
         }

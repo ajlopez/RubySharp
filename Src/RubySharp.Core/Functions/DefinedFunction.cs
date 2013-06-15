@@ -5,15 +5,16 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Commands;
+    using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
 
     public class DefinedFunction : IFunction
     {
-        private ICommand body;
+        private IExpression body;
         private IList<string> parameters;
         private Context context;
 
-        public DefinedFunction(ICommand body, IList<string> parameters, Context context)
+        public DefinedFunction(IExpression body, IList<string> parameters, Context context)
         {
             this.body = body;
             this.context = context;
@@ -33,7 +34,7 @@
                 k++;
             }
 
-            return this.body.Execute(newcontext);
+            return this.body.Evaluate(newcontext);
         }
     }
 }

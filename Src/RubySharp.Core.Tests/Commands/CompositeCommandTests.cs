@@ -17,9 +17,9 @@
             Context context = new Context();
             AssignCommand cmd1 = new AssignCommand("one", new ConstantExpression(1));
             AssignCommand cmd2 = new AssignCommand("two", new ConstantExpression(2));
-            CompositeCommand cmd = new CompositeCommand(new ICommand[] { cmd1, cmd2 });
+            CompositeCommand cmd = new CompositeCommand(new IExpression[] { cmd1, cmd2 });
 
-            var result = cmd.Execute(context);
+            var result = cmd.Evaluate(context);
 
             Assert.AreEqual(2, result);
             Assert.AreEqual(1, context.GetValue("one"));
@@ -32,10 +32,10 @@
             AssignCommand acmd1 = new AssignCommand("one", new ConstantExpression(1));
             AssignCommand acmd2 = new AssignCommand("two", new ConstantExpression(2));
 
-            CompositeCommand cmd1 = new CompositeCommand(new ICommand[] { acmd1, acmd2 });
-            CompositeCommand cmd2 = new CompositeCommand(new ICommand[] { acmd2, acmd1 });
-            CompositeCommand cmd3 = new CompositeCommand(new ICommand[] { acmd1 });
-            CompositeCommand cmd4 = new CompositeCommand(new ICommand[] { acmd1, acmd2 });
+            CompositeCommand cmd1 = new CompositeCommand(new IExpression[] { acmd1, acmd2 });
+            CompositeCommand cmd2 = new CompositeCommand(new IExpression[] { acmd2, acmd1 });
+            CompositeCommand cmd3 = new CompositeCommand(new IExpression[] { acmd1 });
+            CompositeCommand cmd4 = new CompositeCommand(new IExpression[] { acmd1, acmd2 });
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

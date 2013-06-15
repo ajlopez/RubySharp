@@ -7,29 +7,29 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class ForInCommand : ICommand
+    public class ForInCommand : IExpression
     {
         private static int hashcode = typeof(ForInCommand).GetHashCode();
 
         private string name;
         private IExpression expression;
-        private ICommand command;
+        private IExpression command;
 
-        public ForInCommand(string name, IExpression expression, ICommand command)
+        public ForInCommand(string name, IExpression expression, IExpression command)
         {
             this.name = name;
             this.expression = expression;
             this.command = command;
         }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             IEnumerable elements = (IEnumerable)this.expression.Evaluate(context);
 
             foreach (var element in elements) 
             {
                 context.SetValue(this.name, element);
-                this.command.Execute(context);
+                this.command.Evaluate(context);
             }
 
             return null;

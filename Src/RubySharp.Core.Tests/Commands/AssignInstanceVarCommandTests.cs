@@ -19,7 +19,7 @@
             BaseObject obj = new BaseObject(null);
             Context context = new Context(null, obj, null);
 
-            var result = cmd.Execute(context);
+            var result = cmd.Evaluate(context);
 
             Assert.AreEqual(1, result);
             Assert.AreEqual(1, obj.GetValue("one"));

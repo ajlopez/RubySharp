@@ -17,7 +17,7 @@
             Context context = new Context();
             context.SetValue("total", 0);
             ForInCommand command = new ForInCommand("k", new ConstantExpression(new int[] { 1, 2, 3 }), new AssignCommand("total", new AddExpression(new NameExpression("total"), new NameExpression("k"))));
-            command.Execute(context);
+            command.Evaluate(context);
 
             Assert.AreEqual(6, context.GetValue("total"));
         }
@@ -25,11 +25,11 @@
         [TestMethod]
         public void Equals()
         {
-            ForInCommand cmd1 = new ForInCommand("k", new ConstantExpression(1), new ExpressionCommand(new ConstantExpression(2)));
-            ForInCommand cmd2 = new ForInCommand("j", new ConstantExpression(1), new ExpressionCommand(new ConstantExpression(2)));
-            ForInCommand cmd3 = new ForInCommand("k", new ConstantExpression(2), new ExpressionCommand(new ConstantExpression(2)));
-            ForInCommand cmd4 = new ForInCommand("k", new ConstantExpression(1), new ExpressionCommand(new ConstantExpression(3)));
-            ForInCommand cmd5 = new ForInCommand("k", new ConstantExpression(1), new ExpressionCommand(new ConstantExpression(2)));
+            ForInCommand cmd1 = new ForInCommand("k", new ConstantExpression(1), new ConstantExpression(2));
+            ForInCommand cmd2 = new ForInCommand("j", new ConstantExpression(1), new ConstantExpression(2));
+            ForInCommand cmd3 = new ForInCommand("k", new ConstantExpression(2), new ConstantExpression(2));
+            ForInCommand cmd4 = new ForInCommand("k", new ConstantExpression(1), new ConstantExpression(3));
+            ForInCommand cmd5 = new ForInCommand("k", new ConstantExpression(1), new ConstantExpression(2));
 
             Assert.IsTrue(cmd1.Equals(cmd5));
             Assert.IsTrue(cmd5.Equals(cmd1));
