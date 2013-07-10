@@ -6,23 +6,23 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class WhileCommand : ICommand
+    public class WhileCommand : IExpression
     {
         private static int hashcode = typeof(WhileCommand).GetHashCode();
 
         private IExpression condition;
-        private ICommand command;
+        private IExpression command;
 
-        public WhileCommand(IExpression condition, ICommand command)
+        public WhileCommand(IExpression condition, IExpression command)
         {
             this.condition = condition;
             this.command = command;
         }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             for (object value = this.condition.Evaluate(context); value != null && !false.Equals(value); value = this.condition.Evaluate(context))
-                this.command.Execute(context);
+                this.command.Evaluate(context);
 
             return null;
         }

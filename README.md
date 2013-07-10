@@ -38,3 +38,5 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Extending your include knowledge of Ruby](http://macournoyer.wordpress.com/2007/07/06/extending-your-include-knowledge-of-ruby/)
 - [Ruby's Eigenclasses Demystified](http://madebydna.com/all/code/2011/06/24/eigenclasses-demystified.html)
 - [Reflection, ObjectSpace, and Distributed Ruby](http://www.rubycentral.org/pickaxe/ospace.html)
+- [Understanding Ruby Metaprogramming](http://dfmonaco.github.io/understanding_ruby_metaprogramming/#/)
+- [Ruby Metaprogramming: Declaratively Adding Methods to a Class](http://www.vitarara.org/cms/ruby_metaprogamming_declaratively_adding_methods_to_a_class)

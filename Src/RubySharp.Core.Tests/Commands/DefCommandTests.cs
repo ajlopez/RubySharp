@@ -16,9 +16,9 @@
         public void DefineSimpleFunction()
         {
             Context context = new Context();
-            DefCommand cmd = new DefCommand("foo", new string[0], new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })));
+            DefCommand cmd = new DefCommand("foo", new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
-            var result = cmd.Execute(context);
+            var result = cmd.Evaluate(context);
 
             Assert.IsNull(result);
 
@@ -29,10 +29,10 @@
         [TestMethod]
         public void Equals()
         {
-            DefCommand cmd1 = new DefCommand("foo", new string[0], new ExpressionCommand(new ConstantExpression(1)));
-            DefCommand cmd2 = new DefCommand("bar", new string[0], new ExpressionCommand(new ConstantExpression(1)));
-            DefCommand cmd3 = new DefCommand("foo", new string[0], new ExpressionCommand(new ConstantExpression(2)));
-            DefCommand cmd4 = new DefCommand("foo", new string[0], new ExpressionCommand(new ConstantExpression(1)));
+            DefCommand cmd1 = new DefCommand("foo", new string[0], new ConstantExpression(1));
+            DefCommand cmd2 = new DefCommand("bar", new string[0], new ConstantExpression(1));
+            DefCommand cmd3 = new DefCommand("foo", new string[0], new ConstantExpression(2));
+            DefCommand cmd4 = new DefCommand("foo", new string[0], new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));
@@ -50,10 +50,10 @@
         [TestMethod]
         public void EqualsWithParameters()
         {
-            DefCommand cmd1 = new DefCommand("foo", new string[] { "c" }, new ExpressionCommand(new ConstantExpression(1)));
-            DefCommand cmd2 = new DefCommand("foo", new string[] { "a" }, new ExpressionCommand(new ConstantExpression(1)));
-            DefCommand cmd3 = new DefCommand("foo", new string[] { "a", "b" }, new ExpressionCommand(new ConstantExpression(1)));
-            DefCommand cmd4 = new DefCommand("foo", new string[] { "c" }, new ExpressionCommand(new ConstantExpression(1)));
+            DefCommand cmd1 = new DefCommand("foo", new string[] { "c" }, new ConstantExpression(1));
+            DefCommand cmd2 = new DefCommand("foo", new string[] { "a" }, new ConstantExpression(1));
+            DefCommand cmd3 = new DefCommand("foo", new string[] { "a", "b" }, new ConstantExpression(1));
+            DefCommand cmd4 = new DefCommand("foo", new string[] { "c" }, new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

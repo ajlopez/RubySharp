@@ -7,7 +7,7 @@
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
 
-    public class AssignDotCommand : ICommand
+    public class AssignDotCommand : IExpression
     {
         private DotExpression leftvalue;
         private IExpression expression;
@@ -22,7 +22,7 @@
 
         public IExpression Expression { get { return this.expression; } }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             var obj = (BaseObject)this.leftvalue.Expression.Evaluate(context);
             var method = obj.GetMethod(this.leftvalue.Name + "=");

@@ -20,9 +20,9 @@
             Context context = new Context();
             StringWriter writer = new StringWriter();
             context.SetValue("puts", new PutsFunction(writer));
-            ClassCommand cmd = new ClassCommand("Dog", new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })));
+            ClassCommand cmd = new ClassCommand("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
-            var result = cmd.Execute(context);
+            var result = cmd.Evaluate(context);
 
             Assert.IsNull(result);
 
@@ -38,13 +38,13 @@
             Context context = new Context();
             StringWriter writer = new StringWriter();
             context.SetValue("puts", new PutsFunction(writer));
-            ClassCommand cmd = new ClassCommand("Dog", new ExpressionCommand(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) })));
+            ClassCommand cmd = new ClassCommand("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
-            cmd.Execute(context);
+            cmd.Evaluate(context);
 
             var initial = context.GetValue("Dog");
 
-            var result = cmd.Execute(context);
+            var result = cmd.Evaluate(context);
 
             Assert.IsNull(result);
 
@@ -58,10 +58,10 @@
         [TestMethod]
         public void Equals()
         {
-            ClassCommand cmd1 = new ClassCommand("foo", new ExpressionCommand(new ConstantExpression(1)));
-            ClassCommand cmd2 = new ClassCommand("bar", new ExpressionCommand(new ConstantExpression(1)));
-            ClassCommand cmd3 = new ClassCommand("foo", new ExpressionCommand(new ConstantExpression(2)));
-            ClassCommand cmd4 = new ClassCommand("foo", new ExpressionCommand(new ConstantExpression(1)));
+            ClassCommand cmd1 = new ClassCommand("foo", new ConstantExpression(1));
+            ClassCommand cmd2 = new ClassCommand("bar", new ConstantExpression(1));
+            ClassCommand cmd3 = new ClassCommand("foo", new ConstantExpression(2));
+            ClassCommand cmd4 = new ClassCommand("foo", new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

@@ -38,7 +38,7 @@
             var value = new ConstantExpression("Nero");
             AssignDotCommand cmd = new AssignDotCommand(leftvalue, value);
 
-            var result = cmd.Execute(machine.RootContext);
+            var result = cmd.Evaluate(machine.RootContext);
 
             Assert.IsNotNull(result);
             Assert.AreEqual("Nero", result);

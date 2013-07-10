@@ -16,7 +16,7 @@
         public void ExecuteSimpleWhileWhenConditionIsTrue()
         {
             Parser cmdparser = new Parser("a = a + 1");
-            ICommand body = cmdparser.ParseCommand();
+            IExpression body = cmdparser.ParseCommand();
             Parser exprparser = new Parser("a < 6");
             IExpression expr = exprparser.ParseExpression();
 
@@ -25,7 +25,7 @@
 
             WhileCommand cmd = new WhileCommand(expr, body);
 
-            Assert.IsNull(cmd.Execute(context));
+            Assert.IsNull(cmd.Evaluate(context));
 
             Assert.AreEqual(6, context.GetValue("a"));
         }

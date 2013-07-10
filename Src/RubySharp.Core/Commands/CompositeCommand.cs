@@ -4,22 +4,23 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Expressions;
 
-    public class CompositeCommand : ICommand
+    public class CompositeCommand : IExpression
     {
-        private IList<ICommand> commands;
+        private IList<IExpression> commands;
 
-        public CompositeCommand(IList<ICommand> commands)
+        public CompositeCommand(IList<IExpression> commands)
         {
             this.commands = commands;
         }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             object result = null;
 
             foreach (var command in this.commands)
-                result = command.Execute(context);
+                result = command.Evaluate(context);
 
             return result;
         }

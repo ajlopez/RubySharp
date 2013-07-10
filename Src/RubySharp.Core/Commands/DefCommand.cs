@@ -4,22 +4,23 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
 
-    public class DefCommand : ICommand
+    public class DefCommand : IExpression
     {
         private string name;
         private IList<string> parameters;
-        private ICommand command;
+        private IExpression command;
 
-        public DefCommand(string name, IList<string> parameters, ICommand command)
+        public DefCommand(string name, IList<string> parameters, IExpression command)
         {
             this.name = name;
             this.parameters = parameters;
             this.command = command;
         }
 
-        public object Execute(Context context)
+        public object Evaluate(Context context)
         {
             var result = new DefinedFunction(this.command, this.parameters, context);
 
