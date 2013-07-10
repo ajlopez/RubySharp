@@ -9,6 +9,7 @@
     public class Lexer
     {
         private const char Quote = '\'';
+        private const char DoubleQuote = '"';
         private const char Colon = ':';
         private const char StartComment = '#';
         private const char EndOfLine = '\n';
@@ -43,7 +44,10 @@
                 return new Token(TokenType.EndOfLine, "\n");
 
             if (ch == Quote)
-                return this.NextString();
+                return this.NextString(Quote);
+
+            if (ch == DoubleQuote)
+                return this.NextString(DoubleQuote);
 
             if (ch == Colon)
                 return this.NextSymbol();
@@ -135,16 +139,16 @@
             return new Token(TokenType.Symbol, value);
         }
 
-        private Token NextString()
+        private Token NextString(char init)
         {
             string value = string.Empty;
             int ich;
 
-            for (ich = this.NextChar(); ich >= 0 && ((char)ich) != Quote; ich = this.NextChar())
+            for (ich = this.NextChar(); ich >= 0 && ((char)ich) != init; ich = this.NextChar())
                 value += (char)ich;
 
             if (ich < 0)
-                throw new SyntaxError("single quote expected");
+                throw new SyntaxError("unclosed string");
 
             return new Token(TokenType.String, value);
         }
