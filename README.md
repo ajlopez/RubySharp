@@ -31,4 +31,6 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Creating your own attr_accessor in Ruby](http://mikeyhogarth.wordpress.com/2011/12/01/creating-your-own-attr_accessor-in-ruby/)
 - [Understanding Ruby Metaprogramming](http://dfmonaco.github.io/understanding_ruby_metaprogramming/#/)
 - [Ruby Metaprogramming: Declaratively Adding Methods to a Class](http://www.vitarara.org/cms/ruby_metaprogamming_declaratively_adding_methods_to_a_class)
+- [Things that clear Ruby's method cache](https://charlie.bz/blog/things-that-clear-rubys-method-cache)
+- [Parallelism is a Myth in Ruby](http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/)
 
