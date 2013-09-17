@@ -44,3 +44,5 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Things that clear Ruby's method cache](https://charlie.bz/blog/things-that-clear-rubys-method-cache)
 - [Parallelism is a Myth in Ruby](http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/)
 - [Ruby Tips Part 2](http://globaldev.co.uk/2013/09/ruby-tips-part-2/)
+- [Ruby Glossary](http://www.codecademy.com/glossary/ruby)
+- [Ruby QuickRef](http://zenspider.com/Languages/Ruby/QuickRef.html)
