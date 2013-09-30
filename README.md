@@ -46,3 +46,5 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Ruby Tips Part 2](http://globaldev.co.uk/2013/09/ruby-tips-part-2/)
 - [Ruby Glossary](http://www.codecademy.com/glossary/ruby)
 - [Ruby QuickRef](http://zenspider.com/Languages/Ruby/QuickRef.html)
+- [Evaluating alternative Decorator implementations in Ruby](http://robots.thoughtbot.com/post/14825364877/evaluating-alternative-decorator-implementations-in)
+- [Tidy views and beyond with Decorators](http://robots.thoughtbot.com/post/13641910701/tidy-views-and-beyond-with-decorators)
