@@ -48,3 +48,4 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Ruby QuickRef](http://zenspider.com/Languages/Ruby/QuickRef.html)
 - [Evaluating alternative Decorator implementations in Ruby](http://robots.thoughtbot.com/post/14825364877/evaluating-alternative-decorator-implementations-in)
 - [Tidy views and beyond with Decorators](http://robots.thoughtbot.com/post/13641910701/tidy-views-and-beyond-with-decorators)
+- [How Ruby method dispatch works](http://blog.jcoglan.com/2013/05/08/how-ruby-method-dispatch-works/)
