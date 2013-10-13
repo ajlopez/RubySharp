@@ -51,6 +51,7 @@
     <Compile Include="Commands\CompositeCommand.cs" />
     <Compile Include="Commands\ClassCommand.cs" />
     <Compile Include="Commands\AssignInstanceVarCommand.cs" />
+    <Compile Include="Commands\UntilCommand.cs" />
     <Compile Include="Commands\ForInCommand.cs" />
     <Compile Include="Commands\WhileCommand.cs" />
     <Compile Include="Commands\DefCommand.cs" />
