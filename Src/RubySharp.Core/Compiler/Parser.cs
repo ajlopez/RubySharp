@@ -104,9 +104,17 @@
                 this.TryParseEndOfLine();
             else
                 this.ParseEndOfCommand();
-            IExpression thencommand = this.ParseCommandList();
+
+            IExpression thencommand = this.ParseCommandList(new string[] { "end", "else" });
+            IExpression elsecommand = null;
+
+            if (this.TryParseName("else"))
+                elsecommand = this.ParseCommandList();
+            else
+                this.ParseName("end");
+
             this.ParseEndOfCommand();
-            return new IfCommand(condition, thencommand);
+            return new IfCommand(condition, thencommand, elsecommand);
         }
 
         private ForInCommand ParseForInCommand()
@@ -221,6 +229,25 @@
 
             this.lexer.PushToken(token);
             this.ParseName("end");
+
+            if (commands.Count == 1)
+                return commands[0];
+
+            return new CompositeCommand(commands);
+        }
+
+        private IExpression ParseCommandList(IList<string> names)
+        {
+            Token token;
+            IList<IExpression> commands = new List<IExpression>();
+
+            for (token = this.lexer.NextToken(); token != null && (token.Type != TokenType.Name || !names.Contains(token.Value)); token = this.lexer.NextToken())
+            {
+                this.lexer.PushToken(token);
+                commands.Add(this.ParseCommand());
+            }
+
+            this.lexer.PushToken(token);
 
             if (commands.Count == 1)
                 return commands[0];
