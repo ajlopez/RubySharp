@@ -50,3 +50,5 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Tidy views and beyond with Decorators](http://robots.thoughtbot.com/post/13641910701/tidy-views-and-beyond-with-decorators)
 - [How Ruby method dispatch works](http://blog.jcoglan.com/2013/05/08/how-ruby-method-dispatch-works/)
 - [MetaProgramming - Extending Ruby for Fun and Profit](http://www.infoq.com/presentations/metaprogramming-ruby)
+- [Ruby Loops](http://www.tutorialspoint.com/ruby/ruby_loops.htm)
+- [Ruby Methods](http://www.tutorialspoint.com/ruby/ruby_methods.htm)
