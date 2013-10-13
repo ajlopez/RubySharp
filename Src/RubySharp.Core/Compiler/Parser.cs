@@ -105,10 +105,12 @@
             else
                 this.ParseEndOfCommand();
 
-            IExpression thencommand = this.ParseCommandList(new string[] { "end", "else" });
+            IExpression thencommand = this.ParseCommandList(new string[] { "end", "elif", "else" });
             IExpression elsecommand = null;
 
-            if (this.TryParseName("else"))
+            if (this.TryParseName("elif"))
+                elsecommand = this.ParseIfCommand();
+            else if (this.TryParseName("else"))
                 elsecommand = this.ParseCommandList();
             else
                 this.ParseName("end");

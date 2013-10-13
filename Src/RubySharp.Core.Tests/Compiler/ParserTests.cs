@@ -388,6 +388,20 @@
         }
 
         [TestMethod]
+        public void ParseSimpleIfElifElseCommand()
+        {
+            Parser parser = new Parser("if 1\n a=1\nelif 2\n a=2\nelse\n a=3\nend");
+            var innerexpected = new IfCommand(new ConstantExpression(2), new AssignCommand("a", new ConstantExpression(2)), new AssignCommand("a", new ConstantExpression(3)));
+            var expected = new IfCommand(new ConstantExpression(1), new AssignCommand("a", new ConstantExpression(1)), innerexpected);
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSimpleIfCommandWithThen()
         {
             Parser parser = new Parser("if 1 then\n a=1\nend");
