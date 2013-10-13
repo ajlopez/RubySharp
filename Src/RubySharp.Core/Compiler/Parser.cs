@@ -50,6 +50,9 @@
                 if (token.Value == "while")
                     return this.ParseWhileCommand();
 
+                if (token.Value == "until")
+                    return this.ParseUntilCommand();
+
                 if (token.Value == "for")
                     return this.ParseForInCommand();
 
@@ -143,6 +146,18 @@
             IExpression command = this.ParseCommandList();
             this.ParseEndOfCommand();
             return new WhileCommand(condition, command);
+        }
+
+        private UntilCommand ParseUntilCommand()
+        {
+            IExpression condition = this.ParseExpression();
+            if (this.TryParseName("do"))
+                this.TryParseEndOfLine();
+            else
+                this.ParseEndOfCommand();
+            IExpression command = this.ParseCommandList();
+            this.ParseEndOfCommand();
+            return new UntilCommand(condition, command);
         }
 
         private DefCommand ParseDefCommand()

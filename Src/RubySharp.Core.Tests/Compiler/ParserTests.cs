@@ -686,6 +686,44 @@
         }
 
         [TestMethod]
+        public void ParseUntilCommand()
+        {
+            Parser cmdparser = new Parser("a = a + 1");
+            IExpression body = cmdparser.ParseCommand();
+            Parser exprparser = new Parser("a >= 6");
+            IExpression expr = exprparser.ParseExpression();
+
+            Parser parser = new Parser("until a>=6; a=a+1; end");
+            IExpression expected = new UntilCommand(expr, body);
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseUntilCommandWithDo()
+        {
+            Parser cmdparser = new Parser("a = a + 1");
+            IExpression body = cmdparser.ParseCommand();
+            Parser exprparser = new Parser("a >= 6");
+            IExpression expr = exprparser.ParseExpression();
+
+            Parser parser = new Parser("until a>=6 do a=a+1; end");
+            IExpression expected = new UntilCommand(expr, body);
+
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSimpleList()
         {
             Parser parser = new Parser("[1,2,3]");
