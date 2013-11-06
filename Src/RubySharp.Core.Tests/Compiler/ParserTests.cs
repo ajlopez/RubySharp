@@ -174,6 +174,32 @@
         }
 
         [TestMethod]
+        public void ParseNegativeInteger()
+        {
+            Parser parser = new Parser("-123");
+            var expected = new NegativeExpression(new ConstantExpression(123));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseNegativeIntegerMinusInteger()
+        {
+            Parser parser = new Parser("-123-10");
+            var expected = new SubtractExpression(new NegativeExpression(new ConstantExpression(123)), new ConstantExpression(10));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseCallExpressionSimplePuts()
         {
             Parser parser = new Parser("puts 123");

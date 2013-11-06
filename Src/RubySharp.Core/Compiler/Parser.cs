@@ -364,7 +364,12 @@
 
         private IExpression ParseTerm()
         {
-            IExpression expression = this.ParseSimpleTerm();
+            IExpression expression = null;
+
+            if (this.TryParseToken(TokenType.Operator, "-"))
+                expression = new NegativeExpression(this.ParseTerm());
+            else
+                expression = this.ParseSimpleTerm();
 
             if (expression == null)
                 return null;
