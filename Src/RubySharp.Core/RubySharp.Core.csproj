@@ -90,6 +90,7 @@
     <Compile Include="Expressions\CompareOperator.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />
     <Compile Include="Expressions\CompareExpression.cs" />
+    <Compile Include="Expressions\NegativeExpression.cs" />
     <Compile Include="Expressions\InstanceVarExpression.cs" />
     <Compile Include="Expressions\DivideExpression.cs" />
     <Compile Include="Expressions\DotExpression.cs" />
