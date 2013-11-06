@@ -52,3 +52,4 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [MetaProgramming - Extending Ruby for Fun and Profit](http://www.infoq.com/presentations/metaprogramming-ruby)
 - [Ruby Loops](http://www.tutorialspoint.com/ruby/ruby_loops.htm)
 - [Ruby Methods](http://www.tutorialspoint.com/ruby/ruby_methods.htm)
+- [Array](http://ruby-doc.org/core-2.0.0/Array.html)
