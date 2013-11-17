@@ -19,6 +19,30 @@
         }
 
         [TestMethod]
+        public void DivideIntegerByDouble()
+        {
+            DivideExpression expr = new DivideExpression(new ConstantExpression(2), new ConstantExpression(2.5));
+
+            Assert.AreEqual(2 / 2.5, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void DivideDoubleByInteger()
+        {
+            DivideExpression expr = new DivideExpression(new ConstantExpression(2.5), new ConstantExpression(3));
+
+            Assert.AreEqual(2.5 / 3, expr.Evaluate(null));
+        }
+
+        [TestMethod]
+        public void DivideTwoDoubles()
+        {
+            DivideExpression expr = new DivideExpression(new ConstantExpression(2.5), new ConstantExpression(3.7));
+
+            Assert.AreEqual(2.5 / 3.7, expr.Evaluate(null));
+        }
+
+        [TestMethod]
         public void Equals()
         {
             DivideExpression expr1 = new DivideExpression(new ConstantExpression(1), new ConstantExpression(2));
