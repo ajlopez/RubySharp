@@ -19,7 +19,6 @@
             Assert.AreEqual(1, expr.Evaluate(null));
         }
 
-
         [TestMethod]
         public void SubtractDoubleFromInteger()
         {
