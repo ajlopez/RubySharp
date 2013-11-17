@@ -75,6 +75,7 @@
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />
+    <Compile Include="EvaluateTests.cs" />
     <Compile Include="Expressions\CompareExpressionTests.cs" />
     <Compile Include="Expressions\NegativeExpressionTests.cs" />
     <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
