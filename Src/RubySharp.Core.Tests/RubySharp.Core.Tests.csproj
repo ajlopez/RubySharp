@@ -77,6 +77,7 @@
     <Compile Include="ContextTests.cs" />
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="Expressions\CompareExpressionTests.cs" />
+    <Compile Include="Expressions\IndexedExpressionTests.cs" />
     <Compile Include="Expressions\NegativeExpressionTests.cs" />
     <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
