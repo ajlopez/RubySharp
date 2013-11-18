@@ -67,7 +67,7 @@
 
             IExpression expr = this.ParseExpression();
 
-            if (!(expr is NameExpression) && !(expr is InstanceVarExpression))
+            if (!(expr is NameExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression))
             {
                 this.ParseEndOfCommand();
                 return expr;
@@ -92,6 +92,8 @@
 
             if (expr is NameExpression)
                 cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
+            else if (expr is DotExpression)
+                cmd = new AssignDotCommand((DotExpression)expr, this.ParseExpression());
             else
                 cmd = new AssignInstanceVarCommand(((InstanceVarExpression)expr).Name, this.ParseExpression());
 

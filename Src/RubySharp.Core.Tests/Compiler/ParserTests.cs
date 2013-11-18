@@ -336,6 +336,20 @@
         }
 
         [TestMethod]
+        public void ParseAssignDotCommand()
+        {
+            Parser parser = new Parser("a.b = 2");
+            DotExpression dotexpr = (DotExpression)(new Parser("a.b")).ParseExpression();
+            var expected = new AssignDotCommand(dotexpr, new ConstantExpression(2));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseTwoNameAsCall()
         {
             Parser parser = new Parser("a b\n");

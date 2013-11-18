@@ -44,5 +44,26 @@
             Assert.AreEqual("Nero", result);
             Assert.AreEqual("Nero", nero.GetValue("name"));
         }
+
+        [TestMethod]
+        public void Equals()
+        {
+            DotExpression expr1 = (DotExpression)(new Parser("a.b")).ParseExpression();
+            DotExpression expr2 = (DotExpression)(new Parser("a.c")).ParseExpression();
+
+            AssignDotCommand cmd1 = new AssignDotCommand(expr1, new ConstantExpression(1));
+            AssignDotCommand cmd2 = new AssignDotCommand(expr1, new ConstantExpression(2));
+            AssignDotCommand cmd3 = new AssignDotCommand(expr2, new ConstantExpression(1));
+            AssignDotCommand cmd4 = new AssignDotCommand(expr1, new ConstantExpression(1));
+
+            Assert.IsTrue(cmd1.Equals(cmd4));
+            Assert.IsTrue(cmd4.Equals(cmd1));
+            Assert.AreEqual(cmd1.GetHashCode(), cmd4.GetHashCode());
+
+            Assert.IsFalse(cmd1.Equals(null));
+            Assert.IsFalse(cmd1.Equals(cmd2));
+            Assert.IsFalse(cmd1.Equals(cmd3));
+            Assert.IsFalse(cmd1.Equals(123));
+        }
     }
 }
