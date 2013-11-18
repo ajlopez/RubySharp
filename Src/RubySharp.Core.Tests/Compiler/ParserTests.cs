@@ -842,5 +842,18 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseSimpleIndexedExpression()
+        {
+            Parser parser = new Parser("a[1]");
+            var expected = new IndexedExpression(new NameExpression("a"), new ConstantExpression(1));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

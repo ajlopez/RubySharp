@@ -376,15 +376,31 @@
             if (expression == null)
                 return null;
 
-            while (this.TryParseToken(TokenType.Separator, "."))
+            while (true)
             {
-                string name = this.ParseName();
+                if (this.TryParseToken(TokenType.Separator, "."))
+                {
+                    string name = this.ParseName();
 
-                while (this.NextTokenStartsExpressionList())
-                    expression = new DotExpression(expression, name, this.ParseExpressionList());
+                    while (this.NextTokenStartsExpressionList())
+                        expression = new DotExpression(expression, name, this.ParseExpressionList());
 
-                if (!(expression is DotExpression))
-                    expression = new DotExpression(expression, name, new IExpression[0]);
+                    if (!(expression is DotExpression))
+                        expression = new DotExpression(expression, name, new IExpression[0]);
+
+                    continue;
+                }
+
+                if (this.TryParseToken(TokenType.Separator, "["))
+                {
+                    IExpression indexexpr = this.ParseExpression();
+                    this.ParseToken(TokenType.Separator, "]");
+                    expression = new IndexedExpression(expression, indexexpr);
+
+                    continue;
+                }
+
+                break;
             }
 
             return expression;
