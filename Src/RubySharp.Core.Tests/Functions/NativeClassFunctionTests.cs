@@ -21,5 +21,14 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(FixnumClass.Instance, result);
         }
+
+        [TestMethod]
+        public void GetStringForString()
+        {
+            var result = func.Apply("foo", null);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(StringClass.Instance, result);
+        }
     }
 }

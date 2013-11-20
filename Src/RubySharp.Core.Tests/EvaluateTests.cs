@@ -61,6 +61,15 @@
             Assert.IsInstanceOfType(result, typeof(FixnumClass));
         }
 
+        [TestMethod]
+        public void EvaluateStringClassAsString()
+        {
+            var result = this.EvaluateExpression("'foo'.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(StringClass));
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

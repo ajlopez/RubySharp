@@ -13,6 +13,9 @@
             if (self is int)
                 return FixnumClass.Instance;
 
+            if (self is string)
+                return StringClass.Instance;
+
             throw new NotImplementedException();
         }
     }
