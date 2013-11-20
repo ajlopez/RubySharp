@@ -181,6 +181,12 @@
             if (ich >= 0)
                 this.BackChar();
 
+            if (value.EndsWith("."))
+            {
+                this.BackChar();
+                return new Token(TokenType.Integer, ivalue);
+            }
+
             return new Token(TokenType.Real, value);
         }
 

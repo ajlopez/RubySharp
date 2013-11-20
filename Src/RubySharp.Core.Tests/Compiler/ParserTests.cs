@@ -654,6 +654,20 @@
         }
 
         [TestMethod]
+        public void ParseDotExpressionWithIntegerAsTarget()
+        {
+            Parser parser = new Parser("1.foo");
+            var expected = new DotExpression(new ConstantExpression(1), "foo", new IExpression[0]);
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseInstanceVariableExpression()
         {
             Parser parser = new Parser("@a");

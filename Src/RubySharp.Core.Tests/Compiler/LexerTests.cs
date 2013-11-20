@@ -310,6 +310,31 @@
         }
 
         [TestMethod]
+        public void GetIntegerWithDotName()
+        {
+            Lexer lexer = new Lexer("123.foo");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("123", result.Value);
+            Assert.AreEqual(TokenType.Integer, result.Type);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(".", result.Value);
+            Assert.AreEqual(TokenType.Separator, result.Type);
+
+            result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo", result.Value);
+            Assert.AreEqual(TokenType.Name, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetRealNumber()
         {
             Lexer lexer = new Lexer("123.45");
