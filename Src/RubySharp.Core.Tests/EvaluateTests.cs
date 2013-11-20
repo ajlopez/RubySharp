@@ -1,12 +1,13 @@
 ﻿namespace RubySharp.Core.Tests
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Expressions;
+    using RubySharp.Core.Language;
 
     [TestClass]
     public class EvaluateTests
@@ -49,6 +50,15 @@
             Assert.AreEqual(1, list[0]);
             Assert.AreEqual(2, list[1]);
             Assert.AreEqual(3, list[2]);
+        }
+
+        [TestMethod]
+        public void EvaluateIntegerClassAsFixnum()
+        {
+            var result = this.EvaluateExpression("1.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FixnumClass));
         }
 
         private object EvaluateExpression(string text)

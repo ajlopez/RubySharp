@@ -55,6 +55,19 @@
         }
 
         [TestMethod]
+        public void EvaluateNativeObjectClassMethod()
+        {
+            Machine machine = new Machine();
+
+            DotExpression expression = new DotExpression(new ConstantExpression(1), "class", null);
+
+            var result = expression.Evaluate(null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FixnumClass));
+        }
+
+        [TestMethod]
         public void Equals()
         {
             DotExpression expr1 = new DotExpression(new ConstantExpression(1), "foo", new IExpression[0]);

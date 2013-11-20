@@ -24,6 +24,14 @@
 
         public object Evaluate(Context context)
         {
+            var result = this.expression.Evaluate(context);
+
+            if (!(result is BaseObject) && this.name == "class")
+            {
+                if (result is int)
+                    return FixnumClass.Instance;
+            }
+
             var obj = (BaseObject)this.expression.Evaluate(context);
 
             IList<object> values = new List<object>();
