@@ -5,9 +5,14 @@
     using System.Linq;
     using System.Text;
 
-    public class FixnumClass
+    public class FixnumClass : NativeClass
     {
         private static FixnumClass instance = new FixnumClass();
+
+        public FixnumClass()
+            : base("Fixnum")
+        {
+        }
 
         public static FixnumClass Instance { get { return instance; } }
     }

@@ -3,10 +3,13 @@
     using System.Collections.Generic;
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Functions;
 
     public class DotExpression : IExpression
     {
         private static int hashcode = typeof(DotExpression).GetHashCode();
+        private static INativeFunction getclass = new NativeClassFunction();
+
         private IExpression expression;
         private string name;
         private IList<IExpression> arguments;
@@ -24,17 +27,25 @@
 
         public object Evaluate(Context context)
         {
+            IList<object> values = new List<object>();
             var result = this.expression.Evaluate(context);
 
-            if (!(result is BaseObject) && this.name == "class")
+            if (!(result is BaseObject))
             {
-                if (result is int)
-                    return FixnumClass.Instance;
+                NativeClass nclass = (NativeClass)getclass.Apply(result, null);
+                INativeFunction nmethod = nclass.GetInstanceMethod(this.name);
+
+                if (nmethod == null)
+                    throw new NoMethodError(this.name);
+
+                if (this.arguments != null)
+                    foreach (var argument in this.arguments)
+                        values.Add(argument.Evaluate(context));
+
+                return nmethod.Apply(result, values);
             }
 
-            var obj = (BaseObject)this.expression.Evaluate(context);
-
-            IList<object> values = new List<object>();
+            var obj = (BaseObject)result;
 
             foreach (var argument in this.arguments)
                 values.Add(argument.Evaluate(context));

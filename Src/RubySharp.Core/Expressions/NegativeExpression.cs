@@ -10,7 +10,6 @@
         private static int hashcode = typeof(NegativeExpression).GetHashCode();
 
         private IExpression expression;
-        private IExpression right;
 
         public NegativeExpression(IExpression expression)
         {
