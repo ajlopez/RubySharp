@@ -82,7 +82,6 @@
     <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
     <Compile Include="Expressions\ListExpressionTests.cs" />
-    <Compile Include="Functions\NativeClassFunctionTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="Language\StringClassTests.cs" />
     <Compile Include="Language\FixnumClassTests.cs" />

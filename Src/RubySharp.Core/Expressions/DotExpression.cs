@@ -1,14 +1,14 @@
 ﻿namespace RubySharp.Core.Expressions
 {
+    using System;
     using System.Collections.Generic;
     using RubySharp.Core.Exceptions;
-    using RubySharp.Core.Language;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     public class DotExpression : IExpression
     {
         private static int hashcode = typeof(DotExpression).GetHashCode();
-        private static INativeFunction getclass = new NativeClassFunction();
 
         private IExpression expression;
         private string name;
@@ -32,8 +32,8 @@
 
             if (!(result is BaseObject))
             {
-                NativeClass nclass = (NativeClass)getclass.Apply(result, null);
-                INativeFunction nmethod = nclass.GetInstanceMethod(this.name);
+                NativeClass nclass = (NativeClass)NativeClass.MethodClass(result, null);
+                Func<object, IList<object>, object> nmethod = nclass.GetInstanceMethod(this.name);
 
                 if (nmethod == null)
                     throw new NoMethodError(this.name);
@@ -42,7 +42,7 @@
                     foreach (var argument in this.arguments)
                         values.Add(argument.Evaluate(context));
 
-                return nmethod.Apply(result, values);
+                return nmethod(result, values);
             }
 
             var obj = (BaseObject)result;
