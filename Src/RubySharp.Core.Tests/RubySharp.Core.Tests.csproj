@@ -84,6 +84,10 @@
     <Compile Include="Expressions\ListExpressionTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="Language\BlockTests.cs" />
+    <Compile Include="Language\FalseClassTests.cs" />
+    <Compile Include="Language\TrueClassTests.cs" />
+    <Compile Include="Language\FloatClassTests.cs" />
+    <Compile Include="Language\NilClassTests.cs" />
     <Compile Include="Language\StringClassTests.cs" />
     <Compile Include="Language\FixnumClassTests.cs" />
     <Compile Include="MachineFileTests.cs" />

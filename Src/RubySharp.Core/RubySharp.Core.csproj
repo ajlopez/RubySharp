@@ -106,6 +106,10 @@
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Language\BaseObject.cs" />
     <Compile Include="Language\Block.cs" />
+    <Compile Include="Language\FalseClass.cs" />
+    <Compile Include="Language\TrueClass.cs" />
+    <Compile Include="Language\FloatClass.cs" />
+    <Compile Include="Language\NilClass.cs" />
     <Compile Include="Language\StringClass.cs" />
     <Compile Include="Language\NativeClass.cs" />
     <Compile Include="Language\DefinedClass.cs" />

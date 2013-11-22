@@ -8,25 +8,25 @@
     using RubySharp.Core.Language;
 
     [TestClass]
-    public class FixnumClassTests
+    public class FloatClassTests
     {
         [TestMethod]
-        public void FixnumClassInstance()
+        public void FloatClassInstance()
         {
-            Assert.IsNotNull(FixnumClass.Instance);
-            Assert.AreEqual("Fixnum", FixnumClass.Instance.Name);
+            Assert.IsNotNull(FloatClass.Instance);
+            Assert.AreEqual("Float", FloatClass.Instance.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(FixnumClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(FloatClass.Instance.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(FixnumClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(FloatClass.Instance.GetInstanceMethod("foo"));
         }
     }
 }

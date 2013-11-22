@@ -11,14 +11,20 @@
     public class StringClassTests
     {
         [TestMethod]
-        public void StringInstance()
+        public void StringClassInstance()
         {
             Assert.IsNotNull(StringClass.Instance);
             Assert.AreEqual("String", StringClass.Instance.Name);
         }
 
         [TestMethod]
-        public void GetUnknownMethod()
+        public void GetClassInstanceMethod()
+        {
+            Assert.IsNotNull(StringClass.Instance.GetInstanceMethod("class"));
+        }
+
+        [TestMethod]
+        public void GetUnknownInstanceMethod()
         {
             Assert.IsNull(StringClass.Instance.GetInstanceMethod("foo"));
         }
