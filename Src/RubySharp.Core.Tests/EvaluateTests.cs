@@ -70,6 +70,42 @@
             Assert.IsInstanceOfType(result, typeof(StringClass));
         }
 
+        [TestMethod]
+        public void EvaluateTrueClassAsTrueClass()
+        {
+            var result = this.EvaluateExpression("true.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(TrueClass));
+        }
+
+        [TestMethod]
+        public void EvaluateFalseClassAsFalseClass()
+        {
+            var result = this.EvaluateExpression("false.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FalseClass));
+        }
+
+        [TestMethod]
+        public void EvaluateNilClassAsNilClass()
+        {
+            var result = this.EvaluateExpression("nil.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NilClass));
+        }
+
+        [TestMethod]
+        public void EvaluateFloatClassAsFloatClass()
+        {
+            var result = this.EvaluateExpression("1.2.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FloatClass));
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

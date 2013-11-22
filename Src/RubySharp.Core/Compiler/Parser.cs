@@ -414,7 +414,10 @@
                 return null;
 
             if (token.Type == TokenType.Integer)
-                return new ConstantExpression(int.Parse(token.Value));
+                return new ConstantExpression(int.Parse(token.Value, System.Globalization.CultureInfo.InvariantCulture));
+
+            if (token.Type == TokenType.Real)
+                return new ConstantExpression(double.Parse(token.Value, System.Globalization.CultureInfo.InvariantCulture));
 
             if (token.Type == TokenType.String)
                 return new ConstantExpression(token.Value);

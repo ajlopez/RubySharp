@@ -35,11 +35,23 @@
 
         public static object MethodClass(object self, IList<object> values)
         {
+            if (self == null)
+                return NilClass.Instance;
+
             if (self is int)
                 return FixnumClass.Instance;
 
+            if (self is double)
+                return FloatClass.Instance;
+
             if (self is string)
                 return StringClass.Instance;
+
+            if (self is bool)
+                if ((bool)self)
+                    return TrueClass.Instance;
+                else
+                    return FalseClass.Instance;
 
             throw new NotImplementedException();
         }
