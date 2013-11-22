@@ -105,6 +105,7 @@
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Language\BaseObject.cs" />
+    <Compile Include="Language\Block.cs" />
     <Compile Include="Language\StringClass.cs" />
     <Compile Include="Language\NativeClass.cs" />
     <Compile Include="Language\DefinedClass.cs" />
