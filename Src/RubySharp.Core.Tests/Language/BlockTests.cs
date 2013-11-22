@@ -30,11 +30,21 @@
         }
 
         [TestMethod]
-        public void CreateAndEvaluateBlockWithArgument()
+        public void CreateAndEvaluateBlockWithArguments()
         {
             Block block = new Block(new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
 
             Assert.AreEqual(3, block.Apply(null, new object[] { 1, 2 }));
+        }
+
+        [TestMethod]
+        public void CreateAndEvaluateBlockWithNonProvidedArgument()
+        {
+            Context context = new Context();
+            context.SetValue("a", 1);
+            Block block = new Block(new string[] { "a" }, new NameExpression("a"));
+
+            Assert.IsNull(block.Apply(context, new object[] { }));
         }
 
         [TestMethod]

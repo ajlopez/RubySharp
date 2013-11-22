@@ -19,13 +19,13 @@
 
         public object Apply(Context context, IList<object> arguments)
         {
-            if (arguments == null || arguments.Count == 0)
+            if (this.argumentnames == null || this.argumentnames.Count == 0)
                 return this.expression.Evaluate(context);
 
             Context newcontext = new Context(context);
 
             for (int k = 0; k < this.argumentnames.Count; k++)
-                if (k < arguments.Count)
+                if (arguments != null && k < arguments.Count)
                     newcontext.SetValue(argumentnames[k], arguments[k]);
                 else
                     newcontext.SetValue(argumentnames[k], null);
