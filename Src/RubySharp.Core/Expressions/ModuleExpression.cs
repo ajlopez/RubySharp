@@ -26,8 +26,7 @@
             module.Name = this.name;
             context.SetLocalValue(this.name, module);
             Context newcontext = new Context(module, context.RootContext);
-            this.expression.Evaluate(newcontext);
-            return null;
+            return this.expression.Evaluate(newcontext);
         }
 
         public override bool Equals(object obj)

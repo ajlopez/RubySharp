@@ -106,6 +106,16 @@
             Assert.IsInstanceOfType(result, typeof(FloatClass));
         }
 
+        [TestMethod]
+        public void EvaluateModuleConstant()
+        {
+            this.Execute("module MyModule;ONE=1;end");
+            var result = this.EvaluateExpression("MyModule::ONE");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

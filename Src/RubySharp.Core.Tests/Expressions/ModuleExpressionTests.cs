@@ -17,7 +17,7 @@
             Machine machine = new Machine();
             ModuleExpression expr = new ModuleExpression("Module1", new ConstantExpression(1));
 
-            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
+            Assert.AreEqual(1, expr.Evaluate(machine.RootContext));
 
             var result = machine.RootContext.GetValue("Module1");
 
@@ -37,7 +37,7 @@
             Machine machine = new Machine();
             ModuleExpression expr = new ModuleExpression("Module1", new AssignExpression("ONE", new ConstantExpression(1)));
 
-            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
+            Assert.AreEqual(1, expr.Evaluate(machine.RootContext));
 
             var result = machine.RootContext.GetValue("Module1");
 
@@ -55,7 +55,7 @@
             Machine machine = new Machine();
             ModuleExpression expr = new ModuleExpression("Module1", new AssignExpression("one", new ConstantExpression(1)));
 
-            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
+            Assert.AreEqual(1, expr.Evaluate(machine.RootContext));
 
             var result = machine.RootContext.GetValue("Module1");
 
