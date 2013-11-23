@@ -11,15 +11,19 @@
         private static IFunction newfunction = new NewFunction();
 
         private string name;
+        private DynamicClass superclass;
         private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
 
-        public DynamicClass(string name)
+        public DynamicClass(string name, DynamicClass superclass = null)
             : base(null)
         {
             this.name = name;
+            this.superclass = superclass;
         }
 
         public string Name { get { return this.name; } }
+
+        public DynamicClass SuperClass { get { return this.superclass; } }
 
         public void SetInstanceMethod(string name, IFunction method)
         {

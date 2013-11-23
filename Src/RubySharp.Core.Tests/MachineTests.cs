@@ -34,6 +34,62 @@
         }
 
         [TestMethod]
+        public void BasicObjectClass()
+        {
+            Machine machine = new Machine();
+           
+            var result = machine.RootContext.GetValue("BasicObject");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            var @class = (DynamicClass)result;
+            Assert.AreEqual("BasicObject", @class.Name);
+            Assert.IsNull(@class.SuperClass);
+        }
+
+        [TestMethod]
+        public void ObjectClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Object");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            var @class = (DynamicClass)result;
+            Assert.AreEqual("Object", @class.Name);
+            Assert.AreSame(machine.RootContext.GetValue("BasicObject"), @class.SuperClass);
+        }
+
+        [TestMethod]
+        public void ModuleClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Module");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            var @class = (DynamicClass)result;
+            Assert.AreEqual("Module", @class.Name);
+            Assert.AreSame(machine.RootContext.GetValue("Object"), @class.SuperClass);
+        }
+
+        [TestMethod]
+        public void ClassClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Class");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            var @class = (DynamicClass)result;
+            Assert.AreEqual("Class", @class.Name);
+            Assert.AreSame(machine.RootContext.GetValue("Module"), @class.SuperClass);
+        }
+
+        [TestMethod]
         public void ExecuteText()
         {
             Machine machine = new Machine();

@@ -6,6 +6,7 @@
     using System.Text;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     public class Machine
     {
@@ -13,6 +14,16 @@
 
         public Machine()
         {
+            var basicobjectclass = new DynamicClass("BasicObject", null);
+            var objectclass = new DynamicClass("Object", basicobjectclass);
+            var moduleclass = new DynamicClass("Module", objectclass);
+            var classclass = new DynamicClass("Class", moduleclass);
+
+            this.rootcontext.SetLocalValue("BasicObject", basicobjectclass);
+            this.rootcontext.SetLocalValue("Object", objectclass);
+            this.rootcontext.SetLocalValue("Module", moduleclass);
+            this.rootcontext.SetLocalValue("Class", classclass);
+
             this.rootcontext.SetLocalValue("puts", new PutsFunction(System.Console.Out));
             this.rootcontext.SetLocalValue("print", new PrintFunction(System.Console.Out));
         }
