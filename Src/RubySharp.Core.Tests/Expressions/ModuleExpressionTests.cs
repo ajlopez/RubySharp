@@ -14,19 +14,23 @@
         [TestMethod]
         public void EvaluateModuleExpression()
         {
-            Context context = new Context();
+            Machine machine = new Machine();
             ModuleExpression expr = new ModuleExpression("Module1", new ConstantExpression(1));
 
-            Assert.AreEqual(null, expr.Evaluate(context));
+            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
 
-            var result = context.GetValue("Module1");
+            var result = machine.RootContext.GetValue("Module1");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(Module));
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
 
-            var module = (Module)result;
+            var module = (ModuleObject)result;
 
-            Assert.AreEqual("Module1", module.Name);
+            var method = module.GetMethod("name");
+            Assert.IsNotNull(method);
+            Assert.AreEqual("Module1", method.Apply(module, null));
+
+            Assert.AreEqual("Module1", module.GetValue("name"));
         }
     }
 }

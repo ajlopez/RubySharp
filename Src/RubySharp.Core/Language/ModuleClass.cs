@@ -4,12 +4,24 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Functions;
 
     public class ModuleClass : DynamicClass
     {
         public ModuleClass(DynamicClass superclass)
             : base("Module", superclass)
         {
+            this.SetInstanceMethod("name", new LambdaFunction(GetName));
+        }
+
+        public override DynamicObject CreateInstance()
+        {
+            return new ModuleObject(this);
+        }
+
+        private object GetName(DynamicObject obj, IList<object> values)
+        {
+            return obj.GetValue("name");
         }
     }
 }

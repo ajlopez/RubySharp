@@ -103,6 +103,7 @@
     <Compile Include="Expressions\SubtractExpression.cs" />
     <Compile Include="Expressions\NameExpression.cs" />
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Functions\LambdaFunction.cs" />
     <Compile Include="Functions\PrintFunction.cs" />
     <Compile Include="Functions\NewFunction.cs" />
     <Compile Include="Functions\DefinedFunction.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="Language\DynamicObject.cs" />
     <Compile Include="Language\Block.cs" />
     <Compile Include="Language\FalseClass.cs" />
-    <Compile Include="Language\Module.cs" />
+    <Compile Include="Language\ModuleObject.cs" />
     <Compile Include="Language\TrueClass.cs" />
     <Compile Include="Language\FloatClass.cs" />
     <Compile Include="Language\NilClass.cs" />
