@@ -53,3 +53,5 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Ruby Loops](http://www.tutorialspoint.com/ruby/ruby_loops.htm)
 - [Ruby Methods](http://www.tutorialspoint.com/ruby/ruby_methods.htm)
 - [Array](http://ruby-doc.org/core-2.0.0/Array.html)
+- [Class Module &lt; Object](http://phrogz.net/programmingruby/ref_c_module.html) see module_function
+- [Can I invoke an instance method on a Ruby module without including it?](http://stackoverflow.com/questions/322470/can-i-invoke-an-instance-method-on-a-ruby-module-without-including-it) see module_function
