@@ -66,5 +66,44 @@
 
             Assert.IsFalse(module.Constants.HasLocalValue("one"));
         }
+
+        [TestMethod]
+        public void EvaluateModuleExpressionWithClassDefinition()
+        {
+            Machine machine = new Machine();
+            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression("Foo", new ConstantExpression(1)));
+
+            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
+
+            var result = machine.RootContext.GetValue("Module1");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+
+            var module = (ModuleObject)result;
+
+            var @class = module.Constants.GetLocalValue("Foo");
+
+            Assert.IsNotNull(@class);
+            Assert.IsInstanceOfType(@class, typeof(DynamicClass));
+        }
+
+        [TestMethod]
+        public void EvaluateModuleExpressionWithInternalClassDefinition()
+        {
+            Machine machine = new Machine();
+            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression("foo", new ConstantExpression(1)));
+
+            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
+
+            var result = machine.RootContext.GetValue("Module1");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+
+            var module = (ModuleObject)result;
+
+            Assert.IsFalse(module.Constants.HasLocalValue("foo"));
+        }
     }
 }

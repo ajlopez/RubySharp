@@ -22,13 +22,19 @@
 
         public object Evaluate(Context context)
         {
-            var value = context.GetValue(this.name);
+            object value = null;
+            
+            if (context.HasLocalValue(this.name))
+                value = context.GetLocalValue(this.name);
 
             if (value == null || !(value is DynamicClass))
             {
                 var newclass = new DynamicClass(this.name);
                 context.SetLocalValue(this.name, newclass);
                 value = newclass;
+
+                if (context.Module != null && char.IsUpper(this.name[0]))
+                    context.Module.Constants.SetLocalValue(this.name, newclass);
             }
 
             var dclass = (DynamicClass)value;
