@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using RubySharp.Core.Functions;
     using RubySharp.Core.Exceptions;
+    using RubySharp.Core.Functions;
 
     public class NameExpression : IExpression
     {

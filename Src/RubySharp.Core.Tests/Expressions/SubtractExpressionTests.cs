@@ -43,7 +43,6 @@
             Assert.AreEqual(2.5 - 3.7, expr.Evaluate(null));
         }
 
-
         [TestMethod]
         public void Equals()
         {

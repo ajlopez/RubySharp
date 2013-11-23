@@ -26,9 +26,9 @@
 
             for (int k = 0; k < this.argumentnames.Count; k++)
                 if (arguments != null && k < arguments.Count)
-                    newcontext.SetLocalValue(argumentnames[k], arguments[k]);
+                    newcontext.SetLocalValue(this.argumentnames[k], arguments[k]);
                 else
-                    newcontext.SetLocalValue(argumentnames[k], null);
+                    newcontext.SetLocalValue(this.argumentnames[k], null);
 
             return this.expression.Evaluate(newcontext);
         }

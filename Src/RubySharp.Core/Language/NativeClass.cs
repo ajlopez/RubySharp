@@ -46,50 +46,50 @@
         {
             if (self == null)
             {
-                if (nilclass == null)
-                    nilclass = (NativeClass)this.machine.RootContext.GetLocalValue("NilClass");
+                if (this.nilclass == null)
+                    this.nilclass = (NativeClass)this.machine.RootContext.GetLocalValue("NilClass");
 
-                return nilclass;
+                return this.nilclass;
             }
 
             if (self is int)
             {
-                if (fixnumclass == null)
-                    fixnumclass = (NativeClass)this.machine.RootContext.GetLocalValue("Fixnum");
+                if (this.fixnumclass == null)
+                    this.fixnumclass = (NativeClass)this.machine.RootContext.GetLocalValue("Fixnum");
 
-                return fixnumclass;
+                return this.fixnumclass;
             }
 
             if (self is double)
             {
-                if (floatclass == null)
-                    floatclass = (NativeClass)this.machine.RootContext.GetLocalValue("Float");
+                if (this.floatclass == null)
+                    this.floatclass = (NativeClass)this.machine.RootContext.GetLocalValue("Float");
 
-                return floatclass;
+                return this.floatclass;
             }
 
             if (self is string)
             {
-                if (stringclass == null)
-                    stringclass = (NativeClass)this.machine.RootContext.GetLocalValue("String");
+                if (this.stringclass == null)
+                    this.stringclass = (NativeClass)this.machine.RootContext.GetLocalValue("String");
 
-                return stringclass;
+                return this.stringclass;
             }
 
             if (self is bool)
                 if ((bool)self)
                 {
-                    if (trueclass == null)
-                        trueclass = (NativeClass)this.machine.RootContext.GetLocalValue("TrueClass");
+                    if (this.trueclass == null)
+                        this.trueclass = (NativeClass)this.machine.RootContext.GetLocalValue("TrueClass");
 
-                    return trueclass;
+                    return this.trueclass;
                 }
                 else
                 {
-                    if (falseclass == null)
-                        falseclass = (NativeClass)this.machine.RootContext.GetLocalValue("FalseClass");
+                    if (this.falseclass == null)
+                        this.falseclass = (NativeClass)this.machine.RootContext.GetLocalValue("FalseClass");
 
-                    return falseclass;
+                    return this.falseclass;
                 }
 
             throw new NotImplementedException();

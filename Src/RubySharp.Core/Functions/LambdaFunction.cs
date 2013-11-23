@@ -8,7 +8,7 @@ using RubySharp.Core.Language;
 
     public class LambdaFunction : IFunction
     {
-        Func<DynamicObject, IList<object>, object> lambda;
+        private Func<DynamicObject, IList<object>, object> lambda;
 
         public LambdaFunction(Func<DynamicObject, IList<object>, object> lambda)
         {

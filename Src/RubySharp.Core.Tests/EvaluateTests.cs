@@ -25,7 +25,7 @@
         {
             Assert.AreEqual(2, this.EvaluateExpression("1+1"));
             Assert.AreEqual(1 / 2, this.EvaluateExpression("1/2"));
-            Assert.AreEqual(1 + 3 * 2, this.EvaluateExpression("1 + 3 * 2"));
+            Assert.AreEqual(1 + (3 * 2), this.EvaluateExpression("1 + 3 * 2"));
         }
 
         [TestMethod]

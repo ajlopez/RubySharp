@@ -11,7 +11,7 @@
         public ModuleClass(DynamicClass superclass)
             : base("Module", superclass)
         {
-            this.SetInstanceMethod("name", new LambdaFunction(GetName));
+            this.SetInstanceMethod("name", new LambdaFunction(this.GetName));
         }
 
         public override DynamicObject CreateInstance()
