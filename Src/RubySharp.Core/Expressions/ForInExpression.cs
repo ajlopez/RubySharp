@@ -1,4 +1,4 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections;
@@ -7,15 +7,15 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class ForInCommand : IExpression
+    public class ForInExpression : IExpression
     {
-        private static int hashcode = typeof(ForInCommand).GetHashCode();
+        private static int hashcode = typeof(ForInExpression).GetHashCode();
 
         private string name;
         private IExpression expression;
         private IExpression command;
 
-        public ForInCommand(string name, IExpression expression, IExpression command)
+        public ForInExpression(string name, IExpression expression, IExpression command)
         {
             this.name = name;
             this.expression = expression;
@@ -40,9 +40,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is ForInCommand)
+            if (obj is ForInExpression)
             {
-                var cmd = (ForInCommand)obj;
+                var cmd = (ForInExpression)obj;
                 if (!this.name.Equals(cmd.name))
                     return false;
                 if (!this.expression.Equals(cmd.expression))

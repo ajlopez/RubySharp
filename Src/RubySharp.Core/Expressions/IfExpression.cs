@@ -1,4 +1,4 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
@@ -6,20 +6,20 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class IfCommand : IExpression
+    public class IfExpression : IExpression
     {
-        private static int hashcode = typeof(IfCommand).GetHashCode();
+        private static int hashcode = typeof(IfExpression).GetHashCode();
 
         private IExpression condition;
         private IExpression thencommand;
         private IExpression elsecommand;
 
-        public IfCommand(IExpression condition, IExpression thencommand)
+        public IfExpression(IExpression condition, IExpression thencommand)
             : this(condition, thencommand, null)
         {
         }
 
-        public IfCommand(IExpression condition, IExpression thencommand, IExpression elsecommand)
+        public IfExpression(IExpression condition, IExpression thencommand, IExpression elsecommand)
         {
             this.condition = condition;
             this.thencommand = thencommand;
@@ -44,9 +44,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is IfCommand)
+            if (obj is IfExpression)
             {
-                var cmd = (IfCommand)obj;
+                var cmd = (IfExpression)obj;
 
                 if (this.elsecommand == null)
                 {

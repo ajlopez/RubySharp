@@ -1,16 +1,15 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using RubySharp.Core.Expressions;
 
-    public class CompositeCommand : IExpression
+    public class CompositeExpression : IExpression
     {
         private IList<IExpression> commands;
 
-        public CompositeCommand(IList<IExpression> commands)
+        public CompositeExpression(IList<IExpression> commands)
         {
             this.commands = commands;
         }
@@ -30,9 +29,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is CompositeCommand)
+            if (obj is CompositeExpression)
             {
-                var cmd = (CompositeCommand)obj;
+                var cmd = (CompositeExpression)obj;
 
                 if (this.commands.Count != cmd.commands.Count)
                     return false;

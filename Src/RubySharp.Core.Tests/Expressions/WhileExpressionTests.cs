@@ -1,16 +1,15 @@
-﻿namespace RubySharp.Core.Tests.Commands
+﻿namespace RubySharp.Core.Tests.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Expressions;
 
     [TestClass]
-    public class WhileCommandTests
+    public class WhileExpressionTests
     {
         [TestMethod]
         public void ExecuteSimpleWhileWhenConditionIsTrue()
@@ -23,7 +22,7 @@
             Context context = new Context();
             context.SetValue("a", 1);
 
-            WhileCommand cmd = new WhileCommand(expr, body);
+            WhileExpression cmd = new WhileExpression(expr, body);
 
             Assert.IsNull(cmd.Evaluate(context));
 
@@ -33,10 +32,10 @@
         [TestMethod]
         public void Equals()
         {
-            WhileCommand cmd1 = new WhileCommand(new ConstantExpression(1), new AssignCommand("one", new ConstantExpression(1)));
-            WhileCommand cmd2 = new WhileCommand(new ConstantExpression(2), new AssignCommand("one", new ConstantExpression(1)));
-            WhileCommand cmd3 = new WhileCommand(new ConstantExpression(1), new AssignCommand("one", new ConstantExpression(2)));
-            WhileCommand cmd4 = new WhileCommand(new ConstantExpression(1), new AssignCommand("one", new ConstantExpression(1)));
+            WhileExpression cmd1 = new WhileExpression(new ConstantExpression(1), new AssignExpression("one", new ConstantExpression(1)));
+            WhileExpression cmd2 = new WhileExpression(new ConstantExpression(2), new AssignExpression("one", new ConstantExpression(1)));
+            WhileExpression cmd3 = new WhileExpression(new ConstantExpression(1), new AssignExpression("one", new ConstantExpression(2)));
+            WhileExpression cmd4 = new WhileExpression(new ConstantExpression(1), new AssignExpression("one", new ConstantExpression(1)));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

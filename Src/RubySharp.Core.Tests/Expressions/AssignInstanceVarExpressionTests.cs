@@ -1,21 +1,20 @@
-﻿namespace RubySharp.Core.Tests.Commands
+﻿namespace RubySharp.Core.Tests.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
 
     [TestClass]
-    public class AssignInstanceVarCommandTests
+    public class AssignInstanceVarExpressionTests
     {
         [TestMethod]
         public void AssignValue()
         {
-            AssignInstanceVarCommand cmd = new AssignInstanceVarCommand("one", new ConstantExpression(1));
+            AssignInstanceVarExpression cmd = new AssignInstanceVarExpression("one", new ConstantExpression(1));
             BaseObject obj = new BaseObject(null);
             Context context = new Context(null, obj, null);
 
@@ -28,10 +27,10 @@
         [TestMethod]
         public void Equals()
         {
-            AssignInstanceVarCommand cmd1 = new AssignInstanceVarCommand("a", new ConstantExpression(1));
-            AssignInstanceVarCommand cmd2 = new AssignInstanceVarCommand("a", new ConstantExpression(2));
-            AssignInstanceVarCommand cmd3 = new AssignInstanceVarCommand("b", new ConstantExpression(1));
-            AssignInstanceVarCommand cmd4 = new AssignInstanceVarCommand("a", new ConstantExpression(1));
+            AssignInstanceVarExpression cmd1 = new AssignInstanceVarExpression("a", new ConstantExpression(1));
+            AssignInstanceVarExpression cmd2 = new AssignInstanceVarExpression("a", new ConstantExpression(2));
+            AssignInstanceVarExpression cmd3 = new AssignInstanceVarExpression("b", new ConstantExpression(1));
+            AssignInstanceVarExpression cmd4 = new AssignInstanceVarExpression("a", new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

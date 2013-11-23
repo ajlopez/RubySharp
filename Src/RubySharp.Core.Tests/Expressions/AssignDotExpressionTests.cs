@@ -1,25 +1,24 @@
-﻿namespace RubySharp.Core.Tests.Commands
+﻿namespace RubySharp.Core.Tests.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
 
     [TestClass]
-    public class AssignDotCommandTests
+    public class AssignDotExpressionTests
     {
         [TestMethod]
         public void CreateAssignDotCommand()
         {
             DotExpression leftvalue = (DotExpression)(new Parser("a.b")).ParseExpression();
             IExpression value = new ConstantExpression(1);
-            AssignDotCommand cmd = new AssignDotCommand(leftvalue, value);
+            AssignDotExpressions cmd = new AssignDotExpressions(leftvalue, value);
 
             Assert.AreSame(leftvalue, cmd.LeftValue);
             Assert.AreSame(value, cmd.Expression);
@@ -36,7 +35,7 @@
             machine.RootContext.SetValue("nero", nero);
             var leftvalue = (DotExpression)(new Parser("nero.name")).ParseExpression();
             var value = new ConstantExpression("Nero");
-            AssignDotCommand cmd = new AssignDotCommand(leftvalue, value);
+            AssignDotExpressions cmd = new AssignDotExpressions(leftvalue, value);
 
             var result = cmd.Evaluate(machine.RootContext);
 
@@ -51,10 +50,10 @@
             DotExpression expr1 = (DotExpression)(new Parser("a.b")).ParseExpression();
             DotExpression expr2 = (DotExpression)(new Parser("a.c")).ParseExpression();
 
-            AssignDotCommand cmd1 = new AssignDotCommand(expr1, new ConstantExpression(1));
-            AssignDotCommand cmd2 = new AssignDotCommand(expr1, new ConstantExpression(2));
-            AssignDotCommand cmd3 = new AssignDotCommand(expr2, new ConstantExpression(1));
-            AssignDotCommand cmd4 = new AssignDotCommand(expr1, new ConstantExpression(1));
+            AssignDotExpressions cmd1 = new AssignDotExpressions(expr1, new ConstantExpression(1));
+            AssignDotExpressions cmd2 = new AssignDotExpressions(expr1, new ConstantExpression(2));
+            AssignDotExpressions cmd3 = new AssignDotExpressions(expr2, new ConstantExpression(1));
+            AssignDotExpressions cmd4 = new AssignDotExpressions(expr1, new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

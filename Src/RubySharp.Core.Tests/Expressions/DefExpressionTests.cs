@@ -1,22 +1,21 @@
-﻿namespace RubySharp.Core.Tests.Commands
+﻿namespace RubySharp.Core.Tests.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
 
     [TestClass]
-    public class DefCommandTests
+    public class DefExpressionTests
     {
         [TestMethod]
         public void DefineSimpleFunction()
         {
             Context context = new Context();
-            DefCommand cmd = new DefCommand("foo", new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            DefExpression cmd = new DefExpression("foo", new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
 
@@ -29,10 +28,10 @@
         [TestMethod]
         public void Equals()
         {
-            DefCommand cmd1 = new DefCommand("foo", new string[0], new ConstantExpression(1));
-            DefCommand cmd2 = new DefCommand("bar", new string[0], new ConstantExpression(1));
-            DefCommand cmd3 = new DefCommand("foo", new string[0], new ConstantExpression(2));
-            DefCommand cmd4 = new DefCommand("foo", new string[0], new ConstantExpression(1));
+            DefExpression cmd1 = new DefExpression("foo", new string[0], new ConstantExpression(1));
+            DefExpression cmd2 = new DefExpression("bar", new string[0], new ConstantExpression(1));
+            DefExpression cmd3 = new DefExpression("foo", new string[0], new ConstantExpression(2));
+            DefExpression cmd4 = new DefExpression("foo", new string[0], new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));
@@ -50,10 +49,10 @@
         [TestMethod]
         public void EqualsWithParameters()
         {
-            DefCommand cmd1 = new DefCommand("foo", new string[] { "c" }, new ConstantExpression(1));
-            DefCommand cmd2 = new DefCommand("foo", new string[] { "a" }, new ConstantExpression(1));
-            DefCommand cmd3 = new DefCommand("foo", new string[] { "a", "b" }, new ConstantExpression(1));
-            DefCommand cmd4 = new DefCommand("foo", new string[] { "c" }, new ConstantExpression(1));
+            DefExpression cmd1 = new DefExpression("foo", new string[] { "c" }, new ConstantExpression(1));
+            DefExpression cmd2 = new DefExpression("foo", new string[] { "a" }, new ConstantExpression(1));
+            DefExpression cmd3 = new DefExpression("foo", new string[] { "a", "b" }, new ConstantExpression(1));
+            DefExpression cmd4 = new DefExpression("foo", new string[] { "c" }, new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

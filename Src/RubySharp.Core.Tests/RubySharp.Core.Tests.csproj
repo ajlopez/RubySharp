@@ -62,16 +62,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AssignCommandTests.cs" />
-    <Compile Include="Commands\AssignDotCommandTests.cs" />
-    <Compile Include="Commands\CompositeCommandTests.cs" />
-    <Compile Include="Commands\ClassCommandTests.cs" />
-    <Compile Include="Commands\AssignInstanceVarCommandTests.cs" />
-    <Compile Include="Commands\UntilCommandTests.cs" />
-    <Compile Include="Commands\ForInCommandTests.cs" />
-    <Compile Include="Commands\WhileCommandTests.cs" />
-    <Compile Include="Commands\DefCommandTests.cs" />
-    <Compile Include="Commands\IfCommandTests.cs" />
+    <Compile Include="Expressions\AssignExpressionTests.cs" />
+    <Compile Include="Expressions\AssignDotExpressionTests.cs" />
+    <Compile Include="Expressions\CompositeExpressionTests.cs" />
+    <Compile Include="Expressions\ClassExpressionTests.cs" />
+    <Compile Include="Expressions\AssignInstanceVarExpressionTests.cs" />
+    <Compile Include="Expressions\UntilExpressionTests.cs" />
+    <Compile Include="Expressions\ForInExpressionTests.cs" />
+    <Compile Include="Expressions\WhileExpressionTests.cs" />
+    <Compile Include="Expressions\DefExpressionTests.cs" />
+    <Compile Include="Expressions\IfExpressionTests.cs" />
     <Compile Include="Compiler\LexerTests.cs" />
     <Compile Include="Compiler\ParserTests.cs" />
     <Compile Include="ContextTests.cs" />

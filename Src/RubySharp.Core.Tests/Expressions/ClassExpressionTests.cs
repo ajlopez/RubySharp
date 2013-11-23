@@ -1,4 +1,4 @@
-﻿namespace RubySharp.Core.Tests.Commands
+﻿namespace RubySharp.Core.Tests.Expressions
 {
     using System;
     using System.Collections.Generic;
@@ -6,13 +6,12 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
 
     [TestClass]
-    public class ClassCommandTests
+    public class ClassExpressionTests
     {
         [TestMethod]
         public void DefineSimpleClass()
@@ -20,7 +19,7 @@
             Context context = new Context();
             StringWriter writer = new StringWriter();
             context.SetValue("puts", new PutsFunction(writer));
-            ClassCommand cmd = new ClassCommand("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
 
@@ -38,7 +37,7 @@
             Context context = new Context();
             StringWriter writer = new StringWriter();
             context.SetValue("puts", new PutsFunction(writer));
-            ClassCommand cmd = new ClassCommand("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             cmd.Evaluate(context);
 
@@ -58,10 +57,10 @@
         [TestMethod]
         public void Equals()
         {
-            ClassCommand cmd1 = new ClassCommand("foo", new ConstantExpression(1));
-            ClassCommand cmd2 = new ClassCommand("bar", new ConstantExpression(1));
-            ClassCommand cmd3 = new ClassCommand("foo", new ConstantExpression(2));
-            ClassCommand cmd4 = new ClassCommand("foo", new ConstantExpression(1));
+            ClassExpression cmd1 = new ClassExpression("foo", new ConstantExpression(1));
+            ClassExpression cmd2 = new ClassExpression("bar", new ConstantExpression(1));
+            ClassExpression cmd3 = new ClassExpression("foo", new ConstantExpression(2));
+            ClassExpression cmd4 = new ClassExpression("foo", new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

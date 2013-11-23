@@ -1,4 +1,4 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
@@ -6,14 +6,14 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class AssignInstanceVarCommand : IExpression
+    public class AssignInstanceVarExpression : IExpression
     {
-        private static int hashtag = typeof(AssignInstanceVarCommand).GetHashCode();
+        private static int hashtag = typeof(AssignInstanceVarExpression).GetHashCode();
 
         private string name;
         private IExpression expression;
 
-        public AssignInstanceVarCommand(string name, IExpression expression)
+        public AssignInstanceVarExpression(string name, IExpression expression)
         {
             this.name = name;
             this.expression = expression;
@@ -35,9 +35,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is AssignInstanceVarCommand)
+            if (obj is AssignInstanceVarExpression)
             {
-                var cmd = (AssignInstanceVarCommand)obj;
+                var cmd = (AssignInstanceVarExpression)obj;
 
                 return this.Name.Equals(cmd.name) && this.Expression.Equals(cmd.Expression);
             }

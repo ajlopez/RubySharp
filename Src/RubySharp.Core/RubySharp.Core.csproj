@@ -67,16 +67,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AssignCommand.cs" />
-    <Compile Include="Commands\AssignDotCommand.cs" />
-    <Compile Include="Commands\CompositeCommand.cs" />
-    <Compile Include="Commands\ClassCommand.cs" />
-    <Compile Include="Commands\AssignInstanceVarCommand.cs" />
-    <Compile Include="Commands\UntilCommand.cs" />
-    <Compile Include="Commands\ForInCommand.cs" />
-    <Compile Include="Commands\WhileCommand.cs" />
-    <Compile Include="Commands\DefCommand.cs" />
-    <Compile Include="Commands\IfCommand.cs" />
+    <Compile Include="Expressions\AssignExpression.cs" />
+    <Compile Include="Expressions\AssignDotExpressions.cs" />
+    <Compile Include="Expressions\CompositeExpression.cs" />
+    <Compile Include="Expressions\ClassExpression.cs" />
+    <Compile Include="Expressions\AssignInstanceVarExpression.cs" />
+    <Compile Include="Expressions\UntilExpression.cs" />
+    <Compile Include="Expressions\ForInExpression.cs" />
+    <Compile Include="Expressions\WhileExpression.cs" />
+    <Compile Include="Expressions\DefExpression.cs" />
+    <Compile Include="Expressions\IfExpression.cs" />
     <Compile Include="Compiler\Lexer.cs" />
     <Compile Include="Compiler\Parser.cs" />
     <Compile Include="Exceptions\NoMethodError.cs" />

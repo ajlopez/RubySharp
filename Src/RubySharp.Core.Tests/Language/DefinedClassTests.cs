@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
@@ -80,7 +79,7 @@
         public void ApplyNewMethodCallingInitialize()
         {
             DefinedClass @class = new DefinedClass("Dog");
-            IFunction initialize = new DefinedFunction(new AssignInstanceVarCommand("age", new ConstantExpression(10)), new string[0], null);
+            IFunction initialize = new DefinedFunction(new AssignInstanceVarExpression("age", new ConstantExpression(10)), new string[0], null);
             @class.SetInstanceMethod("initialize", initialize);
 
             var result = @class.GetMethod("new").Apply(@class, new object[] { });

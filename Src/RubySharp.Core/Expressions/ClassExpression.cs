@@ -1,4 +1,4 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
@@ -8,13 +8,13 @@
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
 
-    public class ClassCommand : IExpression
+    public class ClassExpression : IExpression
     {
-        private static int hashcode = typeof(ClassCommand).GetHashCode();
+        private static int hashcode = typeof(ClassExpression).GetHashCode();
         private string name;
         private IExpression command;
 
-        public ClassCommand(string name, IExpression command)
+        public ClassExpression(string name, IExpression command)
         {
             this.name = name;
             this.command = command;
@@ -45,9 +45,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is ClassCommand)
+            if (obj is ClassExpression)
             {
-                var cmd = (ClassCommand)obj;
+                var cmd = (ClassExpression)obj;
 
                 return this.name == cmd.name && this.command.Equals(cmd.command);
             }

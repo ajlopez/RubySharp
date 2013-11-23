@@ -1,19 +1,18 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using RubySharp.Core.Expressions;
 
-    public class AssignCommand : IExpression
+    public class AssignExpression : IExpression
     {
-        private static int hashtag = typeof(AssignCommand).GetHashCode();
+        private static int hashtag = typeof(AssignExpression).GetHashCode();
 
         private string name;
         private IExpression expression;
 
-        public AssignCommand(string name, IExpression expression)
+        public AssignExpression(string name, IExpression expression)
         {
             this.name = name;
             this.expression = expression;
@@ -35,9 +34,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is AssignCommand)
+            if (obj is AssignExpression)
             {
-                var cmd = (AssignCommand)obj;
+                var cmd = (AssignExpression)obj;
 
                 return this.Name.Equals(cmd.name) && this.Expression.Equals(cmd.Expression);
             }

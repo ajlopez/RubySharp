@@ -1,19 +1,18 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
 
-    public class DefCommand : IExpression
+    public class DefExpression : IExpression
     {
         private string name;
         private IList<string> parameters;
         private IExpression command;
 
-        public DefCommand(string name, IList<string> parameters, IExpression command)
+        public DefExpression(string name, IList<string> parameters, IExpression command)
         {
             this.name = name;
             this.parameters = parameters;
@@ -37,9 +36,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is DefCommand)
+            if (obj is DefExpression)
             {
-                var cmd = (DefCommand)obj;
+                var cmd = (DefExpression)obj;
 
                 if (this.parameters.Count != cmd.parameters.Count)
                     return false;

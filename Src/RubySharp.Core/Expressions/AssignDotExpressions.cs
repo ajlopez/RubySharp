@@ -1,4 +1,4 @@
-﻿namespace RubySharp.Core.Commands
+﻿namespace RubySharp.Core.Expressions
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
 
-    public class AssignDotCommand : IExpression
+    public class AssignDotExpressions : IExpression
     {
-        private static int hashtag = typeof(AssignDotCommand).GetHashCode();
+        private static int hashtag = typeof(AssignDotExpressions).GetHashCode();
 
         private DotExpression leftvalue;
         private IExpression expression;
 
-        public AssignDotCommand(DotExpression leftvalue, IExpression expression)
+        public AssignDotExpressions(DotExpression leftvalue, IExpression expression)
         {
             this.leftvalue = leftvalue;
             this.expression = expression;
@@ -36,9 +36,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is AssignDotCommand)
+            if (obj is AssignDotExpressions)
             {
-                var cmd = (AssignDotCommand)obj;
+                var cmd = (AssignDotExpressions)obj;
 
                 return this.leftvalue.Equals(cmd.leftvalue) && this.Expression.Equals(cmd.Expression);
             }

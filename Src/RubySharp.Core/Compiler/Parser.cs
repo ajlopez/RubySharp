@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using RubySharp.Core.Commands;
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
@@ -91,18 +90,18 @@
             IExpression cmd;
 
             if (expr is NameExpression)
-                cmd = new AssignCommand(((NameExpression)expr).Name, this.ParseExpression());
+                cmd = new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
             else if (expr is DotExpression)
-                cmd = new AssignDotCommand((DotExpression)expr, this.ParseExpression());
+                cmd = new AssignDotExpressions((DotExpression)expr, this.ParseExpression());
             else
-                cmd = new AssignInstanceVarCommand(((InstanceVarExpression)expr).Name, this.ParseExpression());
+                cmd = new AssignInstanceVarExpression(((InstanceVarExpression)expr).Name, this.ParseExpression());
 
             this.ParseEndOfCommand();
 
             return cmd;
         }
 
-        private IfCommand ParseIfCommand()
+        private IfExpression ParseIfCommand()
         {
             IExpression condition = this.ParseExpression();
             if (this.TryParseName("then"))
@@ -121,10 +120,10 @@
                 this.ParseName("end");
 
             this.ParseEndOfCommand();
-            return new IfCommand(condition, thencommand, elsecommand);
+            return new IfExpression(condition, thencommand, elsecommand);
         }
 
-        private ForInCommand ParseForInCommand()
+        private ForInExpression ParseForInCommand()
         {
             string name = this.ParseName();
             this.ParseName("in");
@@ -135,10 +134,10 @@
                 this.ParseEndOfCommand();
             IExpression command = this.ParseCommandList();
             this.ParseEndOfCommand();
-            return new ForInCommand(name, expression, command);
+            return new ForInExpression(name, expression, command);
         }
 
-        private WhileCommand ParseWhileCommand()
+        private WhileExpression ParseWhileCommand()
         {
             IExpression condition = this.ParseExpression();
             if (this.TryParseName("do"))
@@ -147,10 +146,10 @@
                 this.ParseEndOfCommand();
             IExpression command = this.ParseCommandList();
             this.ParseEndOfCommand();
-            return new WhileCommand(condition, command);
+            return new WhileExpression(condition, command);
         }
 
-        private UntilCommand ParseUntilCommand()
+        private UntilExpression ParseUntilCommand()
         {
             IExpression condition = this.ParseExpression();
             if (this.TryParseName("do"))
@@ -159,26 +158,26 @@
                 this.ParseEndOfCommand();
             IExpression command = this.ParseCommandList();
             this.ParseEndOfCommand();
-            return new UntilCommand(condition, command);
+            return new UntilExpression(condition, command);
         }
 
-        private DefCommand ParseDefCommand()
+        private DefExpression ParseDefCommand()
         {
             string name = this.ParseName();
             IList<string> parameters = this.ParseParameterList();
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
             this.ParseEndOfCommand();
-            return new DefCommand(name, parameters, body);
+            return new DefExpression(name, parameters, body);
         }
 
-        private ClassCommand ParseClassCommand()
+        private ClassExpression ParseClassCommand()
         {
             string name = this.ParseName();
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
             this.ParseEndOfCommand();
-            return new ClassCommand(name, body);
+            return new ClassExpression(name, body);
         }
 
         private IList<string> ParseParameterList()
@@ -257,7 +256,7 @@
             if (commands.Count == 1)
                 return commands[0];
 
-            return new CompositeCommand(commands);
+            return new CompositeExpression(commands);
         }
 
         private IExpression ParseCommandList(IList<string> names)
@@ -276,7 +275,7 @@
             if (commands.Count == 1)
                 return commands[0];
 
-            return new CompositeCommand(commands);
+            return new CompositeExpression(commands);
         }
 
         private void ParseEndOfCommand()
