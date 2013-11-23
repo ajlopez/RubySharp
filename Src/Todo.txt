@@ -1,0 +1,14 @@
+
+- module
+- class << self
+- def o.foo()
+
+
+- Implements:
+
+a = 1
+
+def foo()
+	a # undefined variable or method invocation
+end
+
