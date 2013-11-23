@@ -41,27 +41,6 @@
             if (token == null)
                 return null;
 
-            if (token.Type == TokenType.Name)
-            {
-                if (token.Value == "if")
-                    return this.ParseIfExpression();
-
-                if (token.Value == "while")
-                    return this.ParseWhileExpression();
-
-                if (token.Value == "until")
-                    return this.ParseUntilExpression();
-
-                if (token.Value == "for")
-                    return this.ParseForInExpression();
-
-                if (token.Value == "def")
-                    return this.ParseDefExpression();
-
-                if (token.Value == "class")
-                    return this.ParseClassExpression();
-            }
-
             this.lexer.PushToken(token);
 
             IExpression expr = this.ParseExpression();
@@ -119,7 +98,6 @@
             else
                 this.ParseName("end");
 
-            this.ParseEndOfCommand();
             return new IfExpression(condition, thencommand, elsecommand);
         }
 
@@ -133,7 +111,6 @@
             else
                 this.ParseEndOfCommand();
             IExpression command = this.ParseCommandList();
-            this.ParseEndOfCommand();
             return new ForInExpression(name, expression, command);
         }
 
@@ -145,7 +122,6 @@
             else
                 this.ParseEndOfCommand();
             IExpression command = this.ParseCommandList();
-            this.ParseEndOfCommand();
             return new WhileExpression(condition, command);
         }
 
@@ -157,7 +133,6 @@
             else
                 this.ParseEndOfCommand();
             IExpression command = this.ParseCommandList();
-            this.ParseEndOfCommand();
             return new UntilExpression(condition, command);
         }
 
@@ -167,7 +142,6 @@
             IList<string> parameters = this.ParseParameterList();
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
-            this.ParseEndOfCommand();
             return new DefExpression(name, parameters, body);
         }
 
@@ -176,7 +150,6 @@
             string name = this.ParseName();
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
-            this.ParseEndOfCommand();
             return new ClassExpression(name, body);
         }
 
@@ -439,6 +412,24 @@
 
                 if (token.Value == "do")
                     return new BlockExpression(this.ParseBlock());
+
+                if (token.Value == "if")
+                    return this.ParseIfExpression();
+
+                if (token.Value == "while")
+                    return this.ParseWhileExpression();
+
+                if (token.Value == "until")
+                    return this.ParseUntilExpression();
+
+                if (token.Value == "for")
+                    return this.ParseForInExpression();
+
+                if (token.Value == "def")
+                    return this.ParseDefExpression();
+
+                if (token.Value == "class")
+                    return this.ParseClassExpression();
 
                 return new NameExpression(token.Value);
             }
