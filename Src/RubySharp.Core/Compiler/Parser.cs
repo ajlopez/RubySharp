@@ -35,7 +35,7 @@
         {
             Token token = this.lexer.NextToken();
 
-            while (token != null && token.Type == TokenType.EndOfLine)
+            while (token != null && this.IsEndOfCommand(token))
                 token = this.lexer.NextToken();
 
             if (token == null)
@@ -140,7 +140,6 @@
         {
             string name = this.ParseName();
             IList<string> parameters = this.ParseParameterList();
-            this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
             return new DefExpression(name, parameters, body);
         }
@@ -151,6 +150,13 @@
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
             return new ClassExpression(name, body);
+        }
+
+        private ModuleExpression ParseModuleExpression()
+        {
+            string name = this.ParseName();
+            IExpression body = this.ParseCommandList();
+            return new ModuleExpression(name, body);
         }
 
         private IList<string> ParseParameterList(bool canhaveparens = true)
@@ -233,6 +239,9 @@
 
             for (token = this.lexer.NextToken(); token != null && (token.Type != TokenType.Name || token.Value != "end"); token = this.lexer.NextToken())
             {
+                if (this.IsEndOfCommand(token))
+                    continue;
+
                 this.lexer.PushToken(token);
                 commands.Add(this.ParseCommand());
             }
@@ -253,6 +262,9 @@
 
             for (token = this.lexer.NextToken(); token != null && (token.Type != TokenType.Name || !names.Contains(token.Value)); token = this.lexer.NextToken())
             {
+                if (this.IsEndOfCommand(token))
+                    continue;
+
                 this.lexer.PushToken(token);
                 commands.Add(this.ParseCommand());
             }
@@ -447,6 +459,9 @@
 
                 if (token.Value == "class")
                     return this.ParseClassExpression();
+
+                if (token.Value == "module")
+                    return this.ParseModuleExpression();
 
                 return new NameExpression(token.Value);
             }

@@ -894,5 +894,18 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseEmptyModule()
+        {
+            Parser parser = new Parser("module Module1; a=1; end");
+            var expected = new ModuleExpression("Module1", new AssignExpression("a", new ConstantExpression(1)));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

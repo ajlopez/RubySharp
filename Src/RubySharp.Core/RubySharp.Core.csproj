@@ -73,6 +73,7 @@
     <Compile Include="Expressions\CompositeExpression.cs" />
     <Compile Include="Expressions\ClassExpression.cs" />
     <Compile Include="Expressions\AssignInstanceVarExpression.cs" />
+    <Compile Include="Expressions\DoubleColonExpression.cs" />
     <Compile Include="Expressions\ModuleExpression.cs" />
     <Compile Include="Expressions\UntilExpression.cs" />
     <Compile Include="Expressions\ForInExpression.cs" />

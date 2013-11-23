@@ -31,7 +31,7 @@
                 result = context.GetValue(this.name);
 
                 if (result == null || !(result is IFunction))
-                    throw new NameError(this.name);
+                    throw new NameError(string.Format("undefined local variable or method '{0}'", this.name));
             }
 
             if (result is IFunction)

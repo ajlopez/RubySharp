@@ -12,12 +12,12 @@
     {
         private static int hashcode = typeof(ClassExpression).GetHashCode();
         private string name;
-        private IExpression command;
+        private IExpression expression;
 
-        public ClassExpression(string name, IExpression command)
+        public ClassExpression(string name, IExpression expression)
         {
             this.name = name;
-            this.command = command;
+            this.expression = expression;
         }
 
         public object Evaluate(Context context)
@@ -41,7 +41,7 @@
 
             Context classcontext = new Context(dclass, null, context);
 
-            this.command.Evaluate(classcontext);
+            this.expression.Evaluate(classcontext);
 
             return null;
         }
@@ -55,7 +55,7 @@
             {
                 var cmd = (ClassExpression)obj;
 
-                return this.name == cmd.name && this.command.Equals(cmd.command);
+                return this.name == cmd.name && this.expression.Equals(cmd.expression);
             }
 
             return false;
@@ -63,7 +63,7 @@
 
         public override int GetHashCode()
         {
-            return this.name.GetHashCode() + this.command.GetHashCode() + hashcode;
+            return this.name.GetHashCode() + this.expression.GetHashCode() + hashcode;
         }
     }
 }

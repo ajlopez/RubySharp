@@ -8,6 +8,8 @@
 
     public class ModuleExpression : IExpression
     {
+        private static int hashcode = typeof(ClassExpression).GetHashCode();
+
         private string name;
         private IExpression expression;
 
@@ -26,6 +28,26 @@
             Context newcontext = new Context(module, context.RootContext);
             this.expression.Evaluate(newcontext);
             return null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj is ModuleExpression)
+            {
+                var expr = (ModuleExpression)obj;
+
+                return this.name == expr.name && this.expression.Equals(expr.expression);
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.name.GetHashCode() + this.expression.GetHashCode() + hashcode;
         }
     }
 }
