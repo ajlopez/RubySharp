@@ -16,7 +16,7 @@
         {
             var basicobjectclass = new DynamicClass("BasicObject", null);
             var objectclass = new DynamicClass("Object", basicobjectclass);
-            var moduleclass = new DynamicClass("Module", objectclass);
+            var moduleclass = new ModuleClass(objectclass);
             var classclass = new DynamicClass("Class", moduleclass);
 
             this.rootcontext.SetLocalValue("BasicObject", basicobjectclass);
