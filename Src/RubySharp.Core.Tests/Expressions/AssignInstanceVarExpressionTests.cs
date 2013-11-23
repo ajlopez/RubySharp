@@ -15,7 +15,7 @@
         public void AssignValue()
         {
             AssignInstanceVarExpression cmd = new AssignInstanceVarExpression("one", new ConstantExpression(1));
-            BaseObject obj = new BaseObject(null);
+            DynamicObject obj = new DynamicObject(null);
             Context context = new Context(null, obj, null);
 
             var result = cmd.Evaluate(context);

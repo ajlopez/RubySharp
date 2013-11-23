@@ -65,9 +65,9 @@
             var result = this.machine.RootContext.GetValue("Dog");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(DefinedClass));
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
 
-            var dclass = (DefinedClass)result;
+            var dclass = (DynamicClass)result;
 
             Assert.AreEqual("Dog", dclass.Name);
         }
@@ -78,9 +78,9 @@
             var result = this.machine.ExecuteFile("MachineFiles\\NewInstance.rb");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(BaseObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
 
-            var obj = (BaseObject)result;
+            var obj = (DynamicObject)result;
 
             Assert.AreEqual("Nero", obj.GetValue("name"));
             Assert.AreEqual(6, obj.GetValue("age"));

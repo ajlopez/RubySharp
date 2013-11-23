@@ -24,14 +24,14 @@
         {
             var value = context.GetValue(this.name);
 
-            if (value == null || !(value is DefinedClass))
+            if (value == null || !(value is DynamicClass))
             {
-                var newclass = new DefinedClass(this.name);
+                var newclass = new DynamicClass(this.name);
                 context.SetLocalValue(this.name, newclass);
                 value = newclass;
             }
 
-            var dclass = (DefinedClass)value;
+            var dclass = (DynamicClass)value;
 
             Context classcontext = new Context(dclass, null, context);
 

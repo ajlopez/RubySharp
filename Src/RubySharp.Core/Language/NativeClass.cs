@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Functions;
 
-    public class NativeClass : BaseObject
+    public class NativeClass : DynamicObject
     {
         private string name;
         private IDictionary<string, Func<object, IList<object>, object>> methods = new Dictionary<string, Func<object, IList<object>, object>>();

@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class Module : DefinedClass
+    public class Module : DynamicClass
     {
         public Module(string name)
             : base(name)

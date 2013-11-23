@@ -28,7 +28,7 @@
         public void ExecuteAssignDotCommand()
         {
             Machine machine = new Machine();
-            var @class = new DefinedClass("Dog");
+            var @class = new DynamicClass("Dog");
             var method = new DefinedFunction((new Parser("@name = name")).ParseCommand(), new string[] { "name" }, machine.RootContext);
             @class.SetInstanceMethod("name=", method);
             var nero = @class.CreateInstance();

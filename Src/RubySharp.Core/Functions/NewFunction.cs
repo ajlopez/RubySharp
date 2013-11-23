@@ -9,9 +9,9 @@
 
     public class NewFunction : IFunction
     {
-        public object Apply(BaseObject self, IList<object> values)
+        public object Apply(DynamicObject self, IList<object> values)
         {
-            var obj = ((DefinedClass)self).CreateInstance();
+            var obj = ((DynamicClass)self).CreateInstance();
 
             var initialize = obj.GetMethod("initialize");
 

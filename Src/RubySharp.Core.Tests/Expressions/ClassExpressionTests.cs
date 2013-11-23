@@ -26,7 +26,7 @@
             Assert.IsNull(result);
 
             var value = context.GetValue("Dog");
-            Assert.IsInstanceOfType(value, typeof(DefinedClass));
+            Assert.IsInstanceOfType(value, typeof(DynamicClass));
             Assert.AreEqual(value, context.GetValue("Dog"));
             Assert.AreEqual("123\r\n", writer.ToString());
         }
@@ -48,7 +48,7 @@
             Assert.IsNull(result);
 
             var value = context.GetValue("Dog");
-            Assert.IsInstanceOfType(value, typeof(DefinedClass));
+            Assert.IsInstanceOfType(value, typeof(DynamicClass));
             Assert.AreEqual(value, context.GetValue("Dog"));
             Assert.AreSame(initial, value);
             Assert.AreEqual("123\r\n123\r\n", writer.ToString());

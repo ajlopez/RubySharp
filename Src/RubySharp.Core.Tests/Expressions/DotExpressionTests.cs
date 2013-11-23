@@ -18,7 +18,7 @@
             Machine machine = new Machine();
             machine.ExecuteText("class MyClass;def foo;3;end;end");
 
-            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
+            var dclass = (DynamicClass)machine.RootContext.GetValue("MyClass");
 
             var myobj = dclass.CreateInstance();
 
@@ -36,7 +36,7 @@
             Machine machine = new Machine();
             machine.ExecuteText("class MyClass;end");
 
-            var dclass = (DefinedClass)machine.RootContext.GetValue("MyClass");
+            var dclass = (DynamicClass)machine.RootContext.GetValue("MyClass");
 
             var myobj = dclass.CreateInstance();
 

@@ -26,7 +26,7 @@
 
         public object Evaluate(Context context)
         {
-            var obj = (BaseObject)this.leftvalue.Expression.Evaluate(context);
+            var obj = (DynamicObject)this.leftvalue.Expression.Evaluate(context);
             var method = obj.GetMethod(this.leftvalue.Name + "=");
             return method.Apply(obj, new object[] { this.expression.Evaluate(context) });
         }

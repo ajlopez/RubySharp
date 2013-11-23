@@ -51,9 +51,9 @@
             var result = machine.RootContext.GetValue("MyClass");
             
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(DefinedClass));
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
 
-            var dclass = (DefinedClass)result;
+            var dclass = (DynamicClass)result;
 
             Assert.AreEqual("MyClass", dclass.Name);
 
@@ -71,9 +71,9 @@
             var result = machine.ExecuteText("class MyClass;end;MyClass.new");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(BaseObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
 
-            var obj = (BaseObject)result;
+            var obj = (DynamicObject)result;
 
             Assert.IsNotNull(obj.Class);
             Assert.AreEqual("MyClass", obj.Class.Name);
@@ -120,9 +120,9 @@
             var result = machine.ExecuteText("class Dog;def initialize(age);@age = age;end;end; nero = Dog.new(10)");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(BaseObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
 
-            var obj = (BaseObject)result;
+            var obj = (DynamicObject)result;
 
             Assert.AreEqual(10, obj.GetValue("age"));
         }

@@ -16,7 +16,7 @@
             this.writer = writer;
         }
 
-        public object Apply(BaseObject self, IList<object> values)
+        public object Apply(DynamicObject self, IList<object> values)
         {
             foreach (var value in values)
                 this.writer.WriteLine(value);

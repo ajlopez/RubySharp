@@ -20,7 +20,7 @@
             this.parameters = parameters;
         }
 
-        public object Apply(BaseObject self, IList<object> values)
+        public object Apply(DynamicObject self, IList<object> values)
         {
             Context newcontext = new Context(null, self, this.context);
 

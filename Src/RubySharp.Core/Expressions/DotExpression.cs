@@ -30,7 +30,7 @@
             IList<object> values = new List<object>();
             var result = this.expression.Evaluate(context);
 
-            if (!(result is BaseObject))
+            if (!(result is DynamicObject))
             {
                 NativeClass nclass = (NativeClass)NativeClass.MethodClass(result, null);
                 Func<object, IList<object>, object> nmethod = nclass.GetInstanceMethod(this.name);
@@ -45,7 +45,7 @@
                 return nmethod(result, values);
             }
 
-            var obj = (BaseObject)result;
+            var obj = (DynamicObject)result;
 
             foreach (var argument in this.arguments)
                 values.Add(argument.Evaluate(context));

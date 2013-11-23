@@ -16,7 +16,7 @@
         public void EvaluateUndefinedInstanceVar()
         {
             InstanceVarExpression expr = new InstanceVarExpression("foo");
-            BaseObject obj = new BaseObject(null);
+            DynamicObject obj = new DynamicObject(null);
             Context context = new Context(null, obj, null);
 
             Assert.IsNull(expr.Evaluate(context));
@@ -26,7 +26,7 @@
         public void EvaluateDefinedInstanceVar()
         {
             InstanceVarExpression expr = new InstanceVarExpression("one");
-            BaseObject obj = new BaseObject(null);
+            DynamicObject obj = new DynamicObject(null);
             obj.SetValue("one", 1);
             Context context = new Context(null, obj, null);
 
