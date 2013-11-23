@@ -907,5 +907,18 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseDoubleColon()
+        {
+            Parser parser = new Parser("Module1::PI");
+            var expected = new DoubleColonExpression(new NameExpression("Module1"), "PI");
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

@@ -397,6 +397,15 @@
                     continue;
                 }
 
+                if (this.TryParseToken(TokenType.Separator, "::"))
+                {
+                    string name = this.ParseName();
+
+                    expression = new DoubleColonExpression(expression, name);
+
+                    continue;
+                }
+
                 if (this.TryParseToken(TokenType.Separator, "["))
                 {
                     IExpression indexexpr = this.ParseExpression();
