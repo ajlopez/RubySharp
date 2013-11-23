@@ -7,9 +7,16 @@
 
     public class ModuleObject : DynamicObject
     {
+        private Context constants;
+
         public ModuleObject(DynamicClass @class)
             : base(@class)
         {
+            this.constants = new Context();
         }
+
+        public string Name { get; internal set; }
+
+        public Context Constants { get { return this.constants; } }
     }
 }

@@ -12,6 +12,7 @@
         private IDictionary<string, object> values = new Dictionary<string, object>();
         private DynamicClass @class;
         private DynamicObject self;
+        private ModuleObject module;
 
         public Context()
             : this(null)
@@ -30,9 +31,28 @@
             this.self = self;
         }
 
+        public Context(ModuleObject module, Context parent)
+        {
+            this.module = module;
+            this.parent = parent;
+        }
+
         public DynamicClass Class { get { return this.@class; } }
 
         public DynamicObject Self { get { return this.self; } }
+
+        public ModuleObject Module { get { return this.module; } }
+
+        public Context RootContext
+        {
+            get
+            {
+                if (this.parent == null)
+                    return this;
+
+                return this.parent.RootContext;
+            }
+        }
 
         public void SetLocalValue(string name, object value)
         {

@@ -21,7 +21,7 @@
 
         private object GetName(DynamicObject obj, IList<object> values)
         {
-            return obj.GetValue("name");
+            return ((ModuleObject)obj).Name;
         }
     }
 }

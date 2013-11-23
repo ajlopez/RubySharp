@@ -27,6 +27,33 @@
         }
 
         [TestMethod]
+        public void GetRootContext()
+        {
+            Context context = new Context();
+
+            Assert.AreSame(context, context.RootContext);
+        }
+
+        [TestMethod]
+        public void GetRootContextWithParent()
+        {
+            Context parent = new Context();
+            Context context = new Context(parent);
+
+            Assert.AreSame(parent, context.RootContext);
+        }
+
+        [TestMethod]
+        public void GetRootContextWithGrandParent()
+        {
+            Context grandparent = new Context();
+            Context parent = new Context(grandparent);
+            Context context = new Context(parent);
+
+            Assert.AreSame(grandparent, context.RootContext);
+        }
+
+        [TestMethod]
         public void SetValueAtParentGetValue()
         {
             Context parent = new Context();

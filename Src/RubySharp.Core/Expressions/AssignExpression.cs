@@ -26,6 +26,10 @@
         {
             object value = this.expression.Evaluate(context);
             context.SetLocalValue(this.name, value);
+
+            if (char.IsUpper(this.name[0]) && context.Module != null)
+                context.Module.Constants.SetLocalValue(this.name, value);
+
             return value;
         }
 
