@@ -28,7 +28,7 @@
 
             foreach (var element in elements) 
             {
-                context.SetValue(this.name, element);
+                context.SetLocalValue(this.name, element);
                 this.command.Evaluate(context);
             }
 

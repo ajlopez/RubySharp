@@ -34,9 +34,19 @@
 
         public BaseObject Self { get { return this.self; } }
 
-        public void SetValue(string name, object value)
+        public void SetLocalValue(string name, object value)
         {
             this.values[name] = value;
+        }
+
+        public bool HasLocalValue(string name)
+        {
+            return this.values.ContainsKey(name);
+        }
+
+        public object GetLocalValue(string name)
+        {
+            return this.values[name];
         }
 
         public object GetValue(string name)

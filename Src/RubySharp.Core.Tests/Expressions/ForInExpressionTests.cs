@@ -14,7 +14,7 @@
         public void ExecuteForIn()
         {
             Context context = new Context();
-            context.SetValue("total", 0);
+            context.SetLocalValue("total", 0);
             ForInExpression command = new ForInExpression("k", new ConstantExpression(new int[] { 1, 2, 3 }), new AssignExpression("total", new AddExpression(new NameExpression("total"), new NameExpression("k"))));
             command.Evaluate(context);
 

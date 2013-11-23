@@ -26,7 +26,7 @@
             if (context.Class != null)
                 context.Class.SetInstanceMethod(this.name, result);
             else
-                context.SetValue(this.name, result);
+                context.SetLocalValue(this.name, result);
 
             return null;
         }

@@ -23,7 +23,7 @@
         public void CreateAndEvaluateBlockWithFreeVariable()
         {
             Context context = new Context();
-            context.SetValue("a", 1);
+            context.SetLocalValue("a", 1);
             Block block = new Block(null, new AddExpression(new NameExpression("a"), new ConstantExpression(1)));
 
             Assert.AreEqual(2, block.Apply(context, null));
@@ -41,20 +41,10 @@
         public void CreateAndEvaluateBlockWithNonProvidedArgument()
         {
             Context context = new Context();
-            context.SetValue("a", 1);
+            context.SetLocalValue("a", 1);
             Block block = new Block(new string[] { "a" }, new NameExpression("a"));
 
             Assert.IsNull(block.Apply(context, new object[] { }));
-        }
-
-        [TestMethod]
-        public void CreateAndEvaluateBlockWithFreeVariableAndArgument()
-        {
-            Context context = new Context();
-            context.SetValue("a", 1);
-            Block block = new Block(new string[] { "b" }, new SubtractExpression(new NameExpression("a"), new NameExpression("b")));
-
-            Assert.AreEqual(-2, block.Apply(context, new object[] { 3 }));
         }
 
         [TestMethod]

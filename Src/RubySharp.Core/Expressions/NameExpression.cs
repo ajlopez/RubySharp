@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Exceptions;
 
     public class NameExpression : IExpression
     {
@@ -21,7 +22,17 @@
 
         public object Evaluate(Context context)
         {
-            var result = context.GetValue(this.name);
+            object result = null;
+
+            if (context.HasLocalValue(this.name))
+                result = context.GetLocalValue(this.name);
+            else
+            {
+                result = context.GetValue(this.name);
+
+                if (result == null || !(result is IFunction))
+                    throw new NameError(this.name);
+            }
 
             if (result is IFunction)
                 return ((IFunction)result).Apply(null, emptyvalues);

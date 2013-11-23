@@ -13,8 +13,8 @@
 
         public Machine()
         {
-            this.rootcontext.SetValue("puts", new PutsFunction(System.Console.Out));
-            this.rootcontext.SetValue("print", new PrintFunction(System.Console.Out));
+            this.rootcontext.SetLocalValue("puts", new PutsFunction(System.Console.Out));
+            this.rootcontext.SetLocalValue("print", new PrintFunction(System.Console.Out));
         }
 
         public Context RootContext { get { return this.rootcontext; } }

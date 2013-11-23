@@ -20,7 +20,7 @@
         public object Evaluate(Context context)
         {
             Module module = new Module(this.name);
-            context.SetValue(this.name, module);
+            context.SetLocalValue(this.name, module);
             return null;
         }
     }

@@ -22,7 +22,7 @@
         {
             Context context = new Context();
 
-            context.SetValue("one", 1);
+            context.SetLocalValue("one", 1);
             Assert.AreEqual(1, context.GetValue("one"));
         }
 
@@ -32,7 +32,7 @@
             Context parent = new Context();
             Context context = new Context(parent);
 
-            parent.SetValue("one", 1);
+            parent.SetLocalValue("one", 1);
             Assert.AreEqual(1, context.GetValue("one"));
         }
 
@@ -42,9 +42,9 @@
             Context parent = new Context();
             Context context = new Context(parent);
 
-            parent.SetValue("one", 1);
-            context.SetValue("two", 2);
-            context.SetValue("three", 3);
+            parent.SetLocalValue("one", 1);
+            context.SetLocalValue("two", 2);
+            context.SetLocalValue("three", 3);
 
             var result = context.GetLocalNames();
 

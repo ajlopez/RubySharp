@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NameError.cs" />
     <Compile Include="Expressions\AssignExpression.cs" />
     <Compile Include="Expressions\AssignDotExpressions.cs" />
     <Compile Include="Expressions\CompositeExpression.cs" />

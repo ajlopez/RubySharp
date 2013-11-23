@@ -19,7 +19,7 @@
             CallExpression expr = new CallExpression("puts", new IExpression[] { new ConstantExpression(123) });
             Machine machine = new Machine();
             PutsFunction puts = new PutsFunction(writer);
-            machine.RootContext.SetValue("puts", puts);
+            machine.RootContext.SetLocalValue("puts", puts);
 
             Assert.IsNull(expr.Evaluate(machine.RootContext));
             Assert.AreEqual("123\r\n", writer.ToString());

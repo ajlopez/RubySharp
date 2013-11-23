@@ -18,7 +18,7 @@
             Machine machine = new Machine();
             StringWriter writer = new StringWriter();
             PutsFunction puts = new PutsFunction(writer);
-            machine.RootContext.SetValue("puts", puts);
+            machine.RootContext.SetLocalValue("puts", puts);
 
             DefinedFunction function = new DefinedFunction(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }), new string[] { }, machine.RootContext);
 

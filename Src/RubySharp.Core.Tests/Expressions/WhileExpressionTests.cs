@@ -20,7 +20,7 @@
             IExpression expr = exprparser.ParseExpression();
 
             Context context = new Context();
-            context.SetValue("a", 1);
+            context.SetLocalValue("a", 1);
 
             WhileExpression cmd = new WhileExpression(expr, body);
 

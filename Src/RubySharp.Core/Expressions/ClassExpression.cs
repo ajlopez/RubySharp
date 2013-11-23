@@ -27,7 +27,7 @@
             if (value == null || !(value is DefinedClass))
             {
                 var newclass = new DefinedClass(this.name);
-                context.SetValue(this.name, newclass);
+                context.SetLocalValue(this.name, newclass);
                 value = newclass;
             }
 

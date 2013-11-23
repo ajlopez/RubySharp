@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Exceptions;
 
     [TestClass]
     public class NameExpressionTests
@@ -17,7 +18,16 @@
             NameExpression expr = new NameExpression("foo");
             Context context = new Context();
 
-            Assert.IsNull(expr.Evaluate(context));
+            try
+            {
+                expr.Evaluate(context);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(NameError));
+                Assert.AreEqual("undefined local variable or method 'foo'", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -25,7 +35,7 @@
         {
             NameExpression expr = new NameExpression("one");
             Context context = new Context();
-            context.SetValue("one", 1);
+            context.SetLocalValue("one", 1);
 
             Assert.AreEqual(1, expr.Evaluate(context));
         }
@@ -35,7 +45,7 @@
         {
             NameExpression expr = new NameExpression("foo");
             Context context = new Context();
-            context.SetValue("foo", new DefinedFunction(new ConstantExpression(1), new string[0], context));
+            context.SetLocalValue("foo", new DefinedFunction(new ConstantExpression(1), new string[0], context));
 
             Assert.AreEqual(1, expr.Evaluate(context));
         }

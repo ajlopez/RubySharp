@@ -18,7 +18,7 @@
         {
             Context context = new Context();
             StringWriter writer = new StringWriter();
-            context.SetValue("puts", new PutsFunction(writer));
+            context.SetLocalValue("puts", new PutsFunction(writer));
             ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
@@ -36,7 +36,7 @@
         {
             Context context = new Context();
             StringWriter writer = new StringWriter();
-            context.SetValue("puts", new PutsFunction(writer));
+            context.SetLocalValue("puts", new PutsFunction(writer));
             ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             cmd.Evaluate(context);

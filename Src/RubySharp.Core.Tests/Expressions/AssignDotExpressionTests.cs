@@ -32,7 +32,7 @@
             var method = new DefinedFunction((new Parser("@name = name")).ParseCommand(), new string[] { "name" }, machine.RootContext);
             @class.SetInstanceMethod("name=", method);
             var nero = @class.CreateInstance();
-            machine.RootContext.SetValue("nero", nero);
+            machine.RootContext.SetLocalValue("nero", nero);
             var leftvalue = (DotExpression)(new Parser("nero.name")).ParseExpression();
             var value = new ConstantExpression("Nero");
             AssignDotExpressions cmd = new AssignDotExpressions(leftvalue, value);

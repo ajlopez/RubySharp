@@ -25,7 +25,7 @@
         public object Evaluate(Context context)
         {
             object value = this.expression.Evaluate(context);
-            context.SetValue(this.name, value);
+            context.SetLocalValue(this.name, value);
             return value;
         }
 
