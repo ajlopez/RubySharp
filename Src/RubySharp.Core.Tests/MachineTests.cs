@@ -90,6 +90,84 @@
         }
 
         [TestMethod]
+        public void FixnumClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Fixnum");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FixnumClass));
+
+            var @class = (FixnumClass)result;
+            Assert.AreEqual("Fixnum", @class.Name);
+        }
+
+        [TestMethod]
+        public void FloatClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Float");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FloatClass));
+
+            var @class = (FloatClass)result;
+            Assert.AreEqual("Float", @class.Name);
+        }
+
+        [TestMethod]
+        public void StringClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("String");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(StringClass));
+
+            var @class = (StringClass)result;
+            Assert.AreEqual("String", @class.Name);
+        }
+
+        [TestMethod]
+        public void NilClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("NilClass");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(NilClass));
+
+            var @class = (NilClass)result;
+            Assert.AreEqual("NilClass", @class.Name);
+        }
+
+        [TestMethod]
+        public void FalseClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("FalseClass");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FalseClass));
+
+            var @class = (FalseClass)result;
+            Assert.AreEqual("FalseClass", @class.Name);
+        }
+
+        [TestMethod]
+        public void TrueClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("TrueClass");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(TrueClass));
+
+            var @class = (TrueClass)result;
+            Assert.AreEqual("TrueClass", @class.Name);
+        }
+
+        [TestMethod]
         public void ExecuteText()
         {
             Machine machine = new Machine();
