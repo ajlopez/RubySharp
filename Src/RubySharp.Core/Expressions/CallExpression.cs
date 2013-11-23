@@ -59,7 +59,10 @@
             int result = this.name.GetHashCode();
 
             foreach (var argument in this.arguments)
+            {
+                result *= 17;
                 result += argument.GetHashCode();
+            }
 
             return result;
         }

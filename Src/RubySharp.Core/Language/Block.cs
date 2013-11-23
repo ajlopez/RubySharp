@@ -32,5 +32,44 @@
 
             return this.expression.Evaluate(newcontext);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Block))
+                return false;
+
+            Block blk = (Block)obj;
+
+            if (blk.argumentnames != null && this.argumentnames != null)
+            {
+                if (blk.argumentnames.Count != this.argumentnames.Count)
+                    return false;
+
+                for (int k = 0; k < blk.argumentnames.Count; k++)
+                    if (!blk.argumentnames[k].Equals(this.argumentnames[k]))
+                        return false;
+            }
+            else if (blk.argumentnames != null || this.argumentnames != null)
+                return false;
+
+            return blk.expression.Equals(this.expression);
+        }
+
+
+        public override int GetHashCode()
+        {
+            int result = typeof(Block).GetHashCode();
+
+            if (this.argumentnames != null) 
+                for (int k = 0; k < this.argumentnames.Count; k++) 
+                {
+                    result *= 17;
+                    result += this.argumentnames[k].GetHashCode();
+                }
+
+            result += this.expression.GetHashCode();
+
+            return result;
+        }
     }
 }
