@@ -153,11 +153,14 @@
             return new ClassExpression(name, body);
         }
 
-        private IList<string> ParseParameterList()
+        private IList<string> ParseParameterList(bool canhaveparens = true)
         {
             IList<string> parameters = new List<string>();
 
-            bool inparentheses = this.TryParseToken(TokenType.Separator, "(");
+            bool inparentheses = false;
+            
+            if (canhaveparens)
+                inparentheses = this.TryParseToken(TokenType.Separator, "(");
 
             for (string name = this.TryParseName(); name != null; name = this.ParseName())
             {
@@ -186,7 +189,11 @@
             }
 
             if (inparentheses)
+            {
                 this.ParseToken(TokenType.Separator, ")");
+                if (this.TryParseName("do"))
+                    expressions.Add(new BlockExpression(this.ParseBlock()));
+            }
 
             return expressions;
         }
@@ -209,6 +216,13 @@
 
         private Block ParseBlock()
         {
+            if (this.TryParseToken(TokenType.Separator, "|"))
+            {
+                IList<string> paramnames = this.ParseParameterList(false);
+                this.ParseToken(TokenType.Separator, "|");
+                return new Block(paramnames, this.ParseCommandList());
+            }
+
             return new Block(null, this.ParseCommandList());
         }
 
@@ -281,6 +295,9 @@
 
             if (token.Type == TokenType.Separator)
                 return token.Value == "(";
+
+            if (token.Type == TokenType.Name && token.Value == "end")
+                return false;
 
             return true;
         }

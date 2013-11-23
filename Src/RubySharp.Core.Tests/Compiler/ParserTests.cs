@@ -881,5 +881,18 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseCallWithDoWithArguments()
+        {
+            Parser parser = new Parser("1.upto(9) do |x| print x end");
+            var expected = new DotExpression(new ConstantExpression(1), "upto", new IExpression[] { new ConstantExpression(9), new BlockExpression(new Block(new string[] { "x" }, new CallExpression("print", new IExpression[] { new NameExpression("x") }))) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }
