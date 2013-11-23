@@ -235,6 +235,11 @@
             return expressions;
         }
 
+        private Block ParseBlock()
+        {
+            return new Block(null, this.ParseCommandList());
+        }
+
         private IExpression ParseCommandList()
         {
             Token token;
@@ -432,6 +437,9 @@
 
                 if (token.Value == "nil")
                     return new ConstantExpression(null);
+
+                if (token.Value == "do")
+                    return new BlockExpression(this.ParseBlock());
 
                 return new NameExpression(token.Value);
             }

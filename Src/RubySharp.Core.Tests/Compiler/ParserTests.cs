@@ -869,5 +869,18 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseCallWithDo()
+        {
+            Parser parser = new Parser("k.times do print 'foo' end");
+            var expected = new DotExpression(new NameExpression("k"), "times", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") })))} );
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

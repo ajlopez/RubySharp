@@ -86,6 +86,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="Expressions\AddExpression.cs" />
     <Compile Include="Expressions\BinaryExpression.cs" />
+    <Compile Include="Expressions\BlockExpression.cs" />
     <Compile Include="Expressions\CallExpression.cs" />
     <Compile Include="Expressions\CompareOperator.cs" />
     <Compile Include="Expressions\ConstantExpression.cs" />

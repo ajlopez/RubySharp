@@ -55,7 +55,6 @@
             return blk.expression.Equals(this.expression);
         }
 
-
         public override int GetHashCode()
         {
             int result = typeof(Block).GetHashCode();
