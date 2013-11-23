@@ -7,13 +7,9 @@
 
     public class StringClass : NativeClass
     {
-        private static StringClass instance = new StringClass();
-
-        public StringClass()
-            : base("String")
+        public StringClass(Machine machine)
+            : base("String", machine)
         {
         }
-
-        public static StringClass Instance { get { return instance; } }
     }
 }

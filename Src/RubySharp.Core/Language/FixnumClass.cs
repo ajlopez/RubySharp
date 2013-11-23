@@ -7,13 +7,9 @@
 
     public class FixnumClass : NativeClass
     {
-        private static FixnumClass instance = new FixnumClass();
-
-        public FixnumClass()
-            : base("Fixnum")
+        public FixnumClass(Machine machine)
+            : base("Fixnum", machine)
         {
         }
-
-        public static FixnumClass Instance { get { return instance; } }
     }
 }

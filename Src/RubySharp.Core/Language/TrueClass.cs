@@ -7,13 +7,9 @@
 
     public class TrueClass : NativeClass
     {
-        private static TrueClass instance = new TrueClass();
-
-        public TrueClass()
-            : base("TrueClass")
+        public TrueClass(Machine machine)
+            : base("TrueClass", machine)
         {
         }
-
-        public static TrueClass Instance { get { return instance; } }
     }
 }

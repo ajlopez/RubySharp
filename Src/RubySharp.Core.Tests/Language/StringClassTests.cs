@@ -10,23 +10,31 @@
     [TestClass]
     public class StringClassTests
     {
+        private StringClass @class;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this.@class = new StringClass(null);
+        }
+
         [TestMethod]
         public void StringClassInstance()
         {
-            Assert.IsNotNull(StringClass.Instance);
-            Assert.AreEqual("String", StringClass.Instance.Name);
+            Assert.IsNotNull(this.@class);
+            Assert.AreEqual("String", this.@class.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(StringClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(this.@class.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(StringClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(this.@class.GetInstanceMethod("foo"));
         }
     }
 }

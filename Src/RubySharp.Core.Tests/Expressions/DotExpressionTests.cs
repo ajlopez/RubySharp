@@ -61,7 +61,7 @@
 
             DotExpression expression = new DotExpression(new ConstantExpression(1), "class", null);
 
-            var result = expression.Evaluate(null);
+            var result = expression.Evaluate(machine.RootContext);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(FixnumClass));

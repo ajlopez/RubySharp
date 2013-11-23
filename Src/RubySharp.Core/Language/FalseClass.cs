@@ -7,13 +7,9 @@
 
     public class FalseClass : NativeClass
     {
-        private static FalseClass instance = new FalseClass();
-
-        public FalseClass()
-            : base("FalseClass")
+        public FalseClass(Machine machine)
+            : base("FalseClass", machine)
         {
         }
-
-        public static FalseClass Instance { get { return instance; } }
     }
 }

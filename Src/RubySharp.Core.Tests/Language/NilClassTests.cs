@@ -10,23 +10,30 @@
     [TestClass]
     public class NilClassTests
     {
-        [TestMethod]
-        public void NilClassInstance()
+        private NilClass @class;
+
+        [TestInitialize]
+        public void Setup()
         {
-            Assert.IsNotNull(NilClass.Instance);
-            Assert.AreEqual("NilClass", NilClass.Instance.Name);
+            this.@class = new NilClass(null);
+        }
+
+        [TestMethod]
+        public void NilClassName()
+        {
+            Assert.AreEqual("NilClass", this.@class.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(NilClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(this.@class.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(NilClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(this.@class.GetInstanceMethod("foo"));
         }
     }
 }

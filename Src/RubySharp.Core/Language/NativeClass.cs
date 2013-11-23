@@ -9,13 +9,22 @@
     public class NativeClass : DynamicObject
     {
         private string name;
+        private Machine machine;
         private IDictionary<string, Func<object, IList<object>, object>> methods = new Dictionary<string, Func<object, IList<object>, object>>();
 
-        public NativeClass(string name)
+        private NativeClass fixnumclass;
+        private NativeClass floatclass;
+        private NativeClass stringclass;
+        private NativeClass nilclass;
+        private NativeClass falseclass;
+        private NativeClass trueclass;
+
+        public NativeClass(string name, Machine machine)
             : base(null)
         {
             this.name = name;
-            this.SetInstanceMethod("class", MethodClass);
+            this.machine = machine;
+            this.SetInstanceMethod("class", this.MethodClass);
         }
 
         public string Name { get { return this.name; } }
@@ -33,25 +42,55 @@
             return null;
         }
 
-        public static object MethodClass(object self, IList<object> values)
+        public object MethodClass(object self, IList<object> values)
         {
             if (self == null)
-                return NilClass.Instance;
+            {
+                if (nilclass == null)
+                    nilclass = (NativeClass)this.machine.RootContext.GetLocalValue("NilClass");
+
+                return nilclass;
+            }
 
             if (self is int)
-                return FixnumClass.Instance;
+            {
+                if (fixnumclass == null)
+                    fixnumclass = (NativeClass)this.machine.RootContext.GetLocalValue("Fixnum");
+
+                return fixnumclass;
+            }
 
             if (self is double)
-                return FloatClass.Instance;
+            {
+                if (floatclass == null)
+                    floatclass = (NativeClass)this.machine.RootContext.GetLocalValue("Float");
+
+                return floatclass;
+            }
 
             if (self is string)
-                return StringClass.Instance;
+            {
+                if (stringclass == null)
+                    stringclass = (NativeClass)this.machine.RootContext.GetLocalValue("String");
+
+                return stringclass;
+            }
 
             if (self is bool)
                 if ((bool)self)
-                    return TrueClass.Instance;
+                {
+                    if (trueclass == null)
+                        trueclass = (NativeClass)this.machine.RootContext.GetLocalValue("TrueClass");
+
+                    return trueclass;
+                }
                 else
-                    return FalseClass.Instance;
+                {
+                    if (falseclass == null)
+                        falseclass = (NativeClass)this.machine.RootContext.GetLocalValue("FalseClass");
+
+                    return falseclass;
+                }
 
             throw new NotImplementedException();
         }

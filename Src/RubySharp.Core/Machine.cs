@@ -24,12 +24,12 @@
             this.rootcontext.SetLocalValue("Module", moduleclass);
             this.rootcontext.SetLocalValue("Class", classclass);
 
-            this.rootcontext.SetLocalValue("Fixnum", new FixnumClass());
-            this.rootcontext.SetLocalValue("Float", new FloatClass());
-            this.rootcontext.SetLocalValue("String", new StringClass());
-            this.rootcontext.SetLocalValue("NilClass", new NilClass());
-            this.rootcontext.SetLocalValue("FalseClass", new FalseClass());
-            this.rootcontext.SetLocalValue("TrueClass", new TrueClass());
+            this.rootcontext.SetLocalValue("Fixnum", new FixnumClass(this));
+            this.rootcontext.SetLocalValue("Float", new FloatClass(this));
+            this.rootcontext.SetLocalValue("String", new StringClass(this));
+            this.rootcontext.SetLocalValue("NilClass", new NilClass(this));
+            this.rootcontext.SetLocalValue("FalseClass", new FalseClass(this));
+            this.rootcontext.SetLocalValue("TrueClass", new TrueClass(this));
 
             this.rootcontext.SetLocalValue("puts", new PutsFunction(System.Console.Out));
             this.rootcontext.SetLocalValue("print", new PrintFunction(System.Console.Out));

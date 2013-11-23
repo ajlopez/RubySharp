@@ -7,13 +7,9 @@
 
     public class NilClass : NativeClass
     {
-        private static NilClass instance = new NilClass();
-
-        public NilClass()
-            : base("NilClass")
+        public NilClass(Machine machine)
+            : base("NilClass", machine)
         {
         }
-
-        public static NilClass Instance { get { return instance; } }
     }
 }

@@ -10,23 +10,31 @@
     [TestClass]
     public class FixnumClassTests
     {
+        private FixnumClass @class;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this.@class = new FixnumClass(null);
+        }
+
         [TestMethod]
         public void FixnumClassInstance()
         {
-            Assert.IsNotNull(FixnumClass.Instance);
-            Assert.AreEqual("Fixnum", FixnumClass.Instance.Name);
+            Assert.IsNotNull(this.@class);
+            Assert.AreEqual("Fixnum", this.@class.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(FixnumClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(this.@class.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(FixnumClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(this.@class.GetInstanceMethod("foo"));
         }
     }
 }

@@ -10,23 +10,31 @@
     [TestClass]
     public class TrueClassTests
     {
+        private TrueClass @class;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this.@class = new TrueClass(null);
+        }
+
         [TestMethod]
         public void TrueClassInstance()
         {
-            Assert.IsNotNull(TrueClass.Instance);
-            Assert.AreEqual("TrueClass", TrueClass.Instance.Name);
+            Assert.IsNotNull(this.@class);
+            Assert.AreEqual("TrueClass", this.@class.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(TrueClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(this.@class.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(TrueClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(this.@class.GetInstanceMethod("foo"));
         }
     }
 }

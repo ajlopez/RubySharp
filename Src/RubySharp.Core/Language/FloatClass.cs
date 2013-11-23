@@ -7,13 +7,9 @@
 
     public class FloatClass : NativeClass
     {
-        private static FloatClass instance = new FloatClass();
-
-        public FloatClass()
-            : base("Float")
+        public FloatClass(Machine machine)
+            : base("Float", machine)
         {
         }
-
-        public static FloatClass Instance { get { return instance; } }
     }
 }

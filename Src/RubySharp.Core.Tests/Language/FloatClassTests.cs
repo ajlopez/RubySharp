@@ -10,23 +10,31 @@
     [TestClass]
     public class FloatClassTests
     {
+        private FloatClass @class;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this.@class = new FloatClass(null);
+        }
+
         [TestMethod]
         public void FloatClassInstance()
         {
-            Assert.IsNotNull(FloatClass.Instance);
-            Assert.AreEqual("Float", FloatClass.Instance.Name);
+            Assert.IsNotNull(this.@class);
+            Assert.AreEqual("Float", this.@class.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(FloatClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(this.@class.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(FloatClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(this.@class.GetInstanceMethod("foo"));
         }
     }
 }

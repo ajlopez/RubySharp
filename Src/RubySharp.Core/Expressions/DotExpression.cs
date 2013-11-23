@@ -32,7 +32,8 @@
 
             if (!(result is DynamicObject))
             {
-                NativeClass nclass = (NativeClass)NativeClass.MethodClass(result, null);
+                NativeClass nclass = (NativeClass)context.GetValue("Fixnum");
+                nclass = (NativeClass)nclass.MethodClass(result, null);
                 Func<object, IList<object>, object> nmethod = nclass.GetInstanceMethod(this.name);
 
                 if (nmethod == null)

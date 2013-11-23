@@ -10,23 +10,31 @@
     [TestClass]
     public class FalseClassTests
     {
+        private FalseClass @class;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            this.@class = new FalseClass(null);
+        }
+
         [TestMethod]
         public void FalseClassInstance()
         {
-            Assert.IsNotNull(FalseClass.Instance);
-            Assert.AreEqual("FalseClass", FalseClass.Instance.Name);
+            Assert.IsNotNull(this.@class);
+            Assert.AreEqual("FalseClass", this.@class.Name);
         }
 
         [TestMethod]
         public void GetClassInstanceMethod()
         {
-            Assert.IsNotNull(FalseClass.Instance.GetInstanceMethod("class"));
+            Assert.IsNotNull(this.@class.GetInstanceMethod("class"));
         }
 
         [TestMethod]
         public void GetUnknownInstanceMethod()
         {
-            Assert.IsNull(FalseClass.Instance.GetInstanceMethod("foo"));
+            Assert.IsNull(this.@class.GetInstanceMethod("foo"));
         }
     }
 }
