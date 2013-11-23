@@ -127,14 +127,23 @@
 
             for (ich = this.NextChar(); ich >= 0 && ((char)ich == '_' || char.IsLetterOrDigit((char)ich)); ich = this.NextChar())
             {
-                if (char.IsDigit((char)ich) && string.IsNullOrEmpty(value))
+                char ch = (char)ich;
+
+                if (char.IsDigit(ch) && string.IsNullOrEmpty(value))
                     throw new SyntaxError("unexpected integer");
 
-                value += (char)ich;
+                value += ch;
             }
 
             if (ich >= 0)
+            {
+                char ch = (char)ich;
+
+                if (ch == ':' && string.IsNullOrEmpty(value))
+                    return new Token(TokenType.Separator, "::");
+
                 this.BackChar();
+            }
 
             return new Token(TokenType.Symbol, value);
         }
