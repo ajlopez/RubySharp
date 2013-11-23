@@ -44,22 +44,22 @@
             if (token.Type == TokenType.Name)
             {
                 if (token.Value == "if")
-                    return this.ParseIfCommand();
+                    return this.ParseIfExpression();
 
                 if (token.Value == "while")
-                    return this.ParseWhileCommand();
+                    return this.ParseWhileExpression();
 
                 if (token.Value == "until")
-                    return this.ParseUntilCommand();
+                    return this.ParseUntilExpression();
 
                 if (token.Value == "for")
-                    return this.ParseForInCommand();
+                    return this.ParseForInExpression();
 
                 if (token.Value == "def")
-                    return this.ParseDefCommand();
+                    return this.ParseDefExpression();
 
                 if (token.Value == "class")
-                    return this.ParseClassCommand();
+                    return this.ParseClassExpression();
             }
 
             this.lexer.PushToken(token);
@@ -101,7 +101,7 @@
             return cmd;
         }
 
-        private IfExpression ParseIfCommand()
+        private IfExpression ParseIfExpression()
         {
             IExpression condition = this.ParseExpression();
             if (this.TryParseName("then"))
@@ -113,7 +113,7 @@
             IExpression elsecommand = null;
 
             if (this.TryParseName("elif"))
-                elsecommand = this.ParseIfCommand();
+                elsecommand = this.ParseIfExpression();
             else if (this.TryParseName("else"))
                 elsecommand = this.ParseCommandList();
             else
@@ -123,7 +123,7 @@
             return new IfExpression(condition, thencommand, elsecommand);
         }
 
-        private ForInExpression ParseForInCommand()
+        private ForInExpression ParseForInExpression()
         {
             string name = this.ParseName();
             this.ParseName("in");
@@ -137,7 +137,7 @@
             return new ForInExpression(name, expression, command);
         }
 
-        private WhileExpression ParseWhileCommand()
+        private WhileExpression ParseWhileExpression()
         {
             IExpression condition = this.ParseExpression();
             if (this.TryParseName("do"))
@@ -149,7 +149,7 @@
             return new WhileExpression(condition, command);
         }
 
-        private UntilExpression ParseUntilCommand()
+        private UntilExpression ParseUntilExpression()
         {
             IExpression condition = this.ParseExpression();
             if (this.TryParseName("do"))
@@ -161,7 +161,7 @@
             return new UntilExpression(condition, command);
         }
 
-        private DefExpression ParseDefCommand()
+        private DefExpression ParseDefExpression()
         {
             string name = this.ParseName();
             IList<string> parameters = this.ParseParameterList();
@@ -171,7 +171,7 @@
             return new DefExpression(name, parameters, body);
         }
 
-        private ClassExpression ParseClassCommand()
+        private ClassExpression ParseClassExpression()
         {
             string name = this.ParseName();
             this.ParseEndOfCommand();
