@@ -27,6 +27,10 @@
             var result = machine.RootContext.GetValue("puts");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IFunction));
+
+            result = machine.RootContext.GetValue("print");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(IFunction));
         }
 
         [TestMethod]

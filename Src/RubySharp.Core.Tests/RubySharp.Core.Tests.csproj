@@ -82,6 +82,7 @@
     <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
     <Compile Include="Expressions\ListExpressionTests.cs" />
+    <Compile Include="Functions\PrintFunctionTests.cs" />
     <Compile Include="Language\BaseObjectTests.cs" />
     <Compile Include="Language\BlockTests.cs" />
     <Compile Include="Language\FalseClassTests.cs" />
