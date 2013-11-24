@@ -2,8 +2,14 @@
 = module
 - class << self
 - def o.foo()
++ instance variable
++ class variable
+= instance method
+= module method
+- self in module/class
+- Name of module/class
 
-initialize
+= initialize
 inheritance
 native object and type access
 

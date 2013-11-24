@@ -86,5 +86,30 @@
             Assert.AreEqual(6, obj.GetValue("age"));
             Assert.AreEqual("Dog", obj.Class.Name);
         }
+
+        [TestMethod]
+        public void ExecutePointFile()
+        {
+            this.machine.ExecuteFile("MachineFiles\\Point.rb");
+
+            var result = this.machine.ExecuteText("Point");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+        }
+
+        [TestMethod]
+        public void CreatePoint()
+        {
+            this.machine.ExecuteFile("MachineFiles\\Point.rb");
+
+            var result = this.machine.ExecuteText("Point.new(10, 20)");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
+
+            var dobj = (DynamicObject)result;
+
+            Assert.AreEqual(10, dobj.GetValue("x"));
+            Assert.AreEqual(20, dobj.GetValue("y"));
+        }
     }
 }
