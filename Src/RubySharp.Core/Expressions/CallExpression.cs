@@ -8,6 +8,8 @@
 
     public class CallExpression : IExpression
     {
+        private static int hashtag = typeof(CallExpression).GetHashCode();
+
         private string name;
         private IList<IExpression> arguments;
 
@@ -56,7 +58,7 @@
 
         public override int GetHashCode()
         {
-            int result = this.name.GetHashCode();
+            int result = hashtag + this.name.GetHashCode();
 
             foreach (var argument in this.arguments)
             {

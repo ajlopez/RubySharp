@@ -78,6 +78,7 @@
     <Compile Include="Expressions\AssignInstanceVarExpression.cs" />
     <Compile Include="Expressions\ClassVarExpression.cs" />
     <Compile Include="Expressions\AssignClassVarExpression.cs" />
+    <Compile Include="Expressions\HashExpression.cs" />
     <Compile Include="Expressions\DoubleColonExpression.cs" />
     <Compile Include="Expressions\ModuleExpression.cs" />
     <Compile Include="Expressions\UntilExpression.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Language\ClassClass.cs" />
+    <Compile Include="Language\DynamicHash.cs" />
     <Compile Include="Language\ModuleClass.cs" />
     <Compile Include="Language\DynamicObject.cs" />
     <Compile Include="Language\Block.cs" />
