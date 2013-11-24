@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compiler\TextStream.cs" />
     <Compile Include="Exceptions\NameError.cs" />
     <Compile Include="Expressions\AssignExpression.cs" />
     <Compile Include="Expressions\AssignDotExpressions.cs" />

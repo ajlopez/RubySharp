@@ -19,13 +19,12 @@
 
         private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=" };
 
-        private string text;
-        private int position = 0;
+        private TextStream stream;
         private Stack<Token> tokens = new Stack<Token>();
 
         public Lexer(string text)
         {
-            this.text = text;
+            this.stream = new TextStream(text);
         }
 
         public Token NextToken()
@@ -223,30 +222,31 @@
 
         private int NextFirstChar()
         {
-            while (this.position < this.text.Length && this.text[this.position] != '\n' && char.IsWhiteSpace(this.text[this.position]))
-                this.position++;
+            int ich = this.NextChar();
 
-            return this.NextChar();
+            while (ich > 0 && (char)ich != '\n' && char.IsWhiteSpace((char)ich))
+                ich = this.NextChar();
+
+            return ich;
         }
 
         private int NextChar()
         {
-            if (this.position >= this.text.Length)
+            int ich = this.stream.NextChar();
+
+            if (ich < 0)
                 return -1;
 
-            char ch = this.text[this.position++];
+            char ch = (char)ich;
 
-            if (ch == StartComment)
-            {
-                this.position++;
+            if (ch == StartComment) {
+                for (ich = this.stream.NextChar(); ich >= 0 && (char)ich != '\n';)
+                    ich = this.stream.NextChar();
 
-                while (this.position < this.text.Length && this.text[this.position] != '\n')
-                    this.position++;
-
-                if (this.position >= this.text.Length)
+                if (ich < 0)
                     return -1;
 
-                ch = this.text[this.position++];
+                ch = (char)ich;
             }
 
             return ch;
@@ -254,8 +254,7 @@
 
         private void BackChar()
         {
-            if (this.position <= this.text.Length)
-                this.position--;
+            this.stream.BackChar();
         }
     }
 }
