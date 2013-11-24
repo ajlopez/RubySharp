@@ -110,6 +110,7 @@
     <Compile Include="Functions\DefinedFunction.cs" />
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
+    <Compile Include="Language\ClassClass.cs" />
     <Compile Include="Language\ModuleClass.cs" />
     <Compile Include="Language\DynamicObject.cs" />
     <Compile Include="Language\Block.cs" />

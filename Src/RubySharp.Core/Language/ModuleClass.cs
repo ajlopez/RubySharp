@@ -9,7 +9,12 @@
     public class ModuleClass : DynamicClass
     {
         public ModuleClass(DynamicClass superclass)
-            : base("Module", superclass)
+            : this("Module", superclass)
+        {
+        }
+
+        public ModuleClass(string name, DynamicClass superclass)
+            : base(name, superclass)
         {
             this.SetInstanceMethod("name", new LambdaFunction(this.GetName));
         }
