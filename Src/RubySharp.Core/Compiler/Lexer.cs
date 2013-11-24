@@ -18,7 +18,7 @@
 
         private const string Separators = ";()[],.|{}";
 
-        private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=" };
+        private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=", "=>" };
 
         private ICharStream stream;
         private Stack<Token> tokens = new Stack<Token>();
