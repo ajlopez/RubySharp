@@ -275,6 +275,32 @@
             Assert.AreEqual(6, result);
         }
 
+        [TestMethod]
+        public void EvaluateStringNativeProperty()
+        {
+            var result = this.Execute("'foo'.Length");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void EvaluateStringNativeMethod()
+        {
+            var result = this.Execute("'foo'.ToUpper");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("FOO", result);
+        }
+
+        [TestMethod]
+        public void EvaluateStringNativeMethodWithArguments()
+        {
+            var result = this.Execute("'foo'.Substring 1,2");
+            Assert.IsNotNull(result);
+            Assert.AreEqual("oo", result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

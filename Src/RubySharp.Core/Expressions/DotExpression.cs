@@ -5,6 +5,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Utilities;
 
     public class DotExpression : IExpression
     {
@@ -36,12 +37,12 @@
                 nclass = (NativeClass)nclass.MethodClass(result, null);
                 Func<object, IList<object>, object> nmethod = nclass.GetInstanceMethod(this.name);
 
-                if (nmethod == null)
-                    throw new NoMethodError(this.name);
-
                 if (this.arguments != null)
                     foreach (var argument in this.arguments)
                         values.Add(argument.Evaluate(context));
+
+                if (nmethod == null)
+                    return ObjectUtilities.GetValue(result, this.name, values);
 
                 return nmethod(result, values);
             }
