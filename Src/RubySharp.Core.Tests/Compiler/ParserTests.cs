@@ -681,6 +681,20 @@
         }
 
         [TestMethod]
+        public void ParseClassVariableExpression()
+        {
+            Parser parser = new Parser("@@a");
+            var expected = new ClassVarExpression("a");
+
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseCompareExpressions()
         {
             Parser parser = new Parser("1==2 1!=2 1<2 1>2 1<=2 1>=2");

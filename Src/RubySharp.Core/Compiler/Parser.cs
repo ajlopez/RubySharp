@@ -45,7 +45,7 @@
 
             IExpression expr = this.ParseExpression();
 
-            if (!(expr is NameExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression))
+            if (!(expr is NameExpression) && !(expr is ClassVarExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression))
             {
                 this.ParseEndOfCommand();
                 return expr;
@@ -66,13 +66,13 @@
                 return expr;
             }
 
-            IExpression cmd;
+            IExpression cmd = null;
 
             if (expr is NameExpression)
                 cmd = new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
             else if (expr is DotExpression)
                 cmd = new AssignDotExpressions((DotExpression)expr, this.ParseExpression());
-            else
+            else if (expr is InstanceVarExpression)
                 cmd = new AssignInstanceVarExpression(((InstanceVarExpression)expr).Name, this.ParseExpression());
 
             this.ParseEndOfCommand();
@@ -476,6 +476,9 @@
 
             if (token.Type == TokenType.InstanceVarName)
                 return new InstanceVarExpression(token.Value);
+
+            if (token.Type == TokenType.ClassVarName)
+                return new ClassVarExpression(token.Value);
 
             if (token.Type == TokenType.Symbol)
                 return new ConstantExpression(new Symbol(token.Value));
