@@ -18,11 +18,11 @@
             Machine machine = new Machine();
             StringWriter writer = new StringWriter();
             PutsFunction puts = new PutsFunction(writer);
-            machine.RootContext.SetLocalValue("puts", puts);
+            machine.RootContext.Self.Class.SetInstanceMethod("puts", puts);
 
             DefinedFunction function = new DefinedFunction(new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }), new string[] { }, machine.RootContext);
 
-            Assert.IsNull(function.Apply(null, new object[] { }));
+            Assert.IsNull(function.Apply(machine.RootContext.Self, new object[] { }));
             Assert.AreEqual("123\r\n", writer.ToString());
         }
 

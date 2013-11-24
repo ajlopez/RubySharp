@@ -19,14 +19,14 @@
 
         public object Evaluate(Context context)
         {
-            IFunction function = (IFunction)context.GetValue(this.name);
+            IFunction function = context.Self.GetMethod(this.name);
 
             IList<object> values = new List<object>();
 
             foreach (var argument in this.arguments)
                 values.Add(argument.Evaluate(context));
 
-            return function.Apply(null, values);
+            return function.Apply(context.Self, values);
         }
 
         public override bool Equals(object obj)

@@ -14,14 +14,16 @@
         [TestMethod]
         public void DefineSimpleFunction()
         {
-            Context context = new Context();
+            Machine machine = new Machine();
+            Context context = machine.RootContext;
             DefExpression cmd = new DefExpression("foo", new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
 
             Assert.IsNull(result);
 
-            var value = context.GetValue("foo");
+            var value = context.Self.Class.GetInstanceMethod("foo");
+            Assert.IsNotNull(value);
             Assert.IsInstanceOfType(value, typeof(DefinedFunction));
         }
 

@@ -19,7 +19,7 @@
             Machine machine = new Machine();
             Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
-            context.SetLocalValue("puts", new PutsFunction(writer));
+            context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
             ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
@@ -38,7 +38,7 @@
             Machine machine = new Machine();
             Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
-            context.SetLocalValue("puts", new PutsFunction(writer));
+            context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
             ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             cmd.Evaluate(context);

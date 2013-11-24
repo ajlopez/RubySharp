@@ -40,7 +40,7 @@
         public void ExecuteSimplePutsFile()
         {
             StringWriter writer = new StringWriter();
-            this.machine.RootContext.SetLocalValue("puts", new PutsFunction(writer));
+            this.machine.RootContext.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
             Assert.AreEqual(null, this.machine.ExecuteFile("MachineFiles\\SimplePuts.rb"));
             Assert.AreEqual("hello\r\n", writer.ToString());
         }
@@ -49,7 +49,7 @@
         public void ExecuteSimpleDefFile()
         {
             StringWriter writer = new StringWriter();
-            this.machine.RootContext.SetLocalValue("puts", new PutsFunction(writer));
+            this.machine.RootContext.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
             Assert.AreEqual(null, this.machine.ExecuteFile("MachineFiles\\SimpleDef.rb"));
             Assert.AreEqual("1\r\n", writer.ToString());
         }
@@ -58,7 +58,7 @@
         public void ExecuteSimpleClassFile()
         {
             StringWriter writer = new StringWriter();
-            this.machine.RootContext.SetLocalValue("puts", new PutsFunction(writer));
+            this.machine.RootContext.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
             Assert.AreEqual(null, this.machine.ExecuteFile("MachineFiles\\SimpleClass.rb"));
             Assert.AreEqual("Hello\r\n", writer.ToString());
 

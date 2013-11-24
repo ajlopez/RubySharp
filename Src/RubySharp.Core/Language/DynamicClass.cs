@@ -41,6 +41,9 @@
             if (this.methods.ContainsKey(name))
                 return this.methods[name];
 
+            if (this.superclass != null)
+                return this.superclass.GetInstanceMethod(name);
+
             return null;
         }
 

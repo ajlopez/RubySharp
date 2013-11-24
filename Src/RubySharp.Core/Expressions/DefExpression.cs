@@ -26,7 +26,7 @@
             if (context.Module != null)
                 context.Module.SetInstanceMethod(this.name, result);
             else
-                context.SetLocalValue(this.name, result);
+                context.Self.Class.SetInstanceMethod(this.name, result);
 
             return null;
         }

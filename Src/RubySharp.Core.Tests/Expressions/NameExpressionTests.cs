@@ -61,9 +61,10 @@
         [TestMethod]
         public void EvaluateDefinedFunction()
         {
+            Machine machine = new Machine();
             NameExpression expr = new NameExpression("foo");
-            Context context = new Context();
-            context.SetLocalValue("foo", new DefinedFunction(new ConstantExpression(1), new string[0], context));
+            Context context = machine.RootContext;
+            context.Self.Class.SetInstanceMethod("foo", new DefinedFunction(new ConstantExpression(1), new string[0], context));
 
             Assert.AreEqual(1, expr.Evaluate(context));
         }

@@ -29,22 +29,23 @@
             if (!isglobal)
             {
                 if (context.HasLocalValue(this.name))
-                    result = context.GetLocalValue(this.name);
-                else
-                    throw new NameError(string.Format("undefined local variable or method '{0}'", this.name));
+                    return context.GetLocalValue(this.name);
 
-                if (result != null && result is IFunction)
-                    return ((IFunction)result).Apply(null, emptyvalues);
-            }
-            else
-            {
-                if (context.HasValue(this.name))
-                    result = context.GetValue(this.name);
-                else
-                    throw new NameError(string.Format("unitialized constant {0}", this.name));
+                if (context.Self != null)
+                {
+                    var method = context.Self.GetMethod(this.name);
+
+                    if (method != null)
+                        return method.Apply(context.Self, emptyvalues);
+                }
+
+                throw new NameError(string.Format("undefined local variable or method '{0}'", this.name));
             }
 
-            return result;
+            if (context.HasValue(this.name))
+                return context.GetValue(this.name);
+            
+            throw new NameError(string.Format("unitialized constant {0}", this.name));
         }
 
         public override bool Equals(object obj)
