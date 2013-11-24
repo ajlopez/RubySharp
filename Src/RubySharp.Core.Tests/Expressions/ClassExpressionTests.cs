@@ -16,7 +16,8 @@
         [TestMethod]
         public void DefineSimpleClass()
         {
-            Context context = new Context();
+            Machine machine = new Machine();
+            Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
             context.SetLocalValue("puts", new PutsFunction(writer));
             ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
@@ -34,7 +35,8 @@
         [TestMethod]
         public void RedefineSimpleClass()
         {
-            Context context = new Context();
+            Machine machine = new Machine();
+            Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
             context.SetLocalValue("puts", new PutsFunction(writer));
             ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));

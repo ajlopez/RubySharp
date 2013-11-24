@@ -29,7 +29,9 @@
 
             if (value == null || !(value is DynamicClass))
             {
-                var newclass = new DynamicClass(this.name);
+                var classclass = (DynamicClass)context.RootContext.GetLocalValue("Class");
+                var newclass = (DynamicClass)classclass.CreateInstance();
+                newclass.Name = this.name;
                 context.SetLocalValue(this.name, newclass);
                 value = newclass;
 
