@@ -24,18 +24,25 @@
         {
             object result = null;
 
-            if (context.HasLocalValue(this.name))
-                result = context.GetLocalValue(this.name);
+            bool isglobal = char.IsUpper(this.name[0]);
+
+            if (!isglobal)
+            {
+                if (context.HasLocalValue(this.name))
+                    result = context.GetLocalValue(this.name);
+                else
+                    throw new NameError(string.Format("undefined local variable or method '{0}'", this.name));
+
+                if (result != null && result is IFunction)
+                    return ((IFunction)result).Apply(null, emptyvalues);
+            }
             else
             {
-                result = context.GetValue(this.name);
-
-                if (result == null || !(result is IFunction))
-                    throw new NameError(string.Format("undefined local variable or method '{0}'", this.name));
+                if (context.HasValue(this.name))
+                    result = context.GetValue(this.name);
+                else
+                    throw new NameError(string.Format("unitialized constant {0}", this.name));
             }
-
-            if (result is IFunction)
-                return ((IFunction)result).Apply(null, emptyvalues);
 
             return result;
         }

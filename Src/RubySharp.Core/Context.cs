@@ -60,6 +60,17 @@
             return this.values.ContainsKey(name);
         }
 
+        public bool HasValue(string name)
+        {
+            if (this.HasLocalValue(name))
+                return true;
+
+            if (this.parent != null)
+                return this.parent.HasValue(name);
+
+            return false;
+        }
+
         public object GetLocalValue(string name)
         {
             return this.values[name];

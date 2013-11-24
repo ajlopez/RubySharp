@@ -31,6 +31,24 @@
         }
 
         [TestMethod]
+        public void EvaluateUndefinedConstant()
+        {
+            NameExpression expr = new NameExpression("Foo");
+            Context context = new Context();
+
+            try
+            {
+                expr.Evaluate(context);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(NameError));
+                Assert.AreEqual("unitialized constant Foo", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void EvaluateDefinedName()
         {
             NameExpression expr = new NameExpression("one");
