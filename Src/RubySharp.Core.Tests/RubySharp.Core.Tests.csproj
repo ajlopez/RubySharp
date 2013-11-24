@@ -87,7 +87,7 @@
     <Compile Include="Expressions\NegativeExpressionTests.cs" />
     <Compile Include="Expressions\InstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\DotExpressionTests.cs" />
-    <Compile Include="Expressions\ListExpressionTests.cs" />
+    <Compile Include="Expressions\ArrayExpressionTests.cs" />
     <Compile Include="Functions\PrintFunctionTests.cs" />
     <Compile Include="Language\DynamicArrayTests.cs" />
     <Compile Include="Language\DynamicHashTests.cs" />

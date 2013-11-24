@@ -8,6 +8,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
+    using System.Collections;
 
     [TestClass]
     public class MachineTests
@@ -321,9 +322,9 @@
             var result = machine.ExecuteText("[1,2,3]");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IList<object>));
+            Assert.IsInstanceOfType(result, typeof(IList));
 
-            var list = (IList<object>)result;
+            var list = (IList)result;
 
             Assert.AreEqual(3, list.Count);
             Assert.AreEqual(1, list[0]);
@@ -339,9 +340,9 @@
             var result = machine.ExecuteText("[1,1+1,3]");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IList<object>));
+            Assert.IsInstanceOfType(result, typeof(IList));
 
-            var list = (IList<object>)result;
+            var list = (IList)result;
 
             Assert.AreEqual(3, list.Count);
             Assert.AreEqual(1, list[0]);

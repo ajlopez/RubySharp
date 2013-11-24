@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Language;
+    using System.Collections;
 
     public class IndexedExpression : IExpression
     {
@@ -22,7 +23,7 @@
 
         public object Evaluate(Context context)
         {
-            var list = (IList<object>)this.expression.Evaluate(context);
+            var list = (IList)this.expression.Evaluate(context);
             int index = (int)this.indexexpression.Evaluate(context);
 
             if (index >= list.Count)

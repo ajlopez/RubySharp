@@ -1,6 +1,7 @@
 ﻿namespace RubySharp.Core.Tests
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -50,9 +51,9 @@
             var result = this.EvaluateExpression("a");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IList<object>));
+            Assert.IsInstanceOfType(result, typeof(IList));
 
-            var list = (IList<object>)result;
+            var list = (IList)result;
 
             Assert.AreEqual(3, list.Count);
             Assert.AreEqual(1, list[0]);

@@ -1,24 +1,26 @@
 ﻿namespace RubySharp.Core.Expressions
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Language;
 
-    public class ListExpression : IExpression
+    public class ArrayExpression : IExpression
     {
         private static int hashcode = typeof(DotExpression).GetHashCode();
 
         private IList<IExpression> expressions;
 
-        public ListExpression(IList<IExpression> expressions)
+        public ArrayExpression(IList<IExpression> expressions)
         {
             this.expressions = expressions;
         }
 
         public object Evaluate(Context context)
         {
-            IList<object> result = new List<object>();
+            IList result = new DynamicArray();
 
             foreach (var expr in this.expressions)
                 result.Add(expr.Evaluate(context));
@@ -31,9 +33,9 @@
             if (obj == null)
                 return false;
 
-            if (obj is ListExpression)
+            if (obj is ArrayExpression)
             {
-                var expr = (ListExpression)obj;
+                var expr = (ArrayExpression)obj;
 
                 if (this.expressions.Count != expr.expressions.Count)
                     return false;

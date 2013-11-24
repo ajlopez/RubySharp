@@ -6,21 +6,22 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Expressions;
+    using System.Collections;
 
     [TestClass]
-    public class ListExpressionTests
+    public class ArrayExpressionTests
     {
         [TestMethod]
         public void EvaluateSimpleList()
         {
-            ListExpression expr = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            ArrayExpression expr = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
 
             var result = expr.Evaluate(null);
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IList<object>));
+            Assert.IsInstanceOfType(result, typeof(IList));
 
-            var list = (IList<object>)result;
+            var list = (IList)result;
 
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual(1, list[0]);
@@ -30,11 +31,11 @@
         [TestMethod]
         public void Equals()
         {
-            ListExpression expr1 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
-            ListExpression expr2 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) });
-            ListExpression expr3 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(3) });
-            ListExpression expr4 = new ListExpression(new IExpression[] { });
-            ListExpression expr5 = new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            ArrayExpression expr1 = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            ArrayExpression expr2 = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) });
+            ArrayExpression expr3 = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(3) });
+            ArrayExpression expr4 = new ArrayExpression(new IExpression[] { });
+            ArrayExpression expr5 = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
 
             Assert.IsTrue(expr1.Equals(expr5));
             Assert.IsTrue(expr5.Equals(expr1));

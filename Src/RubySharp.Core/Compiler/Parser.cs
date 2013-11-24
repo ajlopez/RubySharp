@@ -531,7 +531,7 @@
             if (token.Type == TokenType.Separator && token.Value == "[")
             {
                 IList<IExpression> expressions = this.ParseExpressionList("]");
-                return new ListExpression(expressions);
+                return new ArrayExpression(expressions);
             }
 
             throw new SyntaxError(string.Format("unexpected '{0}'", token.Value));

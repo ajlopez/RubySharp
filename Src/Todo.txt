@@ -5,12 +5,14 @@
 + instance variable
 + class variable
 singleton class
+x= method
 = instance method
 = module method
 = self in module/class
 = Name of module/class
 = dynamic hash
 - dynamic array
+x[1] = v
 
 = initialize
 inheritance
