@@ -21,7 +21,7 @@
 
         public object Evaluate(Context context)
         {
-            ModuleClass modclass = (ModuleClass)context.GetValue("Module");
+            ModuleClass modclass = (ModuleClass)context.RootContext.GetLocalValue("Module");
             ModuleObject module = (ModuleObject)modclass.CreateInstance();
             module.Name = this.name;
             context.SetLocalValue(this.name, module);
