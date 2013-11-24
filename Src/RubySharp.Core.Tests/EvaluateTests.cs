@@ -242,6 +242,15 @@
             Assert.AreEqual(6, result);
         }
 
+        [TestMethod]
+        public void EvaluateForInRange()
+        {
+            var result = this.Execute("total = 0\nfor k in 1..3\ntotal = total + k\nend\ntotal");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(6, result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);
