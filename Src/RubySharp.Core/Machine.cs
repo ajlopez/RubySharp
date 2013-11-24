@@ -38,6 +38,7 @@
             this.rootcontext.SetLocalValue("TrueClass", new TrueClass(this));
             this.rootcontext.SetLocalValue("Array", new ArrayClass(this));
             this.rootcontext.SetLocalValue("Hash", new HashClass(this));
+            this.rootcontext.SetLocalValue("Range", new RangeClass(this));
 
             this.rootcontext.Self = objectclass.CreateInstance();
 

@@ -206,6 +206,19 @@
         }
 
         [TestMethod]
+        public void RangeClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Range");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RangeClass));
+
+            var @class = (RangeClass)result;
+            Assert.AreEqual("Range", @class.Name);
+        }
+
+        [TestMethod]
         public void GetClassessClass()
         {
             Machine machine = new Machine();

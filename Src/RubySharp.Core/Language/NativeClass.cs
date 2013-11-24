@@ -21,6 +21,7 @@
         private NativeClass trueclass;
         private NativeClass arrayclass;
         private NativeClass hashclass;
+        private NativeClass rangeclass;
 
         public NativeClass(string name, Machine machine)
             : base(null)
@@ -109,6 +110,14 @@
                     this.arrayclass = (NativeClass)this.machine.RootContext.GetLocalValue("Array");
 
                 return this.arrayclass;
+            }
+
+            if (self is IEnumerable)
+            {
+                if (this.rangeclass == null)
+                    this.rangeclass = (NativeClass)this.machine.RootContext.GetLocalValue("Range");
+
+                return this.rangeclass;
             }
 
             throw new NotImplementedException();

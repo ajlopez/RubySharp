@@ -234,6 +234,21 @@
         }
 
         [TestMethod]
+        public void EvaluateRangeClass()
+        {
+            var rangeclass = this.EvaluateExpression("Range");
+
+            Assert.IsNotNull(rangeclass);
+
+            var result = this.Execute("(1..10).class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(RangeClass));
+
+            Assert.AreSame(rangeclass, result);
+        }
+
+        [TestMethod]
         public void EvaluateEachOnArray()
         {
             var result = this.Execute("total = 0\n[1,2,3].each do |x| total = total + x end\ntotal");
@@ -246,6 +261,15 @@
         public void EvaluateForInRange()
         {
             var result = this.Execute("total = 0\nfor k in 1..3\ntotal = total + k\nend\ntotal");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void EvaluateRangeEach()
+        {
+            var result = this.Execute("total = 0\n(1..3).each do |x| total = total + x end\ntotal");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(6, result);
