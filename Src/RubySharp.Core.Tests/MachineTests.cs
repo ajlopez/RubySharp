@@ -220,6 +220,15 @@
         }
 
         [TestMethod]
+        public void ExecuteReader()
+        {
+            Machine machine = new Machine();
+            Assert.AreEqual(2, machine.ExecuteReader(new StringReader("a=1\nb=2")));
+            Assert.AreEqual(1, machine.RootContext.GetValue("a"));
+            Assert.AreEqual(2, machine.RootContext.GetValue("b"));
+        }
+
+        [TestMethod]
         public void DefineClassWithMethod()
         {
             Machine machine = new Machine();

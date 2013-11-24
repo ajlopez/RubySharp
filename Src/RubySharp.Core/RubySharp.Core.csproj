@@ -117,6 +117,7 @@
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Language\ClassClass.cs" />
+    <Compile Include="Language\DynamicArray.cs" />
     <Compile Include="Language\DynamicHash.cs" />
     <Compile Include="Language\ModuleClass.cs" />
     <Compile Include="Language\DynamicObject.cs" />

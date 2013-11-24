@@ -4,10 +4,13 @@
 - def o.foo()
 + instance variable
 + class variable
+singleton class
 = instance method
 = module method
-- self in module/class
-- Name of module/class
+= self in module/class
+= Name of module/class
+= dynamic hash
+- dynamic array
 
 = initialize
 inheritance
