@@ -41,7 +41,7 @@
 
             var dclass = (DynamicClass)value;
 
-            Context classcontext = new Context(dclass, null, context);
+            Context classcontext = new Context((ModuleObject)dclass, context);
 
             this.expression.Evaluate(classcontext);
 

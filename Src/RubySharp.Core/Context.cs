@@ -10,7 +10,6 @@
     {
         private Context parent;
         private IDictionary<string, object> values = new Dictionary<string, object>();
-        private DynamicClass @class;
         private DynamicObject self;
         private ModuleObject module;
 
@@ -24,20 +23,17 @@
             this.parent = parent;
         }
 
-        public Context(DynamicClass @class, DynamicObject self, Context parent)
-        {
-            this.@class = @class;
-            this.parent = parent;
-            this.self = self;
-        }
-
         public Context(ModuleObject module, Context parent)
         {
             this.module = module;
             this.parent = parent;
         }
 
-        public DynamicClass Class { get { return this.@class; } }
+        public Context(DynamicObject self, Context parent)
+        {
+            this.self = self;
+            this.parent = parent;
+        }
 
         public DynamicObject Self { get { return this.self; } }
 

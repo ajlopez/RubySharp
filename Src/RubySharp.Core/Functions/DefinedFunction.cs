@@ -22,7 +22,7 @@
 
         public object Apply(DynamicObject self, IList<object> values)
         {
-            Context newcontext = new Context(null, self, this.context);
+            Context newcontext = new Context(self, this.context);
 
             int k = 0;
             int cv = values.Count;

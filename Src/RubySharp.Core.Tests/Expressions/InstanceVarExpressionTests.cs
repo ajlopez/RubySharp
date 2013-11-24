@@ -17,7 +17,7 @@
         {
             InstanceVarExpression expr = new InstanceVarExpression("foo");
             DynamicObject obj = new DynamicObject(null);
-            Context context = new Context(null, obj, null);
+            Context context = new Context(obj, null);
 
             Assert.IsNull(expr.Evaluate(context));
         }
@@ -28,7 +28,7 @@
             InstanceVarExpression expr = new InstanceVarExpression("one");
             DynamicObject obj = new DynamicObject(null);
             obj.SetValue("one", 1);
-            Context context = new Context(null, obj, null);
+            Context context = new Context(obj, null);
 
             Assert.AreEqual(1, expr.Evaluate(context));
         }

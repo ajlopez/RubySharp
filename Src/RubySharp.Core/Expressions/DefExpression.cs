@@ -23,8 +23,8 @@
         {
             var result = new DefinedFunction(this.command, this.parameters, context);
 
-            if (context.Class != null)
-                context.Class.SetInstanceMethod(this.name, result);
+            if (context.Module != null)
+                context.Module.SetInstanceMethod(this.name, result);
             else
                 context.SetLocalValue(this.name, result);
 
