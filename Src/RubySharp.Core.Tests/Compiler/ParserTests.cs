@@ -937,6 +937,32 @@
         }
 
         [TestMethod]
+        public void ParseCallWithBlock()
+        {
+            Parser parser = new Parser("k.times { print 'foo' }");
+            var expected = new DotExpression(new NameExpression("k"), "times", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseCallWithBlockWithArguments()
+        {
+            Parser parser = new Parser("1.upto(9) { |x| print x }");
+            var expected = new DotExpression(new ConstantExpression(1), "upto", new IExpression[] { new ConstantExpression(9), new BlockExpression(new Block(new string[] { "x" }, new CallExpression("print", new IExpression[] { new NameExpression("x") }))) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseEmptyModule()
         {
             Parser parser = new Parser("module Module1; a=1; end");
