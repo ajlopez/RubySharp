@@ -96,6 +96,7 @@
     <Compile Include="Language\DynamicObjectTests.cs" />
     <Compile Include="Language\BlockTests.cs" />
     <Compile Include="Language\FalseClassTests.cs" />
+    <Compile Include="Language\RangeTests.cs" />
     <Compile Include="Language\TrueClassTests.cs" />
     <Compile Include="Language\FloatClassTests.cs" />
     <Compile Include="Language\NilClassTests.cs" />
