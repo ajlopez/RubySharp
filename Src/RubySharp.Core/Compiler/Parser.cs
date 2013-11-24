@@ -26,23 +26,39 @@
 
         public IExpression ParseExpression()
         {
-            var result = this.ParseBinaryExpression(0);
+            IExpression expr = this.ParseNoAssignExpression();
 
-            if (!(result is NameExpression))
-                return result;
+            if (expr == null)
+                return null;
 
-            var nexpr = (NameExpression)result;
+            if (!(expr is NameExpression) && !(expr is ClassVarExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression) && !(expr is IndexedExpression))
+                return expr;
 
-            if (this.TryParseToken(TokenType.Separator, "{"))
-                return new CallExpression(nexpr.Name, new IExpression[] { this.ParseBlockExpression(true) });
+            var token = this.lexer.NextToken();
 
-            if (this.TryParseName("do"))
-                return new CallExpression(nexpr.Name, new IExpression[] { this.ParseBlockExpression() });
+            if (token == null)
+                return expr;
 
-            if (!this.NextTokenStartsExpressionList())
-                return result;
+            if (token.Type != TokenType.Operator || token.Value != "=")
+            {
+                this.lexer.PushToken(token);
+                return expr;
+            }
 
-            return new CallExpression(((NameExpression)result).Name, this.ParseExpressionList());
+            IExpression assignexpr = null;
+
+            if (expr is NameExpression)
+                assignexpr = new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
+            else if (expr is DotExpression)
+                assignexpr = new AssignDotExpressions((DotExpression)expr, this.ParseExpression());
+            else if (expr is InstanceVarExpression)
+                assignexpr = new AssignInstanceVarExpression(((InstanceVarExpression)expr).Name, this.ParseExpression());
+            else if (expr is ClassVarExpression)
+                assignexpr = new AssignClassVarExpression(((ClassVarExpression)expr).Name, this.ParseExpression());
+            else if (expr is IndexedExpression)
+                assignexpr = new AssignIndexedExpression(((IndexedExpression)expr).Expression, ((IndexedExpression)expr).IndexExpression, this.ParseExpression());
+
+            return assignexpr;
         }
 
         public IExpression ParseCommand()
@@ -96,6 +112,27 @@
             this.ParseEndOfCommand();
 
             return cmd;
+        }
+
+        private IExpression ParseNoAssignExpression()
+        {
+            var result = this.ParseBinaryExpression(0);
+
+            if (!(result is NameExpression))
+                return result;
+
+            var nexpr = (NameExpression)result;
+
+            if (this.TryParseToken(TokenType.Separator, "{"))
+                return new CallExpression(nexpr.Name, new IExpression[] { this.ParseBlockExpression(true) });
+
+            if (this.TryParseName("do"))
+                return new CallExpression(nexpr.Name, new IExpression[] { this.ParseBlockExpression() });
+
+            if (!this.NextTokenStartsExpressionList())
+                return result;
+
+            return new CallExpression(((NameExpression)result).Name, this.ParseExpressionList());
         }
 
         private IfExpression ParseIfExpression()
