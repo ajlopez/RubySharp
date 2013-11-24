@@ -914,7 +914,7 @@
         public void ParseCallWithDo()
         {
             Parser parser = new Parser("k.times do print 'foo' end");
-            var expected = new DotExpression(new NameExpression("k"), "times", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var expected = new DotExpression(new NameExpression("k"), "times", new IExpression[] { new BlockExpression(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") })) });
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
@@ -927,7 +927,7 @@
         public void ParseCallWithDoWithArguments()
         {
             Parser parser = new Parser("1.upto(9) do |x| print x end");
-            var expected = new DotExpression(new ConstantExpression(1), "upto", new IExpression[] { new ConstantExpression(9), new BlockExpression(new Block(new string[] { "x" }, new CallExpression("print", new IExpression[] { new NameExpression("x") }))) });
+            var expected = new DotExpression(new ConstantExpression(1), "upto", new IExpression[] { new ConstantExpression(9), new BlockExpression(new string[] { "x" }, new CallExpression("print", new IExpression[] { new NameExpression("x") })) });
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
@@ -940,7 +940,7 @@
         public void ParseCallWithBlock()
         {
             Parser parser = new Parser("k.times { print 'foo' }");
-            var expected = new DotExpression(new NameExpression("k"), "times", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var expected = new DotExpression(new NameExpression("k"), "times", new IExpression[] { new BlockExpression(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") })) });
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
@@ -953,7 +953,7 @@
         public void ParseNameCallWithDo()
         {
             Parser parser = new Parser("map do print 'foo' end");
-            var expected = new CallExpression("map", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var expected = new CallExpression("map", new IExpression[] { new BlockExpression(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") })) });
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
@@ -966,7 +966,7 @@
         public void ParseNameCallWithBlock()
         {
             Parser parser = new Parser("map { print 'foo' }");
-            var expected = new CallExpression("map", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var expected = new CallExpression("map", new IExpression[] { new BlockExpression(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") })) });
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
@@ -979,7 +979,7 @@
         public void ParseCallWithBlockWithArguments()
         {
             Parser parser = new Parser("1.upto(9) { |x| print x }");
-            var expected = new DotExpression(new ConstantExpression(1), "upto", new IExpression[] { new ConstantExpression(9), new BlockExpression(new Block(new string[] { "x" }, new CallExpression("print", new IExpression[] { new NameExpression("x") }))) });
+            var expected = new DotExpression(new ConstantExpression(1), "upto", new IExpression[] { new ConstantExpression(9), new BlockExpression(new string[] { "x" }, new CallExpression("print", new IExpression[] { new NameExpression("x") })) });
             var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);

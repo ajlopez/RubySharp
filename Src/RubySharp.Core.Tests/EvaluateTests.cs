@@ -233,6 +233,15 @@
             Assert.AreSame(moduleclass, result);
         }
 
+        [TestMethod]
+        public void EvaluateEachOnArray()
+        {
+            var result = this.Execute("total = 0\n[1,2,3].each do |x| total = total + x end\ntotal");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(6, result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

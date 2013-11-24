@@ -34,10 +34,10 @@
             var nexpr = (NameExpression)result;
 
             if (this.TryParseToken(TokenType.Separator, "{"))
-                return new CallExpression(nexpr.Name, new IExpression[] { new BlockExpression(this.ParseBlock(true)) });
+                return new CallExpression(nexpr.Name, new IExpression[] { this.ParseBlockExpression(true) });
 
             if (this.TryParseName("do"))
-                return new CallExpression(nexpr.Name, new IExpression[] { new BlockExpression(this.ParseBlock()) });
+                return new CallExpression(nexpr.Name, new IExpression[] { this.ParseBlockExpression() });
 
             if (!this.NextTokenStartsExpressionList())
                 return result;
@@ -214,9 +214,9 @@
             {
                 this.ParseToken(TokenType.Separator, ")");
                 if (this.TryParseName("do"))
-                    expressions.Add(new BlockExpression(this.ParseBlock()));
+                    expressions.Add(this.ParseBlockExpression());
                 else if (this.TryParseToken(TokenType.Separator, "{"))
-                    expressions.Add(new BlockExpression(this.ParseBlock(true)));
+                    expressions.Add(this.ParseBlockExpression(true));
             }
 
             return expressions;
@@ -238,16 +238,16 @@
             return expressions;
         }
 
-        private Block ParseBlock(bool usebraces = false)
+        private BlockExpression ParseBlockExpression(bool usebraces = false)
         {
             if (this.TryParseToken(TokenType.Separator, "|"))
             {
                 IList<string> paramnames = this.ParseParameterList(false);
                 this.ParseToken(TokenType.Separator, "|");
-                return new Block(paramnames, this.ParseCommandList(usebraces));
+                return new BlockExpression(paramnames, this.ParseCommandList(usebraces));
             }
 
-            return new Block(null, this.ParseCommandList(usebraces));
+            return new BlockExpression(null, this.ParseCommandList(usebraces));
         }
 
         private IExpression ParseCommandList(bool usebraces = false)
@@ -422,7 +422,7 @@
                     string name = this.ParseName();
 
                     if (this.TryParseToken(TokenType.Separator, "{"))
-                        expression = new DotExpression(expression, name, new IExpression[] { new BlockExpression(this.ParseBlock(true)) });
+                        expression = new DotExpression(expression, name, new IExpression[] { this.ParseBlockExpression(true) });
                     else if (this.NextTokenStartsExpressionList())
                         expression = new DotExpression(expression, name, this.ParseExpressionList());
                     else
@@ -483,7 +483,7 @@
                     return new ConstantExpression(null);
 
                 if (token.Value == "do")
-                    return new BlockExpression(this.ParseBlock());
+                    return this.ParseBlockExpression();
 
                 if (token.Value == "if")
                     return this.ParseIfExpression();

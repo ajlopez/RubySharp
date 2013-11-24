@@ -14,21 +14,23 @@
         [TestMethod]
         public void EvaluateBlockExpression()
         {
-            Block block = new Block(null, new ConstantExpression(1));
-            BlockExpression expr = new BlockExpression(block);
+            BlockExpression expr = new BlockExpression(null, new ConstantExpression(1));
 
-            Assert.AreSame(block, expr.Evaluate(null));
+            var result = expr.Evaluate(null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Block));
         }
 
         [TestMethod]
         public void Equals()
         {
-            BlockExpression expr1 = new BlockExpression(new Block(new string[] { "a" }, new NameExpression("a")));
-            BlockExpression expr2 = new BlockExpression(new Block(new string[] { "a" }, new NameExpression("b")));
-            BlockExpression expr3 = new BlockExpression(new Block(new string[] { "b" }, new NameExpression("a")));
-            BlockExpression expr4 = new BlockExpression(new Block(new string[] { "a", "b" }, new NameExpression("a")));
-            BlockExpression expr5 = new BlockExpression(new Block(null, new NameExpression("a")));
-            BlockExpression expr6 = new BlockExpression(new Block(new string[] { "a" }, new NameExpression("a")));
+            BlockExpression expr1 = new BlockExpression(new string[] { "a" }, new NameExpression("a"));
+            BlockExpression expr2 = new BlockExpression(new string[] { "a" }, new NameExpression("b"));
+            BlockExpression expr3 = new BlockExpression(new string[] { "b" }, new NameExpression("a"));
+            BlockExpression expr4 = new BlockExpression(new string[] { "a", "b" }, new NameExpression("a"));
+            BlockExpression expr5 = new BlockExpression(null, new NameExpression("a"));
+            BlockExpression expr6 = new BlockExpression(new string[] { "a" }, new NameExpression("a"));
 
             Assert.IsFalse(expr1.Equals(123));
             Assert.IsFalse(expr1.Equals(null));
