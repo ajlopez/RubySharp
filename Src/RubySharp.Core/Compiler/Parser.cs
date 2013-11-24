@@ -59,7 +59,7 @@
 
             IExpression expr = this.ParseExpression();
 
-            if (!(expr is NameExpression) && !(expr is ClassVarExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression))
+            if (!(expr is NameExpression) && !(expr is ClassVarExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression) && !(expr is IndexedExpression))
             {
                 this.ParseEndOfCommand();
                 return expr;
@@ -88,8 +88,10 @@
                 cmd = new AssignDotExpressions((DotExpression)expr, this.ParseExpression());
             else if (expr is InstanceVarExpression)
                 cmd = new AssignInstanceVarExpression(((InstanceVarExpression)expr).Name, this.ParseExpression());
-            else
+            else if (expr is ClassVarExpression)
                 cmd = new AssignClassVarExpression(((ClassVarExpression)expr).Name, this.ParseExpression());
+            else if (expr is IndexedExpression)
+                cmd = new AssignIndexedExpression(((IndexedExpression)expr).Expression, ((IndexedExpression)expr).IndexExpression, this.ParseExpression());
 
             this.ParseEndOfCommand();
 
