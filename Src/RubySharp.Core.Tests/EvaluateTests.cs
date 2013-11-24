@@ -146,6 +146,36 @@
             Assert.AreSame(objectclass, result);
         }
 
+        [TestMethod]
+        public void EvaluateModuleNewClass()
+        {
+            var moduleclass = this.EvaluateExpression("Module");
+
+            Assert.IsNotNull(moduleclass);
+
+            var result = this.EvaluateExpression("Module.new.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            Assert.AreSame(moduleclass, result);
+        }
+
+        [TestMethod]
+        public void EvaluateClassNewClass()
+        {
+            var classclass = this.EvaluateExpression("Class");
+
+            Assert.IsNotNull(classclass);
+
+            var result = this.EvaluateExpression("Class.new.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            Assert.AreSame(classclass, result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);
