@@ -1,10 +1,13 @@
 
-- module
+= module
 - class << self
 - def o.foo()
 
+initialize
+inheritance
+native object and type access
 
-- Implements:
+= Implements:
 
 a = 1
 
