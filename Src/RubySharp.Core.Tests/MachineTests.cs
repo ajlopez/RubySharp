@@ -168,6 +168,38 @@
         }
 
         [TestMethod]
+        public void GetClassessClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            var @class = (DynamicClass)result;
+
+            Assert.AreSame(@class, machine.ExecuteText("BasicObject.class"));
+            Assert.AreSame(@class, machine.ExecuteText("Object.class"));
+            Assert.AreSame(@class, machine.ExecuteText("Module.class"));
+            Assert.AreSame(@class, machine.ExecuteText("Class.class"));
+        }
+
+        [TestMethod]
+        public void GetClassessSuperClass()
+        {
+            Machine machine = new Machine();
+
+            Assert.IsNull(machine.ExecuteText("BasicObject.superclass"));
+            Assert.IsNotNull(machine.ExecuteText("Object.superclass"));
+            Assert.AreSame(machine.ExecuteText("BasicObject"), machine.ExecuteText("Object.superclass"));
+            Assert.IsNotNull(machine.ExecuteText("Module.superclass"));
+            Assert.AreSame(machine.ExecuteText("Object"), machine.ExecuteText("Module.superclass"));
+            Assert.IsNotNull(machine.ExecuteText("Class.superclass"));
+            Assert.AreSame(machine.ExecuteText("Module"), machine.ExecuteText("Class.superclass"));
+        }
+
+        [TestMethod]
         public void ExecuteText()
         {
             Machine machine = new Machine();

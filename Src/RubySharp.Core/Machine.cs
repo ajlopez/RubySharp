@@ -24,6 +24,11 @@
             this.rootcontext.SetLocalValue("Module", moduleclass);
             this.rootcontext.SetLocalValue("Class", classclass);
 
+            basicobjectclass.SetClass(classclass);
+            objectclass.SetClass(classclass);
+            moduleclass.SetClass(classclass);
+            classclass.SetClass(classclass);
+
             this.rootcontext.SetLocalValue("Fixnum", new FixnumClass(this));
             this.rootcontext.SetLocalValue("Float", new FloatClass(this));
             this.rootcontext.SetLocalValue("String", new StringClass(this));

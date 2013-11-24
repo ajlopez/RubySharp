@@ -38,5 +38,10 @@
 
             return this.@class.GetInstanceMethod(name);
         }
+
+        internal void SetClass(DynamicClass @class)
+        {
+            this.@class = @class;
+        }
     }
 }

@@ -19,6 +19,7 @@
         {
             this.name = name;
             this.superclass = superclass;
+            this.SetInstanceMethod("class", new LambdaFunction(GetClass));
         }
 
         public string Name { get { return this.name; } }
@@ -49,6 +50,11 @@
                 return newfunction;
 
             return base.GetMethod(name);
+        }
+
+        private static object GetClass(DynamicObject obj, IList<object> values)
+        {
+            return obj.Class;
         }
     }
 }

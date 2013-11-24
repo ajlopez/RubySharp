@@ -11,6 +11,12 @@
         public ClassClass(DynamicClass superclass)
             : base("Class", superclass)
         {
+            this.SetInstanceMethod("superclass", new LambdaFunction(GetSuperClass));
+        }
+
+        private static object GetSuperClass(DynamicObject obj, IList<object> values)
+        {
+            return ((DynamicClass)obj).SuperClass;
         }
     }
 }
