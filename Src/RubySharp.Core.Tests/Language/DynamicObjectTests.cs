@@ -31,6 +31,16 @@
         }
 
         [TestMethod]
+        public void ObjectToString()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+            var result = obj.ToString();
+
+            Assert.IsTrue(result.StartsWith("#<Dog:0x"));
+            Assert.IsTrue(result.EndsWith(">"));
+        }
+
+        [TestMethod]
         public void GetUndefinedValue()
         {
             DynamicObject obj = new DynamicObject(this.@class);

@@ -60,6 +60,11 @@
             return base.GetMethod(name);
         }
 
+        public override string ToString()
+        {
+            return this.Name;
+        }
+
         private static object GetClass(DynamicObject obj, IList<object> values)
         {
             return obj.Class;

@@ -21,6 +21,14 @@
         }
 
         [TestMethod]
+        public void ToString()
+        {
+            DynamicClass dclass = new DynamicClass("Dog");
+
+            Assert.AreEqual("Dog", dclass.ToString());
+        }
+
+        [TestMethod]
         public void UndefinedInstanceMethodIsNull()
         {
             DynamicClass dclass = new DynamicClass("Dog");

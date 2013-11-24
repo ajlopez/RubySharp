@@ -39,6 +39,11 @@
             return this.@class.GetInstanceMethod(name);
         }
 
+        public override string ToString()
+        {
+            return string.Format("#<{0}:0x{1}>", this.Class.Name, this.GetHashCode().ToString("x"));
+        }
+
         internal void SetClass(DynamicClass @class)
         {
             this.@class = @class;
