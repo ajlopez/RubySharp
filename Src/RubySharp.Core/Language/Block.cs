@@ -24,7 +24,7 @@
             if (this.argumentnames == null || this.argumentnames.Count == 0)
                 return this.expression.Evaluate(this.context);
 
-            Context newcontext = new Context(this.context);
+            BlockContext newcontext = new BlockContext(this.context);
 
             for (int k = 0; k < this.argumentnames.Count; k++)
                 if (arguments != null && k < arguments.Count)

@@ -32,7 +32,7 @@
         [TestMethod]
         public void CreateAndEvaluateBlockWithArguments()
         {
-            Block block = new Block(new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")), null);
+            Block block = new Block(new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")), new Context());
 
             Assert.AreEqual(3, block.Apply(new object[] { 1, 2 }));
         }

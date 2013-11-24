@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlockContextTests.cs" />
     <Compile Include="Expressions\AssignExpressionTests.cs" />
     <Compile Include="Expressions\AssignDotExpressionTests.cs" />
     <Compile Include="Expressions\CompositeExpressionTests.cs" />

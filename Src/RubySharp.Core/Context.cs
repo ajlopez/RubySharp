@@ -39,6 +39,8 @@
 
         public ModuleObject Module { get { return this.module; } }
 
+        public Context Parent { get { return this.parent; } }
+
         public Context RootContext
         {
             get
@@ -50,12 +52,12 @@
             }
         }
 
-        public void SetLocalValue(string name, object value)
+        public virtual void SetLocalValue(string name, object value)
         {
             this.values[name] = value;
         }
 
-        public bool HasLocalValue(string name)
+        public virtual bool HasLocalValue(string name)
         {
             return this.values.ContainsKey(name);
         }
@@ -71,7 +73,7 @@
             return false;
         }
 
-        public object GetLocalValue(string name)
+        public virtual object GetLocalValue(string name)
         {
             return this.values[name];
         }

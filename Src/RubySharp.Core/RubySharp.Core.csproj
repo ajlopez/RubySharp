@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlockContext.cs" />
     <Compile Include="Compiler\TextReaderCharStream.cs" />
     <Compile Include="Compiler\ICharStream.cs" />
     <Compile Include="Compiler\TextCharStream.cs" />
