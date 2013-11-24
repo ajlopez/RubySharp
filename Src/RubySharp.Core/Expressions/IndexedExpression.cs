@@ -17,10 +17,6 @@
             this.indexexpression = indexexpression;
         }
 
-        public IExpression Expression { get { return this.expression; } }
-
-        public IExpression IndexExpression { get { return this.indexexpression; } }
-
         public object Evaluate(Context context)
         {
             var list = (IList)this.expression.Evaluate(context);

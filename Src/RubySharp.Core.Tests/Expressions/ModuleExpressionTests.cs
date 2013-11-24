@@ -105,5 +105,27 @@
 
             Assert.IsFalse(module.Constants.HasLocalValue("foo"));
         }
+
+        [TestMethod]
+        public void Equals()
+        {
+            ModuleExpression mexpr1 = new ModuleExpression("Module1", new ConstantExpression(1));
+            ModuleExpression mexpr2 = new ModuleExpression("Module1", new ConstantExpression(2));
+            ModuleExpression mexpr3 = new ModuleExpression("Module2", new ConstantExpression(1));
+            ModuleExpression mexpr4 = new ModuleExpression("Module1", new ConstantExpression(1));
+
+            Assert.IsFalse(mexpr1.Equals(null));
+            Assert.IsFalse(mexpr1.Equals(123));
+            Assert.IsFalse(mexpr1.Equals("foo"));
+
+            Assert.IsTrue(mexpr1.Equals(mexpr4));
+            Assert.IsTrue(mexpr4.Equals(mexpr1));
+            Assert.AreEqual(mexpr1.GetHashCode(), mexpr4.GetHashCode());
+
+            Assert.IsFalse(mexpr1.Equals(mexpr2));
+            Assert.IsFalse(mexpr2.Equals(mexpr1));
+            Assert.IsFalse(mexpr1.Equals(mexpr3));
+            Assert.IsFalse(mexpr3.Equals(mexpr1));
+        }
     }
 }

@@ -19,10 +19,6 @@
             this.name = name;
         }
 
-        public IExpression Expression { get { return this.expression; } }
-
-        public string Name { get { return this.name; } }
-
         public object Evaluate(Context context)
         {
             IList<object> values = new List<object>();
