@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Exceptions;
@@ -19,12 +20,17 @@
 
         private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=" };
 
-        private TextStream stream;
+        private ICharStream stream;
         private Stack<Token> tokens = new Stack<Token>();
 
         public Lexer(string text)
         {
-            this.stream = new TextStream(text);
+            this.stream = new TextCharStream(text);
+        }
+
+        public Lexer(TextReader reader)
+        {
+            this.stream = new TextReaderCharStream(reader);
         }
 
         public Token NextToken()

@@ -14,6 +14,9 @@
 
             foreach (var arg in args)
                 machine.ExecuteFile(arg);
+
+            if (args.Length == 0)
+                machine.ExecuteReader(Console.In);
         }
     }
 }

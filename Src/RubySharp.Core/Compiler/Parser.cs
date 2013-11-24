@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Exceptions;
@@ -16,6 +17,11 @@
         public Parser(string text)
         {
             this.lexer = new Lexer(text);
+        }
+
+        public Parser(TextReader reader)
+        {
+            this.lexer = new Lexer(reader);
         }
 
         public IExpression ParseExpression()

@@ -9,6 +9,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
+    using System.IO;
 
     [TestClass]
     public class ParserTests
@@ -848,6 +849,19 @@
         public void ParseSimpleForInCommandWithDo()
         {
             Parser parser = new Parser("for k in [1,2,3] do\n puts k\nend");
+            var expected = new ForInExpression("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new CallExpression("puts", new IExpression[] { new NameExpression("k") }));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSimpleForInCommandWithDoUsingReader()
+        {
+            Parser parser = new Parser(new StringReader("for k in [1,2,3] do\n puts k\nend"));
             var expected = new ForInExpression("k", new ListExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2), new ConstantExpression(3) }), new CallExpression("puts", new IExpression[] { new NameExpression("k") }));
             var result = parser.ParseCommand();
 

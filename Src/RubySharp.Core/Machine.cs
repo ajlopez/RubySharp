@@ -7,6 +7,7 @@
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
+    using System.IO;
 
     public class Machine
     {
@@ -56,6 +57,17 @@
         public object ExecuteFile(string filename)
         {
             return this.ExecuteText(System.IO.File.ReadAllText(filename));
+        }
+
+        public object ExecuteReader(TextReader reader)
+        {
+            Parser parser = new Parser(reader);
+            object result = null;
+
+            for (var command = parser.ParseCommand(); command != null; command = parser.ParseCommand())
+                result = command.Evaluate(this.rootcontext);
+
+            return result;
         }
     }
 }

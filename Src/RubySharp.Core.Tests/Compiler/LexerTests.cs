@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -437,6 +438,19 @@
         public void GetRealNumberWithSpaces()
         {
             Lexer lexer = new Lexer("  123.45   ");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("123.45", result.Value);
+            Assert.AreEqual(TokenType.Real, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetRealNumberWithSpacesUsingReader()
+        {
+            Lexer lexer = new Lexer(new StringReader("  123.45   "));
             var result = lexer.NextToken();
 
             Assert.IsNotNull(result);
