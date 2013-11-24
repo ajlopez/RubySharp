@@ -25,6 +25,17 @@
             var list = (IList<object>)this.expression.Evaluate(context);
             int index = (int)this.indexexpression.Evaluate(context);
 
+            if (index >= list.Count)
+                return null;
+
+            if (index < 0)
+            {
+                index = list.Count + index;
+
+                if (index < 0)
+                    return null;
+            }
+
             return list[index];
         }
 

@@ -14,6 +14,9 @@
 
         public override object Apply(object leftvalue, object rightvalue)
         {
+            if (leftvalue is string || rightvalue is string)
+                return leftvalue.ToString() + rightvalue.ToString();
+
             if (leftvalue is int)
                 if (rightvalue is int)
                     return (int)leftvalue + (int)rightvalue;

@@ -27,6 +27,46 @@
         }
 
         [TestMethod]
+        public void GetIndexedNegativeValue()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("a = [1,2,3]");
+
+            IndexedExpression expression = new IndexedExpression(new NameExpression("a"), new ConstantExpression(-1));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void GetIndexedOutOfBandNegativeValue()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("a = [1,2,3]");
+
+            IndexedExpression expression = new IndexedExpression(new NameExpression("a"), new ConstantExpression(-10));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void GetIndexedOutOfBandValue()
+        {
+            Machine machine = new Machine();
+            machine.ExecuteText("a = [1,2,3]");
+
+            IndexedExpression expression = new IndexedExpression(new NameExpression("a"), new ConstantExpression(10));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             IndexedExpression expr1 = new IndexedExpression(new NameExpression("a"), new ConstantExpression(1));

@@ -29,6 +29,14 @@
         }
 
         [TestMethod]
+        public void EvaluateStringConcatenate()
+        {
+            Assert.AreEqual("foobar", this.EvaluateExpression("'foo' + 'bar'"));
+            Assert.AreEqual("foo1", this.EvaluateExpression("'foo' + 1"));
+            Assert.AreEqual("1foo", this.EvaluateExpression("1 + 'foo'"));
+        }
+
+        [TestMethod]
         public void EvaluateSimpleAssignment()
         {
             Assert.AreEqual(2, this.Execute("a = 2"));
