@@ -1058,7 +1058,7 @@
         {
             Parser parser = new Parser("a[1] = 2");
             var expected = new AssignIndexedExpression(new NameExpression("a"), new ConstantExpression(1), new ConstantExpression(2));
-            var result = parser.ParseCommand();
+            var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
             Assert.AreEqual(expected, result);
@@ -1071,7 +1071,7 @@
         {
             Parser parser = new Parser("a.b[1] = 2");
             var expected = new AssignIndexedExpression(new DotExpression(new NameExpression("a"), "b", new IExpression[] { }), new ConstantExpression(1), new ConstantExpression(2));
-            var result = parser.ParseCommand();
+            var result = parser.ParseExpression();
 
             Assert.IsNotNull(result);
             Assert.AreEqual(expected, result);

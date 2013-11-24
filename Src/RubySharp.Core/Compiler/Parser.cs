@@ -74,44 +74,8 @@
             this.lexer.PushToken(token);
 
             IExpression expr = this.ParseExpression();
-
-            if (!(expr is NameExpression) && !(expr is ClassVarExpression) && !(expr is InstanceVarExpression) && !(expr is DotExpression) && !(expr is IndexedExpression))
-            {
-                this.ParseEndOfCommand();
-                return expr;
-            }
-
-            token = this.lexer.NextToken();
-
-            if (token == null)
-            {
-                this.ParseEndOfCommand();
-                return expr;
-            }
-
-            if (token.Type != TokenType.Operator || token.Value != "=")
-            {
-                this.lexer.PushToken(token);
-                this.ParseEndOfCommand();
-                return expr;
-            }
-
-            IExpression cmd = null;
-
-            if (expr is NameExpression)
-                cmd = new AssignExpression(((NameExpression)expr).Name, this.ParseExpression());
-            else if (expr is DotExpression)
-                cmd = new AssignDotExpressions((DotExpression)expr, this.ParseExpression());
-            else if (expr is InstanceVarExpression)
-                cmd = new AssignInstanceVarExpression(((InstanceVarExpression)expr).Name, this.ParseExpression());
-            else if (expr is ClassVarExpression)
-                cmd = new AssignClassVarExpression(((ClassVarExpression)expr).Name, this.ParseExpression());
-            else if (expr is IndexedExpression)
-                cmd = new AssignIndexedExpression(((IndexedExpression)expr).Expression, ((IndexedExpression)expr).IndexExpression, this.ParseExpression());
-
             this.ParseEndOfCommand();
-
-            return cmd;
+            return expr;
         }
 
         private IExpression ParseNoAssignExpression()
