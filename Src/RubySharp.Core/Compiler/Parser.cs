@@ -31,6 +31,14 @@
             if (!(result is NameExpression))
                 return result;
 
+            var nexpr = (NameExpression)result;
+
+            if (this.TryParseToken(TokenType.Separator, "{"))
+                return new CallExpression(nexpr.Name, new IExpression[] { new BlockExpression(this.ParseBlock(true)) });
+
+            if (this.TryParseName("do"))
+                return new CallExpression(nexpr.Name, new IExpression[] { new BlockExpression(this.ParseBlock()) });
+
             if (!this.NextTokenStartsExpressionList())
                 return result;
 
@@ -207,6 +215,8 @@
                 this.ParseToken(TokenType.Separator, ")");
                 if (this.TryParseName("do"))
                     expressions.Add(new BlockExpression(this.ParseBlock()));
+                else if (this.TryParseToken(TokenType.Separator, "{"))
+                    expressions.Add(new BlockExpression(this.ParseBlock(true)));
             }
 
             return expressions;
@@ -228,25 +238,30 @@
             return expressions;
         }
 
-        private Block ParseBlock()
+        private Block ParseBlock(bool usebraces = false)
         {
             if (this.TryParseToken(TokenType.Separator, "|"))
             {
                 IList<string> paramnames = this.ParseParameterList(false);
                 this.ParseToken(TokenType.Separator, "|");
-                return new Block(paramnames, this.ParseCommandList());
+                return new Block(paramnames, this.ParseCommandList(usebraces));
             }
 
-            return new Block(null, this.ParseCommandList());
+            return new Block(null, this.ParseCommandList(usebraces));
         }
 
-        private IExpression ParseCommandList()
+        private IExpression ParseCommandList(bool usebraces = false)
         {
             Token token;
             IList<IExpression> commands = new List<IExpression>();
 
-            for (token = this.lexer.NextToken(); token != null && (token.Type != TokenType.Name || token.Value != "end"); token = this.lexer.NextToken())
+            for (token = this.lexer.NextToken(); token != null; token = this.lexer.NextToken())
             {
+                if (usebraces && token.Type == TokenType.Separator && token.Value == "}")
+                    break;
+                else if (!usebraces && token.Type == TokenType.Name && token.Value == "end")
+                    break;
+
                 if (this.IsEndOfCommand(token))
                     continue;
 
@@ -255,7 +270,11 @@
             }
 
             this.lexer.PushToken(token);
-            this.ParseName("end");
+
+            if (usebraces)
+                this.ParseToken(TokenType.Separator, "}");
+            else
+                this.ParseName("end");
 
             if (commands.Count == 1)
                 return commands[0];
@@ -290,6 +309,12 @@
             Token token = this.lexer.NextToken();
 
             if (token != null && token.Type == TokenType.Name && token.Value == "end")
+            {
+                this.lexer.PushToken(token);
+                return;
+            }
+
+            if (token != null && token.Type == TokenType.Separator && token.Value == "}")
             {
                 this.lexer.PushToken(token);
                 return;
@@ -396,7 +421,9 @@
                 {
                     string name = this.ParseName();
 
-                    if (this.NextTokenStartsExpressionList())
+                    if (this.TryParseToken(TokenType.Separator, "{"))
+                        expression = new DotExpression(expression, name, new IExpression[] { new BlockExpression(this.ParseBlock(true)) });
+                    else if (this.NextTokenStartsExpressionList())
                         expression = new DotExpression(expression, name, this.ParseExpressionList());
                     else
                         expression = new DotExpression(expression, name, new IExpression[0]);

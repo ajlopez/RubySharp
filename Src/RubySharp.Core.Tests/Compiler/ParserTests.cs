@@ -950,6 +950,32 @@
         }
 
         [TestMethod]
+        public void ParseNameCallWithDo()
+        {
+            Parser parser = new Parser("map do print 'foo' end");
+            var expected = new CallExpression("map", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseNameCallWithBlock()
+        {
+            Parser parser = new Parser("map { print 'foo' }");
+            var expected = new CallExpression("map", new IExpression[] { new BlockExpression(new Block(null, new CallExpression("print", new IExpression[] { new ConstantExpression("foo") }))) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseCallWithBlockWithArguments()
         {
             Parser parser = new Parser("1.upto(9) { |x| print x }");
