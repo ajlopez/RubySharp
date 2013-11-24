@@ -20,6 +20,19 @@
         }
 
         [TestMethod]
+        public void InitialObjectAndModule()
+        {
+            Machine machine = new Machine();
+            var context = machine.RootContext;
+
+            var objectclass = (DynamicClass)context.GetLocalValue("Object");
+
+            Assert.IsNotNull(context.Self);
+            Assert.IsNull(context.Module);
+            Assert.AreSame(objectclass, context.Self.Class);
+        }
+
+        [TestMethod]
         public void PredefinedFunctions()
         {
             Machine machine = new Machine();

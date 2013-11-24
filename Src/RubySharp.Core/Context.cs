@@ -35,7 +35,7 @@
             this.parent = parent;
         }
 
-        public DynamicObject Self { get { return this.self; } }
+        public DynamicObject Self { get { return this.self; } internal set { this.self = value; } }
 
         public ModuleObject Module { get { return this.module; } }
 

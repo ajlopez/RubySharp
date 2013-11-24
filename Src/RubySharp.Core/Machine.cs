@@ -39,6 +39,8 @@
 
             this.rootcontext.SetLocalValue("puts", new PutsFunction(System.Console.Out));
             this.rootcontext.SetLocalValue("print", new PrintFunction(System.Console.Out));
+
+            this.rootcontext.Self = objectclass.CreateInstance();
         }
 
         public Context RootContext { get { return this.rootcontext; } }
