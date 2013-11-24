@@ -65,6 +65,7 @@
     <Compile Include="BlockContextTests.cs" />
     <Compile Include="Expressions\AssignExpressionTests.cs" />
     <Compile Include="Expressions\AssignDotExpressionTests.cs" />
+    <Compile Include="Expressions\AssignIndexedExpressionTests.cs" />
     <Compile Include="Expressions\CompositeExpressionTests.cs" />
     <Compile Include="Expressions\ClassExpressionTests.cs" />
     <Compile Include="Expressions\AssignInstanceVarExpressionTests.cs" />
