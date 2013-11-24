@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Functions;
+    using System.Collections;
 
     public class NativeClass : DynamicObject
     {
@@ -18,6 +19,8 @@
         private NativeClass nilclass;
         private NativeClass falseclass;
         private NativeClass trueclass;
+        private NativeClass arrayclass;
+        private NativeClass hashclass;
 
         public NativeClass(string name, Machine machine)
             : base(null)
@@ -91,6 +94,22 @@
 
                     return this.falseclass;
                 }
+
+            if (self is IDictionary)
+            {
+                if (this.hashclass == null)
+                    this.hashclass = (NativeClass)this.machine.RootContext.GetLocalValue("Hash");
+
+                return this.hashclass;
+            }
+
+            if (self is IList)
+            {
+                if (this.arrayclass == null)
+                    this.arrayclass = (NativeClass)this.machine.RootContext.GetLocalValue("Array");
+
+                return this.arrayclass;
+            }
 
             throw new NotImplementedException();
         }

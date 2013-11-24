@@ -116,6 +116,24 @@
         }
 
         [TestMethod]
+        public void EvaluateArrayClassAsArrayClass()
+        {
+            var result = this.EvaluateExpression("[1,2].class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ArrayClass));
+        }
+
+        [TestMethod]
+        public void EvaluateHashClassAsHashClass()
+        {
+            var result = this.EvaluateExpression("{:one=>1, :two => 2}.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(HashClass));
+        }
+
+        [TestMethod]
         public void EvaluateModuleConstant()
         {
             this.Execute("module MyModule;ONE=1;end");
