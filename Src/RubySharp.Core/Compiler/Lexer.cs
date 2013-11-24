@@ -112,12 +112,34 @@
                 value += (char)ich;
 
             if (ich >= 0)
+            {
+                if (string.IsNullOrEmpty(value) && (char)ich == Variable)
+                    return NextClassVariableName();
+
                 this.BackChar();
+            }
 
             if (string.IsNullOrEmpty(value) || char.IsDigit(value[0]))
                 throw new SyntaxError("invalid instance variable name");
 
             return new Token(TokenType.InstanceVarName, value);
+        }
+
+        private Token NextClassVariableName()
+        {
+            string value = string.Empty;
+            int ich;
+
+            for (ich = this.NextChar(); ich >= 0 && ((char)ich == '_' || char.IsLetterOrDigit((char)ich)); ich = this.NextChar())
+                value += (char)ich;
+
+            if (ich >= 0)
+                this.BackChar();
+
+            if (string.IsNullOrEmpty(value) || char.IsDigit(value[0]))
+                throw new SyntaxError("invalid class variable name");
+
+            return new Token(TokenType.ClassVarName, value);
         }
 
         private Token NextSymbol()

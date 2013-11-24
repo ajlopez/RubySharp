@@ -250,6 +250,58 @@
         }
 
         [TestMethod]
+        public void GetClassVarName()
+        {
+            Lexer lexer = new Lexer("@@a");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("a", result.Value);
+            Assert.AreEqual(TokenType.ClassVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetClassVarNameWithDigits()
+        {
+            Lexer lexer = new Lexer("@@a123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("a123", result.Value);
+            Assert.AreEqual(TokenType.ClassVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetClassVarNameWithDigitsAndUnderscore()
+        {
+            Lexer lexer = new Lexer("@@a_123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("a_123", result.Value);
+            Assert.AreEqual(TokenType.ClassVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetClassVarNameWithInitialUnderscore()
+        {
+            Lexer lexer = new Lexer("@@_123");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("_123", result.Value);
+            Assert.AreEqual(TokenType.ClassVarName, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void RaiseWhenInvalidInstanceVarName()
         {
             Lexer lexer = new Lexer("@");
@@ -267,6 +319,23 @@
         }
 
         [TestMethod]
+        public void RaiseWhenInvalidClassVarName()
+        {
+            Lexer lexer = new Lexer("@@");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
+                Assert.AreEqual("invalid class variable name", ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void RaiseWhenInstanceVarNameStartsWithADigit()
         {
             Lexer lexer = new Lexer("@123");
@@ -280,6 +349,23 @@
             {
                 Assert.IsInstanceOfType(ex, typeof(SyntaxError));
                 Assert.AreEqual("invalid instance variable name", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void RaiseWhenClassVarNameStartsWithADigit()
+        {
+            Lexer lexer = new Lexer("@@123");
+
+            try
+            {
+                lexer.NextToken();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
+                Assert.AreEqual("invalid class variable name", ex.Message);
             }
         }
 

@@ -10,6 +10,7 @@
         Separator = 6,
         Symbol = 7,
         InstanceVarName = 8,
-        EndOfLine = 9
+        ClassVarName = 9,
+        EndOfLine = 10
     }
 }
