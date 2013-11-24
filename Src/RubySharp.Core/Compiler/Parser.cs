@@ -388,10 +388,9 @@
                 {
                     string name = this.ParseName();
 
-                    while (this.NextTokenStartsExpressionList())
+                    if (this.NextTokenStartsExpressionList())
                         expression = new DotExpression(expression, name, this.ParseExpressionList());
-
-                    if (!(expression is DotExpression))
+                    else
                         expression = new DotExpression(expression, name, new IExpression[0]);
 
                     continue;

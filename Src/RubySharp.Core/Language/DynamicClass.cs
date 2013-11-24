@@ -15,14 +15,19 @@
         private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
 
         public DynamicClass(string name, DynamicClass superclass = null)
-            : base(null)
+            : this(null, name, superclass)
+        {
+        }
+
+        public DynamicClass(DynamicClass @class, string name, DynamicClass superclass = null)
+            : base(@class)
         {
             this.name = name;
             this.superclass = superclass;
             this.SetInstanceMethod("class", new LambdaFunction(GetClass));
         }
 
-        public string Name { get { return this.name; } }
+        public string Name { get { return this.name; } internal set { this.name = value; } }
 
         public DynamicClass SuperClass { get { return this.superclass; } }
 

@@ -5,17 +5,15 @@
     using System.Linq;
     using System.Text;
 
-    public class ModuleObject : DynamicObject
+    public class ModuleObject : DynamicClass
     {
         private Context constants;
 
         public ModuleObject(DynamicClass @class)
-            : base(@class)
+            : base(@class, null)
         {
             this.constants = new Context();
         }
-
-        public string Name { get; internal set; }
 
         public Context Constants { get { return this.constants; } }
     }

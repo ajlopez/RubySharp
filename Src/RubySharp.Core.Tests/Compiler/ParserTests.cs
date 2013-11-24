@@ -920,5 +920,18 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseChainedDot()
+        {
+            Parser parser = new Parser("Object.new.class");
+            var expected = new DotExpression(new DotExpression(new NameExpression("Object"), "new", new IExpression[] { }), "class", new IExpression[] { });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

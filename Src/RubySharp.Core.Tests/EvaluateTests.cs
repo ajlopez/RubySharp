@@ -116,6 +116,36 @@
             Assert.AreEqual(1, result);
         }
 
+        [TestMethod]
+        public void EvaluateObjectNew()
+        {
+            var result = this.EvaluateExpression("Object.new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicObject));
+
+            var dobj = (DynamicObject)result;
+
+            Assert.IsNotNull(dobj.Class);
+            Assert.AreEqual("Object", dobj.Class.Name);
+            Assert.AreSame(dobj.Class, this.EvaluateExpression("Object"));
+        }
+
+        [TestMethod]
+        public void EvaluateObjectNewClass()
+        {
+            var objectclass = this.EvaluateExpression("Object");
+
+            Assert.IsNotNull(objectclass);
+
+            var result = this.EvaluateExpression("Object.new.class");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            Assert.AreSame(objectclass, result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);
