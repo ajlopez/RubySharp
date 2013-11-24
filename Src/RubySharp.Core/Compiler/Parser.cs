@@ -525,6 +525,9 @@
                 return expr;
             }
 
+            if (token.Type == TokenType.Separator && token.Value == "{")
+                return this.ParseHashExpression();
+
             if (token.Type == TokenType.Separator && token.Value == "[")
             {
                 IList<IExpression> expressions = this.ParseExpressionList("]");
@@ -532,6 +535,27 @@
             }
 
             throw new SyntaxError(string.Format("unexpected '{0}'", token.Value));
+        }
+
+        private HashExpression ParseHashExpression()
+        {
+            IList<IExpression> keyexpressions = new List<IExpression>();
+            IList<IExpression> valueexpressions = new List<IExpression>();
+
+            while (!this.TryParseToken(TokenType.Separator, "}")) 
+            {
+                if (keyexpressions.Count > 0)
+                    this.ParseToken(TokenType.Separator, ",");
+
+                var keyexpression = this.ParseExpression();
+                this.ParseToken(TokenType.Operator, "=>");
+                var valueexpression = this.ParseExpression();
+
+                keyexpressions.Add(keyexpression);
+                valueexpressions.Add(valueexpression);
+            }
+
+            return new HashExpression(keyexpressions, valueexpressions);
         }
 
         private void ParseName(string name)

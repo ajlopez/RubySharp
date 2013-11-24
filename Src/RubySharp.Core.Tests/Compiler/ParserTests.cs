@@ -1026,5 +1026,31 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseSimpleHash()
+        {
+            Parser parser = new Parser("{ :one=>1, :two => 2 }");
+            var expected = new HashExpression(new IExpression[] { new ConstantExpression(new Symbol("one")), new ConstantExpression(new Symbol("two")) }, new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseEmptyHash()
+        {
+            Parser parser = new Parser("{  }");
+            var expected = new HashExpression(new IExpression[0], new IExpression[0]);
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }
