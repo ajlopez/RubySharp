@@ -22,8 +22,6 @@
 
         public object Evaluate(Context context)
         {
-            object result = null;
-
             bool isglobal = char.IsUpper(this.name[0]);
 
             if (!isglobal)
