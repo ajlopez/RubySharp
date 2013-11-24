@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
@@ -35,14 +36,22 @@
             {
                 NativeClass nclass = (NativeClass)context.GetValue("Fixnum");
                 nclass = (NativeClass)nclass.MethodClass(result, null);
-                Func<object, IList<object>, object> nmethod = nclass.GetInstanceMethod(this.name);
+                Func<object, IList<object>, object> nmethod = null;
+                
+                if (nclass != null)
+                    nmethod = nclass.GetInstanceMethod(this.name);
 
                 if (this.arguments != null)
                     foreach (var argument in this.arguments)
                         values.Add(argument.Evaluate(context));
 
                 if (nmethod == null)
+                {
+                    if (result is Type && this.name == "new")
+                        return Activator.CreateInstance((Type)result, values.ToArray());
+
                     return ObjectUtilities.GetValue(result, this.name, values);
+                }
 
                 return nmethod(result, values);
             }

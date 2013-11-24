@@ -9,6 +9,16 @@
 
     public class Person
     {
+        public Person()
+        {
+        }
+
+        public Person(string firstname, string lastname)
+        {
+            this.FirstName = firstname;
+            this.LastName = lastname;
+        }
+
         public event MyEvent NameEvent;
 
         public string FirstName { get; set; }

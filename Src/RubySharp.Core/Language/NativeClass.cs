@@ -120,7 +120,7 @@
                 return this.rangeclass;
             }
 
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

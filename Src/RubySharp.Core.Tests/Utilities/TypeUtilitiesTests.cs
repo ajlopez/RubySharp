@@ -57,6 +57,7 @@
         public void AsType()
         {
             Assert.IsNotNull(TypeUtilities.AsType("System.IO.File"));
+            Assert.IsNotNull(TypeUtilities.AsType("RubySharp.Core.Tests.Classes.Person"));
             Assert.IsNull(TypeUtilities.AsType("Foo.Bar"));
         }
 

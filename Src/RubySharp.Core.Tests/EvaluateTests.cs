@@ -10,6 +10,7 @@
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
     using RubySharp.Core.Utilities;
+    using RubySharp.Core.Tests.Classes;
 
     [TestClass]
     public class EvaluateTests
@@ -300,6 +301,30 @@
             var result = this.Execute("'foo'.Substring 1,2");
             Assert.IsNotNull(result);
             Assert.AreEqual("oo", result);
+        }
+
+        [TestMethod]
+        public void EvaluateNewPerson()
+        {
+            this.machine.RootContext.SetLocalValue("Person", typeof(Person));
+            var result = this.EvaluateExpression("Person.new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Person));
+        }
+
+        [TestMethod]
+        public void EvaluateNewPersonWithNames()
+        {
+            this.machine.RootContext.SetLocalValue("Person", typeof(Person));
+            var result = this.EvaluateExpression("Person.new 'Adam', 'Smith'");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Person));
+
+            var person = (Person)result;
+            Assert.AreEqual("Adam", person.FirstName);
+            Assert.AreEqual("Smith", person.LastName);
         }
 
         private object EvaluateExpression(string text)
