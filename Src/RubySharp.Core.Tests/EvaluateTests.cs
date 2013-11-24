@@ -327,6 +327,15 @@
             Assert.AreEqual("Smith", person.LastName);
         }
 
+        [TestMethod]
+        public void EvaluateQualifiedType()
+        {
+            var result = this.EvaluateExpression("RubySharp.Core.Tests.Classes.Person");
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(typeof(Person), result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

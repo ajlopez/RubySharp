@@ -15,12 +15,15 @@
         private IExpression expression;
         private string name;
         private IList<IExpression> arguments;
+        private string qname;
 
         public DotExpression(IExpression expression, string name, IList<IExpression> arguments)
         {
             this.expression = expression;
             this.name = name;
             this.arguments = arguments;
+
+            this.qname = this.AsQualifiedName();
         }
 
         public IExpression Expression { get { return this.expression; } }
@@ -29,6 +32,14 @@
 
         public object Evaluate(Context context)
         {
+            if (this.qname != null)
+            {
+                Type type = TypeUtilities.AsType(this.qname);
+
+                if (type != null)
+                    return type;
+            }
+
             IList<object> values = new List<object>();
             var result = this.expression.Evaluate(context);
 
@@ -67,6 +78,34 @@
                 throw new NoMethodError(this.name);
 
             return method.Apply(obj, values);
+        }
+
+        public String AsQualifiedName()
+        {
+            if (!char.IsUpper(this.name[0]))
+                return null;
+
+            if (this.expression is NameExpression)
+            {
+                string prefix = ((NameExpression)this.expression).AsQualifiedName();
+
+                if (prefix == null)
+                    return null;
+
+                return prefix + "." + this.name;
+            }
+
+            if (this.expression is DotExpression)
+            {
+                string prefix = ((DotExpression)this.expression).AsQualifiedName();
+
+                if (prefix == null)
+                    return null;
+
+                return prefix + "." + this.name;
+            }
+
+            return null;
         }
 
         public override bool Equals(object obj)

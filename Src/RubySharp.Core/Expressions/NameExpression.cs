@@ -46,6 +46,14 @@
             throw new NameError(string.Format("unitialized constant {0}", this.name));
         }
 
+        public string AsQualifiedName()
+        {
+            if (!char.IsUpper(this.name[0]))
+                return null;
+
+            return this.name;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
