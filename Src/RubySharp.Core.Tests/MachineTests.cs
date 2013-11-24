@@ -180,6 +180,32 @@
         }
 
         [TestMethod]
+        public void ArrayClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Array");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ArrayClass));
+
+            var @class = (ArrayClass)result;
+            Assert.AreEqual("Array", @class.Name);
+        }
+
+        [TestMethod]
+        public void HashClass()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.RootContext.GetValue("Hash");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(HashClass));
+
+            var @class = (HashClass)result;
+            Assert.AreEqual("Hash", @class.Name);
+        }
+
+        [TestMethod]
         public void GetClassessClass()
         {
             Machine machine = new Machine();

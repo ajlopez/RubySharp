@@ -36,6 +36,8 @@
             this.rootcontext.SetLocalValue("NilClass", new NilClass(this));
             this.rootcontext.SetLocalValue("FalseClass", new FalseClass(this));
             this.rootcontext.SetLocalValue("TrueClass", new TrueClass(this));
+            this.rootcontext.SetLocalValue("Array", new ArrayClass(this));
+            this.rootcontext.SetLocalValue("Hash", new HashClass(this));
 
             this.rootcontext.Self = objectclass.CreateInstance();
 
