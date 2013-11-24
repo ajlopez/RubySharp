@@ -64,6 +64,7 @@
         public void IsNamespace()
         {
             Assert.IsTrue(TypeUtilities.IsNamespace("System"));
+            Assert.IsTrue(TypeUtilities.IsNamespace("RubySharp"));
             Assert.IsTrue(TypeUtilities.IsNamespace("RubySharp.Core"));
             Assert.IsTrue(TypeUtilities.IsNamespace("RubySharp.Core.Language"));
             Assert.IsTrue(TypeUtilities.IsNamespace("System.IO"));

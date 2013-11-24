@@ -9,6 +9,7 @@
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Utilities;
 
     [TestClass]
     public class EvaluateTests

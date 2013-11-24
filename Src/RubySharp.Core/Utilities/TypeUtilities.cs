@@ -75,7 +75,10 @@
 
         public static bool IsNamespace(string name)
         {
-            return GetNamespaces().Contains(name);
+            if (GetNamespaces().Contains(name))
+                return true;
+
+            return GetNamespaces().Any(n => n != null && n.StartsWith(name + "."));
         }
 
         public static IList<string> GetNames(Type type)
