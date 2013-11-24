@@ -1078,5 +1078,31 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void ParseSimpleRangeExpression()
+        {
+            Parser parser = new Parser("1..10");
+            var expected = new RangeExpression(new ConstantExpression(1), new ConstantExpression(10));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseRangeExpression()
+        {
+            Parser parser = new Parser("1+2..10");
+            var expected = new RangeExpression(new AddExpression(new ConstantExpression(1), new ConstantExpression(2)), new ConstantExpression(10));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }

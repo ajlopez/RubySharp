@@ -18,7 +18,7 @@
 
         private const string Separators = ";()[],.|{}";
 
-        private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=", "=>" };
+        private static string[] operators = new string[] { "+", "-", "*", "/", "=", "<", ">", "!", "==", "<=", ">=", "!=", "=>", ".." };
 
         private ICharStream stream;
         private Stack<Token> tokens = new Stack<Token>();
@@ -75,6 +75,20 @@
                 }
 
                 return new Token(TokenType.Operator, ch.ToString());
+            }
+            else if (operators.Any(op => op.StartsWith(ch.ToString())))
+            {
+                string value = ch.ToString();
+                ich = this.NextChar();
+
+                if (ich >= 0)
+                {
+                    value += (char)ich;
+                    if (operators.Contains(value))
+                        return new Token(TokenType.Operator, value);
+
+                    this.BackChar();
+                }
             }
 
             if (Separators.Contains(ch))

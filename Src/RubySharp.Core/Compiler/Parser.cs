@@ -11,7 +11,7 @@
 
     public class Parser
     {
-        private static string[][] binaryoperators = new string[][] { new string[] { "==", "!=", "<", ">", "<=", ">=" }, new string[] { "+", "-" }, new string[] { "*", "/" } };
+        private static string[][] binaryoperators = new string[][] { new string[] { "..", "==", "!=", "<", ">", "<=", ">=" }, new string[] { "+", "-" }, new string[] { "*", "/" } };
         private Lexer lexer;
 
         public Parser(string text)
@@ -398,6 +398,8 @@
                     expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.LessOrEqual);
                 if (token.Value == ">=")
                     expr = new CompareExpression(expr, this.ParseBinaryExpression(level + 1), CompareOperator.GreaterOrEqual);
+                if (token.Value == "..")
+                    expr = new RangeExpression(expr, this.ParseBinaryExpression(level + 1));
             }
 
             if (token != null)

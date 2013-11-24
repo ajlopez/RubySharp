@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Language;
 
-    public class RangeExpression
+    public class RangeExpression : IExpression
     {
         private static int hashcode = typeof(RangeExpression).GetHashCode();
 
