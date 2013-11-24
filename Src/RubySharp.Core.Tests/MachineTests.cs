@@ -37,13 +37,11 @@
         {
             Machine machine = new Machine();
 
-            var result = machine.RootContext.GetValue("puts");
+            var result = machine.RootContext.Self.Class.GetInstanceMethod("puts");
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IFunction));
 
-            result = machine.RootContext.GetValue("print");
+            result = machine.RootContext.Self.Class.GetInstanceMethod("print");
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(IFunction));
         }
 
         [TestMethod]

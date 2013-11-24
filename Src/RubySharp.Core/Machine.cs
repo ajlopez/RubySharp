@@ -37,10 +37,10 @@
             this.rootcontext.SetLocalValue("FalseClass", new FalseClass(this));
             this.rootcontext.SetLocalValue("TrueClass", new TrueClass(this));
 
-            this.rootcontext.SetLocalValue("puts", new PutsFunction(System.Console.Out));
-            this.rootcontext.SetLocalValue("print", new PrintFunction(System.Console.Out));
-
             this.rootcontext.Self = objectclass.CreateInstance();
+
+            this.rootcontext.Self.Class.SetInstanceMethod("puts", new PutsFunction(System.Console.Out));
+            this.rootcontext.Self.Class.SetInstanceMethod("print", new PrintFunction(System.Console.Out));
         }
 
         public Context RootContext { get { return this.rootcontext; } }
