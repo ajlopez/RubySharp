@@ -74,6 +74,8 @@
                 cmd = new AssignDotExpressions((DotExpression)expr, this.ParseExpression());
             else if (expr is InstanceVarExpression)
                 cmd = new AssignInstanceVarExpression(((InstanceVarExpression)expr).Name, this.ParseExpression());
+            else
+                cmd = new AssignClassVarExpression(((ClassVarExpression)expr).Name, this.ParseExpression());
 
             this.ParseEndOfCommand();
 

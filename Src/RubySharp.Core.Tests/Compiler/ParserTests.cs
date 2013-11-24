@@ -335,6 +335,19 @@
         }
 
         [TestMethod]
+        public void ParseAssignClassVarCommand()
+        {
+            Parser parser = new Parser("@@a=2");
+            var expected = new AssignClassVarExpression("a", new ConstantExpression(2));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseAssignDotCommand()
         {
             Parser parser = new Parser("a.b = 2");

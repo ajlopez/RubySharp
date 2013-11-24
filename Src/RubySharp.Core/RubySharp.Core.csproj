@@ -74,6 +74,7 @@
     <Compile Include="Expressions\ClassExpression.cs" />
     <Compile Include="Expressions\AssignInstanceVarExpression.cs" />
     <Compile Include="Expressions\ClassVarExpression.cs" />
+    <Compile Include="Expressions\AssignClassVarExpression.cs" />
     <Compile Include="Expressions\DoubleColonExpression.cs" />
     <Compile Include="Expressions\ModuleExpression.cs" />
     <Compile Include="Expressions\UntilExpression.cs" />

@@ -68,6 +68,7 @@
     <Compile Include="Expressions\ClassExpressionTests.cs" />
     <Compile Include="Expressions\AssignInstanceVarExpressionTests.cs" />
     <Compile Include="Expressions\ClassVarExpressionTests.cs" />
+    <Compile Include="Expressions\AssignClassVarExpressionTests.cs" />
     <Compile Include="Expressions\DoubleColonExpressionTests.cs" />
     <Compile Include="Expressions\ModuleExpressionTests.cs" />
     <Compile Include="Expressions\UntilExpressionTests.cs" />
