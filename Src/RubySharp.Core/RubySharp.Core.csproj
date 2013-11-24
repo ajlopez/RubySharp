@@ -83,6 +83,7 @@
     <Compile Include="Expressions\HashExpression.cs" />
     <Compile Include="Expressions\DoubleColonExpression.cs" />
     <Compile Include="Expressions\ModuleExpression.cs" />
+    <Compile Include="Expressions\RangeExpression.cs" />
     <Compile Include="Expressions\UntilExpression.cs" />
     <Compile Include="Expressions\ForInExpression.cs" />
     <Compile Include="Expressions\WhileExpression.cs" />

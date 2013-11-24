@@ -74,6 +74,7 @@
     <Compile Include="Expressions\DoubleColonExpressionTests.cs" />
     <Compile Include="Expressions\HashExpressionTests.cs" />
     <Compile Include="Expressions\ModuleExpressionTests.cs" />
+    <Compile Include="Expressions\RangeExpressionTests.cs" />
     <Compile Include="Expressions\UntilExpressionTests.cs" />
     <Compile Include="Expressions\ForInExpressionTests.cs" />
     <Compile Include="Expressions\WhileExpressionTests.cs" />
