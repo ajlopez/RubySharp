@@ -117,6 +117,32 @@
         }
 
         [TestMethod]
+        public void GetNamesSkippingCommentUpToEndOfLine()
+        {
+            Lexer lexer = new Lexer("a# this is a comment\nb");
+
+            var token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Name, token.Type);
+            Assert.AreEqual("a", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.EndOfLine, token.Type);
+            Assert.AreEqual("\n", token.Value);
+
+            token = lexer.NextToken();
+
+            Assert.IsNotNull(token);
+            Assert.AreEqual(TokenType.Name, token.Type);
+            Assert.AreEqual("b", token.Value);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         public void GetSymbol()
         {
             Lexer lexer = new Lexer(":foo");
@@ -468,6 +494,19 @@
 
             Assert.IsNotNull(result);
             Assert.AreEqual("foo", result.Value);
+            Assert.AreEqual(TokenType.String, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
+        public void GetSingleQuoteStringWithCommentChar()
+        {
+            Lexer lexer = new Lexer("'#foo'");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("#foo", result.Value);
             Assert.AreEqual(TokenType.String, result.Type);
 
             Assert.IsNull(lexer.NextToken());

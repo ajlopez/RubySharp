@@ -244,32 +244,31 @@
         {
             int ich = this.NextChar();
 
-            while (ich > 0 && (char)ich != '\n' && char.IsWhiteSpace((char)ich))
-                ich = this.NextChar();
+            while (true)
+            {
+                while (ich > 0 && (char)ich != '\n' && char.IsWhiteSpace((char)ich))
+                    ich = this.NextChar();
+
+                if (ich > 0 && (char)ich == StartComment)
+                {
+                    for (ich = this.stream.NextChar(); ich >= 0 && (char)ich != '\n'; )
+                        ich = this.stream.NextChar();
+
+                    if (ich < 0)
+                        return -1;
+
+                    continue;
+                }
+
+                break;
+            }
 
             return ich;
         }
 
         private int NextChar()
         {
-            int ich = this.stream.NextChar();
-
-            if (ich < 0)
-                return -1;
-
-            char ch = (char)ich;
-
-            if (ch == StartComment) {
-                for (ich = this.stream.NextChar(); ich >= 0 && (char)ich != '\n';)
-                    ich = this.stream.NextChar();
-
-                if (ich < 0)
-                    return -1;
-
-                ch = (char)ich;
-            }
-
-            return ch;
+            return this.stream.NextChar();
         }
 
         private void BackChar()
