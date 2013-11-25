@@ -70,6 +70,15 @@
         }
 
         [TestMethod]
+        public void NamedExpression()
+        {
+            INamedExpression expr = new NameExpression("foo");
+
+            Assert.AreSame("foo", expr.Name);
+            Assert.IsNull(expr.TargetExpression);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             NameExpression expr1 = new NameExpression("one");

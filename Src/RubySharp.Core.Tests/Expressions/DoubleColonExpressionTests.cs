@@ -61,6 +61,15 @@
         }
 
         [TestMethod]
+        public void NamedExpression()
+        {
+            INamedExpression expression = new DoubleColonExpression(new ConstantExpression(1), "name");
+
+            Assert.AreEqual(new ConstantExpression(1), expression.TargetExpression);
+            Assert.AreEqual("name", expression.Name);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             DoubleColonExpression expr1 = new DoubleColonExpression(new ConstantExpression(1), "foo");

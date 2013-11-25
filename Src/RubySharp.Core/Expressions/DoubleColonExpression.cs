@@ -7,7 +7,7 @@
     using RubySharp.Core.Language;
     using RubySharp.Core.Utilities;
 
-    public class DoubleColonExpression : IExpression
+    public class DoubleColonExpression : INamedExpression
     {
         private static int hashcode = typeof(DoubleColonExpression).GetHashCode();
 
@@ -19,6 +19,10 @@
             this.expression = expression;
             this.name = name;
         }
+
+        public IExpression TargetExpression { get { return this.expression; } }
+
+        public string Name { get { return this.name; } }
 
         public object Evaluate(Context context)
         {

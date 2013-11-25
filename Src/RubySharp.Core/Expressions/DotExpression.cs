@@ -8,7 +8,7 @@
     using RubySharp.Core.Language;
     using RubySharp.Core.Utilities;
 
-    public class DotExpression : IExpression
+    public class DotExpression : INamedExpression
     {
         private static int hashcode = typeof(DotExpression).GetHashCode();
 
@@ -26,7 +26,7 @@
             this.qname = this.AsQualifiedName();
         }
 
-        public IExpression Expression { get { return this.expression; } }
+        public IExpression TargetExpression { get { return this.expression; } }
 
         public string Name { get { return this.name; } }
 

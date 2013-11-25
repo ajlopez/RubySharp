@@ -28,7 +28,7 @@
 
         public object Evaluate(Context context)
         {
-            object target = this.leftvalue.Expression.Evaluate(context);
+            object target = this.leftvalue.TargetExpression.Evaluate(context);
 
             if (target is DynamicObject)
             {

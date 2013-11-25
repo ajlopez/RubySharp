@@ -7,7 +7,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
 
-    public class NameExpression : IExpression
+    public class NameExpression : INamedExpression
     {
         private static int hashcode = typeof(NameExpression).GetHashCode();
         private static IList<object> emptyvalues = new object[] { };
@@ -17,6 +17,8 @@
         {
             this.name = name;
         }
+
+        public IExpression TargetExpression { get { return null; } }
 
         public string Name { get { return this.name; } }
 

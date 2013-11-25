@@ -82,6 +82,7 @@
     <Compile Include="Expressions\AssignClassVarExpression.cs" />
     <Compile Include="Expressions\AssignIndexedExpression.cs" />
     <Compile Include="Expressions\DefDotExpression.cs" />
+    <Compile Include="Expressions\INamedExpression.cs" />
     <Compile Include="Expressions\SelfExpression.cs" />
     <Compile Include="Expressions\NegationExpression.cs" />
     <Compile Include="Expressions\HashExpression.cs" />

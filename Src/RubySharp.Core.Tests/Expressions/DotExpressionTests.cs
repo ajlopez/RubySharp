@@ -68,6 +68,15 @@
         }
 
         [TestMethod]
+        public void NamedExpression()
+        {
+            INamedExpression expression = new DotExpression(new ConstantExpression(1), "class", null);
+
+            Assert.AreEqual(new ConstantExpression(1), expression.TargetExpression);
+            Assert.AreEqual("class", expression.Name);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             DotExpression expr1 = new DotExpression(new ConstantExpression(1), "foo", new IExpression[0]);
