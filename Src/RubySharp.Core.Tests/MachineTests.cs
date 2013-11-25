@@ -43,6 +43,9 @@
 
             result = machine.RootContext.Self.Class.GetInstanceMethod("print");
             Assert.IsNotNull(result);
+
+            result = machine.RootContext.Self.Class.GetInstanceMethod("require");
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]

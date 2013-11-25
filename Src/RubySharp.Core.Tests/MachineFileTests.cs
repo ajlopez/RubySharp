@@ -111,5 +111,57 @@
             Assert.AreEqual(10, dobj.GetValue("x"));
             Assert.AreEqual(20, dobj.GetValue("y"));
         }
+
+        [TestMethod]
+        public void RequireFile()
+        {
+            Assert.IsTrue(this.machine.RequireFile("MachineFiles\\Point"));
+
+            var result = this.machine.ExecuteText("Point");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+        }
+
+        [TestMethod]
+        public void RequireFileTwice()
+        {
+            Assert.IsTrue(this.machine.RequireFile("MachineFiles\\SimpleAssign"));
+            Assert.IsFalse(this.machine.RequireFile("MachineFiles\\SimpleAssign.rb"));
+
+            var result = this.machine.ExecuteText("a");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void RequireFileTwiceUsingFullPath()
+        {
+            string filename = Path.GetFullPath("MachineFiles\\SimpleAssign");
+            string filename2 = Path.GetFullPath("MachineFiles\\SimpleAssign.rb");
+            Assert.IsTrue(this.machine.RequireFile(filename));
+            Assert.IsFalse(this.machine.RequireFile(filename2));
+
+            var result = this.machine.ExecuteText("a");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void ExecuteRequireModules()
+        {
+            this.machine.ExecuteFile("MachineFiles\\RequireModules.rb");
+
+            var result = this.machine.ExecuteText("Module1");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+            Assert.AreEqual("Module1", ((ModuleObject)result).Name);
+
+            result = this.machine.ExecuteText("Module2");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+            Assert.AreEqual("Module2", ((ModuleObject)result).Name);
+        }
     }
 }

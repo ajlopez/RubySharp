@@ -12,9 +12,12 @@
     public class Machine
     {
         private Context rootcontext = new Context();
+        private IList<string> requirepaths = new List<string>();
+        private IList<string> required = new List<string>();
 
         public Machine()
         {
+            this.requirepaths.Add(".");
             var basicobjectclass = new DynamicClass("BasicObject", null);
             var objectclass = new DynamicClass("Object", basicobjectclass);
             var moduleclass = new ModuleClass(objectclass);
@@ -44,6 +47,7 @@
 
             this.rootcontext.Self.Class.SetInstanceMethod("puts", new PutsFunction(System.Console.Out));
             this.rootcontext.Self.Class.SetInstanceMethod("print", new PrintFunction(System.Console.Out));
+            this.rootcontext.Self.Class.SetInstanceMethod("require", new RequireFunction(this));
         }
 
         public Context RootContext { get { return this.rootcontext; } }
@@ -61,7 +65,56 @@
 
         public object ExecuteFile(string filename)
         {
-            return this.ExecuteText(System.IO.File.ReadAllText(filename));
+            string path = Path.GetDirectoryName(filename);
+
+            this.requirepaths.Insert(0, path);
+
+            try
+            {
+                return this.ExecuteText(System.IO.File.ReadAllText(filename));
+            }
+            finally
+            {
+                this.requirepaths.RemoveAt(0);
+            }
+        }
+
+        public bool RequireFile(string filename)
+        {
+            if (!Path.IsPathRooted(filename))
+            {
+                foreach (var path in this.requirepaths)
+                {
+                    string newfilename = Path.Combine(path, filename);
+                    if (!File.Exists(newfilename))
+                        if (File.Exists(newfilename + ".rb"))
+                            newfilename += ".rb";
+
+                    if (File.Exists(newfilename))
+                    {
+                        filename = newfilename;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                string newfilename = Path.GetFullPath(filename);
+
+                if (!File.Exists(newfilename))
+                    if (File.Exists(newfilename + ".rb"))
+                        newfilename += ".rb";
+
+                filename = newfilename;
+            }
+
+            if (this.required.Contains(filename))
+                return false;
+
+            this.ExecuteFile(filename);
+            this.required.Add(filename);
+
+            return true;
         }
 
         public object ExecuteReader(TextReader reader)
