@@ -31,6 +31,18 @@
         }
 
         [TestMethod]
+        public void GetSingletonClass()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+
+            var singleton = obj.SingletonClass;
+
+            Assert.IsNotNull(singleton);
+            Assert.AreSame(obj.Class, singleton.SuperClass);
+            Assert.AreEqual(string.Format("#<Class:{0}>", obj.ToString()), singleton.Name);
+        }
+
+        [TestMethod]
         public void ObjectToString()
         {
             DynamicObject obj = new DynamicObject(this.@class);
@@ -63,6 +75,15 @@
         {
             DynamicObject obj = new DynamicObject(this.@class);
             Assert.AreSame(this.foo, obj.GetMethod("foo"));
+        }
+
+        [TestMethod]
+        public void GetMethodFromSingletonClass()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+            var newfoo = new DefinedFunction(null, null, null);
+            obj.SingletonClass.SetInstanceMethod("foo", newfoo);
+            Assert.AreSame(newfoo, obj.GetMethod("foo"));
         }
     }
 }
