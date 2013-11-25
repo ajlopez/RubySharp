@@ -250,6 +250,24 @@
             Assert.IsNotNull(result1);
             Assert.IsInstanceOfType(result1, typeof(ModuleObject));
             Assert.AreEqual("MyModule", ((ModuleObject)result1).Name);
+            Assert.AreSame(this.machine.ExecuteText("Module"), this.machine.ExecuteText("MyModule.class"));
+
+            Assert.IsNotNull(result2);
+            Assert.AreEqual(42, result2);
+        }
+
+        [TestMethod]
+        public void ExecuteClassWithSelfMethodFile()
+        {
+            this.machine.ExecuteFile("MachineFiles\\ClassWithSelfMethod.rb");
+
+            var result1 = this.machine.ExecuteText("MyClass");
+            var result2 = this.machine.ExecuteText("MyClass.foo");
+
+            Assert.IsNotNull(result1);
+            Assert.IsInstanceOfType(result1, typeof(ModuleObject));
+            Assert.AreEqual("MyClass", ((ModuleObject)result1).Name);
+            Assert.AreSame(this.machine.ExecuteText("Class"), this.machine.ExecuteText("MyClass.class"));
 
             Assert.IsNotNull(result2);
             Assert.AreEqual(42, result2);
