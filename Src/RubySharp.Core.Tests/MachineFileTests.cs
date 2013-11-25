@@ -163,5 +163,14 @@
             Assert.IsInstanceOfType(result, typeof(ModuleObject));
             Assert.AreEqual("Module2", ((ModuleObject)result).Name);
         }
+
+        [TestMethod]
+        public void ExecuteRepeatedModuleFile()
+        {
+            this.machine.ExecuteFile("MachineFiles\\RepeatedModule.rb");
+
+            Assert.AreEqual(1, this.machine.ExecuteText("MyModule::ONE"));
+            Assert.AreEqual(2, this.machine.ExecuteText("MyModule::TWO"));
+        }
     }
 }

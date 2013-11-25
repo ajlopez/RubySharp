@@ -21,10 +21,23 @@
 
         public object Evaluate(Context context)
         {
-            ModuleClass modclass = (ModuleClass)context.RootContext.GetLocalValue("Module");
-            ModuleObject module = (ModuleObject)modclass.CreateInstance();
-            module.Name = this.name;
-            context.SetLocalValue(this.name, module);
+            object value = null;
+
+            if (context.HasLocalValue(this.name))
+                value = context.GetLocalValue(this.name);
+
+            ModuleObject module;
+
+            if (value == null || !(value is ModuleObject))
+            {
+                ModuleClass modclass = (ModuleClass)context.RootContext.GetLocalValue("Module");
+                module = (ModuleObject)modclass.CreateInstance();
+                module.Name = this.name;
+                context.RootContext.SetLocalValue(this.name, module);
+            }
+            else
+                module = (ModuleObject)value;
+
             Context newcontext = new Context(module, context.RootContext);
             return this.expression.Evaluate(newcontext);
         }
