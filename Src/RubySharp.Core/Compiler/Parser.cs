@@ -496,6 +496,9 @@
                 if (token.Value == "true")
                     return new ConstantExpression(true);
 
+                if (token.Value == "self")
+                    return new SelfExpression();
+
                 if (token.Value == "nil")
                     return new ConstantExpression(null);
 

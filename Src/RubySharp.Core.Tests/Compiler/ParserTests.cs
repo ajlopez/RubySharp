@@ -1164,5 +1164,18 @@
                 Assert.AreEqual("class/module name must be a CONSTANT", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void ParseSelfExpression()
+        {
+            Parser parser = new Parser("self");
+            var expected = new SelfExpression();
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
     }
 }
