@@ -172,5 +172,22 @@
             Assert.AreEqual(1, this.machine.ExecuteText("MyModule::ONE"));
             Assert.AreEqual(2, this.machine.ExecuteText("MyModule::TWO"));
         }
+
+        [TestMethod]
+        public void ExecuteModuleWithClassesFile()
+        {
+            this.machine.ExecuteFile("MachineFiles\\ModuleWithClasses.rb");
+
+            var result1 = this.machine.ExecuteText("MyLisp::List");
+            var result2 = this.machine.ExecuteText("MyLisp::Atom");
+
+            Assert.IsNotNull(result1);
+            Assert.IsInstanceOfType(result1, typeof(DynamicClass));
+            Assert.AreEqual("List", ((DynamicClass)result1).Name);
+
+            Assert.IsNotNull(result2);
+            Assert.IsInstanceOfType(result2, typeof(DynamicClass));
+            Assert.AreEqual("Atom", ((DynamicClass)result2).Name);
+        }
     }
 }
