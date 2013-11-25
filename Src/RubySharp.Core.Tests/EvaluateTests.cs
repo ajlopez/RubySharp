@@ -336,6 +336,28 @@
             Assert.AreSame(typeof(Person), result);
         }
 
+        [TestMethod]
+        public void EvaluateQualifiedPersonNew()
+        {
+            var result = this.EvaluateExpression("RubySharp.Core.Tests.Classes.Person.new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Person));
+        }
+
+        [TestMethod]
+        public void EvaluateQualifiedPersonNewWithNames()
+        {
+            var result = this.EvaluateExpression("RubySharp.Core.Tests.Classes.Person.new('Adam', 'Smith')");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Person));
+
+            var person = (Person)result;
+            Assert.AreEqual("Adam", person.FirstName);
+            Assert.AreEqual("Smith", person.LastName);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);
