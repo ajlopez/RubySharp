@@ -81,6 +81,7 @@
     <Compile Include="Expressions\ClassVarExpression.cs" />
     <Compile Include="Expressions\AssignClassVarExpression.cs" />
     <Compile Include="Expressions\AssignIndexedExpression.cs" />
+    <Compile Include="Expressions\SelfExpression.cs" />
     <Compile Include="Expressions\NegationExpression.cs" />
     <Compile Include="Expressions\HashExpression.cs" />
     <Compile Include="Expressions\DoubleColonExpression.cs" />

@@ -420,5 +420,16 @@
 
             Assert.IsNull(result);
         }
+
+        [TestMethod]
+        public void EvaluateSelf()
+        {
+            Machine machine = new Machine();
+
+            var result = machine.ExecuteText("self");
+
+            Assert.IsNotNull(result);
+            Assert.AreSame(machine.RootContext.Self, result);
+        }
     }
 }

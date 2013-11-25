@@ -5,7 +5,7 @@
 + instance variable
 + class variable
 + require .rb (.rb)
-require .dll
++ require .dll
 singleton class
 x= method
 = nested modules
