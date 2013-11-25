@@ -23,7 +23,12 @@
         {
             object value = null;
 
-            if (context.HasLocalValue(this.name))
+            if (context.Module != null)
+            {
+                if (context.Module.Constants.HasLocalValue(this.name))
+                    value = context.Module.Constants.GetLocalValue(this.name);
+            }
+            else if (context.HasLocalValue(this.name))
                 value = context.GetLocalValue(this.name);
 
             ModuleObject module;
@@ -32,8 +37,17 @@
             {
                 ModuleClass modclass = (ModuleClass)context.RootContext.GetLocalValue("Module");
                 module = (ModuleObject)modclass.CreateInstance();
-                module.Name = this.name;
-                context.RootContext.SetLocalValue(this.name, module);
+
+                if (context.Module != null)
+                {
+                    module.Name = context.Module.Name + "::" + this.name;
+                    context.Module.Constants.SetLocalValue(this.name, module);
+                }
+                else
+                {
+                    module.Name = this.name;
+                    context.RootContext.SetLocalValue(this.name, module);
+                }
             }
             else
                 module = (ModuleObject)value;

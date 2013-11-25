@@ -189,5 +189,22 @@
             Assert.IsInstanceOfType(result2, typeof(DynamicClass));
             Assert.AreEqual("Atom", ((DynamicClass)result2).Name);
         }
+
+        [TestMethod]
+        public void ExecuteClassWithModuleFile()
+        {
+            this.machine.ExecuteFile("MachineFiles\\ClassWithModule.rb");
+
+            var result1 = this.machine.ExecuteText("MyClass");
+            var result2 = this.machine.ExecuteText("MyClass::MyModule");
+
+            Assert.IsNotNull(result1);
+            Assert.IsInstanceOfType(result1, typeof(DynamicClass));
+            Assert.AreEqual("MyClass", ((DynamicClass)result1).Name);
+
+            Assert.IsNotNull(result2);
+            Assert.IsInstanceOfType(result2, typeof(ModuleObject));
+            Assert.AreEqual("MyClass::MyModule", ((ModuleObject)result2).Name);
+        }
     }
 }
