@@ -611,6 +611,58 @@
         }
 
         [TestMethod]
+        public void ParseObjectDefCommand()
+        {
+            Parser parser = new Parser("def a.foo\na=1\nend");
+            var expected = new DefDotExpression(new NameExpression("a"), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSelfDefCommand()
+        {
+            Parser parser = new Parser("def self.foo\na=1\nend");
+            var expected = new DefDotExpression(new SelfExpression(), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseObjectDefCommandUsingDoubleColon()
+        {
+            Parser parser = new Parser("def a::foo\na=1\nend");
+            var expected = new DefDotExpression(new NameExpression("a"), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
+        public void ParseSelfDefCommandUsingDoubleColon()
+        {
+            Parser parser = new Parser("def self::foo\na=1\nend");
+            var expected = new DefDotExpression(new SelfExpression(), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseSymbol()
         {
             Parser parser = new Parser(":foo");

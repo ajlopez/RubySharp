@@ -238,5 +238,21 @@
             Assert.IsInstanceOfType(result3, typeof(ModuleObject));
             Assert.AreEqual("MyModule::MySubmodule::MySubmodule2", ((ModuleObject)result3).Name);
         }
+
+        [TestMethod]
+        public void ExecuteModuleWithSelfMethodFile()
+        {
+            this.machine.ExecuteFile("MachineFiles\\ModuleWithSelfMethod.rb");
+
+            var result1 = this.machine.ExecuteText("MyModule");
+            var result2 = this.machine.ExecuteText("MyModule.foo");
+
+            Assert.IsNotNull(result1);
+            Assert.IsInstanceOfType(result1, typeof(ModuleObject));
+            Assert.AreEqual("MyModule", ((ModuleObject)result1).Name);
+
+            Assert.IsNotNull(result2);
+            Assert.AreEqual(42, result2);
+        }
     }
 }

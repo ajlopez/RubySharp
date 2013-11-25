@@ -27,6 +27,7 @@
         {
             this.module = module;
             this.parent = parent;
+            this.self = module;
         }
 
         public Context(DynamicObject self, Context parent)
