@@ -8,7 +8,7 @@
 require .dll
 singleton class
 x= method
-nested modules
+= nested modules
 = instance method
 = module method
 = self in module/class
@@ -19,7 +19,7 @@ x[1] = v
 
 = initialize
 inheritance
-native object and type access
+= native object and type access
 
 = Implements:
 
