@@ -414,6 +414,10 @@
 
             if (this.TryParseToken(TokenType.Operator, "-"))
                 expression = new NegativeExpression(this.ParseTerm());
+            else if (this.TryParseToken(TokenType.Operator, "+"))
+                expression = this.ParseTerm();
+            else if (this.TryParseToken(TokenType.Operator, "!"))
+                expression = new NegationExpression(this.ParseTerm());
             else
                 expression = this.ParseSimpleTerm();
 

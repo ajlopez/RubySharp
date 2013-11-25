@@ -187,6 +187,32 @@
         }
 
         [TestMethod]
+        public void ParsePositiveInteger()
+        {
+            Parser parser = new Parser("+123");
+            var expected = new ConstantExpression(123);
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
+        public void ParseBooleanNegation()
+        {
+            Parser parser = new Parser("!a");
+            var expected = new NegationExpression(new NameExpression("a"));
+            var result = parser.ParseExpression();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseExpression());
+        }
+
+        [TestMethod]
         public void ParseNegativeIntegerMinusInteger()
         {
             Parser parser = new Parser("-123-10");
@@ -270,7 +296,7 @@
         [ExpectedException(typeof(SyntaxError))]
         public void RaiseIfNotACommand()
         {
-            Parser parser = new Parser("+");
+            Parser parser = new Parser("*");
             parser.ParseCommand();
         }
 
