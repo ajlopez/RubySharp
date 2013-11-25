@@ -133,6 +133,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MachineFiles\MyLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MachineFiles\SimpleAssign.rb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

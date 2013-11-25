@@ -123,6 +123,16 @@
         }
 
         [TestMethod]
+        public void RequireLibraryFile()
+        {
+            Assert.IsTrue(this.machine.RequireFile("MachineFiles\\MyLib"));
+
+            var result = this.machine.ExecuteText("MyLib.MyClass");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Type));
+        }
+
+        [TestMethod]
         public void RequireFileTwice()
         {
             Assert.IsTrue(this.machine.RequireFile("MachineFiles\\SimpleAssign"));

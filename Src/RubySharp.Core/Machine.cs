@@ -8,6 +8,7 @@
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
     using System.IO;
+    using System.Reflection;
 
     public class Machine
     {
@@ -89,6 +90,8 @@
                     if (!File.Exists(newfilename))
                         if (File.Exists(newfilename + ".rb"))
                             newfilename += ".rb";
+                        else if (File.Exists(newfilename + ".dll"))
+                            newfilename += ".dll";
 
                     if (File.Exists(newfilename))
                     {
@@ -104,12 +107,20 @@
                 if (!File.Exists(newfilename))
                     if (File.Exists(newfilename + ".rb"))
                         newfilename += ".rb";
+                    else if (File.Exists(newfilename + ".dll"))
+                        newfilename += ".dll";
 
                 filename = newfilename;
             }
 
             if (this.required.Contains(filename))
                 return false;
+
+            if (filename.EndsWith(".dll"))
+            {
+                Assembly.LoadFrom(filename);
+                return true;
+            }
 
             this.ExecuteFile(filename);
             this.required.Add(filename);
