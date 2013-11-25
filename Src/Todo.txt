@@ -4,8 +4,11 @@
 - def o.foo()
 + instance variable
 + class variable
++ require .rb (.rb)
+require .dll
 singleton class
 x= method
+nested modules
 = instance method
 = module method
 = self in module/class

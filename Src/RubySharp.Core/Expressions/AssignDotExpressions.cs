@@ -6,6 +6,8 @@
     using System.Text;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Exceptions;
+    using RubySharp.Core.Utilities;
 
     public class AssignDotExpressions : IExpression
     {
@@ -26,9 +28,23 @@
 
         public object Evaluate(Context context)
         {
-            var obj = (DynamicObject)this.leftvalue.Expression.Evaluate(context);
-            var method = obj.GetMethod(this.leftvalue.Name + "=");
-            return method.Apply(obj, new object[] { this.expression.Evaluate(context) });
+            object target = this.leftvalue.Expression.Evaluate(context);
+
+            if (target is DynamicObject)
+            {
+                var obj = (DynamicObject)target;
+                var method = obj.GetMethod(this.leftvalue.Name + "=");
+
+                if (method != null)
+                    return method.Apply(obj, new object[] { this.expression.Evaluate(context) });
+
+                throw new NoMethodError(this.leftvalue.Name + "=");
+            }
+
+            var newvalue = this.expression.Evaluate(context);
+            ObjectUtilities.SetValue(target, this.leftvalue.Name, newvalue);
+
+            return newvalue;
         }
 
         public override bool Equals(object obj)
