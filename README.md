@@ -56,3 +56,7 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [Class Module &lt; Object](http://phrogz.net/programmingruby/ref_c_module.html) see module_function
 - [Can I invoke an instance method on a Ruby module without including it?](http://stackoverflow.com/questions/322470/can-i-invoke-an-instance-method-on-a-ruby-module-without-including-it) see module_function
 - [Ruby – Visibility of private and protected module methods when mixed into a class](http://www.treibstofff.de/2009/08/07/ruby-visibility-of-private-and-protected-module-methods-when-mixed-into-a-class/)
+- [Use of Double-Colon ::](https://www.ruby-forum.com/topic/107527)
+- [What does :: (double colon) mean in Ruby?](http://stackoverflow.com/questions/2276905/what-does-double-colon-mean-in-ruby)
+- [What is Ruby's double-colon (::) all about?](http://stackoverflow.com/questions/3009477/what-is-rubys-double-colon-all-about)
+- [. vs :: (dot vs. double-colon) for calling a method](http://stackoverflow.com/questions/11043450/vs-dot-vs-double-colon-for-calling-a-method)
