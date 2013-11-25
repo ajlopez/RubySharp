@@ -125,6 +125,7 @@
     <Compile Include="Language\ClassClass.cs" />
     <Compile Include="Language\ArrayClass.cs" />
     <Compile Include="Language\FunctionWrapper.cs" />
+    <Compile Include="Language\Predicates.cs" />
     <Compile Include="Language\RangeClass.cs" />
     <Compile Include="Language\HashClass.cs" />
     <Compile Include="Language\DynamicArray.cs" />
