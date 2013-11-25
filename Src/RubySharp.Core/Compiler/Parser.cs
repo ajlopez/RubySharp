@@ -539,7 +539,9 @@
                 return new ArrayExpression(expressions);
             }
 
-            throw new SyntaxError(string.Format("unexpected '{0}'", token.Value));
+            this.lexer.PushToken(token);
+
+            return null;
         }
 
         private HashExpression ParseHashExpression()

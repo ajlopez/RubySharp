@@ -268,10 +268,10 @@
 
         [TestMethod]
         [ExpectedException(typeof(SyntaxError))]
-        public void RaiseIfNotAnExpression()
+        public void RaiseIfNotACommand()
         {
             Parser parser = new Parser("+");
-            parser.ParseExpression();
+            parser.ParseCommand();
         }
 
         [TestMethod]

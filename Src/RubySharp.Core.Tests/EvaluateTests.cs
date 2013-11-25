@@ -11,6 +11,7 @@
     using RubySharp.Core.Language;
     using RubySharp.Core.Utilities;
     using RubySharp.Core.Tests.Classes;
+    using System.Windows.Forms;
 
     [TestClass]
     public class EvaluateTests
@@ -356,6 +357,34 @@
             var person = (Person)result;
             Assert.AreEqual("Adam", person.FirstName);
             Assert.AreEqual("Smith", person.LastName);
+        }
+
+        [TestMethod]
+        public void EvaluateFormNew()
+        {
+            var result = this.EvaluateExpression("System.Windows.Forms.Form.new");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Form));
+        }
+
+        [TestMethod]
+        public void EvaluateFormNewWithParens()
+        {
+            var result = this.EvaluateExpression("System.Windows.Forms.Form.new()");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Form));
+        }
+
+        [TestMethod]
+        public void EvaluateFileExists()
+        {
+            var result = this.EvaluateExpression("System.IO.File.Exists('foo.txt')");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(bool));
+            Assert.IsFalse((bool)result);
         }
 
         private object EvaluateExpression(string text)

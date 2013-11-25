@@ -61,6 +61,9 @@
                     if (result is Type && this.name == "new")
                         return Activator.CreateInstance((Type)result, values.ToArray());
 
+                    if (result is Type)
+                        return TypeUtilities.InvokeTypeMember((Type)result, this.name, values);
+
                     return ObjectUtilities.GetValue(result, this.name, values);
                 }
 
