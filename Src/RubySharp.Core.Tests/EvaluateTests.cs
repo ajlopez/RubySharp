@@ -396,6 +396,29 @@
             Assert.AreEqual(System.Windows.Forms.DockStyle.Fill, result);
         }
 
+        [TestMethod]
+        public void EvaluateCreateByteArray()
+        {
+            var result = this.EvaluateExpression("System.Array.CreateInstance(System.Byte, 1024)");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(byte[]));
+
+            var array = (byte[])result;
+
+            Assert.AreEqual(1024, array.Length);
+        }
+
+        [TestMethod]
+        public void EvaluateAccessStringAsArray()
+        {
+            var result = this.EvaluateExpression("'foo'[0]");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(string));
+            Assert.AreEqual("f", result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

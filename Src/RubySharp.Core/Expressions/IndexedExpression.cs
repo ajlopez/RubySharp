@@ -23,8 +23,28 @@
 
         public object Evaluate(Context context)
         {
-            var list = (IList)this.expression.Evaluate(context);
+            object value = this.expression.Evaluate(context);
             int index = (int)this.indexexpression.Evaluate(context);
+
+            if (value is string)
+            {
+                string text = (string)value;
+
+                if (index >= text.Length)
+                    return null;
+
+                if (index < 0)
+                {
+                    index = text.Length + index;
+
+                    if (index < 0)
+                        return null;
+                }
+
+                return text[index].ToString();
+            }
+
+            var list = (IList)this.expression.Evaluate(context);
 
             if (index >= list.Count)
                 return null;

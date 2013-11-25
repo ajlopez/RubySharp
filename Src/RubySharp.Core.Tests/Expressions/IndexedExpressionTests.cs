@@ -67,6 +67,56 @@
         }
 
         [TestMethod]
+        public void GetIndexedString()
+        {
+            Machine machine = new Machine();
+
+            IndexedExpression expression = new IndexedExpression(new ConstantExpression("foo"), new ConstantExpression(0));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("f", result);
+        }
+
+        [TestMethod]
+        public void GetIndexedStringOutOfBound()
+        {
+            Machine machine = new Machine();
+
+            IndexedExpression expression = new IndexedExpression(new ConstantExpression("foo"), new ConstantExpression(10));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void GetIndexedStringNegativeIndex()
+        {
+            Machine machine = new Machine();
+
+            IndexedExpression expression = new IndexedExpression(new ConstantExpression("bar"), new ConstantExpression(-1));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("r", result);
+        }
+
+        [TestMethod]
+        public void GetIndexedStringNegativeIndexAsNil()
+        {
+            Machine machine = new Machine();
+
+            IndexedExpression expression = new IndexedExpression(new ConstantExpression("bar"), new ConstantExpression(-10));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             IndexedExpression expr1 = new IndexedExpression(new NameExpression("a"), new ConstantExpression(1));
