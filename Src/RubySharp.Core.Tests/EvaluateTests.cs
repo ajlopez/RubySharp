@@ -387,6 +387,15 @@
             Assert.IsFalse((bool)result);
         }
 
+        [TestMethod]
+        public void EvaluateTypeEnum()
+        {
+            var result = this.EvaluateExpression("System.Windows.Forms.DockStyle::Fill");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(System.Windows.Forms.DockStyle.Fill, result);
+        }
+
         private object EvaluateExpression(string text)
         {
             Parser parser = new Parser(text);

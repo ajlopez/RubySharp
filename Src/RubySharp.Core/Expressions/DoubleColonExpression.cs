@@ -5,6 +5,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Utilities;
 
     public class DoubleColonExpression : IExpression
     {
@@ -23,6 +24,9 @@
         {
             IList<object> values = new List<object>();
             var result = this.expression.Evaluate(context);
+
+            if (result is Type)
+                return TypeUtilities.ParseEnumValue((Type)result, this.name);
 
             var obj = (ModuleObject)result;
 

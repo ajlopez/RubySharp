@@ -8,6 +8,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
+    using RubySharp.Core.Compiler;
 
     [TestClass]
     public class DoubleColonExpressionTests
@@ -44,6 +45,19 @@
                 Assert.IsInstanceOfType(ex, typeof(NameError));
                 Assert.AreEqual("unitialized constant MyModule::FOO", ex.Message);
             }
+        }
+
+        [TestMethod]
+        public void EvaluateTypeConstant()
+        {
+            Machine machine = new Machine();
+
+            DoubleColonExpression expression = new DoubleColonExpression(new ConstantExpression(typeof(TokenType)), "Name");
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(TokenType.Name, result);
         }
 
         [TestMethod]
