@@ -158,48 +158,26 @@
         private IExpression ParseDefExpression()
         {
             string name = this.ParseName();
-            IExpression named = null;
-            bool wasdot = false;
+            INamedExpression named = null;
+            
+            if (name == "self")
+                named = new SelfExpression();
+            else
+                named = new NameExpression(name);
 
             while (true)
             {
                 if (this.TryParseToken(TokenType.Separator, "."))
                 {
                     string newname = this.ParseName();
-
-                    if (named == null)
-                        if (name == "self")
-                            named = new SelfExpression();
-                        else
-                            named = new NameExpression(name);
-                    else if (wasdot)
-                        named = new DotExpression(named, name, new IExpression[0]);
-                    else
-                        named = new DoubleColonExpression(named, name);
-
-                    name = newname;
-                    wasdot = true;
-
+                    named = new DotExpression(named, newname, new IExpression[0]);
                     continue;
                 }
 
                 if (this.TryParseToken(TokenType.Separator, "::"))
                 {
                     string newname = this.ParseName();
-
-                    if (named == null)
-                        if (name == "self")
-                            named = new SelfExpression();
-                        else
-                            named = new NameExpression(name);
-                    else if (wasdot)
-                        named = new DotExpression(named, name, new IExpression[0]);
-                    else
-                        named = new DoubleColonExpression(named, name);
-
-                    name = newname;
-                    wasdot = false;
-
+                    named = new DoubleColonExpression(named, newname);
                     continue;
                 }
 
@@ -209,10 +187,7 @@
             IList<string> parameters = this.ParseParameterList();
             IExpression body = this.ParseCommandList();
 
-            if (named != null)
-                return new DefDotExpression(named, name, parameters, body);
-            else
-                return new DefExpression(name, parameters, body);
+            return new DefExpression(named, parameters, body);
         }
 
         private ClassExpression ParseClassExpression()

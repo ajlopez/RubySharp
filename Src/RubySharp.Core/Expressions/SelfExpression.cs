@@ -7,13 +7,17 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
 
-    public class SelfExpression : IExpression
+    public class SelfExpression : INamedExpression
     {
         private static int hashcode = typeof(SelfExpression).GetHashCode();
 
         public SelfExpression()
         {
         }
+
+        public IExpression TargetExpression { get { return null; } }
+
+        public string Name { get { return "self"; } }
 
         public object Evaluate(Context context)
         {

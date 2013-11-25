@@ -558,7 +558,7 @@
         public void ParseSimpleDefCommand()
         {
             Parser parser = new Parser("def foo\na=1\nend");
-            var expected = new DefExpression("foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var expected = new DefExpression(new NameExpression("foo"), new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -571,7 +571,7 @@
         public void ParseDefCommandWithParameters()
         {
             Parser parser = new Parser("def foo a, b\na+b\nend");
-            var expected = new DefExpression("foo", new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
+            var expected = new DefExpression(new NameExpression("foo"), new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -584,7 +584,7 @@
         public void ParseDefCommandWithParametersInParentheses()
         {
             Parser parser = new Parser("def foo(a, b)\na+b\nend");
-            var expected = new DefExpression("foo", new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
+            var expected = new DefExpression(new NameExpression("foo"), new string[] { "a", "b" }, new AddExpression(new NameExpression("a"), new NameExpression("b")));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -614,7 +614,7 @@
         public void ParseObjectDefCommand()
         {
             Parser parser = new Parser("def a.foo\na=1\nend");
-            var expected = new DefDotExpression(new NameExpression("a"), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var expected = new DefExpression(new DotExpression(new NameExpression("a"), "foo", new IExpression[0]), new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -627,7 +627,7 @@
         public void ParseSelfDefCommand()
         {
             Parser parser = new Parser("def self.foo\na=1\nend");
-            var expected = new DefDotExpression(new SelfExpression(), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var expected = new DefExpression(new DotExpression(new SelfExpression(), "foo", new IExpression[0]), new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -640,7 +640,7 @@
         public void ParseObjectDefCommandUsingDoubleColon()
         {
             Parser parser = new Parser("def a::foo\na=1\nend");
-            var expected = new DefDotExpression(new NameExpression("a"), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var expected = new DefExpression(new DoubleColonExpression(new NameExpression("a"), "foo"), new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);
@@ -653,7 +653,7 @@
         public void ParseSelfDefCommandUsingDoubleColon()
         {
             Parser parser = new Parser("def self::foo\na=1\nend");
-            var expected = new DefDotExpression(new SelfExpression(), "foo", new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
+            var expected = new DefExpression(new DoubleColonExpression(new SelfExpression(), "foo"), new string[] { }, new AssignExpression("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);

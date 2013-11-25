@@ -5,30 +5,39 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     public class DefExpression : IExpression
     {
         private static int hashcode = typeof(DefExpression).GetHashCode();
 
-        private string name;
+        private INamedExpression namedexpression;
         private IList<string> parameters;
-        private IExpression command;
+        private IExpression expression;
 
-        public DefExpression(string name, IList<string> parameters, IExpression command)
+        public DefExpression(INamedExpression namedexpression, IList<string> parameters, IExpression expression)
         {
-            this.name = name;
+            this.namedexpression = namedexpression;
             this.parameters = parameters;
-            this.command = command;
+            this.expression = expression;
         }
 
         public object Evaluate(Context context)
         {
-            var result = new DefinedFunction(this.command, this.parameters, context);
+            var result = new DefinedFunction(this.expression, this.parameters, context);
 
-            if (context.Module != null)
-                context.Module.SetInstanceMethod(this.name, result);
+            if (this.namedexpression.TargetExpression == null)
+            {
+                if (context.Module != null)
+                    context.Module.SetInstanceMethod(this.namedexpression.Name, result);
+                else
+                    context.Self.Class.SetInstanceMethod(this.namedexpression.Name, result);
+            }
             else
-                context.Self.Class.SetInstanceMethod(this.name, result);
+            {
+                var target = (DynamicObject)this.namedexpression.TargetExpression.Evaluate(context);
+                target.SingletonClass.SetInstanceMethod(this.namedexpression.Name, result);
+            }
 
             return null;
         }
@@ -40,16 +49,16 @@
 
             if (obj is DefExpression)
             {
-                var cmd = (DefExpression)obj;
+                var expr = (DefExpression)obj;
 
-                if (this.parameters.Count != cmd.parameters.Count)
+                if (this.parameters.Count != expr.parameters.Count)
                     return false;
 
                 for (int k = 0; k < this.parameters.Count; k++)
-                    if (this.parameters[k] != cmd.parameters[k])
+                    if (this.parameters[k] != expr.parameters[k])
                         return false;
 
-                return this.name == cmd.name && this.command.Equals(cmd.command);
+                return this.namedexpression.Equals(expr.namedexpression) && this.expression.Equals(expr.expression);
             }
 
             return false;
@@ -57,7 +66,7 @@
 
         public override int GetHashCode()
         {
-            int result = hashcode + this.name.GetHashCode() + this.command.GetHashCode();
+            int result = hashcode + this.namedexpression.GetHashCode() + this.expression.GetHashCode();
 
             foreach (var parameter in this.parameters)
                 result += parameter.GetHashCode();

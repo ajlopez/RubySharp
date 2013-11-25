@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     [TestClass]
     public class DefExpressionTests
@@ -16,7 +17,7 @@
         {
             Machine machine = new Machine();
             Context context = machine.RootContext;
-            DefExpression cmd = new DefExpression("foo", new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            DefExpression cmd = new DefExpression(new NameExpression("foo"), new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
 
@@ -28,12 +29,32 @@
         }
 
         [TestMethod]
+        public void DefineFunction()
+        {
+            Machine machine = new Machine();
+            Context context = machine.RootContext;
+            DynamicObject obj = new DynamicObject((DynamicClass)context.GetLocalValue("Object"));
+            context.SetLocalValue("a", obj);
+            DefExpression cmd = new DefExpression(new DotExpression(new NameExpression("a"), "foo", new IExpression[0]), new string[0], new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+
+            var result = cmd.Evaluate(context);
+
+            Assert.IsNull(result);
+
+            var value = obj.SingletonClass.GetInstanceMethod("foo");
+            Assert.IsNotNull(value);
+            Assert.IsInstanceOfType(value, typeof(DefinedFunction));
+
+            Assert.IsNull(obj.Class.GetInstanceMethod("foo"));
+        }
+
+        [TestMethod]
         public void Equals()
         {
-            DefExpression cmd1 = new DefExpression("foo", new string[0], new ConstantExpression(1));
-            DefExpression cmd2 = new DefExpression("bar", new string[0], new ConstantExpression(1));
-            DefExpression cmd3 = new DefExpression("foo", new string[0], new ConstantExpression(2));
-            DefExpression cmd4 = new DefExpression("foo", new string[0], new ConstantExpression(1));
+            DefExpression cmd1 = new DefExpression(new NameExpression("foo"), new string[0], new ConstantExpression(1));
+            DefExpression cmd2 = new DefExpression(new NameExpression("bar"), new string[0], new ConstantExpression(1));
+            DefExpression cmd3 = new DefExpression(new NameExpression("foo"), new string[0], new ConstantExpression(2));
+            DefExpression cmd4 = new DefExpression(new NameExpression("foo"), new string[0], new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));
@@ -51,10 +72,10 @@
         [TestMethod]
         public void EqualsWithParameters()
         {
-            DefExpression cmd1 = new DefExpression("foo", new string[] { "c" }, new ConstantExpression(1));
-            DefExpression cmd2 = new DefExpression("foo", new string[] { "a" }, new ConstantExpression(1));
-            DefExpression cmd3 = new DefExpression("foo", new string[] { "a", "b" }, new ConstantExpression(1));
-            DefExpression cmd4 = new DefExpression("foo", new string[] { "c" }, new ConstantExpression(1));
+            DefExpression cmd1 = new DefExpression(new NameExpression("foo"), new string[] { "c" }, new ConstantExpression(1));
+            DefExpression cmd2 = new DefExpression(new NameExpression("foo"), new string[] { "a" }, new ConstantExpression(1));
+            DefExpression cmd3 = new DefExpression(new NameExpression("foo"), new string[] { "a", "b" }, new ConstantExpression(1));
+            DefExpression cmd4 = new DefExpression(new NameExpression("foo"), new string[] { "c" }, new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));
