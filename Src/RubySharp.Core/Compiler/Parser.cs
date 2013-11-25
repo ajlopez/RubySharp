@@ -168,6 +168,10 @@
             string name = this.ParseName();
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
+
+            if (!Predicates.IsConstantName(name))
+                throw new SyntaxError("class/module name must be a CONSTANT");
+
             return new ClassExpression(name, body);
         }
 
@@ -175,6 +179,10 @@
         {
             string name = this.ParseName();
             IExpression body = this.ParseCommandList();
+
+            if (!Predicates.IsConstantName(name))
+                throw new SyntaxError("class/module name must be a CONSTANT");
+
             return new ModuleExpression(name, body);
         }
 

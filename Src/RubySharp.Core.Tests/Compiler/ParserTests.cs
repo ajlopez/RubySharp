@@ -1130,5 +1130,39 @@
 
             Assert.IsNull(parser.ParseCommand());
         }
+
+        [TestMethod]
+        public void RaiseIfModuleNameIsNotAConstant()
+        {
+            Parser parser = new Parser("module mymod end");
+
+            try
+            {
+                parser.ParseExpression();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
+                Assert.AreEqual("class/module name must be a CONSTANT", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void RaiseIfClassNameIsNotAConstant()
+        {
+            Parser parser = new Parser("class myclass\nend");
+
+            try
+            {
+                parser.ParseExpression();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(SyntaxError));
+                Assert.AreEqual("class/module name must be a CONSTANT", ex.Message);
+            }
+        }
     }
 }
