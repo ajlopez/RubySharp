@@ -199,7 +199,7 @@
             if (!Predicates.IsConstantName(name))
                 throw new SyntaxError("class/module name must be a CONSTANT");
 
-            return new ClassExpression(name, body);
+            return new ClassExpression(new NameExpression(name), body);
         }
 
         private ModuleExpression ParseModuleExpression()

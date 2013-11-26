@@ -679,7 +679,7 @@
         public void ParseSimpleClassCommand()
         {
             Parser parser = new Parser("class Dog\na=1\nend");
-            var expected = new ClassExpression("Dog", new AssignExpression("a", new ConstantExpression(1)));
+            var expected = new ClassExpression(new NameExpression("Dog"), new AssignExpression("a", new ConstantExpression(1)));
             var result = parser.ParseCommand();
 
             Assert.IsNotNull(result);

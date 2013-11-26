@@ -11,32 +11,52 @@
     public class ClassExpression : IExpression
     {
         private static int hashcode = typeof(ClassExpression).GetHashCode();
-        private string name;
+        private INamedExpression namedexpression;
         private IExpression expression;
 
-        public ClassExpression(string name, IExpression expression)
+        public ClassExpression(INamedExpression namedexpression, IExpression expression)
         {
-            this.name = name;
+            this.namedexpression = namedexpression;
             this.expression = expression;
         }
 
         public object Evaluate(Context context)
         {
             object value = null;
-            
-            if (context.HasLocalValue(this.name))
-                value = context.GetLocalValue(this.name);
+            ModuleObject target = null;
+
+            if (this.namedexpression.TargetExpression == null)
+            {
+                if (context.HasValue(this.namedexpression.Name))
+                    value = context.GetValue(this.namedexpression.Name);
+            }
+            else
+            {
+                target = (ModuleObject)this.namedexpression.TargetExpression.Evaluate(context);
+                value = target.Constants.GetLocalValue(this.namedexpression.Name);
+            }
 
             if (value == null || !(value is DynamicClass))
             {
                 var classclass = (DynamicClass)context.RootContext.GetLocalValue("Class");
                 var newclass = (DynamicClass)classclass.CreateInstance();
-                newclass.Name = this.name;
-                context.SetLocalValue(this.name, newclass);
-                value = newclass;
 
-                if (context.Module != null && char.IsUpper(this.name[0]))
-                    context.Module.Constants.SetLocalValue(this.name, newclass);
+                if (target == null)
+                {
+                    newclass.Name = this.namedexpression.Name;
+
+                    if (context.Module != null)
+                        context.Module.Constants.SetLocalValue(this.namedexpression.Name, newclass);
+                    else
+                        context.RootContext.SetLocalValue(this.namedexpression.Name, newclass);
+                }
+                else
+                {
+                    newclass.Name = target.Name + "::" + this.namedexpression.Name;
+                    target.Constants.SetLocalValue(this.namedexpression.Name, newclass);
+                }
+
+                value = newclass;
             }
 
             var dclass = (DynamicClass)value;
@@ -56,9 +76,9 @@
 
             if (obj is ClassExpression)
             {
-                var cmd = (ClassExpression)obj;
+                var expr = (ClassExpression)obj;
 
-                return this.name == cmd.name && this.expression.Equals(cmd.expression);
+                return this.namedexpression.Equals(expr.namedexpression) && this.expression.Equals(expr.expression);
             }
 
             return false;
@@ -66,7 +86,7 @@
 
         public override int GetHashCode()
         {
-            return this.name.GetHashCode() + this.expression.GetHashCode() + hashcode;
+            return this.namedexpression.GetHashCode() + this.expression.GetHashCode() + hashcode;
         }
     }
 }

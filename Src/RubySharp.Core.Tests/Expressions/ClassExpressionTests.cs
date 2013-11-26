@@ -20,7 +20,7 @@
             Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
             context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
-            ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            ClassExpression cmd = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             var result = cmd.Evaluate(context);
 
@@ -39,7 +39,7 @@
             Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
             context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
-            ClassExpression cmd = new ClassExpression("Dog", new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            ClassExpression cmd = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
             cmd.Evaluate(context);
 
@@ -59,10 +59,10 @@
         [TestMethod]
         public void Equals()
         {
-            ClassExpression cmd1 = new ClassExpression("foo", new ConstantExpression(1));
-            ClassExpression cmd2 = new ClassExpression("bar", new ConstantExpression(1));
-            ClassExpression cmd3 = new ClassExpression("foo", new ConstantExpression(2));
-            ClassExpression cmd4 = new ClassExpression("foo", new ConstantExpression(1));
+            ClassExpression cmd1 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(1));
+            ClassExpression cmd2 = new ClassExpression(new NameExpression("bar"), new ConstantExpression(1));
+            ClassExpression cmd3 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(2));
+            ClassExpression cmd4 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(1));
 
             Assert.IsTrue(cmd1.Equals(cmd4));
             Assert.IsTrue(cmd4.Equals(cmd1));

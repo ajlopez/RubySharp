@@ -71,7 +71,7 @@
         public void EvaluateModuleExpressionWithClassDefinition()
         {
             Machine machine = new Machine();
-            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression("Foo", new ConstantExpression(1)));
+            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression(new NameExpression("Foo"), new ConstantExpression(1)));
 
             Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
 
@@ -92,7 +92,7 @@
         public void EvaluateModuleExpressionWithInternalClassDefinition()
         {
             Machine machine = new Machine();
-            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression("foo", new ConstantExpression(1)));
+            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression(new NameExpression("foo"), new ConstantExpression(1)));
 
             Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
 
