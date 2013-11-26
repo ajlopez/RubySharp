@@ -193,11 +193,11 @@
 
             Assert.IsNotNull(result1);
             Assert.IsInstanceOfType(result1, typeof(DynamicClass));
-            Assert.AreEqual("List", ((DynamicClass)result1).Name);
+            Assert.AreEqual("MyLisp::List", ((DynamicClass)result1).Name);
 
             Assert.IsNotNull(result2);
             Assert.IsInstanceOfType(result2, typeof(DynamicClass));
-            Assert.AreEqual("Atom", ((DynamicClass)result2).Name);
+            Assert.AreEqual("MyLisp::Atom", ((DynamicClass)result2).Name);
         }
 
         [TestMethod]

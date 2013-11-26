@@ -86,24 +86,7 @@
 
             Assert.IsNotNull(@class);
             Assert.IsInstanceOfType(@class, typeof(DynamicClass));
-        }
-
-        [TestMethod]
-        public void EvaluateModuleExpressionWithInternalClassDefinition()
-        {
-            Machine machine = new Machine();
-            ModuleExpression expr = new ModuleExpression("Module1", new ClassExpression(new NameExpression("foo"), new ConstantExpression(1)));
-
-            Assert.AreEqual(null, expr.Evaluate(machine.RootContext));
-
-            var result = machine.RootContext.GetValue("Module1");
-
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
-
-            var module = (ModuleObject)result;
-
-            Assert.IsFalse(module.Constants.HasLocalValue("foo"));
+            Assert.AreEqual("Module1::Foo", ((DynamicClass)@class).Name);
         }
 
         [TestMethod]

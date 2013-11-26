@@ -43,12 +43,16 @@
 
                 if (target == null)
                 {
-                    newclass.Name = this.namedexpression.Name;
-
                     if (context.Module != null)
+                    {
+                        newclass.Name = context.Module.Name + "::" + this.namedexpression.Name;
                         context.Module.Constants.SetLocalValue(this.namedexpression.Name, newclass);
+                    }
                     else
+                    {
+                        newclass.Name = this.namedexpression.Name;
                         context.RootContext.SetLocalValue(this.namedexpression.Name, newclass);
+                    }
                 }
                 else
                 {
