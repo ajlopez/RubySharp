@@ -71,6 +71,7 @@
     <Compile Include="Compiler\TextReaderCharStream.cs" />
     <Compile Include="Compiler\ICharStream.cs" />
     <Compile Include="Compiler\TextCharStream.cs" />
+    <Compile Include="Exceptions\TypeError.cs" />
     <Compile Include="Exceptions\ValueError.cs" />
     <Compile Include="Exceptions\NameError.cs" />
     <Compile Include="Expressions\AssignExpression.cs" />

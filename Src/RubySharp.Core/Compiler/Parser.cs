@@ -193,13 +193,32 @@
         private ClassExpression ParseClassExpression()
         {
             string name = this.ParseName();
+            INamedExpression named = null;
+
+            if (name == "self")
+                named = new SelfExpression();
+            else
+                named = new NameExpression(name);
+
+            while (true)
+            {
+                if (this.TryParseToken(TokenType.Separator, "::"))
+                {
+                    string newname = this.ParseName();
+                    named = new DoubleColonExpression(named, newname);
+                    continue;
+                }
+
+                break;
+            }
+
             this.ParseEndOfCommand();
             IExpression body = this.ParseCommandList();
 
-            if (!Predicates.IsConstantName(name))
+            if (!Predicates.IsConstantName(named.Name))
                 throw new SyntaxError("class/module name must be a CONSTANT");
 
-            return new ClassExpression(new NameExpression(name), body);
+            return new ClassExpression(named, body);
         }
 
         private ModuleExpression ParseModuleExpression()

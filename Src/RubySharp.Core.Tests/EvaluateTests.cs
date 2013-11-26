@@ -5,13 +5,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Compiler;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
-    using RubySharp.Core.Utilities;
     using RubySharp.Core.Tests.Classes;
-    using System.Windows.Forms;
+    using RubySharp.Core.Utilities;
 
     [TestClass]
     public class EvaluateTests
@@ -417,6 +418,34 @@
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(string));
             Assert.AreEqual("f", result);
+        }
+
+        [TestMethod]
+        public void DefineQualifiedClass()
+        {
+            this.Execute("module MyModule\nend");
+            this.Execute("class MyModule::MyClass\nend");
+
+            var result = this.EvaluateExpression("MyModule::MyClass");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+            Assert.AreEqual("MyModule::MyClass", ((DynamicClass)result).Name);
+        }
+
+        [TestMethod]
+        public void TypeErrorWhenDefineQualifiedClassOnAnObject()
+        {
+            try
+            {
+                this.Execute("class self::MyClass\nend");
+                Assert.Fail();
+            }
+            catch (Exception ex) 
+            {
+                Assert.IsInstanceOfType(ex, typeof(TypeError));
+                Assert.IsTrue(ex.Message.EndsWith(" is not a class/module"));
+            }
         }
 
         private object EvaluateExpression(string text)

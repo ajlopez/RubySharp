@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
@@ -27,13 +28,25 @@
 
             if (this.namedexpression.TargetExpression == null)
             {
-                if (context.HasValue(this.namedexpression.Name))
+                if (context.Module != null)
+                {
+                    if (context.Module.Constants.HasLocalValue(this.namedexpression.Name))
+                        value = context.Module.Constants.GetLocalValue(this.namedexpression.Name);
+                }
+                else if (context.HasValue(this.namedexpression.Name))
                     value = context.GetValue(this.namedexpression.Name);
             }
             else
             {
-                target = (ModuleObject)this.namedexpression.TargetExpression.Evaluate(context);
-                value = target.Constants.GetLocalValue(this.namedexpression.Name);
+                object targetvalue = this.namedexpression.TargetExpression.Evaluate(context);
+
+                if (!(targetvalue is ModuleObject))
+                    throw new TypeError(string.Format("{0} is not a class/module", targetvalue.ToString()));
+
+                target = (ModuleObject)targetvalue;
+
+                if (target.Constants.HasLocalValue(this.namedexpression.Name))
+                    value = target.Constants.GetLocalValue(this.namedexpression.Name);
             }
 
             if (value == null || !(value is DynamicClass))

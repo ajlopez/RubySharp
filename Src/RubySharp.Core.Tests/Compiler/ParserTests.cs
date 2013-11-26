@@ -689,6 +689,19 @@
         }
 
         [TestMethod]
+        public void ParseQualifiedClassCommand()
+        {
+            Parser parser = new Parser("class Animals::Dog\na=1\nend");
+            var expected = new ClassExpression(new DoubleColonExpression(new NameExpression("Animals"), "Dog"), new AssignExpression("a", new ConstantExpression(1)));
+            var result = parser.ParseCommand();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, result);
+
+            Assert.IsNull(parser.ParseCommand());
+        }
+
+        [TestMethod]
         public void ParseDotExpression()
         {
             Parser parser = new Parser("dog.foo");
