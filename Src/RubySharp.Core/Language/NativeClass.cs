@@ -46,6 +46,11 @@
             return null;
         }
 
+        public override string ToString()
+        {            
+            return this.Name;
+        }
+
         public object MethodClass(object self, IList<object> values)
         {
             if (self == null)

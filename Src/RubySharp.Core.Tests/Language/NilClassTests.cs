@@ -22,6 +22,7 @@
         public void NilClassName()
         {
             Assert.AreEqual("NilClass", this.@class.Name);
+            Assert.AreEqual("NilClass", this.@class.ToString());
         }
 
         [TestMethod]

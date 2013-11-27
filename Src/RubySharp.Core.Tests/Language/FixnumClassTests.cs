@@ -23,6 +23,7 @@
         {
             Assert.IsNotNull(this.@class);
             Assert.AreEqual("Fixnum", this.@class.Name);
+            Assert.AreEqual("Fixnum", this.@class.ToString());
         }
 
         [TestMethod]

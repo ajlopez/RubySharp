@@ -19,6 +19,8 @@
 
             if (args.Length == 0)
             {
+                Console.WriteLine("rush 0.0.1-alpha-alpha-alpha-realpha ;-)");
+
                 Parser parser = new Parser(Console.In);
 
                 while (true)

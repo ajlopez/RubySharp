@@ -23,6 +23,7 @@
         {
             Assert.IsNotNull(this.@class);
             Assert.AreEqual("Float", this.@class.Name);
+            Assert.AreEqual("Float", this.@class.ToString());
         }
 
         [TestMethod]
