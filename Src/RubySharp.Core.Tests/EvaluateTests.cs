@@ -480,6 +480,15 @@
         public void DefineObjectMethod()
         {
             this.Execute("class Object\ndef foo\nend\nend");
+
+            var result = this.Execute("Object");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            var dclass = (DynamicClass)result;
+
+            Assert.IsNotNull(dclass.GetInstanceMethod("foo"));
         }
 
         private object EvaluateExpression(string text)
