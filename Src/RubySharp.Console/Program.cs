@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Text;
     using RubySharp.Core;
+    using RubySharp.Core.Compiler;
+    using RubySharp.Core.Expressions;
 
     public class Program
     {
@@ -16,7 +18,23 @@
                 machine.ExecuteFile(arg);
 
             if (args.Length == 0)
-                machine.ExecuteReader(Console.In);
+            {
+                Parser parser = new Parser(Console.In);
+
+                while (true)
+                    try
+                    {
+                        IExpression expr = parser.ParseCommand();
+                        var result = expr.Evaluate(machine.RootContext);
+                        var text = result == null ? "nil" : result.ToString();
+                        Console.WriteLine(string.Format("=> {0}", text));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                    }
+            }
         }
     }
 }
