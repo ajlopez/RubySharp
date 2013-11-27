@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Functions;
 
-    public class ModuleClass : DynamicClass
+    public class ModuleClass : ModuleObject
     {
         public ModuleClass(DynamicClass superclass)
             : this("Module", superclass)

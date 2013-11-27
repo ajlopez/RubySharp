@@ -78,7 +78,18 @@
             var method = obj.GetMethod(this.name);
 
             if (method == null)
+            {
+                if (Predicates.IsConstantName(this.name))
+                    try
+                    {
+                        return ObjectUtilities.GetNativeValue(obj, this.name, values);
+                    }
+                    catch
+                    {
+                    }
+
                 throw new NoMethodError(this.name);
+            }
 
             return method.Apply(obj, values);
         }

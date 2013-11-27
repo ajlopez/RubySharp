@@ -20,7 +20,7 @@
         {
             this.requirepaths.Add(".");
             var basicobjectclass = new DynamicClass("BasicObject", null);
-            var objectclass = new DynamicClass("Object", basicobjectclass);
+            var objectclass = new ModuleObject("Object", basicobjectclass);
             var moduleclass = new ModuleClass(objectclass);
             var classclass = new ClassClass(moduleclass, objectclass);
 

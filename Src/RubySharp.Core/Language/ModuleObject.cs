@@ -15,6 +15,12 @@
             this.constants = new Context();
         }
 
+        public ModuleObject(string name, DynamicClass superclass)
+            : base(name, superclass)
+        {
+            this.constants = new Context();
+        }
+
         public Context Constants { get { return this.constants; } }
     }
 }

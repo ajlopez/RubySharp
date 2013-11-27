@@ -314,6 +314,18 @@
         }
 
         [TestMethod]
+        public void EvaluateDynamicObjectNativeMethod()
+        {
+            var obj = (DynamicObject)this.Execute("obj = Object.new");
+
+            var result = this.Execute("obj.GetHashCode");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(int));
+            Assert.AreEqual(obj.GetHashCode(), result);
+        }
+
+        [TestMethod]
         public void EvaluateStringNativeMethodWithArguments()
         {
             var result = this.Execute("'foo'.Substring 1,2");
@@ -462,6 +474,12 @@
                 Assert.IsInstanceOfType(ex, typeof(TypeError));
                 Assert.IsTrue(ex.Message.EndsWith(" is not a class/module"));
             }
+        }
+
+        [TestMethod]
+        public void DefineObjectMethod()
+        {
+            this.Execute("class Object\ndef foo\nend\nend");
         }
 
         private object EvaluateExpression(string text)

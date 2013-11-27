@@ -70,6 +70,7 @@
             var result = machine.RootContext.GetValue("Object");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicClass));
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
 
             var @class = (DynamicClass)result;
             Assert.AreEqual("Object", @class.Name);
@@ -84,6 +85,7 @@
             var result = machine.RootContext.GetValue("Module");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicClass));
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
 
             var @class = (DynamicClass)result;
             Assert.AreEqual("Module", @class.Name);
@@ -98,6 +100,7 @@
             var result = machine.RootContext.GetValue("Class");
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicClass));
+            Assert.IsInstanceOfType(result, typeof(ModuleObject));
 
             var @class = (DynamicClass)result;
             Assert.AreEqual("Class", @class.Name);
