@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
+    using System.Collections;
 
     [TestClass]
     public class DynamicObjectTests
@@ -75,6 +76,37 @@
         {
             DynamicObject obj = new DynamicObject(this.@class);
             Assert.AreSame(this.foo, obj.GetMethod("foo"));
+        }
+
+        [TestMethod]
+        public void GetInitialMethods()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+            Assert.IsNotNull(obj.GetMethod("class"));
+            Assert.IsNotNull(obj.GetMethod("methods"));
+        }
+
+        [TestMethod]
+        public void InvokeClassMethod()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+            Assert.AreSame(this.@class, obj.GetMethod("class").Apply(obj, null));
+        }
+
+        [TestMethod]
+        public void InvokeMethodsMethod()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+            var result = obj.GetMethod("methods").Apply(obj, null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicArray));
+
+            DynamicArray names = (DynamicArray)result;
+
+            Assert.IsTrue(names.Contains(new Symbol("foo")));
+            Assert.IsTrue(names.Contains(new Symbol("class")));
+            Assert.IsTrue(names.Contains(new Symbol("methods")));
         }
 
         [TestMethod]

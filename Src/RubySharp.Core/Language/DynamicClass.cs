@@ -25,6 +25,7 @@
             this.name = name;
             this.superclass = superclass;
             this.SetInstanceMethod("class", new LambdaFunction(GetClass));
+            this.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
         }
 
         public string Name { get { return this.name; } internal set { this.name = value; } }
@@ -73,6 +74,26 @@
         private static object GetClass(DynamicObject obj, IList<object> values)
         {
             return obj.Class;
+        }
+
+        private static object GetMethods(DynamicObject obj, IList<object> values)
+        {
+            var result = new DynamicArray();
+
+            for (var @class = obj.SingletonClass; @class != null; @class = @class.SuperClass)
+            {
+                var names = @class.GetOwnInstanceMethodNames();
+
+                foreach (var name in names)
+                {
+                    Symbol symbol = new Symbol(name);
+
+                    if (!result.Contains(symbol))
+                        result.Add(symbol);
+                }
+            }
+
+            return result;
         }
     }
 }
