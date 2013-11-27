@@ -60,6 +60,11 @@
             return base.GetMethod(name);
         }
 
+        public IList<string> GetOwnInstanceMethodNames()
+        {
+            return this.methods.Keys.ToList();
+        }
+
         public override string ToString()
         {
             return this.Name;

@@ -37,6 +37,43 @@
         }
 
         [TestMethod]
+        public void RetrieveDefinedInstanceMethodIsNull()
+        {
+            DynamicClass dclass = new DynamicClass("Dog");
+            IFunction foo = new DefinedFunction(null, null, null);
+            dclass.SetInstanceMethod("foo", foo);
+
+            Assert.AreSame(foo, dclass.GetInstanceMethod("foo"));
+        }
+
+        [TestMethod]
+        public void GetEmptyOwnInstanceMethodNames()
+        {
+            DynamicClass dclass = new DynamicClass("Dog");
+
+            var result = dclass.GetOwnInstanceMethodNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreNotEqual(0, result.Count);
+            Assert.IsTrue(result.Contains("class"));
+        }
+
+        [TestMethod]
+        public void GetOwnInstanceMethodNames()
+        {
+            DynamicClass dclass = new DynamicClass("Dog");
+            IFunction foo = new DefinedFunction(null, null, null);
+            dclass.SetInstanceMethod("foo", foo);
+
+            var result = dclass.GetOwnInstanceMethodNames();
+
+            Assert.IsNotNull(result);
+            Assert.AreNotEqual(0, result.Count);
+            Assert.IsTrue(result.Contains("class"));
+            Assert.IsTrue(result.Contains("foo"));
+        }
+
+        [TestMethod]
         public void CreateInstance()
         {
             DynamicClass dclass = new DynamicClass("Dog");
