@@ -24,8 +24,13 @@
         {
             this.name = name;
             this.superclass = superclass;
-            this.SetInstanceMethod("class", new LambdaFunction(GetClass));
-            this.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
+
+            // TODO Hack for singleton class
+            if (name == null || !name.StartsWith("#")) {
+                this.SetInstanceMethod("class", new LambdaFunction(GetClass));
+                this.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
+                this.SetInstanceMethod("singleton_methods", new LambdaFunction(GetSingletonMethods));
+            }
         }
 
         public string Name { get { return this.name; } internal set { this.name = value; } }
@@ -96,6 +101,23 @@
                     if (!result.Contains(symbol))
                         result.Add(symbol);
                 }
+            }
+
+            return result;
+        }
+
+        private static object GetSingletonMethods(DynamicObject obj, IList<object> values)
+        {
+            var result = new DynamicArray();
+
+            var names = obj.SingletonClass.GetOwnInstanceMethodNames();
+
+            foreach (var name in names)
+            {
+                Symbol symbol = new Symbol(name);
+
+                if (!result.Contains(symbol))
+                    result.Add(symbol);
             }
 
             return result;

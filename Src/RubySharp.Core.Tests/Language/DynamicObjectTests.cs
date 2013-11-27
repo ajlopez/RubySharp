@@ -110,6 +110,20 @@
         }
 
         [TestMethod]
+        public void InvokeSingletonMethodsMethod()
+        {
+            DynamicObject obj = new DynamicObject(this.@class);
+            var result = obj.GetMethod("singleton_methods").Apply(obj, null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicArray));
+
+            DynamicArray names = (DynamicArray)result;
+
+            Assert.AreEqual(0, names.Count);
+        }
+
+        [TestMethod]
         public void GetMethodFromSingletonClass()
         {
             DynamicObject obj = new DynamicObject(this.@class);

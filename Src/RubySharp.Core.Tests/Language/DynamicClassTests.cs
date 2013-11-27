@@ -72,6 +72,7 @@
             Assert.AreNotEqual(0, result.Count);
             Assert.IsTrue(result.Contains("class"));
             Assert.IsTrue(result.Contains("methods"));
+            Assert.IsTrue(result.Contains("singleton_methods"));
             Assert.IsTrue(result.Contains("foo"));
         }
 
