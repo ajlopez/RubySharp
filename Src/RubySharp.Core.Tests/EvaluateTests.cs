@@ -223,6 +223,22 @@
         }
 
         [TestMethod]
+        public void EvaluateDefinedClassSuperClass()
+        {
+            var classclass = this.EvaluateExpression("Class");
+            var objectclass = this.EvaluateExpression("Object");
+
+            Assert.IsNotNull(classclass);
+
+            var result = this.Execute("class Foo\n end\n Foo.superclass");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+
+            Assert.AreSame(objectclass, result);
+        }
+
+        [TestMethod]
         public void EvaluateDefinedModuleClass()
         {
             var moduleclass = this.EvaluateExpression("Module");

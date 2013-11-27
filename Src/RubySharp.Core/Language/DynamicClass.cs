@@ -71,6 +71,11 @@
             return this.Name;
         }
 
+        internal void SetSuperClass(DynamicClass superclass)
+        {
+            this.superclass = superclass;
+        }
+
         private static object GetClass(DynamicObject obj, IList<object> values)
         {
             return obj.Class;
