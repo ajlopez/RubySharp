@@ -534,6 +534,19 @@
         }
 
         [TestMethod]
+        public void GetStringWithEscapedChars()
+        {
+            Lexer lexer = new Lexer("\"foo\\t\\n\\r\"");
+            var result = lexer.NextToken();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("foo\t\n\r", result.Value);
+            Assert.AreEqual(TokenType.String, result.Type);
+
+            Assert.IsNull(lexer.NextToken());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(SyntaxError))]
         public void RaiseIfDoubleQuoteStringIsNotClosed()
         {

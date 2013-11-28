@@ -195,7 +195,42 @@
             int ich;
 
             for (ich = this.NextChar(); ich >= 0 && ((char)ich) != init; ich = this.NextChar())
+            {
+                char ch = (char)ich;
+
+                if (ch == '\\')
+                {
+                    int ich2 = this.NextChar();
+
+                    if (ich2 > 0)
+                    {
+                        char ch2 = (char)ich2;
+
+                        if (ch2 == 't')
+                        {
+                            value += '\t';
+                            continue;
+                        }
+
+                        if (ch2 == 'r')
+                        {
+                            value += '\r';
+                            continue;
+                        }
+
+                        if (ch2 == 'n')
+                        {
+                            value += '\n';
+                            continue;
+                        }
+
+                        value += ch2;
+                        continue;
+                    }
+                }
+
                 value += (char)ich;
+            }
 
             if (ich < 0)
                 throw new SyntaxError("unclosed string");
