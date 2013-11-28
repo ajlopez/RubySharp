@@ -33,6 +33,28 @@
         }
 
         [TestMethod]
+        public void DefineSimpleSubClass()
+        {
+            Machine machine = new Machine();
+            Context context = machine.RootContext;
+            DynamicClass animalclass = new DynamicClass("Animal", (DynamicClass)context.GetValue("Object"));
+            context.SetLocalValue("Animal", animalclass);
+            StringWriter writer = new StringWriter();
+            context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
+            ClassExpression cmd = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }), new NameExpression("Animal"));
+
+            var result = cmd.Evaluate(context);
+
+            Assert.IsNull(result);
+
+            var value = context.GetValue("Dog");
+            Assert.IsInstanceOfType(value, typeof(DynamicClass));
+            Assert.AreEqual(value, context.GetValue("Dog"));
+            Assert.AreSame(animalclass, ((DynamicClass)value).SuperClass);
+            Assert.AreEqual("123\r\n", writer.ToString());
+        }
+
+        [TestMethod]
         public void RedefineSimpleClass()
         {
             Machine machine = new Machine();

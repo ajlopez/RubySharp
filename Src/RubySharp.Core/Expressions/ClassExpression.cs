@@ -14,11 +14,13 @@
         private static int hashcode = typeof(ClassExpression).GetHashCode();
         private INamedExpression namedexpression;
         private IExpression expression;
+        private INamedExpression superclassexpression;
 
-        public ClassExpression(INamedExpression namedexpression, IExpression expression)
+        public ClassExpression(INamedExpression namedexpression, IExpression expression, INamedExpression superclassexpression = null)
         {
             this.namedexpression = namedexpression;
             this.expression = expression;
+            this.superclassexpression = superclassexpression;
         }
 
         public object Evaluate(Context context)
@@ -71,6 +73,12 @@
                 {
                     newclass.Name = target.Name + "::" + this.namedexpression.Name;
                     target.Constants.SetLocalValue(this.namedexpression.Name, newclass);
+                }
+
+                if (this.superclassexpression != null)
+                {
+                    var superclass = (DynamicClass)this.superclassexpression.Evaluate(context);
+                    newclass.SetSuperClass(superclass);
                 }
 
                 value = newclass;
