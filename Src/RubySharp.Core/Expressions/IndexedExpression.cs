@@ -24,40 +24,52 @@
         public object Evaluate(Context context)
         {
             object value = this.expression.Evaluate(context);
-            int index = (int)this.indexexpression.Evaluate(context);
+            object indexvalue = this.indexexpression.Evaluate(context);
 
-            if (value is string)
+            if (indexvalue is int)
             {
-                string text = (string)value;
+                int index = (int)indexvalue;
 
-                if (index >= text.Length)
+                if (value is string)
+                {
+                    string text = (string)value;
+
+                    if (index >= text.Length)
+                        return null;
+
+                    if (index < 0)
+                    {
+                        index = text.Length + index;
+
+                        if (index < 0)
+                            return null;
+                    }
+
+                    return text[index].ToString();
+                }
+
+                var list = (IList)this.expression.Evaluate(context);
+
+                if (index >= list.Count)
                     return null;
 
                 if (index < 0)
                 {
-                    index = text.Length + index;
+                    index = list.Count + index;
 
                     if (index < 0)
                         return null;
                 }
 
-                return text[index].ToString();
+                return list[index];
             }
 
-            var list = (IList)this.expression.Evaluate(context);
+            var dict = (IDictionary)value;
 
-            if (index >= list.Count)
-                return null;
+            if (dict.Contains(indexvalue))
+                return dict[indexvalue];
 
-            if (index < 0)
-            {
-                index = list.Count + index;
-
-                if (index < 0)
-                    return null;
-            }
-
-            return list[index];
+            return null;
         }
 
         public override bool Equals(object obj)

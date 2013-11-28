@@ -117,6 +117,37 @@
         }
 
         [TestMethod]
+        public void GetIndexedDictionaryEntry()
+        {
+            Machine machine = new Machine();
+            var hash = new DynamicHash();
+            hash[new Symbol("one")] = 1;
+            hash[new Symbol("two")] = 2;
+
+            IndexedExpression expression = new IndexedExpression(new ConstantExpression(hash), new ConstantExpression(new Symbol("one")));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void GetIndexedDictionaryEntryAsNil()
+        {
+            Machine machine = new Machine();
+            var hash = new DynamicHash();
+            hash[new Symbol("one")] = 1;
+            hash[new Symbol("two")] = 2;
+
+            IndexedExpression expression = new IndexedExpression(new ConstantExpression(hash), new ConstantExpression(new Symbol("three")));
+
+            var result = expression.Evaluate(machine.RootContext);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             IndexedExpression expr1 = new IndexedExpression(new NameExpression("a"), new ConstantExpression(1));
