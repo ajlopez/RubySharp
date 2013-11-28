@@ -153,6 +153,7 @@
     <Compile Include="Utilities\TypeUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Compiler\Compiler.cd" />
     <None Include="Context.cd" />
     <None Include="Expressions\Expressions.cd" />
   </ItemGroup>
