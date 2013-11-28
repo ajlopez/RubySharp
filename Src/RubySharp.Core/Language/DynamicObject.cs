@@ -24,7 +24,10 @@
             get
             {
                 if (this.singletonclass == null)
+                {
                     this.singletonclass = new DynamicClass(string.Format("#<Class:{0}>", this.ToString()), this.@class);
+                    this.singletonclass.SetClass(this.@class.Class);
+                }
 
                 return this.singletonclass;
             }

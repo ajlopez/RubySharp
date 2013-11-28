@@ -18,7 +18,7 @@
         [TestInitialize]
         public void Setup()
         {
-            this.@class = new DynamicClass("Dog");
+            this.@class = new DynamicClass(new DynamicClass("Class"), "Dog");
             this.foo = new DefinedFunction(null, null, null);
             this.@class.SetInstanceMethod("foo", this.foo);
         }
@@ -41,6 +41,8 @@
             Assert.IsNotNull(singleton);
             Assert.AreSame(obj.Class, singleton.SuperClass);
             Assert.AreEqual(string.Format("#<Class:{0}>", obj.ToString()), singleton.Name);
+            Assert.IsNotNull(singleton.Class);
+            Assert.AreEqual("Class", singleton.Class.Name);
         }
 
         [TestMethod]
