@@ -1,9 +1,9 @@
 ﻿namespace RubySharp.Core.Expressions
 {
+    using System.Collections;
     using System.Collections.Generic;
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Language;
-    using System.Collections;
 
     public class IndexedExpression : IExpression
     {

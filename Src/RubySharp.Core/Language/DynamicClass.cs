@@ -26,7 +26,8 @@
             this.superclass = superclass;
 
             // TODO Hack for singleton class
-            if (name == null || !name.StartsWith("#")) {
+            if (name == null || !name.StartsWith("#")) 
+            {
                 this.SetInstanceMethod("class", new LambdaFunction(GetClass));
                 this.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
                 this.SetInstanceMethod("singleton_methods", new LambdaFunction(GetSingletonMethods));

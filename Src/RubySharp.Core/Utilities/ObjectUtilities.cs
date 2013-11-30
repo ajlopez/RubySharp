@@ -5,8 +5,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using RubySharp.Core.Language;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
 
     // Based on AjSharp AjLanguage.ObjectUtilities
     // Based on PythonSharp.Utilitites

@@ -8,7 +8,7 @@
 
     public class TextReaderCharStream : ICharStream
     {
-        TextReader reader;
+        private TextReader reader;
         private char[] buffer = new char[1024];
         private int length;
         private int position;

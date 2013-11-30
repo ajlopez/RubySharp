@@ -94,7 +94,7 @@
             return method.Apply(obj, values);
         }
 
-        public String AsQualifiedName()
+        public string AsQualifiedName()
         {
             if (!char.IsUpper(this.name[0]))
                 return null;

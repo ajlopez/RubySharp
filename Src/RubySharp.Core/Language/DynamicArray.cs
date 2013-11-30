@@ -1,10 +1,10 @@
 ﻿namespace RubySharp.Core.Language
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Collections;
 
     public class DynamicArray : ArrayList
     {
@@ -17,6 +17,7 @@
 
                 return base[index];
             }
+
             set
             {
                 while (index >= this.Count)

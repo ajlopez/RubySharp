@@ -1,11 +1,11 @@
 ﻿namespace RubySharp.Core.Language
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Functions;
-    using System.Collections;
 
     public class NativeClass : DynamicObject
     {

@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using RubySharp.Core.Compiler;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
-    using System.IO;
-    using System.Reflection;
 
     public class Machine
     {

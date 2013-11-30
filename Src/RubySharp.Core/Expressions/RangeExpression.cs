@@ -38,7 +38,7 @@
 
         public override int GetHashCode()
         {
-            return hashcode + this.fromexpression.GetHashCode() + 7 * this.toexpression.GetHashCode();
+            return hashcode + this.fromexpression.GetHashCode() + (7 * this.toexpression.GetHashCode());
         }
     }
 }

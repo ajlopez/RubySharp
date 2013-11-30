@@ -1,10 +1,10 @@
 ﻿namespace RubySharp.Core.Language
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Collections;
 
     public class Range : IEnumerable<int>
     {
@@ -45,6 +45,11 @@
                 this.current = from - 1;
             }
 
+            int IEnumerator<int>.Current
+            {
+                get { return this.current; }
+            }
+
             public object Current
             {
                 get { return this.current; }
@@ -60,11 +65,6 @@
             public void Reset()
             {
                 this.current = this.from - 1;
-            }
-
-            int IEnumerator<int>.Current
-            {
-                get { return this.current; }
             }
 
             public void Dispose()

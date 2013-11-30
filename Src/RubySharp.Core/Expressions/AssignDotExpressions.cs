@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
-    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Utilities;
 
     public class AssignDotExpressions : IExpression

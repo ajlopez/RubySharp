@@ -1,11 +1,11 @@
 ﻿namespace RubySharp.Core.Expressions
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using RubySharp.Core.Functions;
-    using System.Collections;
     using RubySharp.Core.Language;
 
     public class HashExpression : IExpression

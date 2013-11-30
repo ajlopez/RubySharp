@@ -133,7 +133,7 @@
             if (ich >= 0)
             {
                 if (string.IsNullOrEmpty(value) && (char)ich == Variable)
-                    return NextClassVariableName();
+                    return this.NextClassVariableName();
 
                 this.BackChar();
             }
@@ -286,7 +286,7 @@
 
                 if (ich > 0 && (char)ich == StartComment)
                 {
-                    for (ich = this.stream.NextChar(); ich >= 0 && (char)ich != '\n'; )
+                    for (ich = this.stream.NextChar(); ich >= 0 && (char)ich != '\n';)
                         ich = this.stream.NextChar();
 
                     if (ich < 0)

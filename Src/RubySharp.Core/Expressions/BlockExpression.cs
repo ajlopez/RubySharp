@@ -19,7 +19,7 @@
 
         public object Evaluate(Context context)
         {
-            return new Block(paramnames, this.expression, context);
+            return new Block(this.paramnames, this.expression, context);
         }
 
         public override bool Equals(object obj)
@@ -53,7 +53,8 @@
         {
             int result = typeof(BlockExpression).GetHashCode() + this.expression.GetHashCode();
 
-            foreach (var paramname in this.paramnames) {
+            foreach (var paramname in this.paramnames) 
+            {
                 result *= 7;
                 result += paramname.GetHashCode();
             }
