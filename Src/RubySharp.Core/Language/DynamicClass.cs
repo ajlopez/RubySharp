@@ -49,7 +49,7 @@
             return null;
         }
 
-        public virtual DynamicObject CreateInstance()
+        public DynamicObject CreateInstance()
         {
             return new DynamicObject(this);
         }
