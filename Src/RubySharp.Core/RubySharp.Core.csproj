@@ -120,7 +120,6 @@
     <Compile Include="Expressions\IExpression.cs" />
     <Compile Include="Functions\LambdaFunction.cs" />
     <Compile Include="Functions\PrintFunction.cs" />
-    <Compile Include="Functions\NewFunction.cs" />
     <Compile Include="Functions\DefinedFunction.cs" />
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />

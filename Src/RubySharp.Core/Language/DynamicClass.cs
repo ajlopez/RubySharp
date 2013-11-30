@@ -8,8 +8,6 @@
 
     public class DynamicClass : DynamicObject
     {
-        private static IFunction newfunction = new NewFunction();
-
         private string name;
         private DynamicClass superclass;
         private DynamicClass parent;
