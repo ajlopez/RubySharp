@@ -88,7 +88,8 @@
         [TestMethod]
         public void ClassHasNewMethod()
         {
-            DynamicClass @class = new DynamicClass("Dog");
+            Machine machine = new Machine();
+            DynamicClass @class = new DynamicClass((DynamicClass)machine.RootContext.GetLocalValue("Class"), "Dog", (DynamicClass)machine.RootContext.GetLocalValue("Object"));
 
             var result = @class.GetMethod("new");
 
@@ -106,7 +107,8 @@
         [TestMethod]
         public void ApplyNewMethod()
         {
-            DynamicClass @class = new DynamicClass("Dog");
+            Machine machine = new Machine();
+            DynamicClass @class = new DynamicClass((DynamicClass)machine.RootContext.GetLocalValue("Class"), "Dog", (DynamicClass)machine.RootContext.GetLocalValue("Object"));
 
             var result = @class.GetMethod("new").Apply(@class, null);
 
@@ -121,7 +123,8 @@
         [TestMethod]
         public void ApplyNewMethodCallingInitialize()
         {
-            DynamicClass @class = new DynamicClass("Dog");
+            Machine machine = new Machine();
+            DynamicClass @class = new DynamicClass((DynamicClass)machine.RootContext.GetLocalValue("Class"), "Dog", (DynamicClass)machine.RootContext.GetLocalValue("Object"));
             IFunction initialize = new DefinedFunction(new AssignInstanceVarExpression("age", new ConstantExpression(10)), new string[0], null);
             @class.SetInstanceMethod("initialize", initialize);
 

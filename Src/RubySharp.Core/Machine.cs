@@ -41,6 +41,8 @@
             moduleclass.SetInstanceMethod("superclass", new LambdaFunction(GetSuperClass));
             moduleclass.SetInstanceMethod("name", new LambdaFunction(GetName));
 
+            classclass.SetInstanceMethod("new", new LambdaFunction(NewInstance));
+
             this.rootcontext.SetLocalValue("Fixnum", new FixnumClass(this));
             this.rootcontext.SetLocalValue("Float", new FloatClass(this));
             this.rootcontext.SetLocalValue("String", new StringClass(this));
@@ -144,6 +146,18 @@
                 result = command.Evaluate(this.rootcontext);
 
             return result;
+        }
+
+        private static object NewInstance(DynamicObject obj, IList<object> values)
+        {
+            var newobj = ((DynamicClass)obj).CreateInstance();
+
+            var initialize = newobj.GetMethod("initialize");
+
+            if (initialize != null)
+                initialize.Apply(newobj, values);
+
+            return newobj;
         }
 
         private static object GetName(DynamicObject obj, IList<object> values)

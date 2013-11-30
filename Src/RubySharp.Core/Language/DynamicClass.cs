@@ -56,9 +56,6 @@
 
         public override IFunction GetMethod(string name)
         {
-            if (name == "new")
-                return newfunction;
-
             return base.GetMethod(name);
         }
 
