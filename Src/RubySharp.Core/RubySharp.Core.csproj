@@ -125,7 +125,6 @@
     <Compile Include="Functions\IFunction.cs" />
     <Compile Include="Functions\PutsFunction.cs" />
     <Compile Include="Functions\RequireFunction.cs" />
-    <Compile Include="Language\ClassClass.cs" />
     <Compile Include="Language\ArrayClass.cs" />
     <Compile Include="Language\FunctionWrapper.cs" />
     <Compile Include="Language\Predicates.cs" />
@@ -133,11 +132,9 @@
     <Compile Include="Language\HashClass.cs" />
     <Compile Include="Language\DynamicArray.cs" />
     <Compile Include="Language\DynamicHash.cs" />
-    <Compile Include="Language\ModuleClass.cs" />
     <Compile Include="Language\DynamicObject.cs" />
     <Compile Include="Language\Block.cs" />
     <Compile Include="Language\FalseClass.cs" />
-    <Compile Include="Language\ModuleObject.cs" />
     <Compile Include="Language\Range.cs" />
     <Compile Include="Language\TrueClass.cs" />
     <Compile Include="Language\FloatClass.cs" />

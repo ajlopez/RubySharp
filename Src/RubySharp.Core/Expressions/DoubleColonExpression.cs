@@ -32,7 +32,7 @@
             if (result is Type)
                 return TypeUtilities.ParseEnumValue((Type)result, this.name);
 
-            var obj = (ModuleObject)result;
+            var obj = (DynamicClass)result;
 
             if (!obj.Constants.HasLocalValue(this.name))
                 throw new NameError(string.Format("unitialized constant {0}::{1}", obj.Name, this.name));

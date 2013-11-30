@@ -22,9 +22,9 @@
             var result = machine.RootContext.GetValue("Module1");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
 
-            var module = (ModuleObject)result;
+            var module = (DynamicClass)result;
 
             var method = module.GetMethod("name");
             Assert.IsNotNull(method);
@@ -42,9 +42,9 @@
             var result = machine.RootContext.GetValue("Module1");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
 
-            var module = (ModuleObject)result;
+            var module = (DynamicClass)result;
 
             Assert.AreEqual(1, module.Constants.GetLocalValue("ONE"));
         }
@@ -60,9 +60,9 @@
             var result = machine.RootContext.GetValue("Module1");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
 
-            var module = (ModuleObject)result;
+            var module = (DynamicClass)result;
 
             Assert.IsFalse(module.Constants.HasLocalValue("one"));
         }
@@ -78,9 +78,9 @@
             var result = machine.RootContext.GetValue("Module1");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
 
-            var module = (ModuleObject)result;
+            var module = (DynamicClass)result;
 
             var @class = module.Constants.GetLocalValue("Foo");
 

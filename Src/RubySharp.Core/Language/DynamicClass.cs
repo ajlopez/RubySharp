@@ -13,6 +13,7 @@
         private string name;
         private DynamicClass superclass;
         private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
+        private Context constants = new Context();
 
         public DynamicClass(string name, DynamicClass superclass = null)
             : this(null, name, superclass)
@@ -25,18 +26,20 @@
             this.name = name;
             this.superclass = superclass;
 
-            // TODO Hack for singleton class
-            if (name == null || !name.StartsWith("#")) 
-            {
-                this.SetInstanceMethod("class", new LambdaFunction(GetClass));
-                this.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
-                this.SetInstanceMethod("singleton_methods", new LambdaFunction(GetSingletonMethods));
-            }
+            //// TODO Hack for singleton class
+            //if (name == null || !name.StartsWith("#")) 
+            //{
+            //    this.SetInstanceMethod("class", new LambdaFunction(GetClass));
+            //    this.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
+            //    this.SetInstanceMethod("singleton_methods", new LambdaFunction(GetSingletonMethods));
+            //}
         }
 
         public string Name { get { return this.name; } internal set { this.name = value; } }
 
         public DynamicClass SuperClass { get { return this.superclass; } }
+
+        public Context Constants { get { return this.constants; } }
 
         public void SetInstanceMethod(string name, IFunction method)
         {

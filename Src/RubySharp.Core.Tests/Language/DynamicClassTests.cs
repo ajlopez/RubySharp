@@ -54,9 +54,7 @@
             var result = dclass.GetOwnInstanceMethodNames();
 
             Assert.IsNotNull(result);
-            Assert.AreNotEqual(0, result.Count);
-            Assert.IsTrue(result.Contains("class"));
-            Assert.IsTrue(result.Contains("methods"));
+            Assert.AreEqual(0, result.Count);
         }
 
         [TestMethod]
@@ -70,9 +68,6 @@
 
             Assert.IsNotNull(result);
             Assert.AreNotEqual(0, result.Count);
-            Assert.IsTrue(result.Contains("class"));
-            Assert.IsTrue(result.Contains("methods"));
-            Assert.IsTrue(result.Contains("singleton_methods"));
             Assert.IsTrue(result.Contains("foo"));
         }
 

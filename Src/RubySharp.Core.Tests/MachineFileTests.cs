@@ -164,14 +164,14 @@
             var result = this.machine.ExecuteText("Module1");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
-            Assert.AreEqual("Module1", ((ModuleObject)result).Name);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+            Assert.AreEqual("Module1", ((DynamicClass)result).Name);
 
             result = this.machine.ExecuteText("Module2");
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(ModuleObject));
-            Assert.AreEqual("Module2", ((ModuleObject)result).Name);
+            Assert.IsInstanceOfType(result, typeof(DynamicClass));
+            Assert.AreEqual("Module2", ((DynamicClass)result).Name);
         }
 
         [TestMethod]
@@ -213,8 +213,8 @@
             Assert.AreEqual("MyClass", ((DynamicClass)result1).Name);
 
             Assert.IsNotNull(result2);
-            Assert.IsInstanceOfType(result2, typeof(ModuleObject));
-            Assert.AreEqual("MyClass::MyModule", ((ModuleObject)result2).Name);
+            Assert.IsInstanceOfType(result2, typeof(DynamicClass));
+            Assert.AreEqual("MyClass::MyModule", ((DynamicClass)result2).Name);
         }
 
         [TestMethod]
@@ -227,16 +227,16 @@
             var result3 = this.machine.ExecuteText("MyModule::MySubmodule::MySubmodule2");
 
             Assert.IsNotNull(result1);
-            Assert.IsInstanceOfType(result1, typeof(ModuleObject));
-            Assert.AreEqual("MyModule", ((ModuleObject)result1).Name);
+            Assert.IsInstanceOfType(result1, typeof(DynamicClass));
+            Assert.AreEqual("MyModule", ((DynamicClass)result1).Name);
 
             Assert.IsNotNull(result2);
-            Assert.IsInstanceOfType(result2, typeof(ModuleObject));
-            Assert.AreEqual("MyModule::MySubmodule", ((ModuleObject)result2).Name);
+            Assert.IsInstanceOfType(result2, typeof(DynamicClass));
+            Assert.AreEqual("MyModule::MySubmodule", ((DynamicClass)result2).Name);
 
             Assert.IsNotNull(result3);
-            Assert.IsInstanceOfType(result3, typeof(ModuleObject));
-            Assert.AreEqual("MyModule::MySubmodule::MySubmodule2", ((ModuleObject)result3).Name);
+            Assert.IsInstanceOfType(result3, typeof(DynamicClass));
+            Assert.AreEqual("MyModule::MySubmodule::MySubmodule2", ((DynamicClass)result3).Name);
         }
 
         [TestMethod]
@@ -248,8 +248,8 @@
             var result2 = this.machine.ExecuteText("MyModule.foo");
 
             Assert.IsNotNull(result1);
-            Assert.IsInstanceOfType(result1, typeof(ModuleObject));
-            Assert.AreEqual("MyModule", ((ModuleObject)result1).Name);
+            Assert.IsInstanceOfType(result1, typeof(DynamicClass));
+            Assert.AreEqual("MyModule", ((DynamicClass)result1).Name);
             Assert.AreSame(this.machine.ExecuteText("Module"), this.machine.ExecuteText("MyModule.class"));
 
             Assert.IsNotNull(result2);
@@ -265,8 +265,8 @@
             var result2 = this.machine.ExecuteText("MyClass.foo");
 
             Assert.IsNotNull(result1);
-            Assert.IsInstanceOfType(result1, typeof(ModuleObject));
-            Assert.AreEqual("MyClass", ((ModuleObject)result1).Name);
+            Assert.IsInstanceOfType(result1, typeof(DynamicClass));
+            Assert.AreEqual("MyClass", ((DynamicClass)result1).Name);
             Assert.AreSame(this.machine.ExecuteText("Class"), this.machine.ExecuteText("MyClass.class"));
 
             Assert.IsNotNull(result2);

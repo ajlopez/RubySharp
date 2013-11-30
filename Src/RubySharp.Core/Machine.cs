@@ -20,9 +20,9 @@
         {
             this.requirepaths.Add(".");
             var basicobjectclass = new DynamicClass("BasicObject", null);
-            var objectclass = new ModuleObject("Object", basicobjectclass);
-            var moduleclass = new ModuleClass(objectclass);
-            var classclass = new ClassClass(moduleclass, objectclass);
+            var objectclass = new DynamicClass("Object", basicobjectclass);
+            var moduleclass = new DynamicClass("Module", objectclass);
+            var classclass = new DynamicClass("Class", moduleclass);
 
             this.rootcontext.SetLocalValue("BasicObject", basicobjectclass);
             this.rootcontext.SetLocalValue("Object", objectclass);
@@ -33,6 +33,13 @@
             objectclass.SetClass(classclass);
             moduleclass.SetClass(classclass);
             classclass.SetClass(classclass);
+
+            basicobjectclass.SetInstanceMethod("class", new LambdaFunction(GetClass));
+            basicobjectclass.SetInstanceMethod("methods", new LambdaFunction(GetMethods));
+            basicobjectclass.SetInstanceMethod("singleton_methods", new LambdaFunction(GetSingletonMethods));
+
+            moduleclass.SetInstanceMethod("superclass", new LambdaFunction(GetSuperClass));
+            moduleclass.SetInstanceMethod("name", new LambdaFunction(GetName));
 
             this.rootcontext.SetLocalValue("Fixnum", new FixnumClass(this));
             this.rootcontext.SetLocalValue("Float", new FloatClass(this));
@@ -135,6 +142,58 @@
 
             for (var command = parser.ParseCommand(); command != null; command = parser.ParseCommand())
                 result = command.Evaluate(this.rootcontext);
+
+            return result;
+        }
+
+        private static object GetName(DynamicObject obj, IList<object> values)
+        {
+            return ((DynamicClass)obj).Name;
+        }
+
+        private static object GetSuperClass(DynamicObject obj, IList<object> values)
+        {
+            return ((DynamicClass)obj).SuperClass;
+        }
+
+        private static object GetClass(DynamicObject obj, IList<object> values)
+        {
+            return obj.Class;
+        }
+
+        private static object GetMethods(DynamicObject obj, IList<object> values)
+        {
+            var result = new DynamicArray();
+
+            for (var @class = obj.SingletonClass; @class != null; @class = @class.SuperClass)
+            {
+                var names = @class.GetOwnInstanceMethodNames();
+
+                foreach (var name in names)
+                {
+                    Symbol symbol = new Symbol(name);
+
+                    if (!result.Contains(symbol))
+                        result.Add(symbol);
+                }
+            }
+
+            return result;
+        }
+
+        private static object GetSingletonMethods(DynamicObject obj, IList<object> values)
+        {
+            var result = new DynamicArray();
+
+            var names = obj.SingletonClass.GetOwnInstanceMethodNames();
+
+            foreach (var name in names)
+            {
+                Symbol symbol = new Symbol(name);
+
+                if (!result.Contains(symbol))
+                    result.Add(symbol);
+            }
 
             return result;
         }

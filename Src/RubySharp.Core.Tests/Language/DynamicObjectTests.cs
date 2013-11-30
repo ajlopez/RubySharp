@@ -18,7 +18,8 @@
         [TestInitialize]
         public void Setup()
         {
-            this.@class = new DynamicClass(new DynamicClass("Class"), "Dog");
+            Machine machine = new Machine();
+            this.@class = new DynamicClass((DynamicClass)machine.RootContext.GetLocalValue("Class"), "Dog", (DynamicClass)machine.RootContext.GetLocalValue("Object"));
             this.foo = new DefinedFunction(null, null, null);
             this.@class.SetInstanceMethod("foo", this.foo);
         }

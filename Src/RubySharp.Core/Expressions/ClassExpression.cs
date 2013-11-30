@@ -26,7 +26,7 @@
         public object Evaluate(Context context)
         {
             object value = null;
-            ModuleObject target = null;
+            DynamicClass target = null;
 
             if (this.namedexpression.TargetExpression == null)
             {
@@ -42,10 +42,10 @@
             {
                 object targetvalue = this.namedexpression.TargetExpression.Evaluate(context);
 
-                if (!(targetvalue is ModuleObject))
+                if (!(targetvalue is DynamicClass))
                     throw new TypeError(string.Format("{0} is not a class/module", targetvalue.ToString()));
 
-                target = (ModuleObject)targetvalue;
+                target = (DynamicClass)targetvalue;
 
                 if (target.Constants.HasLocalValue(this.namedexpression.Name))
                     value = target.Constants.GetLocalValue(this.namedexpression.Name);
@@ -54,7 +54,8 @@
             if (value == null || !(value is DynamicClass))
             {
                 var classclass = (DynamicClass)context.RootContext.GetLocalValue("Class");
-                var newclass = (DynamicClass)classclass.CreateInstance();
+                var objectclass = (DynamicClass)context.RootContext.GetLocalValue("Object");
+                var newclass = new DynamicClass(classclass, this.namedexpression.Name, objectclass);
 
                 if (target == null)
                 {
@@ -86,7 +87,7 @@
 
             var dclass = (DynamicClass)value;
 
-            Context classcontext = new Context((ModuleObject)dclass, context);
+            Context classcontext = new Context(dclass, context);
             classcontext.Self = dclass;
 
             this.expression.Evaluate(classcontext);

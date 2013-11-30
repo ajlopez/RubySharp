@@ -31,12 +31,12 @@
             else if (context.HasLocalValue(this.name))
                 value = context.GetLocalValue(this.name);
 
-            ModuleObject module;
+            DynamicClass module;
 
-            if (value == null || !(value is ModuleObject))
+            if (value == null || !(value is DynamicClass))
             {
-                ModuleClass modclass = (ModuleClass)context.RootContext.GetLocalValue("Module");
-                module = (ModuleObject)modclass.CreateInstance();
+                DynamicClass modclass = (DynamicClass)context.RootContext.GetLocalValue("Module");
+                module = new DynamicClass(modclass, this.name);
 
                 if (context.Module != null)
                 {
@@ -50,7 +50,7 @@
                 }
             }
             else
-                module = (ModuleObject)value;
+                module = (DynamicClass)value;
 
             Context newcontext = new Context(module, context.RootContext);
             return this.expression.Evaluate(newcontext);

@@ -11,7 +11,7 @@
         private Context parent;
         private IDictionary<string, object> values = new Dictionary<string, object>();
         private DynamicObject self;
-        private ModuleObject module;
+        private DynamicClass module;
 
         public Context()
             : this(null)
@@ -23,7 +23,7 @@
             this.parent = parent;
         }
 
-        public Context(ModuleObject module, Context parent)
+        public Context(DynamicClass module, Context parent)
         {
             this.module = module;
             this.parent = parent;
@@ -38,7 +38,7 @@
 
         public DynamicObject Self { get { return this.self; } internal set { this.self = value; } }
 
-        public ModuleObject Module { get { return this.module; } }
+        public DynamicClass Module { get { return this.module; } }
 
         public Context Parent { get { return this.parent; } }
 
