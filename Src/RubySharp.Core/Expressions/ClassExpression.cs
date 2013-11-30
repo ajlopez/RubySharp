@@ -54,33 +54,19 @@
             if (value == null || !(value is DynamicClass))
             {
                 var classclass = (DynamicClass)context.RootContext.GetLocalValue("Class");
-                var objectclass = (DynamicClass)context.RootContext.GetLocalValue("Object");
-                var newclass = new DynamicClass(classclass, this.namedexpression.Name, objectclass);
-
-                if (target == null)
-                {
-                    if (context.Module != null)
-                    {
-                        newclass.Name = context.Module.Name + "::" + this.namedexpression.Name;
-                        context.Module.Constants.SetLocalValue(this.namedexpression.Name, newclass);
-                    }
-                    else
-                    {
-                        newclass.Name = this.namedexpression.Name;
-                        context.RootContext.SetLocalValue(this.namedexpression.Name, newclass);
-                    }
-                }
-                else
-                {
-                    newclass.Name = target.Name + "::" + this.namedexpression.Name;
-                    target.Constants.SetLocalValue(this.namedexpression.Name, newclass);
-                }
+                var superclass = (DynamicClass)context.RootContext.GetLocalValue("Object");
+                string name = this.namedexpression.Name;
+                var parent = target == null ? context.Module : target;
 
                 if (this.superclassexpression != null)
-                {
-                    var superclass = (DynamicClass)this.superclassexpression.Evaluate(context);
-                    newclass.SetSuperClass(superclass);
-                }
+                    superclass = (DynamicClass)this.superclassexpression.Evaluate(context);
+                
+                var newclass = new DynamicClass(classclass, name, superclass, parent);
+
+                if (parent == null)
+                    context.RootContext.SetLocalValue(name, newclass);
+                else
+                    parent.Constants.SetLocalValue(name, newclass);
 
                 value = newclass;
             }

@@ -86,7 +86,8 @@
 
             Assert.IsNotNull(@class);
             Assert.IsInstanceOfType(@class, typeof(DynamicClass));
-            Assert.AreEqual("Module1::Foo", ((DynamicClass)@class).Name);
+            Assert.AreEqual("Foo", ((DynamicClass)@class).Name);
+            Assert.AreEqual("Module1::Foo", ((DynamicClass)@class).FullName);
         }
 
         [TestMethod]

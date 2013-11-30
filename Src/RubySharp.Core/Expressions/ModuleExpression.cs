@@ -36,18 +36,13 @@
             if (value == null || !(value is DynamicClass))
             {
                 DynamicClass modclass = (DynamicClass)context.RootContext.GetLocalValue("Module");
-                module = new DynamicClass(modclass, this.name);
+                var superclass = (DynamicClass)context.RootContext.GetLocalValue("Object");
+                module = new DynamicClass(modclass, this.name, superclass, context.Module);
 
                 if (context.Module != null)
-                {
-                    module.Name = context.Module.Name + "::" + this.name;
                     context.Module.Constants.SetLocalValue(this.name, module);
-                }
                 else
-                {
-                    module.Name = this.name;
                     context.RootContext.SetLocalValue(this.name, module);
-                }
             }
             else
                 module = (DynamicClass)value;

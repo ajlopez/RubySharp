@@ -12,6 +12,7 @@
 
         private string name;
         private DynamicClass superclass;
+        private DynamicClass parent;
         private IDictionary<string, IFunction> methods = new Dictionary<string, IFunction>();
         private Context constants = new Context();
 
@@ -20,18 +21,30 @@
         {
         }
 
-        public DynamicClass(DynamicClass @class, string name, DynamicClass superclass = null)
+        public DynamicClass(DynamicClass @class, string name, DynamicClass superclass = null, DynamicClass parent = null)
             : base(@class)
         {
             this.name = name;
             this.superclass = superclass;
+            this.parent = parent;
         }
 
-        public string Name { get { return this.name; } internal set { this.name = value; } }
+        public string Name { get { return this.name; } }
 
         public DynamicClass SuperClass { get { return this.superclass; } }
 
         public Context Constants { get { return this.constants; } }
+
+        public string FullName
+        {
+            get
+            {
+                if (this.parent == null)
+                    return this.Name;
+
+                return this.parent.FullName + "::" + this.Name;
+            }
+        }
 
         public void SetInstanceMethod(string name, IFunction method)
         {
@@ -66,7 +79,7 @@
 
         public override string ToString()
         {
-            return this.Name;
+            return this.FullName;
         }
 
         internal void SetSuperClass(DynamicClass superclass)

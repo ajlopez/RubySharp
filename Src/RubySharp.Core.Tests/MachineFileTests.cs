@@ -193,11 +193,13 @@
 
             Assert.IsNotNull(result1);
             Assert.IsInstanceOfType(result1, typeof(DynamicClass));
-            Assert.AreEqual("MyLisp::List", ((DynamicClass)result1).Name);
+            Assert.AreEqual("List", ((DynamicClass)result1).Name);
+            Assert.AreEqual("MyLisp::List", ((DynamicClass)result1).FullName);
 
             Assert.IsNotNull(result2);
             Assert.IsInstanceOfType(result2, typeof(DynamicClass));
-            Assert.AreEqual("MyLisp::Atom", ((DynamicClass)result2).Name);
+            Assert.AreEqual("Atom", ((DynamicClass)result2).Name);
+            Assert.AreEqual("MyLisp::Atom", ((DynamicClass)result2).FullName);
         }
 
         [TestMethod]
@@ -211,10 +213,12 @@
             Assert.IsNotNull(result1);
             Assert.IsInstanceOfType(result1, typeof(DynamicClass));
             Assert.AreEqual("MyClass", ((DynamicClass)result1).Name);
+            Assert.AreEqual("MyClass", ((DynamicClass)result1).FullName);
 
             Assert.IsNotNull(result2);
             Assert.IsInstanceOfType(result2, typeof(DynamicClass));
-            Assert.AreEqual("MyClass::MyModule", ((DynamicClass)result2).Name);
+            Assert.AreEqual("MyModule", ((DynamicClass)result2).Name);
+            Assert.AreEqual("MyClass::MyModule", ((DynamicClass)result2).FullName);
         }
 
         [TestMethod]
@@ -232,11 +236,13 @@
 
             Assert.IsNotNull(result2);
             Assert.IsInstanceOfType(result2, typeof(DynamicClass));
-            Assert.AreEqual("MyModule::MySubmodule", ((DynamicClass)result2).Name);
+            Assert.AreEqual("MySubmodule", ((DynamicClass)result2).Name);
+            Assert.AreEqual("MyModule::MySubmodule", ((DynamicClass)result2).FullName);
 
             Assert.IsNotNull(result3);
             Assert.IsInstanceOfType(result3, typeof(DynamicClass));
-            Assert.AreEqual("MyModule::MySubmodule::MySubmodule2", ((DynamicClass)result3).Name);
+            Assert.AreEqual("MySubmodule2", ((DynamicClass)result3).Name);
+            Assert.AreEqual("MyModule::MySubmodule::MySubmodule2", ((DynamicClass)result3).FullName);
         }
 
         [TestMethod]
