@@ -18,7 +18,7 @@ x= method
 x[1] = v
 
 + Removing Module Object, Class Class, Module Class
-- Remove hardcoded new method
++ Remove hardcoded new method
 
 = initialize
 inheritance
