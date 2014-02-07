@@ -7,6 +7,8 @@
 
     public delegate int MyEvent(string n);
 
+    public delegate int MyIntEvent();
+
     public class Person
     {
         public Person()
@@ -21,6 +23,8 @@
 
         public event MyEvent NameEvent;
 
+        public event MyIntEvent IntEvent;
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -29,6 +33,9 @@
         {
             if (this.NameEvent != null)
                 this.NameEvent.Invoke(this.FirstName);
+
+            if (this.IntEvent != null)
+                this.IntEvent.Invoke();
 
             return this.LastName + ", " + this.FirstName;
         }
