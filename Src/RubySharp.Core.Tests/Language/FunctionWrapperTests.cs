@@ -100,6 +100,28 @@
             Assert.IsTrue(function.WasInvoked);
         }
 
+        [TestMethod]
+        public void CreateActionDelegate()
+        {
+            Context environment = new Context();
+            Runner function = new Runner();
+            FunctionWrapper wrapper = new FunctionWrapper(function, environment);
+            var @delegate = wrapper.CreateActionDelegate();
+            @delegate.DynamicInvoke();
+            Assert.IsTrue(function.WasInvoked);
+        }
+
+        [TestMethod]
+        public void CreateFunctionDelegate()
+        {
+            Context environment = new Context();
+            Runner function = new Runner();
+            FunctionWrapper wrapper = new FunctionWrapper(function, environment);
+            var @delegate = wrapper.CreateFunctionDelegate();
+            @delegate.DynamicInvoke();
+            Assert.IsTrue(function.WasInvoked);
+        }
+
         internal class Runner : IFunction
         {
             public bool WasInvoked { get; set; }
