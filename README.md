@@ -61,3 +61,5 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [What is Ruby's double-colon (::) all about?](http://stackoverflow.com/questions/3009477/what-is-rubys-double-colon-all-about)
 - [. vs :: (dot vs. double-colon) for calling a method](http://stackoverflow.com/questions/11043450/vs-dot-vs-double-colon-for-calling-a-method)
 - [Ways to load code](https://practicingruby.com/articles/ways-to-load-code)
+- [Include vs Extend in Ruby](http://www.railstips.org/blog/archives/2009/05/15/include-vs-extend-in-ruby/)
+- [Ruby Require VS Load VS Include VS Extend](http://ionrails.com/2009/09/19/ruby_require-vs-load-vs-include-vs-extend/)
