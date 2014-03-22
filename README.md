@@ -60,3 +60,4 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [What does :: (double colon) mean in Ruby?](http://stackoverflow.com/questions/2276905/what-does-double-colon-mean-in-ruby)
 - [What is Ruby's double-colon (::) all about?](http://stackoverflow.com/questions/3009477/what-is-rubys-double-colon-all-about)
 - [. vs :: (dot vs. double-colon) for calling a method](http://stackoverflow.com/questions/11043450/vs-dot-vs-double-colon-for-calling-a-method)
+- [Ways to load code](https://practicingruby.com/articles/ways-to-load-code)
