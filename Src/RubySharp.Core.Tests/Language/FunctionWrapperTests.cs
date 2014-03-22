@@ -89,6 +89,17 @@
         }
 
         [TestMethod]
+        public void AddFunctionWithoutParametersAsPersonEventHandler()
+        {
+            Person person = new Person() { FirstName = "Adam" };
+            IntListener listener = new IntListener();
+            ObjectUtilities.AddHandler(person, "IntEvent", listener, null);
+            person.GetName();
+
+            Assert.AreEqual(0, listener.Arity);
+        }
+
+        [TestMethod]
         public void CreateThreadStart()
         {
             Context environment = new Context();
@@ -97,6 +108,28 @@
             Thread th = new Thread(wrapper.CreateThreadStart());
             th.Start();
             th.Join();
+            Assert.IsTrue(function.WasInvoked);
+        }
+
+        [TestMethod]
+        public void CreateActionDelegate()
+        {
+            Context environment = new Context();
+            Runner function = new Runner();
+            FunctionWrapper wrapper = new FunctionWrapper(function, environment);
+            var @delegate = wrapper.CreateActionDelegate();
+            @delegate.DynamicInvoke();
+            Assert.IsTrue(function.WasInvoked);
+        }
+
+        [TestMethod]
+        public void CreateFunctionDelegate()
+        {
+            Context environment = new Context();
+            Runner function = new Runner();
+            FunctionWrapper wrapper = new FunctionWrapper(function, environment);
+            var @delegate = wrapper.CreateFunctionDelegate();
+            @delegate.DynamicInvoke();
             Assert.IsTrue(function.WasInvoked);
         }
 
@@ -144,6 +177,21 @@
                 this.Name = (string)arguments[0];
                 this.Length = this.Name.Length;
                 return this.Length;
+            }
+        }
+
+        internal class IntListener : IFunction
+        {
+            public int Arity { get; set; }
+
+            public object Apply(DynamicObject obj, IList<object> arguments)
+            {
+                if (arguments == null)
+                    this.Arity = 0;
+                else
+                    this.Arity = arguments.Count;
+
+                return this.Arity;
             }
         }
     }

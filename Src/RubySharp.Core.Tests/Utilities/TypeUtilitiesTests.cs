@@ -59,6 +59,7 @@
             Assert.IsNotNull(TypeUtilities.AsType("System.IO.File"));
             Assert.IsNotNull(TypeUtilities.AsType("RubySharp.Core.Tests.Classes.Person"));
             Assert.IsNull(TypeUtilities.AsType("Foo.Bar"));
+            Assert.IsNull(TypeUtilities.AsType("Foo"));
         }
 
         [TestMethod]
@@ -72,6 +73,7 @@
             Assert.IsTrue(TypeUtilities.IsNamespace("System.Data"));
 
             Assert.IsFalse(TypeUtilities.IsNamespace("Foo.Bar"));
+            Assert.IsFalse(TypeUtilities.IsNamespace("Foo"));
         }
 
         [TestMethod]
