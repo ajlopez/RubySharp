@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public class ConstantExpression : IExpression
+    public class ConstantExpression : BaseExpression
     {
         private object value;
 
@@ -16,7 +16,7 @@
 
         public object Value { get { return this.value; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             return this.value;
         }

@@ -31,6 +31,11 @@
             return result;
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            return BaseExpression.GetLocalVariables(this.valueexpressions);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

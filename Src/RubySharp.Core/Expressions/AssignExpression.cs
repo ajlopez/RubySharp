@@ -33,6 +33,11 @@
             return value;
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            return new string[] { this.name };
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

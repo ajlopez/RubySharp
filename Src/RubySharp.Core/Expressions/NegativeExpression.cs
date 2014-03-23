@@ -24,6 +24,11 @@
             return -(int)value;
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            return this.expression.GetLocalVariables();
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Functions;
 
-    public class ClassVarExpression : IExpression
+    public class ClassVarExpression : BaseExpression
     {
         private static int hashcode = typeof(ClassVarExpression).GetHashCode();
         private string name;
@@ -18,7 +18,7 @@
 
         public string Name { get { return this.name; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             var result = context.Self.Class.GetValue(this.name);
 

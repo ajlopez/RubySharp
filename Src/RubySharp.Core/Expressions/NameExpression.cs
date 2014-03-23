@@ -7,7 +7,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
 
-    public class NameExpression : INamedExpression
+    public class NameExpression : BaseExpression, INamedExpression
     {
         private static int hashcode = typeof(NameExpression).GetHashCode();
         private static IList<object> emptyvalues = new object[] { };
@@ -22,7 +22,7 @@
 
         public string Name { get { return this.name; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             bool isglobal = char.IsUpper(this.name[0]);
 

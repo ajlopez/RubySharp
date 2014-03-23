@@ -76,6 +76,7 @@
     <Compile Include="Exceptions\NameError.cs" />
     <Compile Include="Expressions\AssignExpression.cs" />
     <Compile Include="Expressions\AssignDotExpressions.cs" />
+    <Compile Include="Expressions\BaseExpression.cs" />
     <Compile Include="Expressions\CompositeExpression.cs" />
     <Compile Include="Expressions\ClassExpression.cs" />
     <Compile Include="Expressions\AssignInstanceVarExpression.cs" />

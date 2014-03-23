@@ -31,6 +31,11 @@
             return function.Apply(context.Self, context, values);
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            return BaseExpression.GetLocalVariables(this.arguments);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

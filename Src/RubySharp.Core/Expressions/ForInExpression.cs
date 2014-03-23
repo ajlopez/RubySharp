@@ -35,6 +35,13 @@
             return null;
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            var list = new List<IExpression>() { this.expression, this.command };
+
+            return BaseExpression.GetLocalVariables(list);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

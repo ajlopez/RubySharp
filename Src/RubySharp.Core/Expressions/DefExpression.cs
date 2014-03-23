@@ -7,7 +7,7 @@
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
 
-    public class DefExpression : IExpression
+    public class DefExpression : BaseExpression
     {
         private static int hashcode = typeof(DefExpression).GetHashCode();
 
@@ -22,7 +22,7 @@
             this.expression = expression;
         }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             var result = new DefinedFunction(this.expression, this.parameters, context);
 

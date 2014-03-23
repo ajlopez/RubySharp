@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Language;
 
-    public class BlockExpression : IExpression
+    public class BlockExpression : BaseExpression
     {
         private IList<string> paramnames;
         private IExpression expression;
@@ -17,7 +17,7 @@
             this.expression = expression;
         }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             return new Block(this.paramnames, this.expression, context);
         }
