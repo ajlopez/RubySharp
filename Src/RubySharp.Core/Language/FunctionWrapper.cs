@@ -41,12 +41,12 @@
 
         private object DoFunction()
         {
-            return this.function.Apply(null, null);
+            return this.function.Apply(null, this.context, null);
         }
 
         private void DoAction()
         {
-            this.function.Apply(null, null);
+            this.function.Apply(null, this.context, null);
         }
     }
 
@@ -69,12 +69,12 @@
 
         public TR DoFunction()
         {
-            return (TR)this.Function.Apply(null, null);
+            return (TR)this.Function.Apply(null, this.Context, null);
         }
 
         public void DoAction()
         {
-            this.Function.Apply(null, null);
+            this.Function.Apply(null, this.Context, null);
         }
     }
 
@@ -97,12 +97,12 @@
 
         public TR DoFunction(T1 t1)
         {
-            return (TR)this.Function.Apply(this.Self, new object[] { t1 });
+            return (TR)this.Function.Apply(this.Self, this.Context, new object[] { t1 });
         }
 
         public void DoAction(T1 t1)
         {
-            this.Function.Apply(this.Self, new object[] { t1 });
+            this.Function.Apply(this.Self, this.Context, new object[] { t1 });
         }
     }
     
@@ -125,12 +125,12 @@
 
         public TR DoFunction(T1 t1, T2 t2)
         {
-            return (TR)this.Function.Apply(this.Self, new object[] { t1, t2 });
+            return (TR)this.Function.Apply(this.Self, this.Context, new object[] { t1, t2 });
         }
 
         public void DoAction(T1 t1, T2 t2)
         {
-            this.Function.Apply(this.Self, new object[] { t1, t2 });
+            this.Function.Apply(this.Self, this.Context, new object[] { t1, t2 });
         }
     }
     
@@ -153,12 +153,12 @@
 
         public TR DoFunction(T1 t1, T2 t2, T3 t3)
         {
-            return (TR)this.Function.Apply(this.Self, new object[] { t1, t2, t3 });
+            return (TR)this.Function.Apply(this.Self, this.Context, new object[] { t1, t2, t3 });
         }
 
         public void DoAction(T1 t1, T2 t2, T3 t3)
         {
-            this.Function.Apply(this.Self, new object[] { t1, t2, t3 });
+            this.Function.Apply(this.Self, this.Context, new object[] { t1, t2, t3 });
         }
     }
 }

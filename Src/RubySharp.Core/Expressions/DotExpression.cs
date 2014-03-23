@@ -91,7 +91,7 @@
                 throw new NoMethodError(this.name);
             }
 
-            return method.Apply(obj, values);
+            return method.Apply(obj, context, values);
         }
 
         public string AsQualifiedName()

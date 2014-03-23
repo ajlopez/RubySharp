@@ -36,7 +36,7 @@
                 var method = obj.GetMethod(this.leftvalue.Name + "=");
 
                 if (method != null)
-                    return method.Apply(obj, new object[] { this.expression.Evaluate(context) });
+                    return method.Apply(obj, context, new object[] { this.expression.Evaluate(context) });
 
                 throw new NoMethodError(this.leftvalue.Name + "=");
             }

@@ -8,6 +8,6 @@
 
     public interface IFunction
     {
-        object Apply(DynamicObject self, IList<object> values);
+        object Apply(DynamicObject self, Context context, IList<object> values);
     }
 }

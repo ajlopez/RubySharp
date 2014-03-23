@@ -152,7 +152,7 @@
             Assert.IsTrue(names.Contains("NameEvent"));
         }
 
-        private object DummyFunction(object self, IList<object> arguments)
+        private object DummyFunction(object self, Context context, IList<object> arguments)
         {
             return null;
         }

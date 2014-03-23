@@ -15,7 +15,7 @@
             this.machine = machine;
         }
 
-        public object Apply(DynamicObject self, IList<object> values)
+        public object Apply(DynamicObject self, Context context, IList<object> values)
         {
             string filename = (string)values[0];
             return this.machine.RequireFile(filename);

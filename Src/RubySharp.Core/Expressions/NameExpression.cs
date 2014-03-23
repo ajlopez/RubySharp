@@ -36,7 +36,7 @@
                     var method = context.Self.GetMethod(this.name);
 
                     if (method != null)
-                        return method.Apply(context.Self, emptyvalues);
+                        return method.Apply(context.Self, context, emptyvalues);
                 }
 
                 throw new NameError(string.Format("undefined local variable or method '{0}'", this.name));
