@@ -1,13 +1,13 @@
 ﻿namespace RubySharp.Core.Tests.Language
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
-    using System.Collections;
 
     [TestClass]
     public class DynamicObjectTests

@@ -21,7 +21,7 @@
         }
 
         [TestMethod]
-        public void ToString()
+        public void DynamicToString()
         {
             DynamicClass dclass = new DynamicClass("Dog");
 

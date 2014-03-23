@@ -6,10 +6,10 @@
     using System.Text;
     using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using RubySharp.Core.Utilities;
-    using RubySharp.Core.Language;
     using RubySharp.Core.Functions;
+    using RubySharp.Core.Language;
     using RubySharp.Core.Tests.Classes;
+    using RubySharp.Core.Utilities;
 
     [TestClass]
     public class ObjectUtilitiesTests

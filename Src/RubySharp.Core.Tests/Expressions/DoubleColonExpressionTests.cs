@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Compiler;
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Language;
-    using RubySharp.Core.Compiler;
 
     [TestClass]
     public class DoubleColonExpressionTests

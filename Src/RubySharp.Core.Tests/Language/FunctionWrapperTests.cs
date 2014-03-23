@@ -7,10 +7,10 @@
     using System.Text;
     using System.Threading;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
     using RubySharp.Core.Tests.Classes;
     using RubySharp.Core.Utilities;
-    using RubySharp.Core.Functions;
 
     [TestClass]
     public class FunctionWrapperTests
