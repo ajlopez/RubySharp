@@ -7,7 +7,7 @@
     using System.Text;
     using RubySharp.Core.Language;
 
-    public class ArrayExpression : IExpression
+    public class ArrayExpression : BaseExpression
     {
         private static int hashcode = typeof(DotExpression).GetHashCode();
 
@@ -18,7 +18,7 @@
             this.expressions = expressions;
         }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             IList result = new DynamicArray();
 

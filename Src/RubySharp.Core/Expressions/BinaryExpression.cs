@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
 
-    public abstract class BinaryExpression : IExpression
+    public abstract class BinaryExpression : BaseExpression
     {
         private IExpression left;
         private IExpression right;
@@ -20,7 +20,7 @@
 
         public IExpression RightExpression { get { return this.right; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             var lvalue = this.left.Evaluate(context);
             var rvalue = this.right.Evaluate(context);

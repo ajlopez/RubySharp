@@ -8,7 +8,7 @@
     using RubySharp.Core.Language;
     using RubySharp.Core.Utilities;
 
-    public class DotExpression : INamedExpression
+    public class DotExpression : BaseExpression, INamedExpression
     {
         private static int hashcode = typeof(DotExpression).GetHashCode();
 
@@ -30,7 +30,7 @@
 
         public string Name { get { return this.name; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             if (this.qname != null)
             {
@@ -91,7 +91,7 @@
                 throw new NoMethodError(this.name);
             }
 
-            return method.Apply(obj, values);
+            return method.Apply(obj, context, values);
         }
 
         public string AsQualifiedName()

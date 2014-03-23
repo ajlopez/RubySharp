@@ -28,7 +28,7 @@
 
             var method = module.GetMethod("name");
             Assert.IsNotNull(method);
-            Assert.AreEqual("Module1", method.Apply(module, null));
+            Assert.AreEqual("Module1", method.Apply(module, module.Constants, null));
         }
 
         [TestMethod]

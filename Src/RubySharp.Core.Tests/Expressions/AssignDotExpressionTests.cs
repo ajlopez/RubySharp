@@ -6,11 +6,11 @@
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Compiler;
+    using RubySharp.Core.Exceptions;
     using RubySharp.Core.Expressions;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
     using RubySharp.Core.Tests.Classes;
-    using RubySharp.Core.Exceptions;
 
     [TestClass]
     public class AssignDotExpressionTests

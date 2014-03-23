@@ -26,6 +26,12 @@
             return new Range(from, to);
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            var list = new List<IExpression>() { this.fromexpression, this.toexpression };
+            return BaseExpression.GetLocalVariables(list);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is RangeExpression))

@@ -9,7 +9,7 @@
     using RubySharp.Core.Language;
     using RubySharp.Core.Utilities;
 
-    public class AssignDotExpressions : IExpression
+    public class AssignDotExpressions : BaseExpression
     {
         private static int hashtag = typeof(AssignDotExpressions).GetHashCode();
 
@@ -26,7 +26,7 @@
 
         public IExpression Expression { get { return this.expression; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             object target = this.leftvalue.TargetExpression.Evaluate(context);
 
@@ -36,7 +36,7 @@
                 var method = obj.GetMethod(this.leftvalue.Name + "=");
 
                 if (method != null)
-                    return method.Apply(obj, new object[] { this.expression.Evaluate(context) });
+                    return method.Apply(obj, context, new object[] { this.expression.Evaluate(context) });
 
                 throw new NoMethodError(this.leftvalue.Name + "=");
             }

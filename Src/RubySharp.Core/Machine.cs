@@ -148,34 +148,34 @@
             return result;
         }
 
-        private static object NewInstance(DynamicObject obj, IList<object> values)
+        private static object NewInstance(DynamicObject obj, Context context, IList<object> values)
         {
             var newobj = ((DynamicClass)obj).CreateInstance();
 
             var initialize = newobj.GetMethod("initialize");
 
             if (initialize != null)
-                initialize.Apply(newobj, values);
+                initialize.Apply(newobj, context, values);
 
             return newobj;
         }
 
-        private static object GetName(DynamicObject obj, IList<object> values)
+        private static object GetName(DynamicObject obj, Context context, IList<object> values)
         {
             return ((DynamicClass)obj).Name;
         }
 
-        private static object GetSuperClass(DynamicObject obj, IList<object> values)
+        private static object GetSuperClass(DynamicObject obj, Context context, IList<object> values)
         {
             return ((DynamicClass)obj).SuperClass;
         }
 
-        private static object GetClass(DynamicObject obj, IList<object> values)
+        private static object GetClass(DynamicObject obj, Context context, IList<object> values)
         {
             return obj.Class;
         }
 
-        private static object GetMethods(DynamicObject obj, IList<object> values)
+        private static object GetMethods(DynamicObject obj, Context context, IList<object> values)
         {
             var result = new DynamicArray();
 
@@ -195,7 +195,7 @@
             return result;
         }
 
-        private static object GetSingletonMethods(DynamicObject obj, IList<object> values)
+        private static object GetSingletonMethods(DynamicObject obj, Context context, IList<object> values)
         {
             var result = new DynamicArray();
 

@@ -72,6 +72,13 @@
             return null;
         }
 
+        public IList<string> GetLocalVariables()
+        {
+            var list = new List<IExpression>() { this.indexexpression, this.expression };
+
+            return BaseExpression.GetLocalVariables(list);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)

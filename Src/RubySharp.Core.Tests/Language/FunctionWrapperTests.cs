@@ -7,10 +7,10 @@
     using System.Text;
     using System.Threading;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
     using RubySharp.Core.Tests.Classes;
     using RubySharp.Core.Utilities;
-    using RubySharp.Core.Functions;
 
     [TestClass]
     public class FunctionWrapperTests
@@ -137,7 +137,7 @@
         {
             public bool WasInvoked { get; set; }
 
-            public object Apply(DynamicObject self, IList<object> values)
+            public object Apply(DynamicObject self, Context context, IList<object> values)
             {
                 this.WasInvoked = true;
                 return null;
@@ -146,7 +146,7 @@
 
         internal class Adder : IFunction
         {
-            public object Apply(DynamicObject self, IList<object> values)
+            public object Apply(DynamicObject self, Context context, IList<object> values)
             {
                 return (int)values[0] + (int)values[1];
             }
@@ -158,7 +158,7 @@
 
             public int Y { get; set; }
 
-            public object Apply(DynamicObject self, IList<object> arguments)
+            public object Apply(DynamicObject self, Context context, IList<object> arguments)
             {
                 this.X = (int)arguments[0];
                 this.Y = (int)arguments[1];
@@ -172,7 +172,7 @@
 
             public string Name { get; set; }
 
-            public object Apply(DynamicObject obj, IList<object> arguments)
+            public object Apply(DynamicObject obj, Context context, IList<object> arguments)
             {
                 this.Name = (string)arguments[0];
                 this.Length = this.Name.Length;
@@ -184,7 +184,7 @@
         {
             public int Arity { get; set; }
 
-            public object Apply(DynamicObject obj, IList<object> arguments)
+            public object Apply(DynamicObject obj, Context context, IList<object> arguments)
             {
                 if (arguments == null)
                     this.Arity = 0;

@@ -9,7 +9,7 @@
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
 
-    public class ClassExpression : IExpression
+    public class ClassExpression : BaseExpression
     {
         private static int hashcode = typeof(ClassExpression).GetHashCode();
         private INamedExpression namedexpression;
@@ -23,7 +23,7 @@
             this.superclassexpression = superclassexpression;
         }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             object value = null;
             DynamicClass target = null;

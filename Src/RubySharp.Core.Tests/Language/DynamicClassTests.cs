@@ -21,7 +21,7 @@
         }
 
         [TestMethod]
-        public void ToString()
+        public void DynamicToString()
         {
             DynamicClass dclass = new DynamicClass("Dog");
 
@@ -110,7 +110,7 @@
             Machine machine = new Machine();
             DynamicClass @class = new DynamicClass((DynamicClass)machine.RootContext.GetLocalValue("Class"), "Dog", (DynamicClass)machine.RootContext.GetLocalValue("Object"));
 
-            var result = @class.GetMethod("new").Apply(@class, null);
+            var result = @class.GetMethod("new").Apply(@class, machine.RootContext, null);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicObject));
@@ -128,7 +128,7 @@
             IFunction initialize = new DefinedFunction(new AssignInstanceVarExpression("age", new ConstantExpression(10)), new string[0], null);
             @class.SetInstanceMethod("initialize", initialize);
 
-            var result = @class.GetMethod("new").Apply(@class, new object[] { });
+            var result = @class.GetMethod("new").Apply(@class, @class.Constants, new object[] { });
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicObject));

@@ -1,13 +1,13 @@
 ﻿namespace RubySharp.Core.Tests.Language
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using RubySharp.Core.Functions;
     using RubySharp.Core.Language;
-    using System.Collections;
 
     [TestClass]
     public class DynamicObjectTests
@@ -93,14 +93,14 @@
         public void InvokeClassMethod()
         {
             DynamicObject obj = new DynamicObject(this.@class);
-            Assert.AreSame(this.@class, obj.GetMethod("class").Apply(obj, null));
+            Assert.AreSame(this.@class, obj.GetMethod("class").Apply(obj, null, null));
         }
 
         [TestMethod]
         public void InvokeMethodsMethod()
         {
             DynamicObject obj = new DynamicObject(this.@class);
-            var result = obj.GetMethod("methods").Apply(obj, null);
+            var result = obj.GetMethod("methods").Apply(obj, null, null);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicArray));
@@ -116,7 +116,7 @@
         public void InvokeSingletonMethodsMethod()
         {
             DynamicObject obj = new DynamicObject(this.@class);
-            var result = obj.GetMethod("singleton_methods").Apply(obj, null);
+            var result = obj.GetMethod("singleton_methods").Apply(obj, null, null);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(DynamicArray));

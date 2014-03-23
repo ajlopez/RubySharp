@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Language;
 
-    public class ModuleExpression : IExpression
+    public class ModuleExpression : BaseExpression
     {
         private static int hashcode = typeof(ClassExpression).GetHashCode();
 
@@ -19,7 +19,7 @@
             this.expression = expression;
         }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             object value = null;
 

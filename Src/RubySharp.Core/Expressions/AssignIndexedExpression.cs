@@ -5,7 +5,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Language;
 
-    public class AssignIndexedExpression : IExpression
+    public class AssignIndexedExpression : BaseExpression
     {
         private static int hashcode = typeof(IndexedExpression).GetHashCode();
         private IExpression leftexpression;
@@ -19,7 +19,7 @@
             this.expression = expression;
         }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             var leftvalue = (IList)this.leftexpression.Evaluate(context);
             int index = (int)this.indexexpression.Evaluate(context);

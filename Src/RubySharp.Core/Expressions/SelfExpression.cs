@@ -7,7 +7,7 @@
     using RubySharp.Core.Exceptions;
     using RubySharp.Core.Functions;
 
-    public class SelfExpression : INamedExpression
+    public class SelfExpression : BaseExpression, INamedExpression
     {
         private static int hashcode = typeof(SelfExpression).GetHashCode();
 
@@ -19,7 +19,7 @@
 
         public string Name { get { return "self"; } }
 
-        public object Evaluate(Context context)
+        public override object Evaluate(Context context)
         {
             return context.Self;
         }

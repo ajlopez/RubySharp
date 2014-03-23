@@ -8,5 +8,7 @@
     public interface IExpression
     {
         object Evaluate(Context context);
+
+        IList<string> GetLocalVariables();
     }
 }
