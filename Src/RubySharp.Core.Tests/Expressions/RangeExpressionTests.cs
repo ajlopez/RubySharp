@@ -31,6 +31,24 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            RangeExpression expr = new RangeExpression(new ConstantExpression(1), new ConstantExpression(4));
+            Assert.IsNull(expr.GetLocalVariables());
+        }
+
+        [TestMethod]
+        public void GetLocalVariablesWithAssignment()
+        {
+            RangeExpression expr = new RangeExpression(new AssignExpression("a", new ConstantExpression(1)), new ConstantExpression(4));
+
+            var result = expr.GetLocalVariables();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("a", result[0]);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             RangeExpression expr1 = new RangeExpression(new ConstantExpression(1), new ConstantExpression(2));

@@ -20,9 +20,9 @@
             Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
             context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
-            ClassExpression cmd = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            ClassExpression expr = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
-            var result = cmd.Evaluate(context);
+            var result = expr.Evaluate(context);
 
             Assert.IsNull(result);
 
@@ -30,6 +30,13 @@
             Assert.IsInstanceOfType(value, typeof(DynamicClass));
             Assert.AreEqual(value, context.GetValue("Dog"));
             Assert.AreEqual("123\r\n", writer.ToString());
+        }
+
+        [TestMethod]
+        public void GetLocalVariables()
+        {
+            ClassExpression expr = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            Assert.IsNull(expr.GetLocalVariables());
         }
 
         [TestMethod]
@@ -41,9 +48,9 @@
             context.SetLocalValue("Animal", animalclass);
             StringWriter writer = new StringWriter();
             context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
-            ClassExpression cmd = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }), new NameExpression("Animal"));
+            ClassExpression expr = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }), new NameExpression("Animal"));
 
-            var result = cmd.Evaluate(context);
+            var result = expr.Evaluate(context);
 
             Assert.IsNull(result);
 
@@ -61,13 +68,13 @@
             Context context = machine.RootContext;
             StringWriter writer = new StringWriter();
             context.Self.Class.SetInstanceMethod("puts", new PutsFunction(writer));
-            ClassExpression cmd = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
+            ClassExpression expr = new ClassExpression(new NameExpression("Dog"), new CallExpression("puts", new IExpression[] { new ConstantExpression(123) }));
 
-            cmd.Evaluate(context);
+            expr.Evaluate(context);
 
             var initial = context.GetValue("Dog");
 
-            var result = cmd.Evaluate(context);
+            var result = expr.Evaluate(context);
 
             Assert.IsNull(result);
 
@@ -81,22 +88,22 @@
         [TestMethod]
         public void Equals()
         {
-            ClassExpression cmd1 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(1));
-            ClassExpression cmd2 = new ClassExpression(new NameExpression("bar"), new ConstantExpression(1));
-            ClassExpression cmd3 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(2));
-            ClassExpression cmd4 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(1));
+            ClassExpression expr1 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(1));
+            ClassExpression expr2 = new ClassExpression(new NameExpression("bar"), new ConstantExpression(1));
+            ClassExpression expr3 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(2));
+            ClassExpression expr4 = new ClassExpression(new NameExpression("foo"), new ConstantExpression(1));
 
-            Assert.IsTrue(cmd1.Equals(cmd4));
-            Assert.IsTrue(cmd4.Equals(cmd1));
-            Assert.AreEqual(cmd1.GetHashCode(), cmd4.GetHashCode());
+            Assert.IsTrue(expr1.Equals(expr4));
+            Assert.IsTrue(expr4.Equals(expr1));
+            Assert.AreEqual(expr1.GetHashCode(), expr4.GetHashCode());
 
-            Assert.IsFalse(cmd1.Equals(null));
-            Assert.IsFalse(cmd1.Equals(123));
+            Assert.IsFalse(expr1.Equals(null));
+            Assert.IsFalse(expr1.Equals(123));
 
-            Assert.IsFalse(cmd1.Equals(cmd2));
-            Assert.IsFalse(cmd2.Equals(cmd1));
-            Assert.IsFalse(cmd1.Equals(cmd3));
-            Assert.IsFalse(cmd3.Equals(cmd1));
+            Assert.IsFalse(expr1.Equals(expr2));
+            Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr3));
+            Assert.IsFalse(expr3.Equals(expr1));
         }
     }
 }
