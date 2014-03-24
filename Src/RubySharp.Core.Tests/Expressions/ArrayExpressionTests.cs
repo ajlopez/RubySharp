@@ -29,6 +29,13 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            ArrayExpression expr = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });
+            Assert.IsNull(expr.GetLocalVariables());
+        }
+
+        [TestMethod]
         public void Equals()
         {
             ArrayExpression expr1 = new ArrayExpression(new IExpression[] { new ConstantExpression(1), new ConstantExpression(2) });

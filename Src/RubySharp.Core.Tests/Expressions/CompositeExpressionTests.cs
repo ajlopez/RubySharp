@@ -14,11 +14,11 @@
         public void ExecuteTwoAssignCommands()
         {
             Context context = new Context();
-            AssignExpression cmd1 = new AssignExpression("one", new ConstantExpression(1));
-            AssignExpression cmd2 = new AssignExpression("two", new ConstantExpression(2));
-            CompositeExpression cmd = new CompositeExpression(new IExpression[] { cmd1, cmd2 });
+            AssignExpression expr1 = new AssignExpression("one", new ConstantExpression(1));
+            AssignExpression expr2 = new AssignExpression("two", new ConstantExpression(2));
+            CompositeExpression expr = new CompositeExpression(new IExpression[] { expr1, expr2 });
 
-            var result = cmd.Evaluate(context);
+            var result = expr.Evaluate(context);
 
             Assert.AreEqual(2, result);
             Assert.AreEqual(1, context.GetValue("one"));
@@ -26,26 +26,42 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            Context context = new Context();
+            AssignExpression expr1 = new AssignExpression("one", new ConstantExpression(1));
+            AssignExpression expr2 = new AssignExpression("two", new ConstantExpression(2));
+            CompositeExpression expr = new CompositeExpression(new IExpression[] { expr1, expr2 });
+
+            var result = expr.GetLocalVariables();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains("one"));
+            Assert.IsTrue(result.Contains("two"));
+        }
+
+        [TestMethod]
         public void Equals()
         {
-            AssignExpression acmd1 = new AssignExpression("one", new ConstantExpression(1));
-            AssignExpression acmd2 = new AssignExpression("two", new ConstantExpression(2));
+            AssignExpression aexpr1 = new AssignExpression("one", new ConstantExpression(1));
+            AssignExpression aexpr2 = new AssignExpression("two", new ConstantExpression(2));
 
-            CompositeExpression cmd1 = new CompositeExpression(new IExpression[] { acmd1, acmd2 });
-            CompositeExpression cmd2 = new CompositeExpression(new IExpression[] { acmd2, acmd1 });
-            CompositeExpression cmd3 = new CompositeExpression(new IExpression[] { acmd1 });
-            CompositeExpression cmd4 = new CompositeExpression(new IExpression[] { acmd1, acmd2 });
+            CompositeExpression expr1 = new CompositeExpression(new IExpression[] { aexpr1, aexpr2 });
+            CompositeExpression expr2 = new CompositeExpression(new IExpression[] { aexpr2, aexpr1 });
+            CompositeExpression expr3 = new CompositeExpression(new IExpression[] { aexpr1 });
+            CompositeExpression expr4 = new CompositeExpression(new IExpression[] { aexpr1, aexpr2 });
 
-            Assert.IsTrue(cmd1.Equals(cmd4));
-            Assert.IsTrue(cmd4.Equals(cmd1));
-            Assert.AreEqual(cmd1.GetHashCode(), cmd4.GetHashCode());
+            Assert.IsTrue(expr1.Equals(expr4));
+            Assert.IsTrue(expr4.Equals(expr1));
+            Assert.AreEqual(expr1.GetHashCode(), expr4.GetHashCode());
 
-            Assert.IsFalse(cmd1.Equals(null));
-            Assert.IsFalse(cmd1.Equals(123));
-            Assert.IsFalse(cmd1.Equals(cmd2));
-            Assert.IsFalse(cmd2.Equals(cmd1));
-            Assert.IsFalse(cmd1.Equals(cmd3));
-            Assert.IsFalse(cmd3.Equals(cmd1));
+            Assert.IsFalse(expr1.Equals(null));
+            Assert.IsFalse(expr1.Equals(123));
+            Assert.IsFalse(expr1.Equals(expr2));
+            Assert.IsFalse(expr2.Equals(expr1));
+            Assert.IsFalse(expr1.Equals(expr3));
+            Assert.IsFalse(expr3.Equals(expr1));
         }
     }
 }

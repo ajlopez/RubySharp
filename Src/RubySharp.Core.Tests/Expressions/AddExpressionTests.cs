@@ -43,6 +43,13 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            AddExpression expr = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));
+            Assert.IsNull(expr.GetLocalVariables());
+        }
+
+        [TestMethod]
         public void Equals()
         {
             AddExpression expr1 = new AddExpression(new ConstantExpression(1), new ConstantExpression(2));

@@ -33,6 +33,9 @@
                         varnames.Add(name);
             }
 
+            if (varnames.Count == 0)
+                return null;
+
             return varnames;
         }
     }

@@ -26,6 +26,13 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            CallExpression expr = new CallExpression("puts", new IExpression[] { new ConstantExpression(123) });
+            Assert.IsNull(expr.GetLocalVariables());
+        }
+
+        [TestMethod]
         public void Equals()
         {
             CallExpression expr1 = new CallExpression("puts", new IExpression[] { new ConstantExpression(1) });
