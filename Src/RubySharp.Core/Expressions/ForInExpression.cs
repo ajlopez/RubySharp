@@ -37,7 +37,7 @@
 
         public IList<string> GetLocalVariables()
         {
-            var list = new List<IExpression>() { this.expression, this.command };
+            var list = new List<IExpression>() { new AssignExpression(this.name, null), this.expression, this.command };
 
             return BaseExpression.GetLocalVariables(list);
         }

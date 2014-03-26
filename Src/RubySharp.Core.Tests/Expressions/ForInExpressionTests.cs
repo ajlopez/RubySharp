@@ -22,6 +22,19 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            ForInExpression command = new ForInExpression("k", new ConstantExpression(new int[] { 1, 2, 3 }), new AssignExpression("total", new AddExpression(new NameExpression("total"), new NameExpression("k"))));
+
+            var result = command.GetLocalVariables();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains("k"));
+            Assert.IsTrue(result.Contains("total"));
+        }
+
+        [TestMethod]
         public void Equals()
         {
             ForInExpression cmd1 = new ForInExpression("k", new ConstantExpression(1), new ConstantExpression(2));
