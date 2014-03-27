@@ -61,6 +61,13 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            DoubleColonExpression expression = new DoubleColonExpression(new ConstantExpression(typeof(TokenType)), "Name");
+            Assert.IsNull(expression.GetLocalVariables());
+        }
+
+        [TestMethod]
         public void NamedExpression()
         {
             INamedExpression expression = new DoubleColonExpression(new ConstantExpression(1), "name");
