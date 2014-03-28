@@ -26,6 +26,25 @@
         }
 
         [TestMethod]
+        public void GetLocalVariables()
+        {
+            AssignClassVarExpression cmd = new AssignClassVarExpression("one", new ConstantExpression(1));
+            Assert.IsNull(cmd.GetLocalVariables());
+        }
+
+        [TestMethod]
+        public void GetLocalVariablesFromExpression()
+        {
+            AssignClassVarExpression cmd = new AssignClassVarExpression("one", new AssignExpression("a", new ConstantExpression(1)));
+
+            var result = cmd.GetLocalVariables();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("a", result[0]);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             AssignClassVarExpression cmd1 = new AssignClassVarExpression("a", new ConstantExpression(1));

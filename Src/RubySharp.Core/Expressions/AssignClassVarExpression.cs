@@ -6,7 +6,7 @@
     using System.Text;
     using RubySharp.Core.Expressions;
 
-    public class AssignClassVarExpression : BaseExpression
+    public class AssignClassVarExpression : IExpression
     {
         private static int hashtag = typeof(AssignClassVarExpression).GetHashCode();
 
@@ -23,7 +23,12 @@
 
         public IExpression Expression { get { return this.expression; } }
 
-        public override object Evaluate(Context context)
+        public IList<string> GetLocalVariables()
+        {
+            return this.expression.GetLocalVariables();
+        }
+
+        public object Evaluate(Context context)
         {
             object value = this.expression.Evaluate(context);
             context.Self.Class.SetValue(this.name, value);

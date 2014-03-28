@@ -32,6 +32,18 @@
         }
 
         [TestMethod]
+        public void GetLocalVariablesFromExpression()
+        {
+            AssignInstanceVarExpression cmd = new AssignInstanceVarExpression("one", new AssignExpression("a", new ConstantExpression(1)));
+
+            var result = cmd.GetLocalVariables();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("a", result[0]);
+        }
+
+        [TestMethod]
         public void Equals()
         {
             AssignInstanceVarExpression expr1 = new AssignInstanceVarExpression("a", new ConstantExpression(1));
