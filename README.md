@@ -73,4 +73,4 @@ It's an interpreter, not a compiler. It keeps a tree of commands and expressions
 - [How do you find the namespace/module name programatically in Ruby on Rails?](http://stackoverflow.com/questions/133357/how-do-you-find-the-namespace-module-name-programatically-in-ruby-on-rails)
 - [Back to Basics: Polymorphism and Ruby](http://robots.thoughtbot.com/back-to-basics-polymorphism-and-ruby)
 - [Ruby, Programming with Nothing](http://codon.com/programming-with-nothing)
-
+- [Fun With the method Method](http://www.justinweiss.com/blog/2014/11/10/fun-with-the-method-method/)
